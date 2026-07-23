@@ -38,7 +38,7 @@ material:
   uncertainty_notes:
     - "The row does not include a complete Karl Hipp order code tolerance/material suffix, so stainless or special-order variants cannot be excluded from BOM-side evidence alone."
 how_to_make:
-  summary: "Procure as a Karl Hipp precision-ground 16 mm lead-4 ball screw spindle, or manufacture locally by preparing Cf53 steel bar, machining end features, heat treating the ball track, precision grinding the screw profile, and inspecting lead accuracy."
+  summary: "Prepare as a Karl Hipp precision-ground 16 mm lead-4 ball screw spindle, or manufacture locally by preparing Cf53 steel bar, machining end features, heat treating the ball track, precision grinding the screw profile, and inspecting lead accuracy"
   manufacturing_steps:
     - "Start from Cf53 steel round bar sized for a 16 mm nominal ball screw spindle and cut to the required overall length."
     - "Turn bearing journals, threaded or coupling ends, and shoulders to the required drawing dimensions."
@@ -56,3 +56,99 @@ how_to_make:
 kb_implications:
   - "item_granularity: simple_part - Model as a reusable precision ball screw spindle/axis part rather than raw bar stock; the mating nut, supports, and couplings should remain separate BOM rows or subcomponents."
 ---
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0061_2AJ1.md
+source_research_sha256: "576911d038eeeda3e0fd081ab0a26fbd45628d94037ebc4e473b8c3f5cc54b05"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Read the ball-screw spindle function, steel-density mass basis, Cf53 hardened material evidence, precision manufacturing route, KB implications, and CAD preview before conversion."
+decomposition:
+  decision: simple_part
+  rationale: "The row is one precision ball-screw spindle/axis member, not the full linear actuator assembly. It stays a simple item, but precision manufacturing capability is a major guardrail."
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: precision_ground_hardened_ball_screw_spindle
+  primary_process_bucket: precision_component_import_decompose_later
+  supporting_processes:
+    - stock_preparation
+    - cutting
+    - precision_machining
+    - heat_treatment
+    - grinding_lapping
+    - surface_finishing
+    - dimensional_inspection
+    - calibration
+    - import_assumption
+  candidate_existing_processes:
+    - process_id: machining_process_turning_v0
+      fit: supporting
+      reason: "Relevant to turning journals, shoulders, and end features before heat treatment and grinding."
+    - process_id: machining_precision_v0
+      fit: partial
+      reason: "Covers precision machining concepts but lacks ball-screw thread grinding, lead accuracy, and hardened race detail."
+    - process_id: precision_grinding_and_scraping_v0
+      fit: supporting
+      reason: "Closest existing anchor for precision finishing, though ball-screw thread grinding needs more specific capability."
+    - process_id: calibration_basic_v0
+      fit: supporting
+      reason: "Relevant to lead accuracy and axis-fit verification after manufacture."
+    - process_id: inspection_basic_v0
+      fit: supporting
+      reason: "Covers straightness, runout, surface, and fit checks at coarse KB level."
+  abstraction_decision: needs_human
+  rationale: "The part requires hardened race geometry, precision ground screw profile, lead accuracy, and runout control beyond generic machining. It should remain a precision component until a local ball-screw process is explicitly modeled."
+  process_guardrails:
+    tolerance: review
+    surface_finish: review
+    sealing_quality: not_applicable
+    alignment_accuracy: review
+    blocked_by_precision: true
+identity_for_merge:
+  functional_purpose: convert rotary drive input into precise linear axis motion
+  material: cf53_hardened_steel
+  scale_or_capacity:
+    mass_kg: 0.679
+    bom_quantity: 1
+    row_total_mass_kg: 0.679
+    scale_class: small
+    nominal_diameter_mm: 16
+    lead_mm: 4
+    length_mm: 490
+  geometry_form: long_precision_ball_screw_spindle_with_end_features
+merge_pool:
+  eligible: true
+  functional_purpose_key: linear_guidance
+  precision_guardrails:
+    - lead_accuracy
+    - thread_profile
+    - hardness
+    - straightness
+    - runout
+    - nut_compatibility
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - precision_component_import_decompose_later
+  import_risk_factors:
+    - "Precision ball-screw manufacture requires hardened Cf53 steel, ground race profile, lead accuracy, runout control, and matched nut compatibility."
+    - "Current generic machining processes do not fully capture ball-screw grinding and inspection requirements."
+  post_merge_decision_notes: "Final import/local decision is deferred until merge review compares this row with other linear-guidance and ball-screw rows."
+kb_staging:
+  proposed_item_id: null
+  notes: "Wait for merge review; likely reusable precision ball-screw spindle abstraction with diameter, lead, and length guardrails."
+assumptions:
+  - "The standard Karl Hipp spindle material and hardness apply to this row."
+  - "The CAD solid represents the spindle only, excluding mating nut, balls, supports, and couplings."
+  - "Generic steel density is sufficient for mass grouping despite Cf53-specific material identity."
+unresolved:
+  - "Exact end-machining drawing, tolerance class, lead accuracy, thread profile, heat treatment specification, surface finish, and matched nut details are not resolved by row evidence."
+```

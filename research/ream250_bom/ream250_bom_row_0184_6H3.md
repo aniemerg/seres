@@ -38,7 +38,7 @@ material:
   uncertainty_notes:
     - The row-specific STEP file does not expose the exact Mink order variant, bristle height, or polymer grade; treat TPE/TPV plus PA6 as the best family-level material set, not a certified material grade.
 how_to_make:
-  summary: Procure as a Mink Flex-System/FBL3002 flexible strip brush seal and cut to the 270 mm CAD length for installation; local approximation would extrude or mold the rubber/TPE profile and add polymer bristles, then trim and inspect the segment.
+  summary: "Prepare as a Mink Flex-System/FBL3002 flexible strip brush seal and cut to the 270 mm CAD length for installation; extrude or mold the rubber/TPE profile and add polymer bristles, then trim and inspect the segment"
   manufacturing_steps:
     - Select the Mink Flex-System profile matching the reAM250 groove/interface, using the FBL3002 family indicated by the assembly STEP context.
     - Cut the flexible strip brush from supplied roll/length stock to the 270 mm row length shown by CAD.
@@ -48,10 +48,10 @@ how_to_make:
     cited_fact_or_basis: "Mink's Flex-System brochure says the product is supplied in rolls up to several hundred metres, can be cut to the required length, and can be fitted/replaced with low tool effort by gluing, pushing onto an edge, or inserting into a groove. CAD evidence gives the required row length as 270.00 mm."
     evidence_basis: bom_provided
   assumptions:
-    - Procurement and cut-to-length installation is the preferred route because the row is a vendor component from Mink Bursten.
-    - The local approximation route is lower confidence than procurement because the catalog does not provide a full sub-BOM or bristle-insertion manufacturing workflow.
+    - "Cut-to-length installation is the preferred route because the row is a vendor component from Mink Bursten"
+    - "This manufacturing route is lower confidence because the catalog does not provide a full sub-BOM or bristle-insertion manufacturing workflow"
   uncertainty_notes:
-    - Exact profile selection, adhesive or retaining method, and bristle height should be checked against the machine drawing or Mink order configuration before replacing the component.
+    - "Exact machine drawing or Mink configuration is needed before replacing the component"
 kb_implications:
-  - "item_granularity: consumable - Model as a replaceable cut-to-length flexible brush seal, not as raw stock or a calibrated module; later KB work can reuse a generic brush-seal consumable with row-specific length."
+  - "item_granularity: simple_part - Model as a replaceable cut-to-length flexible brush seal, not as raw stock or a calibrated module; later KB work can reuse a generic brush-seal replaceable or applied part with row-specific length."
 ---

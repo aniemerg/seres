@@ -40,7 +40,7 @@ material:
     - "No ceramic grade, composition, surface finish, or procurement standard is provided."
     - "The conflicting stainless material metadata should be rechecked against the native CAD assembly before final KB modeling."
 how_to_make:
-  summary: "Plausible route: make or procure a small technical-ceramic square rod, cut it to the 274 mm length, grind or lap the sides/ends as needed, then bond or install it with the neighboring gliding-surface and glue components."
+  summary: "Plausible route: Make a small technical-ceramic square rod, cut it to the 274 mm length, grind or lap the sides/ends as needed, then bond or install it with the neighboring gliding-surface and glue components"
   manufacturing_steps:
     - "Select a dense technical ceramic rod or green ceramic preform sized near the 4 x 4 mm square section."
     - "If made locally, press, extrude, or machine a green ceramic blank from ceramic powder plus binder, then debind and sinter it."
@@ -61,3 +61,99 @@ how_to_make:
 kb_implications:
   - "item_granularity: simple_part - Model as a simple ceramic rod/contact pole with unresolved grade, not as a purchased module or assembly; the stainless metadata conflict should be preserved as a modeling caveat."
 ---
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0169_6B2.md
+source_research_sha256: 2c03381962551f237c7261e0d57e11d06b2b2dd79eeeb6eb01c044ea2f3150e7
+evidence_reviewed:
+  original_research_sections:
+  - function
+  - mass
+  - material
+  - how_to_make
+  - kb_implications
+  geometry_evidence_used: true
+  notes: Reviewed the original function, row-neighborhood assumptions, CAD-derived mass basis, BOM quantity, material conflict,
+    manufacturing route, KB implications, and CAD preview before conversion.
+decomposition:
+  decision: simple_part
+  rationale: The row is a monolithic small square rod/contact pole, not a module and assembly. The material conflict is a
+    modeling caveat, not a reason to decompose.
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: ceramic_rod_forming_sintering_cutting_grinding
+  primary_process_bucket: general_subtractive_machining
+  supporting_processes:
+  - stock_preparation
+  - cutting
+  - precision_machining
+  - deburring
+  - surface_finishing
+  - dimensional_inspection
+  - joining
+  candidate_existing_processes:
+  - process_id: machining_basic_v0
+    fit: partial
+    reason: Covers basic stock removal; row-specific precision features remain guardrails.
+  - process_id: machining_precision_v0
+    fit: supporting
+    reason: Relevant when bore, sliding, concentricity, and finish control matter.
+  - process_id: inspection_basic_v0
+    fit: supporting
+    reason: Covers dimensional checks before staging selects the final recipe.
+  - process_id: welding_basic_v0
+    fit: supporting
+    reason: Relevant when the row needs permanent joining.
+  abstraction_decision: add_post_processing
+  rationale: The source route is a technical-ceramic rod made and sourced near net shape, then cut and ground/lapped. The
+    nearest shared lunar process bucket is stock cutting/grinding under general subtractive machining, with finishing retained
+    for straightness and contact-surface quality; upstream ceramic stock production remains a later closure input.
+  process_guardrails:
+    tolerance: review
+    surface_finish: review
+    sealing_quality: not_applicable
+    alignment_accuracy: review
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: wear-resistant guide spacer and contact member
+  material: technical_ceramic
+  scale_or_capacity:
+    mass_kg: 0.00826
+    bom_quantity: 1
+    row_total_mass_kg: 0.00826
+    scale_class: tiny
+  geometry_form: long_small_square_rod
+merge_pool:
+  eligible: true
+  functional_purpose_key: wear_resistant_contact_member
+  precision_guardrails:
+  - straightness
+  - surface_finish
+  - adhesive_mounting_compatibility
+  - material_family_conflict
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+  - general_subtractive_machining
+  import_risk_factors:
+  - Local closure may need dense technical-ceramic rod stock, ceramic green forming and sintering, and import-treated ceramic
+    stock before final cutting and grinding.
+  - Material evidence conflicts with assembly STEP stainless metadata, so final material choice should be checked before KB
+    promotion.
+  post_merge_decision_notes: Final import/local manufacture decision is deferred until after merge review; compare against
+    other guide, spacer, and contact members while preserving material and surface-finish guardrails.
+kb_staging:
+  proposed_item_id: null
+  notes: Wait for merge review before final item ID; likely a generic small technical-ceramic contact and guide rod if material
+    conflict and surface requirements converge.
+assumptions:
+- The CAD filename and BOM identity are treated as stronger evidence for ceramic material than the conflicting stainless assembly
+  metadata.
+- The rod can be modeled as stock cut and finish-ground for closure purposes, with upstream ceramic stock production handled
+  separately.
+unresolved:
+- Exact ceramic grade, actual material, straightness tolerance, surface roughness, and bonding and mounting details are not
+  specified.
+```

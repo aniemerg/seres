@@ -37,7 +37,7 @@ material:
   uncertainty_notes:
     - "The public BOM URL is a product-family route rather than a row-specific part-number page, so surface finish and exact Rexroth alloy designation should be rechecked before precision manufacturing."
 how_to_make:
-  summary: "Procure as a Bosch Rexroth cut-to-length 20 x 20 aluminum strut profile, or locally reproduce by extruding the 20 x 20 slotted aluminum profile, cutting to length, deburring, and anodizing or otherwise finishing the segment."
+  summary: "Prepare as a Bosch Rexroth cut-to-length 20 x 20 aluminum strut profile, or locally reproduce by extruding the 20 x 20 slotted aluminum profile, cutting to length, deburring, and anodizing or otherwise finishing the segment"
   manufacturing_steps:
     - "Extrude Aluminum 6061 or a compatible structural aluminum alloy through a die matching the 20 x 20 mm slotted profile."
     - "Cut the extrusion to the row length represented by the STEP geometry."
@@ -48,7 +48,7 @@ how_to_make:
     cited_fact_or_basis: "BOM row evidence identifies a Bosch Rexroth strut profile, and CAD preview shows a constant 20 x 20 mm slotted extrusion. targeted_web_search: tried 'Bosch Rexroth strut profile 20x20 material aluminum mass kg m' and 'site:boschrexroth.com strut profile 20x20 Bosch Rexroth material'; results matched the Bosch Rexroth strut-profile product family and catalog/distributor pages for 20 x 20 aluminum profiles, but did not state a row-specific manufacturing process for this cut segment."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "Aluminum extrusion plus cut-to-length finishing is the plausible local manufacturing route for a constant-section slotted structural profile."
+    - "Aluminum extrusion plus cut-to-length finishing is the plausible Manufacturing route for a constant-section slotted structural profile."
   uncertainty_notes:
     - "The CAD and product-family evidence do not specify extrusion temper, anodizing thickness, cut tolerance, or end-machining details for this row."
 kb_implications:

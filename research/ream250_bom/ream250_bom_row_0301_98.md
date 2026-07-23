@@ -46,7 +46,7 @@ how_to_make:
     - "Deburr, clean, and apply any required surface finish or corrosion protection before frame assembly."
   source:
     url_or_path: "design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/98_plate.step; research/ream250_bom/ream250_bom_row_0301_98__views_2x2.png; web targeted search"
-    cited_fact_or_basis: "FreeCAD measured one solid with a 900.00 x 10.00 x 960.00 mm bounding box. The rendered preview shows a plain flat rectangular plate with no visible holes, pockets, threads, or multi-part features. targeted_web_search: searched \"98_plate reAM250 material\", \"reAM250 98_plate material\", \"reAM250 900 960 10 plate\", and \"reAM250 98 4 98_plate\"; found duplicate BOM listings but no row-specific fabrication drawing or manufacturing instructions."
+    cited_fact_or_basis: "FreeCAD measured one solid with a 900.00 x 10.00 x 960.00 mm bounding box. The rendered preview shows a plain flat rectangular plate with no visible holes, pockets, threads, or multi-part features. targeted_web_search: searched \"98_plate reAM250 material\", \"reAM250 98_plate material\", \"reAM250 900 960 10 plate\", and \"reAM250 98 4 98_plate\" found duplicate BOM listings but no row-specific fabrication drawing or manufacturing instructions."
     evidence_basis: "engineering_hypothesis"
   assumptions:
     - "Plate cutting and edge finishing are selected as the plausible route because the CAD is a simple prismatic 10 mm plate."
@@ -58,3 +58,88 @@ kb_implications:
 ---
 
 Research result for reAM250 BOM row 301.
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0301_98.md
+source_research_sha256: "8142feceb6dfc3e98fabfbabc5f89d23f76fd9943f192bee67ee3252fabd0b56"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Reviewed the frame plate function, CAD-derived mass, unresolved material evidence, simple plate-cutting route, and plain rectangular CAD preview before conversion."
+decomposition:
+  decision: simple_part
+  rationale: "The row is four instances of one large plain plate geometry; no embedded hardware, electronics, seals, nor multi-part structure is present in the row evidence."
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: large_plate_cutting_and_edge_finishing
+  primary_process_bucket: sheet_plate_cutting_drilling
+  supporting_processes:
+    - stock_preparation
+    - cutting
+    - deburring
+    - surface_finishing
+    - dimensional_inspection
+  candidate_existing_processes:
+    - process_id: sheet_metal_cutting_v0
+      fit: direct
+      reason: "Covers cutting sheet and plate stock into large rectangular blanks for panels and frame plates."
+    - process_id: metal_cutting_basic_v0
+      fit: supporting
+      reason: "Covers saw-style stock cutting to length when the stock is treated as thick metal plate."
+    - process_id: surface_finishing_v0
+      fit: supporting
+      reason: "Covers edge cleanup, surface conditioning, and fit-up finishing when required by assembly."
+    - process_id: inspection_basic_v0
+      fit: supporting
+      reason: "Covers checks of length, width, thickness, squareness, and flatness."
+  abstraction_decision: keep_original_family
+  rationale: "The source evidence already describes a plain large plate made from stock by cutting and edge finishing, which fits the selected sheet and plate cutting bucket."
+  process_guardrails:
+    tolerance: review
+    surface_finish: review
+    sealing_quality: not_applicable
+    alignment_accuracy: review
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: structural plate and panel for machine frame group
+  material: structural_metal_unknown_aluminum_assumed_for_mass
+  scale_or_capacity:
+    mass_kg: 22.766
+    bom_quantity: 4
+    row_total_mass_kg: 91.064
+    scale_class: large
+  geometry_form: large_plain_rectangular_plate_900x960x10mm
+merge_pool:
+  eligible: true
+  functional_purpose_key: structural_frame_member
+  precision_guardrails:
+    - material_family
+    - flatness
+    - edge_squareness
+    - attachment_method
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - sheet_plate_cutting_drilling
+  import_risk_factors:
+    - "Material uncertainty is high; steel would roughly triple the per-unit mass compared with the aluminum planning estimate."
+    - "Row total mass is significant, so material resolution can materially affect closure accounting."
+  post_merge_decision_notes: "Final import/local decision is deferred until merge review; this row should merge only after material family and attachment role are checked against related frame rows."
+kb_staging:
+  proposed_item_id: null
+  notes: "Wait for merge review with other large structural plates and panels before assigning a closure item ID."
+assumptions:
+  - "The four BOM units share the same geometry and role."
+  - "The plate is structural metal stock rather than a calibrated module."
+  - "No hidden holes, pockets, inserts, nor coatings are modeled until stronger evidence appears."
+unresolved:
+  - "Material family remains unresolved; aluminum is only the mass-planning assumption."
+  - "Final attachment method and frame location are not identified by the row evidence."
+```

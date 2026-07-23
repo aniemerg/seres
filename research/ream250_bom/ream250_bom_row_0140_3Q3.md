@@ -37,9 +37,8 @@ material:
   uncertainty_notes:
     - "The aluminum alloy grade is not stated on the row-matched product page or datasheet."
 how_to_make:
-  summary: "Best current route is procurement as Pfeiffer 311ZRA100 or equivalent ISO-K DN100 aluminum/NBR centering ring; local manufacture would combine a machined aluminum centering ring with a standard NBR O-ring and final dimensional/fit inspection."
+  summary: "Combine a machined aluminum centering ring with a standard NBR O-ring and final dimensional/fit inspection"
   manufacturing_steps:
-    - "Procure Pfeiffer 311ZRA100 or equivalent ISO-K DN100 centering ring with aluminum outer ring and NBR O-ring."
     - "For local manufacture, machine or form the aluminum centering/outer ring to DN100 ISO-K dimensions and deburr sealing-adjacent features."
     - "Install an NBR O-ring of the matching cross-section and inspect ring dimensions, O-ring seating, and flange fit."
   source:
@@ -47,9 +46,103 @@ how_to_make:
     cited_fact_or_basis: "The official product route identifies the purchased product, DN100 ISO-K dimensions, aluminum outer ring, and NBR O-ring. The CAD preview shows a simple annular ring profile consistent with machining/forming plus O-ring installation. targeted_web_search: queries tried: 'Pfeiffer 311ZRA100 manufacturing process', 'ISO-K centering ring aluminum NBR manufacture', and '311ZRA100 datasheet manufacturing'; result: no row-specific source states the manufacturing process, so local manufacturing steps are inferred from geometry and materials."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "Equivalent local production can use conventional aluminum ring machining/forming and separate elastomer O-ring procurement or molding."
-  uncertainty_notes:
-    - "The exact aluminum alloy, surface finish, and O-ring procurement/molding specification would need a later manufacturing drawing or standard-part specification."
+    - "Local production can use conventional aluminum ring machining/forming and separate elastomer O-ring production or molding"
+  uncertainty_notes: []
 kb_implications:
-  - "item_granularity: consumable - Model later as a reusable ISO-K DN100 centering-ring seal consumable family rather than a reAM250-specific custom machine part; the row quantity represents two instances of the same replaceable flange seal."
+  - "item_granularity: simple_part - Model later as a reusable ISO-K DN100 centering-ring seal replaceable or applied part family rather than a reAM250-specific custom machine part; the row quantity represents two instances of the same replaceable flange seal."
 ---
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0140_3Q3.md
+source_research_sha256: "44de054d354ec93c4aa37b1d7dfe801e628e66fac4b4ca7579ba723d4ecd9409"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Read centering/sealing function, mixed-density mass estimate, aluminum/NBR material evidence, ring plus O-ring assembly route, KB implication, and preview of the thin annular seal geometry."
+decomposition:
+  decision: simple_part
+  rationale: "The item is a small replaceable flange seal/centering hardware unit; aluminum ring and NBR O-ring should be tracked as material guardrails without forcing row-level decomposition."
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: machined_aluminum_centering_ring_with_elastomer_o_ring
+  primary_process_bucket: plumbing_connector_fabrication_testing
+  supporting_processes:
+    - precision_machining
+    - deburring
+    - elastomer_forming
+    - assembly
+    - cleaning
+    - leak_testing
+    - dimensional_inspection
+  candidate_existing_processes:
+    - process_id: vacuum_seal_assembly_fabrication_v0
+      fit: partial
+      reason: "Covers assembling vacuum seal flange/gasket hardware and checking seal fit, though this row is much smaller."
+    - process_id: elastomer_molding_basic_v0
+      fit: supporting
+      reason: "Relevant to the NBR-style O-ring material dependency if local elastomer production is modeled."
+    - process_id: machining_basic_v0
+      fit: supporting
+      reason: "Covers machining the aluminum centering/outer ring."
+    - process_id: machining_precision_v0
+      fit: supporting
+      reason: "Relevant for flange centering dimensions and O-ring seating geometry."
+    - process_id: leak_testing_v0
+      fit: supporting
+      reason: "Relevant when validating assembled flange joints using this seal."
+    - process_id: inspection_basic_v0
+      fit: supporting
+      reason: "Covers dimensional checks of ring diameter, thickness, and O-ring seating."
+  abstraction_decision: keep_original_family
+  rationale: "The source item is already vacuum flange centering/sealing hardware, and the selected bucket preserves seal fit, elastomer dependency, cleaning, and leak-test needs."
+  process_guardrails:
+    tolerance: review
+    surface_finish: review
+    sealing_quality: high
+    alignment_accuracy: review
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: centering and sealing a flanged gas/fluid interface
+  material: aluminum_outer_ring_with_nbr_o_ring
+  scale_or_capacity:
+    mass_kg: 0.0177
+    bom_quantity: 2
+    row_total_mass_kg: 0.0355
+    scale_class: tiny
+  geometry_form: thin_annular_centering_ring_with_elastomer_o_ring_for_dn100_iso_k
+merge_pool:
+  eligible: true
+  functional_purpose_key: interface_sealing
+  precision_guardrails:
+    - flange_standard_fit
+    - o_ring_material
+    - seal_compression
+    - mixed_material_mass_split
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - plumbing_connector_fabrication_testing
+  import_risk_factors:
+    - "NBR O-ring production is a separate polymer/elastomer dependency."
+    - "Mass estimate depends on unresolved aluminum-to-NBR volume split."
+    - "Flange seal reliability requires fit and compression checks."
+  post_merge_decision_notes: "Final import/local manufacture decision is deferred until after merge review with other centering-ring seal rows."
+kb_staging:
+  proposed_item_id: null
+  notes: "Leave final closure item ID open for merge review across flange centering/seal hardware."
+assumptions:
+  - "Use 0.0177 kg per unit as the mixed aluminum/NBR planning estimate."
+  - "Treat the aluminum ring and O-ring as one replaceable seal item at row-conversion granularity."
+  - "Track elastomer material explicitly during later staging."
+unresolved:
+  - "Aluminum alloy grade and O-ring material specification beyond NBR family."
+  - "Actual aluminum/NBR volume split and catalog mass."
+  - "Required seal compression and leak-rate acceptance."
+```

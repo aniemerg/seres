@@ -45,7 +45,7 @@ how_to_make:
     - "Deburr, clean, and inspect the mounting faces and hole location before assembly."
   source:
     url_or_path: "design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/3S2_mount.step; research/ream250_bom/ream250_bom_row_0146_3S2__views_2x2.png; web targeted search"
-    cited_fact_or_basis: "FreeCAD measured one solid with a 20.00 x 30.00 x 15.00 mm bounding box. The rendered preview shows a compact bracket-like geometry with two perpendicular legs and a circular through feature. targeted_web_search: searched \"3S2_mount reAM250 manufacturing\", \"3S2 reAM250 mount drawing\", \"reAM250 3S2 mount\", and \"3S2_mount\"; found duplicate BOM text but no row-specific fabrication drawing or manufacturing source."
+    cited_fact_or_basis: "FreeCAD measured one solid with a 20.00 x 30.00 x 15.00 mm bounding box. The rendered preview shows a compact bracket-like geometry with two perpendicular legs and a circular through feature. targeted_web_search: searched \"3S2_mount reAM250 manufacturing\", \"3S2 reAM250 mount drawing\", \"reAM250 3S2 mount\", and \"3S2_mount\" found duplicate BOM text but no row-specific fabrication drawing or manufacturing source."
     evidence_basis: "engineering_hypothesis"
   assumptions:
     - "The manufacturing route is inferred from the simple bracket geometry and likely low-volume machine-specific hardware role."
@@ -57,3 +57,94 @@ kb_implications:
 ---
 
 Research result for reAM250 BOM row 146.
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0146_3S2.md
+source_research_sha256: "925e65010c69962742147f4c65f5860ce26638f51c143e7fc74f38470886981e"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Reviewed the gas-outlet-area mounting bracket function, 0.0105 kg per-unit steel-planning mass with BOM quantity 2 and 0.021 kg row total, unresolved metal material evidence, simple forming/machining route, KB implication, and CAD preview showing a compact L bracket with a circular through feature."
+decomposition:
+  decision: simple_part
+  rationale: "The row is one small bracket/spacer with a through feature and no internal assemblies; closure can model it as reusable mounting hardware."
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: small_metal_bracket_forming_machining
+  primary_process_bucket: sheet_plate_cutting_drilling
+  supporting_processes:
+    - stock_preparation
+    - cutting
+    - forming
+    - drilling
+    - precision_machining
+    - deburring
+    - cleaning
+    - dimensional_inspection
+  candidate_existing_processes:
+    - process_id: sheet_metal_forming_v0
+      fit: partial
+      reason: "Covers forming a small right-angle bracket from sheet/plate stock."
+    - process_id: drilling_basic_v0
+      fit: supporting
+      reason: "Covers the circular through feature visible in the bracket."
+    - process_id: machining_basic_v0
+      fit: supporting
+      reason: "Fallback if the bracket is machined from a small block instead of bent sheet."
+    - process_id: finishing_deburring_v0
+      fit: supporting
+      reason: "Covers edge cleanup after cutting, drilling, and forming."
+    - process_id: inspection_basic_v0
+      fit: supporting
+      reason: "Covers hole position, bracket angle, and fit checks."
+  abstraction_decision: substitute_process_family
+  rationale: "The original route is unresolved, but the compact L-shaped bracket can be covered by a shared sheet/plate cutting, forming, drilling, and inspection path."
+  process_guardrails:
+    tolerance: low_to_moderate
+    surface_finish: low_to_moderate
+    sealing_quality: not_applicable
+    alignment_accuracy: review
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: "small mounting support for gas outlet hardware"
+  material: unresolved_structural_metal
+  scale_or_capacity:
+    mass_kg: 0.0105
+    bom_quantity: 2
+    row_total_mass_kg: 0.021
+    scale_class: small
+  geometry_form: compact_l_bracket_with_circular_through_feature
+merge_pool:
+  eligible: true
+  functional_purpose_key: mounting_support
+  precision_guardrails:
+    - hole_position
+    - bracket_angle
+    - material_unresolved
+    - forming_vs_machining
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - sheet_plate_cutting_drilling
+  import_risk_factors:
+    - "Material family and exact mounting tolerance are unresolved."
+    - "If the part is machined from solid stock, the selected sheet/plate path needs adjustment during staging."
+  post_merge_decision_notes: "Final import/local decision is deferred until merge review compares this with other small mounting brackets and gas outlet supports."
+kb_staging:
+  proposed_item_id: null
+  notes: "Wait for merge review; likely candidate for a generic small metal mounting bracket if geometry and material guardrails converge."
+assumptions:
+  - "BOM quantity is 2, mass is 0.0105 kg per mount under the steel planning estimate, and row total mass is 0.021 kg."
+  - "The part is treated as rigid metal hardware based on geometry and gas outlet context."
+  - "The circular feature is treated as a mounting feature, not a flow path."
+unresolved:
+  - "Exact material, manufacturing route, surface finish, fastener role, mating component, and mounting tolerance are unknown."
+  - "Whether the bracket should merge with generic mounting brackets depends on material and hole/angle requirements."
+```

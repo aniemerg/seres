@@ -36,24 +36,122 @@ material:
   uncertainty_notes:
     - "The exact steel grade, heat treatment, coating, seal polymer, and retainer/end-cap polymer are not identified by the available row-matched evidence."
 how_to_make:
-  summary: "Procure as a standard HIWIN HGL15CAZ0H linear-guide carriage, supplied as a precision bearing block with SS sealing configuration and a loose straight grease nipple; later local manufacturing would require a detailed bearing-block sub-BOM and precision raceway process model rather than treating it as a simple machined block."
+  summary: "Do not model a row-level manufacturing route for this pass. Treat the HGL15CAZ0H linear-guide carriage as a complex precision motion module that must be decomposed in later KB work before any local manufacturing process is claimed."
   manufacturing_steps:
-    - "Specify HIWIN HGL15CAZ0H: HG series, low square HGL15CA block, Z0 light preload, H precision, SS sealing system, no oil lubrication unit, no coating."
-    - "Procure the carriage as a finished vendor component and keep it matched to HGR15 rail geometry."
-    - "Install the supplied grease nipple or connect the lubrication route required by the axis design."
-    - "Mount the carriage from above using the specified M4 interface and align it to the paired HGR15 rail during axis assembly."
-    - "For future self-manufacture modeling, split into hardened/ground steel body and raceways, recirculating balls, seals, retainer/end caps, grease nipple, lubricant, heat treatment, grinding/lapping, cleaning, and preload/accuracy inspection steps."
+    - "Defer detailed manufacturing until a separate linear-guide-carriage sub-BOM is created."
+    - "Future decomposition should resolve at least the carriage body/raceways, recirculating balls, end caps, retainer, seals, grease nipple or lubrication interface, lubricant, heat treatment, precision grinding/lapping, cleaning, assembly, preload control, and accuracy inspection."
   source:
     url_or_path: "https://www.reiman.pt/pub/media/technical_data/hiwin/datasheets/hgl15caz0h.pdf; https://www.hiwin.de/en/Products/Linear-guideways/Blocks/Ball-guides/Series-HG-QH/HGL/HGL15CAZ0H/p/5-001374; https://www.lm76.com/HG-Series-Catalog_opt.pdf; research/ream250_bom/ream250_bom_row_0026_2A3__views_2x2.png"
-    cited_fact_or_basis: "The HIWIN datasheet identifies the order specification HGL15CAZ0H, block preserved, HGL15CAZ0H (1 pcs.), and grease nipple straight loose; it also gives M4 mounting and the configuration attributes. The HIWIN product route matches the same product family and model. The HG-series catalog describes the guideway construction as block, rail, end cap, retainer, bottom seal, ball, grease nipple, and related lubrication components. The rendered contact sheet confirms the row CAD is a compact carriage-like block, not raw stock. The local manufacturing sub-BOM/process split is a modeling implication inferred from bearing construction, not a source-stated route."
+    cited_fact_or_basis: "The HIWIN datasheet identifies the order specification HGL15CAZ0H, block preserved, HGL15CAZ0H (1 pcs.), and grease nipple straight loose; it also gives M4 mounting and the configuration attributes. The HIWIN product route matches the same product family and model. The HG-series catalog describes the guideway construction as block, rail, end cap, retainer, bottom seal, ball, grease nipple, and related lubrication components. The rendered contact sheet confirms the row CAD is a compact carriage-like module, not raw stock or a simple machined block. targeted_web_search: searched \"Hiwin HGL15CAZ0H datasheet\", \"HGL15CAZ0H material\", \"HGL15CAZ0H weight\", and \"HGL15CA chrome steel\" no row-matched source found a complete manufacturing process, heat treatment, tolerance stack, or component-level sub-BOM for local production."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "Current KB modeling should procure the standard carriage as a purchased module because the BOM gives a HIWIN vendor product and no sub-BOM or raceway manufacturing drawing."
-    - "The final bullet is included only as a future self-manufacture decomposition path for closure work."
+    - "Because this is a precision recirculating linear-guide carriage, row-level manufacturing is intentionally not specified until the module is decomposed."
   uncertainty_notes:
-    - "targeted_web_search: searched \"Hiwin HGL15CAZ0H datasheet\", \"HGL15CAZ0H material\", \"HGL15CAZ0H weight\", and \"HGL15CA chrome steel\"; no row-matched source found a complete manufacturing process, heat treatment, tolerance stack, or component-level sub-BOM for local production."
+    - "The exact component sub-BOM, steel grades, heat treatment, grinding/lapping process, seal materials, lubrication details, tolerances, and inspection sequence are unresolved."
 kb_implications:
-  - "item_granularity: purchased_module - model as a reusable purchased precision linear-guide carriage for now; only split into steel body, balls, seals, retainer/end caps, lubricant, and inspection processes if linear-guide imports become a priority."
+  - "item_granularity: complex_module - model as a reusable complex precision linear-guide carriage for this pass; only split into steel body, balls, seals, retainer/end caps, lubricant, and inspection processes if linear-guide imports become a priority."
 ---
 
 Research result for reAM250 BOM row 26.
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0026_2A3.md
+source_research_sha256: "cbb7d4ea474e8a76b775b0cc9dc0695d438c29b7695d2365a4766c5809eabe66"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Reviewed the HIWIN linear-guide carriage function, 0.14 kg catalog mass with BOM quantity 1, chrome/bearing-steel plus nonmetal component evidence, deferred manufacturing route, KB implication, and CAD preview showing a compact recirculating carriage module."
+decomposition:
+  decision: complex_module
+  rationale: "The carriage contains precision raceways, rolling balls, seals, end caps, retainer features, lubricant, preload control, and inspection dependencies; these internals matter for closure if local manufacture is attempted."
+  proposed_subparts:
+    - carriage_body_raceway
+    - recirculating_balls
+    - end_caps
+    - retainer_elements
+    - seals
+    - grease_nipple
+    - lubricant_charge
+process_abstraction:
+  original_process_family: vendor_precision_linear_guide_carriage
+  primary_process_bucket: precision_component_import_decompose_later
+  supporting_processes:
+    - decomposition_required
+    - import_assumption
+    - precision_machining
+    - grinding_lapping
+    - heat_treatment
+    - assembly
+    - calibration
+    - dimensional_inspection
+  candidate_existing_processes:
+    - process_id: machining_precision_v0
+      fit: partial
+      reason: "Relevant to carriage body and rail-interface features, but does not cover recirculating ball guideway manufacturing."
+    - process_id: precision_grinding_basic_v0
+      fit: supporting
+      reason: "Relevant to hardened raceway surfaces and preload-critical sliding accuracy."
+    - process_id: heat_treatment_hardening_v0
+      fit: supporting
+      reason: "Relevant to bearing steel raceway and rolling element hardness."
+    - process_id: bearing_set_heavy_production_v0
+      fit: partial
+      reason: "Covers some rolling-bearing manufacturing concepts, but linear carriage ball recirculation and preload are not represented directly."
+    - process_id: assembly_basic_v0
+      fit: supporting
+      reason: "Relevant to final placement of balls, seals, end caps, lubricant, and grease fitting after precision parts exist."
+    - process_id: inspection_basic_v0
+      fit: supporting
+      reason: "Basic QA anchor; later staging needs accuracy, preload, smoothness, and dimensional inspection beyond the generic process."
+  abstraction_decision: needs_human
+  rationale: "A precision linear-guide carriage should not be reduced to a simple machined block. It should remain an import/decompose-later precision component until the KB has a deliberate linear-guidance manufacturing model."
+  process_guardrails:
+    tolerance: high
+    surface_finish: high
+    sealing_quality: review
+    alignment_accuracy: high
+    blocked_by_precision: true
+identity_for_merge:
+  functional_purpose: "low friction precision linear motion carriage for a guided machine axis"
+  material: chrome_bearing_steel_with_polymer_seals_and_lubricant
+  scale_or_capacity:
+    mass_kg: 0.14
+    bom_quantity: 1
+    row_total_mass_kg: 0.14
+    scale_class: small
+  geometry_form: compact_square_linear_guide_carriage_block
+merge_pool:
+  eligible: false
+  functional_purpose_key: linear_guidance
+  precision_guardrails:
+    - preload
+    - raceway_surface_finish
+    - rolling_element_quality
+    - alignment_accuracy
+    - seal_materials
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - precision_component_import_decompose_later
+  import_risk_factors:
+    - "Precision raceways, rolling balls, preload control, seals, lubricant, and accuracy inspection create a high closure burden."
+    - "Component-level sub-BOM, steel grades, heat treatment, and grinding/lapping process are unresolved."
+  post_merge_decision_notes: "Final import/local decision is deferred; compare with other guideway blocks and rails before deciding whether to keep a generic linear-guidance import candidate."
+kb_staging:
+  proposed_item_id: null
+  notes: "Do not assign a simple closure item ID at row conversion; decomposition and merge review should decide the linear-guide carriage abstraction."
+assumptions:
+  - "BOM quantity is 1 and row total mass is the catalog carriage mass of 0.14 kg."
+  - "Chrome/bearing steel is treated as the main load-bearing material, with nonmetal seals and lubricant kept as unresolved secondary materials."
+  - "The CAD preview confirms carriage form but does not expose internal ball path, preload, seal, and grease features."
+unresolved:
+  - "Exact steel grade, heat treatment, ball grade, seal polymer, grease type, preload class, and inspection sequence remain unresolved."
+  - "Whether linear-guide carriages are imported as modules, decomposed locally, and merged across sizes is deferred."
+```

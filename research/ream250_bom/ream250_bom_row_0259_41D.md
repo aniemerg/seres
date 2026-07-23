@@ -39,7 +39,7 @@ material:
   uncertainty_notes:
     - "No source identified the exact aluminum alloy, surface treatment, or whether the supplied pulley includes any separate steel retaining hardware."
 how_to_make:
-  summary: "Procure or manufacture as a standard 21 AT5/18-2 aluminum timing pulley, then finish-bore or verify the 7 mm H7 bore for the reAM250 shaft interface."
+  summary: "Manufacture as a standard 21 AT5/18-2 aluminum timing pulley, then finish-bore or verify the 7 mm H7 bore for the reAM250 shaft interface"
   manufacturing_steps:
     - "Start from an aluminum AT5 pulley blank or standard 21 AT5/18-2 pulley body with two flanges."
     - "Generate or finish the AT5 tooth profile and flange geometry by pulley hobbing/form cutting or equivalent CNC turning and milling operations."
@@ -50,8 +50,7 @@ how_to_make:
     cited_fact_or_basis: "BOM row 259 states the custom 7 mm H7 bore requirement. Lenze states that belt pulleys can be made according to drawing with special drilled holes, special tolerances, different surface treatments, different materials, and single-piece or large-series production. Optibelt gives the base 21 AT5 / 18-2 pulley geometry, aluminum material, maximum finished bore, and catalog mass. targeted_web_search: searched 'zahriemen24 21 AT5/18-2 toothed belt pulley 7 mm H7 575457', 'site:zahriemen24.de 575457', 'site:zahriemen24.de 21 AT5/18-2', and '21 AT5/18-2 7 mm H7'; found duplicate BOM text and standard pulley catalog matches, but no row-specific manufacturing drawing for the exact Zahriemen24 575457 modification."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "A purchased standard pulley plus secondary bore finishing or vendor-supplied bore customization is the most plausible route because the BOM names a standard pulley designation plus a custom H7 bore."
-    - "If manufactured locally from stock instead of procured, the same operations can be modeled as aluminum blank turning, tooth/flange machining, bore finishing, deburring, and inspection."
+    - "A external standard pulley plus secondary bore finishing or row-matched bore customization is the most plausible route because the BOM names a standard pulley designation plus a custom H7 bore"
   uncertainty_notes:
     - "The exact surface finish, balance grade, tooth-tolerance class, and vendor modification drawing are not present in the BOM row or resolved catalog evidence."
 kb_implications:
@@ -59,3 +58,105 @@ kb_implications:
 ---
 
 Research result for reAM250 BOM row 259.
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0259_41D.md
+source_research_sha256: ba2cd6fce4ec03f5fe71c3e0844a760cccfce4ce8f44c3281238caac8572ce27
+evidence_reviewed:
+  original_research_sections:
+  - function
+  - mass
+  - material
+  - how_to_make
+  - kb_implications
+  geometry_evidence_used: true
+  notes: Reviewed function, catalog mass basis, aluminum material evidence, standard pulley manufacturing route, assembly-only
+    CAD context, and KB implications before conversion.
+decomposition:
+  decision: simple_part
+  rationale: A single standard flanged timing pulley with a finish-bored shaft interface; no motor, gearbox, bearing, and
+    internal module structure is present in this row.
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: pulley_hobbing_form_cutting_and_finish_boring
+  primary_process_bucket: general_subtractive_machining
+  supporting_processes:
+  - stock_preparation
+  - cutting
+  - precision_machining
+  - deburring
+  - surface_finishing
+  - dimensional_inspection
+  - gear_tooth_machining
+  - coating
+  candidate_existing_processes:
+  - process_id: machining_basic_v0
+    fit: partial
+    reason: Covers basic stock removal; row-specific precision features remain guardrails.
+  - process_id: machining_precision_v0
+    fit: supporting
+    reason: Relevant when bore, sliding, concentricity, and finish control matter.
+  - process_id: inspection_basic_v0
+    fit: supporting
+    reason: Covers dimensional checks before staging selects the final recipe.
+  - process_id: gear_cutting_basic_v0
+    fit: supporting
+    reason: Relevant when tooth geometry controls motion transfer.
+  - process_id: surface_treatment_basic_v0
+    fit: supporting
+    reason: Relevant when the row needs protective surface treatment.
+  abstraction_decision: add_post_processing
+  rationale: The row-specific function depends on accurate AT5 tooth geometry, flange geometry, concentricity, and a 7 mm
+    H7 bore. General subtractive machining is the closest shared lunar bucket, with finish boring, deburring, and inspection
+    retained as required post-processing. Metal additive manufacturing is not preferred for the belt tooth profile and shaft
+    bore without substantial machining afterward.
+  process_guardrails:
+    tolerance: h7_bore_and_tooth_profile_review
+    surface_finish: review
+    sealing_quality: not_applicable
+    alignment_accuracy: concentricity_and_runout_review
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: synchronous belt motion transmission
+  material: aluminum_alloy
+  scale_or_capacity:
+    mass_kg: 0.031
+    bom_quantity: 2
+    row_total_mass_kg: 0.062
+    scale_class: tiny
+  geometry_form: flanged_toothed_timing_pulley_with_finish_bore
+merge_pool:
+  eligible: true
+  functional_purpose_key: synchronous_motion_transmission
+  precision_guardrails:
+  - tooth_pitch_profile
+  - bore_tolerance_h7
+  - bore_to_tooth_concentricity
+  - pulley_runout
+  - belt_width_and_flange_fit
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+  - general_subtractive_machining
+  import_risk_factors:
+  - AT5 tooth profile and belt-fit tolerances may require specialized cutter geometry and inspection.
+  - The 7 mm H7 bore requires precision finish boring and reaming with concentricity control.
+  - Exact aluminum alloy, surface treatment, balance grade, and vendor modification drawing are unresolved.
+  post_merge_decision_notes: Final import/local manufacture decision is deferred until after merge review; compare with other
+    pulley and drivetrain rows before deciding the condition that to stage a generic timing pulley closure item.
+kb_staging:
+  proposed_item_id: null
+  notes: Wait for merge review across drivetrain pulley rows; preserve the precision bore and tooth-profile guardrails if
+    merged.
+assumptions:
+- The Optibelt 21 AT5 / 18-2 catalog line is a suitable evidence proxy for mass, aluminum material, and base geometry.
+- The row-specific 7 mm H7 bore is treated as secondary finishing rather than a different closure item by itself.
+- General subtractive machining can represent pulley tooth generation if suitable tooling and inspection are available.
+unresolved:
+- Exact Zahriemen24 575457 modification drawing.
+- Aluminum alloy, surface treatment, balance grade, and tooth-tolerance class.
+- Whether local tooling for AT5 tooth generation should be modeled separately during KB staging.
+- Mating shaft and belt path details in the powder-inlet drivetrain.
+```

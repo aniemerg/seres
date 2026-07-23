@@ -37,10 +37,10 @@ material:
   uncertainty_notes:
     - "Exact alloy, temper, and anodize specification are unresolved; downstream KB modeling should use aluminum/anodized aluminum rather than a specific alloy grade unless a later source identifies the 17AH supplier."
 how_to_make:
-  summary: "Procure as a standard 60 x 60 mm anodized aluminum machine-frame profile cut to 350 mm, or locally make by aluminum extrusion, straightening/aging, anodizing, saw cutting, and deburring."
+  summary: "Prepare as a standard 60 x 60 mm anodized aluminum machine-frame profile cut to 350 mm, or locally make by aluminum extrusion, straightening/aging, anodizing, saw cutting, and deburring"
   manufacturing_steps:
-    - "Procurement route: buy 60 x 60 mm modular aluminum profile stock and cut two 350 mm lengths for the BOM row."
-    - "Local route: extrude aluminum alloy through a die forming the 60 x 60 mm slotted cross-section."
+    - "Cut two 350 mm lengths for the BOM row"
+    - "Manufacturing route: extrude aluminum alloy through a die forming the 60 x 60 mm slotted cross-section."
     - "Straighten and age or stress-relieve according to alloy/process practice, then anodize for the standard corrosion-resistant surface."
     - "Saw-cut to 350 mm, deburr the ends, and add any required end tapping or drilled features if later assembly evidence requires them."
   source:
@@ -59,3 +59,90 @@ kb_implications:
 # reAM250 BOM Row 236 - 17AH
 
 Research result for the leased reAM250 BOM row.
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0236_17AH.md
+source_research_sha256: "472979a08b1f573800fe8879fba818843a47a1d08fc20ea8c8af1c7611ec2e36"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Read function, mass basis, material evidence, manufacturing route, CAD proxy, image preview, and KB implications before conversion."
+decomposition:
+  decision: simple_part
+  rationale: "Single cut length of slotted frame stock with no internal closure dependencies; profile series and length evidence should remain staging notes."
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: aluminum_profile_extrusion_cut_to_length
+  primary_process_bucket: structural_profile_stock_fabrication_cutting
+  supporting_processes:
+    - extrusion
+    - heat_treatment
+    - surface_finishing
+    - cutting
+    - deburring
+    - drilling
+    - dimensional_inspection
+  candidate_existing_processes:
+    - process_id: metal_extrusion_process_v0
+      fit: partial
+      reason: "Covers metal stock extrusion, with slotted die design and anodized finish left as later staging details."
+    - process_id: cutting_basic_v0
+      fit: supporting
+      reason: "Covers cutting stock to the required 350 mm length."
+    - process_id: surface_finishing_v0
+      fit: supporting
+      reason: "Covers post-extrusion finish control when corrosion and slot wear resistance matter."
+    - process_id: inspection_basic_v0
+      fit: supporting
+      reason: "Covers dimensional checks for length, square section, slot condition, and frame fit."
+  abstraction_decision: keep_original_family
+  rationale: "The evidence route is profile extrusion plus finishing and cut-to-length work, matching the canonical stock fabrication bucket."
+  process_guardrails:
+    tolerance: review
+    surface_finish: review
+    sealing_quality: not_applicable
+    alignment_accuracy: review
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: structural rail and spacer member for machine framing
+  material: anodized_aluminum_strut_stock
+  scale_or_capacity:
+    mass_kg: 1.37
+    bom_quantity: 2
+    row_total_mass_kg: 2.74
+    scale_class: one_to_two_kg_each
+  geometry_form: slotted_square_strut_length
+merge_pool:
+  eligible: true
+  functional_purpose_key: structural_frame_support_member
+  precision_guardrails:
+    - length_accuracy
+    - slot_geometry
+    - squareness
+    - frame_alignment
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - structural_profile_stock_fabrication_cutting
+  import_risk_factors:
+    - "Slotted extrusion die and anodized finish may be deferred if local profile stock capability is absent."
+    - "Canonical 17AH CAD is missing, so staging should preserve proxy geometry uncertainty."
+  post_merge_decision_notes: "Final import and local manufacture decision is deferred until merge review compares matching frame support rows."
+kb_staging:
+  proposed_item_id: null
+  notes: "Wait for merge review; likely candidate for shared structural strut stock with length captured in BOM notes."
+assumptions:
+  - "The ambiguous profile instance is the best available geometry proxy for the missing canonical 17AH file."
+  - "Length variation can be represented through BOM notes rather than a distinct closure item."
+  - "End drilling and tapping are optional secondary steps pending later drawing evidence."
+unresolved:
+  - "Exact profile series, alloy temper, and anodized finish specification are unresolved."
+  - "Canonical 17AH CAD is absent from the raw STEP export."
+```

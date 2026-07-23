@@ -46,10 +46,10 @@ how_to_make:
     - "Deburr, clean, and inspect the plate against the Z-axis assembly interfaces before installation."
   source:
     url_or_path: "design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/2AB_right_support_plate.step; research/ream250_bom/ream250_bom_row_0034_2AB__views_2x2.png"
-    cited_fact_or_basis: "FreeCAD measured a 135.00 x 218.60 x 23.00 mm one-solid part. The rendered contact sheet shows a wedge-like support plate/web and a row of through holes on one narrow face. targeted_web_search: searched \"2AB_right_support_plate manufacturing\", \"reAM250 right support plate drawing\", \"reAM250 2AB support plate\", and \"Renishaw AM250 support plate material\"; results did not provide a row-specific manufacturing drawing or process specification."
+    cited_fact_or_basis: "FreeCAD measured a 135.00 x 218.60 x 23.00 mm one-solid part. The rendered contact sheet shows a wedge-like support plate/web and a row of through holes on one narrow face. targeted_web_search: searched \"2AB_right_support_plate manufacturing\", \"reAM250 right support plate drawing\", \"reAM250 2AB support plate\", and \"Renishaw AM250 support plate material\" results did not provide a row-specific manufacturing drawing or process specification."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "The local manufacturing route is inferred from the simple monolithic machined-plate geometry rather than from a sourced process note."
+    - "The inferred from the simple monolithic machined-plate geometry rather than from a sourced process note."
     - "The hole pattern is assumed to be a mechanical mounting interface requiring normal machined-part tolerances rather than precision bearing races."
   uncertainty_notes:
     - "Exact tolerances, surface finish, heat treatment, and whether any holes are threaded are not specified by the BOM or CAD preview."
@@ -60,3 +60,96 @@ kb_implications:
 # reAM250 BOM Row 34 - 2AB
 
 Research result for the leased reAM250 BOM row.
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0034_2AB.md
+source_research_sha256: "94bfa089f56aff7c2094f834ec840c2d30332715bf3c4ff6b8434e923b5a0410"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Reviewed the Z-axis support function, 1.13 kg aluminum-scenario mass with steel sensitivity, unresolved structural metal material, inferred machining route, KB implication, and CAD preview showing a thick wedge-like plate with mounting holes."
+decomposition:
+  decision: simple_part
+  rationale: "The row is one monolithic handed structural support plate with no internal assemblies; closure can model it as a fabricated metal part."
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: cnc_machining_from_plate_stock
+  primary_process_bucket: general_subtractive_machining
+  supporting_processes:
+    - stock_preparation
+    - cutting
+    - drilling
+    - precision_machining
+    - deburring
+    - cleaning
+    - dimensional_inspection
+  candidate_existing_processes:
+    - process_id: machining_basic_v0
+      fit: partial
+      reason: "Covers general stock removal for a monolithic support plate; final interface tolerances still need review."
+    - process_id: machining_precision_v0
+      fit: supporting
+      reason: "Relevant if Z-axis guide, bearing, and alignment interfaces require tighter face and hole control."
+    - process_id: drilling_basic_v0
+      fit: supporting
+      reason: "Covers the visible through-hole pattern and any later tapped mounting holes."
+    - process_id: cutting_basic_v0
+      fit: supporting
+      reason: "Covers rough blank preparation before milling the wedge outline."
+    - process_id: finishing_deburring_v0
+      fit: supporting
+      reason: "Covers edge cleanup after machining and drilling."
+    - process_id: inspection_basic_v0
+      fit: supporting
+      reason: "Covers dimensional checks before integration into the Z-axis assembly."
+  abstraction_decision: keep_original_family
+  rationale: "The original inferred route is CNC machining from metal stock, matching the selected general subtractive machining bucket. Add cutting, drilling, finishing, and inspection as supporting operations."
+  process_guardrails:
+    tolerance: review
+    surface_finish: moderate
+    sealing_quality: not_applicable
+    alignment_accuracy: review
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: "handed structural support and locating plate for Z-axis motion hardware"
+  material: unresolved_structural_metal
+  scale_or_capacity:
+    mass_kg: 1.13
+    bom_quantity: 1
+    row_total_mass_kg: 1.13
+    scale_class: small
+  geometry_form: thick_wedge_machined_support_plate_with_mounting_holes
+merge_pool:
+  eligible: true
+  functional_purpose_key: structural_support
+  precision_guardrails:
+    - alignment_accuracy
+    - mounting_hole_pattern
+    - face_flatness
+    - material_unresolved
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - general_subtractive_machining
+  import_risk_factors:
+    - "Material remains unresolved; steel mass scenario is about 3.28 kg compared with the 1.13 kg aluminum scenario."
+    - "Z-axis alignment tolerances are not specified and could require precision machining plus inspection."
+  post_merge_decision_notes: "Final import/local decision is deferred until merge review compares this with other structural support plates and Z-axis locating members."
+kb_staging:
+  proposed_item_id: null
+  notes: "Wait for merge review; likely candidate for a generic small structural support plate if material and precision guardrails converge."
+assumptions:
+  - "BOM quantity is 1 and row total mass is treated as 1.13 kg under the aluminum-scenario estimate."
+  - "The part is modeled as structural metal despite unresolved alloy evidence because of the thick plate/web geometry and Z-axis hardware context."
+  - "Visible holes are treated as normal mounting features unless later evidence shows bearing-grade location control."
+unresolved:
+  - "Exact material family, grade, heat treatment, surface finish, and hole thread state are unknown."
+  - "Actual Z-axis load path and alignment tolerance are not specified."
+```

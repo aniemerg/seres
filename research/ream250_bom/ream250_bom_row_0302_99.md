@@ -41,7 +41,7 @@ material:
     - "No row-specific grade such as S235, S275, S355, stainless, or aluminum alloy is provided."
     - "The exact surface finish or coating is unknown."
 how_to_make:
-  summary: "Procure as 100 x 80 x 5 mm structural steel hollow profile/tube stock and cut to the 900 mm CAD length; full local manufacture would use steel tube forming and seam welding followed by cut-off and deburring."
+  summary: "Prepare as 100 x 80 x 5 mm structural steel hollow profile/tube stock and cut to the 900 mm CAD length; full use steel tube forming and seam welding followed by cut-off and deburring"
   manufacturing_steps:
     - "Source structural steel rectangular hollow section stock close to the CAD-implied 100 x 80 x 5 mm profile."
     - "Cut one member to the 900 mm CAD length."
@@ -53,12 +53,116 @@ how_to_make:
     cited_fact_or_basis: "The row STEP and preview show a constant-section 900.00 x 100.00 x 80.00 mm hollow profile. targeted_web_search: searched '99_bottom_square_profile reAM250 material', '100x80x5 rectangular hollow section steel kg per metre', and 'EN 10219 rectangular hollow section 100x80x5 steel mass kg/m'; results supported the common structural hollow-section stock route but did not provide a row-specific manufacturing drawing or supplier process for this exact reAM250 part."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "For KB planning, the normal route is procurement of stock hollow section and saw/abrasive cut-to-length rather than bespoke machining from solid."
+    - "Cut-to-length rather than bespoke machining from solid"
     - "No special machined features are visible in the rendered contact sheet."
   uncertainty_notes:
     - "The row does not specify whether the production part is painted, plated, welded into a larger frame, or modified after cutting."
 kb_implications:
-  - "item_granularity: raw_material_or_stock - Model later as cut structural hollow steel profile stock, approximately 100 x 80 x 5 x 900 mm, with BOM quantity/length variants handled as profile-stock cuts rather than unique purchased modules."
+  - "item_granularity: simple_part - Model later as cut structural hollow steel profile stock, approximately 100 x 80 x 5 x 900 mm, with BOM quantity/length variants handled as profile-stock cuts rather than unique purchased modules."
 ---
 
 Research result for the leased reAM250 BOM row only.
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0302_99.md
+source_research_sha256: c124a95078bffd5cbd5019a241c122885c42cfa327c728cdb1d84ef0719c1c8f
+evidence_reviewed:
+  original_research_sections:
+  - function
+  - mass
+  - material
+  - how_to_make
+  - kb_implications
+  geometry_evidence_used: true
+  notes: Read the original function, mass basis, material evidence, manufacturing route, KB implications, and CAD preview
+    showing a straight hollow rectangular profile before conversion.
+decomposition:
+  decision: simple_part
+  rationale: The row is one cut structural hollow profile member with no evidence of embedded mechanisms, electronics, vendor
+    subassembly content, and precision interfaces that need internal decomposition.
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: structural_profile_stock_cut_to_length
+  primary_process_bucket: structural_profile_stock_fabrication_cutting
+  supporting_processes:
+  - stock_preparation
+  - extrusion
+  - cutting
+  - deburring
+  - dimensional_inspection
+  - leak_testing
+  - joining
+  - coating
+  candidate_existing_processes:
+  - process_id: metal_extrusion_process_v0
+    fit: partial
+    reason: Covers profile stock creation when extrusion is the selected local route.
+  - process_id: extrusion_basic_v0
+    fit: partial
+    reason: Covers generic extrusion abstraction for profile stock.
+  - process_id: cutting_basic_v0
+    fit: supporting
+    reason: Covers cutting profile stock to length.
+  - process_id: inspection_basic_v0
+    fit: supporting
+    reason: Covers dimensional checks before staging selects the final recipe.
+  - process_id: leak_testing_v0
+    fit: supporting
+    reason: Relevant when sealing and fluid integrity matter.
+  - process_id: welding_basic_v0
+    fit: supporting
+    reason: Relevant when the row needs permanent joining.
+  - process_id: surface_treatment_basic_v0
+    fit: supporting
+    reason: Relevant when the row needs protective surface treatment.
+  abstraction_decision: keep_original_family
+  rationale: 'The source route already belongs to the shared structural profile bucket: make rectangular hollow stock, cut
+    to length, deburr, and inspect. This keeps frame members in one reusable process family.'
+  process_guardrails:
+    tolerance: moderate length, squareness, and straightness control needed for frame fit-up
+    surface_finish: ordinary structural finish acceptable unless later coating and weld prep is specified
+    sealing_quality: not_applicable
+    alignment_accuracy: frame alignment depends on cut squareness, straightness, and assembly fixturing
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: lower frame and base structural support member
+  material: structural_steel
+  scale_or_capacity:
+    mass_kg: 12.01
+    bom_quantity: 2
+    row_total_mass_kg: 24.02
+    scale_class: medium
+  geometry_form: rectangular_hollow_profile_cut_to_length
+merge_pool:
+  eligible: true
+  functional_purpose_key: structural_frame_member
+  precision_guardrails:
+  - length_tolerance
+  - cut_squareness
+  - straightness
+  - frame_alignment
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+  - structural_profile_stock_fabrication_cutting
+  import_risk_factors:
+  - Exact steel grade and coating are unknown.
+  - Local hollow-section stock production may require profile forming, welding, and straightening capability before simple
+    cut-to-length production is available.
+  post_merge_decision_notes: Final import/local decision is deferred until after merge review; this row should first be compared
+    with other steel structural frame/profile members by function, material, scale, and hollow-profile geometry.
+kb_staging:
+  proposed_item_id: null
+  notes: Wait for merge review before assigning an item ID; likely candidate for a shared structural steel rectangular hollow
+    profile closure item with cut-length variant.
+assumptions:
+- The CAD-derived 100 x 80 x 5 mm hollow profile interpretation is suitable for closure-level modeling.
+- Structural steel is the correct material family despite missing row-specific grade metadata.
+- Any coating, paint, weld prep, and end-feature details are secondary unless later evidence shows they affect closure and
+  precision.
+unresolved:
+- Exact steel grade, surface treatment, and installed connection method are not specified.
+- Need merge review against other base-frame hollow profile rows before deciding the condition that this remains distinct.
+```

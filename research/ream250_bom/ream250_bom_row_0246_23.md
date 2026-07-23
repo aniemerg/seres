@@ -48,10 +48,95 @@ how_to_make:
     cited_fact_or_basis: "The BOM-provided Liqui Moly page states that the surfaces to be sealed should be clean, oil-free, grease-free, and dry, and that material is applied evenly before parts are joined immediately; the CAD preview shows a thin tall rectangular perimeter bead."
     evidence_basis: "bom_provided"
   assumptions:
-    - "The local manufacturing action is application and curing of a purchased sealant, not synthesis of silicone chemistry."
+    - "The local manufacturing action is application and curing of a external sealant, not synthesis of silicone chemistry"
     - "The CAD preview is used only for the applied path and approximate installed shape."
   uncertainty_notes:
     - "The BOM evidence does not state the actual dispensing nozzle size, cure schedule, or compression target used in the reAM250 assembly."
 kb_implications:
-  - "item_granularity: consumable - installed black silicone sealant bead; model as a consumable/applied material rather than a reusable part or separate molded gasket."
+  - "item_granularity: simple_part - installed black silicone sealant bead; model as a replaceable or applied part/applied material rather than a reusable part or separate molded gasket."
 ---
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0246_23.md
+source_research_sha256: "dad00be732066f89ffecab56c0c5b07b4f1dd46ad4030643c81bda21557beccd"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Read function, quantity, CAD-derived cured bead mass, silicone sealant material evidence, application/cure route, kb implications, and preview showing a thin tall rectangular perimeter bead."
+decomposition:
+  decision: simple_part
+  rationale: "The row is an installed bead of cured silicone sealant with no separate hardware subparts. It should be modeled as applied material in a panel joint."
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: dispensed_silicone_sealant_application_and_cure
+  primary_process_bucket: polymer_elastomer_forming_dispensing
+  supporting_processes:
+    - cleaning
+    - elastomer_forming
+    - curing
+    - assembly
+    - dimensional_inspection
+  candidate_existing_processes:
+    - process_id: seal_installation_v0
+      fit: direct
+      reason: "Best existing anchor for applying and installing seals in an assembly, though this row is dispensed sealant rather than a preformed gasket."
+    - process_id: drying_and_curing_v0
+      fit: supporting
+      reason: "Covers the cure interval after sealant application."
+    - process_id: cleaning_basic_v0
+      fit: supporting
+      reason: "Covers surface cleaning before sealant application."
+    - process_id: elastomer_molding_basic_v0
+      fit: poor_fit
+      reason: "Only relevant if later work replaces the dispensed bead with a molded gasket; source evidence favors applied sealant."
+  abstraction_decision: keep_original_family
+  rationale: "The original route is already an elastomer dispensing and curing operation. Closure should focus on silicone sealant supply/application rather than machining a discrete part."
+  process_guardrails:
+    tolerance: low
+    surface_finish: adhesion_surface_cleanliness_review
+    sealing_quality: continuity_and_adhesion_review
+    alignment_accuracy: not_applicable
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: perimeter sealing of a tall panel interface
+  material: black_silicone_sealant_cured_silicone_rubber
+  scale_or_capacity:
+    mass_kg: 0.089
+    bom_quantity: 2
+    row_total_mass_kg: 0.178
+    scale_class: small
+  geometry_form: tall_rectangular_dispensed_bead
+merge_pool:
+  eligible: true
+  functional_purpose_key: sealing_element
+  precision_guardrails:
+    - bead_continuity
+    - adhesion_cleanliness
+    - compression_thickness
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - polymer_elastomer_forming_dispensing
+  import_risk_factors:
+    - "Local silicone sealant chemistry and shelf-stable dispensing package are unresolved."
+    - "Installed bead mass is CAD-derived and may omit squeeze-out and cure shrinkage."
+  post_merge_decision_notes: "Final import/local decision is deferred until merge review groups applied silicone seals and decides whether generic silicone sealant is an imported consumable."
+kb_staging:
+  proposed_item_id: null
+  notes: "Wait for merge review before assigning an item ID; likely candidate family is an applied silicone perimeter seal."
+assumptions:
+  - "BOM quantity is 2, so row total mass is about 0.178 kg from the 0.089 kg per-unit estimate."
+  - "The installed cured bead is the closure item rather than the commercial cartridge."
+  - "Surface cleaning and cure time are required process guardrails for sealing performance."
+unresolved:
+  - "Exact silicone formulation and filler package."
+  - "Dispensing nozzle size, cure schedule, compression target, and acceptance inspection."
+  - "Whether later KB staging should model sealant as consumable material rather than a discrete part."
+```

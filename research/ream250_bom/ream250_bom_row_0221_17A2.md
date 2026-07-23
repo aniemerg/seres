@@ -38,9 +38,9 @@ material:
   uncertainty_notes:
     - "The row-specific STEP material and Bosch profile-family material convention do not name the same exact alloy grade, so downstream modeling should preserve the material as aluminum extrusion alloy rather than over-constraining the grade."
 how_to_make:
-  summary: "Best current route is procurement as a Bosch Rexroth 20 x 20 mm strut profile or equivalent aluminum T-slot extrusion, cut to the 629.4 mm CAD length; a local route would extrude the aluminum profile, age/anodize as required, saw to length, deburr, and inspect slot/profile dimensions."
+  summary: "Cut to the 629.4 mm CAD length; extrude the aluminum profile, age/anodize as required, saw to length, deburr, and inspect slot/profile dimensions"
   manufacturing_steps:
-    - "Procure Bosch Rexroth 20 x 20 mm strut profile stock or an equivalent 20 mm modular aluminum profile with matching slot geometry."
+    - "Prepare Bosch Rexroth 20 x 20 mm strut profile stock or an equivalent 20 mm modular aluminum profile with matching slot geometry"
     - "Cut the profile to the CAD length of 629.4 mm for each of the three row instances."
     - "Deburr cut ends and clean slot edges so standard profile connectors or fasteners can seat correctly."
     - "For local manufacture, produce the cross-section by aluminum extrusion from the resolved profile alloy, apply required aging/anodizing or surface finish, then cut to length."
@@ -51,7 +51,6 @@ how_to_make:
     evidence_basis: "engineering_hypothesis"
   assumptions:
     - "Cutting/deburring and the local extrusion route are inferred from the CAD length, profile geometry, and common production route for aluminum structural profiles."
-    - "Procurement as standard profile stock is acceptable for current modeling because the BOM row names Bosch Rexroth AG and links to the Bosch strut-profile product family."
   uncertainty_notes:
     - "The sources do not specify the actual supplier's production line, saw tolerance, end finishing, surface treatment for this exact cut length, or whether any end tapping or connector preparation is added elsewhere."
 kb_implications:

@@ -36,7 +36,7 @@ material:
   uncertainty_notes:
     - "The exact supplier page from zahriemen24.de was not available in the local BOM link fields, so the material is row-family matched rather than confirmed from the original BOM vendor route."
 how_to_make:
-  summary: "Procure as a standard 21 AT5/30-2 aluminum timing pulley and customize the bore/keyway/set-screw features, or locally machine it from aluminum round stock with installed steel flanges."
+  summary: "Prepare as a standard 21 AT5/30-2 aluminum timing pulley and customize the bore/keyway/set-screw features, or locally machine it from aluminum round stock with installed steel flanges"
   manufacturing_steps:
     - "Start from Aluminum 6082 T6 round bar or a near-net timing-pulley blank sized for 30 AT5 teeth, 21 mm total width, and about 51 mm flange diameter."
     - "Turn the hub, faces, bore pilot, and outside diameters on a lathe."
@@ -48,8 +48,7 @@ how_to_make:
     cited_fact_or_basis: "The catalog page identifies 21 AT5 30-2 as a standard aluminum timing pulley for later boring, with selectable Ø12 mm/H7 bore, pinolskruer/set-screws, and notgang/keyway options; BOM row 256 specifically requires a 12 mm H7 bore with groove and threaded hole on the groove. targeted_web_search: tried 'zahriemen24 575390 D12 belt pulley 12 mm H7 bore groove threaded hole', '\"575390\" \"AT5/30-2\"', '\"21 AT5/30-2\" \"575390\"', and '\"Tandremskive 21 AT5 30-2\"'; searches found matching vendor/catalog family data but no row-specific manufacturing-process specification."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "The local route is inferred from common timing-pulley geometry and the catalog's selectable boring/keyway/set-screw customization options."
-    - "For KB planning, procurement of the standard pulley blank plus local bore/keyway/set-screw customization is more realistic than fully manufacturing the tooth profile unless timing pulleys become a major dependency."
+    - "The manufacturing route is inferred from common timing-pulley geometry and the catalog's selectable boring/keyway/set-screw customization options."
   uncertainty_notes:
     - "No source states the actual zahriemen24.de or upstream factory manufacturing process for this exact row; tooth profile tolerances, balancing requirements, and flange attachment method remain unresolved."
 kb_implications:

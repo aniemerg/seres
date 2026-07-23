@@ -1,0 +1,65 @@
+format:
+  file_type: yaml
+  data_location: full_file
+
+required:
+  - stage_id
+  - stage_status
+  - source_merge_review
+  - source_phase2_decision
+  - evidence_inputs
+  - proposed_items
+  - proposed_bom_mappings
+  - stage_findings
+  - unresolved
+
+enums:
+  stage_status:
+    - pilot_only
+    - ready_for_review
+    - needs_human
+  source_phase2_decision:
+    - merge
+    - split
+    - partial_merge
+    - needs_human
+  proposed_items.action:
+    - reuse_existing
+    - create_new
+    - defer
+  proposed_items.import_local_decision.decision:
+    - import
+    - local_manufacture
+    - local_manufacture_candidate_with_recipe_gap
+    - local_manufacture_candidate_with_precision_guardrails
+    - reuse_existing_local_recipe
+    - needs_human
+
+sections:
+  evidence_inputs:
+    required:
+      - merge_review_read
+      - original_rows_read
+      - existing_kb_checked
+  proposed_items:
+    required_item_fields:
+      - action
+      - proposed_item_id
+      - reason_for_action
+      - import_local_decision
+      - promotion_blockers
+  import_local_decision:
+    required:
+      - decision
+      - is_import
+      - rationale
+      - import_risk_factors
+      - local_manufacture_blockers
+  proposed_bom_mappings:
+    required_item_fields:
+      - source_row
+      - source_item
+      - closure_item_id
+      - quantity
+      - unit
+      - row_total_mass_kg

@@ -44,13 +44,105 @@ how_to_make:
     - "Deburr, clean, and inspect platform flatness, thickness, and fit in the Z-axis/build-platform assembly."
   source:
     url_or_path: "design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/2AP7_lifting_platform.step; research/ream250_bom/ream250_bom_row_0077_2AP7__views_2x2.png; web search"
-    cited_fact_or_basis: "CAD and preview show a thin 250 x 250 x 10 mm square plate-like part with a central square opening. targeted_web_search: searched \"2AP7_lifting_platform manufacturing\", \"reAM250 2AP7 lifting_platform\", and \"Hexagon head bolts Product grade C lifting platform\"; no row-specific manufacturing specification was found."
+    cited_fact_or_basis: "CAD and preview show a thin 250 x 250 x 10 mm square plate-like part with a central square opening. targeted_web_search: searched \"2AP7_lifting_platform manufacturing\", \"reAM250 2AP7 lifting_platform\", and \"Hexagon head bolts Product grade C lifting platform\" no row-specific manufacturing specification was found."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "The part is treated as a low-complexity plate component rather than a purchased calibrated module."
+    - "The part is treated as a low-complexity plate component rather than a external calibrated module"
     - "CNC machining or abrasive/waterjet cutting plus finish machining is sufficient for a coarse KB manufacturing route."
   uncertainty_notes:
     - "Actual production could use a supplier-specific process or material/finish requirement not present in the BOM or STEP metadata."
 kb_implications:
   - "item_granularity: simple_part - Model later as a reusable machined structural plate/platform, not as a fastener or purchased module, unless better source evidence changes the row identity."
 ---
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0077_2AP7.md
+source_research_sha256: "a3a0dbc5a4304cf4908467c640fb18377c6b3795d23aa99c8d4b82eb2247dd8b"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Read the lifting-platform CAD identity, aluminum-scenario mass basis, unresolved structural metal evidence, plate manufacturing route, KB implications, and CAD preview before conversion."
+decomposition:
+  decision: simple_part
+  rationale: "The row is one square lifting-platform plate with a central opening. The conflicting BOM fastener text is treated as metadata noise because the CAD and filename identify a platform plate."
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: cut_and_finish_machined_structural_plate
+  primary_process_bucket: sheet_plate_cutting_drilling
+  supporting_processes:
+    - stock_preparation
+    - cutting
+    - drilling
+    - precision_machining
+    - deburring
+    - surface_finishing
+    - dimensional_inspection
+  candidate_existing_processes:
+    - process_id: sheet_metal_cutting_v0
+      fit: partial
+      reason: "Covers profile cutting from plate stock, though this row is a 10 mm structural plate."
+    - process_id: cutting_basic_v0
+      fit: supporting
+      reason: "Relevant to rough cutting the square blank and central opening."
+    - process_id: machining_basic_v0
+      fit: supporting
+      reason: "Covers finish machining of datum edges, central opening, chamfers, and mounting features."
+    - process_id: machining_precision_v0
+      fit: supporting
+      reason: "Relevant if build-platform flatness and Z-axis interface control are tight."
+    - process_id: finishing_deburring_v0
+      fit: supporting
+      reason: "Covers cleanup of cut edges and platform perimeter."
+    - process_id: inspection_basic_v0
+      fit: supporting
+      reason: "Covers flatness, thickness, central opening, and fit checks."
+  abstraction_decision: substitute_process_family
+  rationale: "The source route includes machining, but the part is a plate/platform whose primary closure handle should be sheet/plate cutting and drilling, with finish machining recorded as support work."
+  process_guardrails:
+    tolerance: review
+    surface_finish: review
+    sealing_quality: not_applicable
+    alignment_accuracy: review
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: support the build platform within the vertical lifting stack
+  material: unknown_structural_metal
+  scale_or_capacity:
+    mass_kg: 1.492
+    bom_quantity: 1
+    row_total_mass_kg: 1.492
+    scale_class: small
+  geometry_form: square_plate_platform_with_central_square_opening
+merge_pool:
+  eligible: true
+  functional_purpose_key: platform_support
+  precision_guardrails:
+    - flatness
+    - central_opening_geometry
+    - z_axis_interface_fit
+    - material_stiffness
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - sheet_plate_cutting_drilling
+  import_risk_factors:
+    - "Material is unresolved; aluminum planning mass is lower than a steel scenario."
+    - "Build-platform support may need flatness and stiffness beyond a rough cut plate."
+  post_merge_decision_notes: "Final import/local decision is deferred until merge review compares this row with other platform and support plate rows."
+kb_staging:
+  proposed_item_id: null
+  notes: "Wait for merge review; likely reusable platform support plate with material-specific variants if evidence diverges."
+assumptions:
+  - "The CAD filename and geometry override the conflicting fastener-like BOM text for row identity."
+  - "The 1.492 kg aluminum-scenario mass is retained for scale grouping with material uncertainty documented."
+  - "The row is one manufactured plate, not a purchased module."
+unresolved:
+  - "Exact alloy, stiffness requirement, flatness, central-opening tolerance, surface finish, and mating interfaces are not resolved by row evidence."
+```

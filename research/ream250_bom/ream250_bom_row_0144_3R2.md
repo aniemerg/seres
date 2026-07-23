@@ -35,10 +35,10 @@ material:
   assumptions: []
   uncertainty_notes: []
 how_to_make:
-  summary: "Manufacture as a small vacuum flange seal consumable: form the aluminum centering/outer ring, mold or procure the NBR O-ring, clean and deburr the ring, install the O-ring, and inspect fit and sealing surfaces."
+  summary: "Manufacture as a small vacuum flange seal consumable: form the aluminum centering/outer ring, mold"
   manufacturing_steps:
     - "Machine, stamp, or otherwise form the aluminum centering/outer ring profile to DN 63 ISO-K geometry."
-    - "Mold, cut, or procure the NBR O-ring to the matching seal cross-section."
+    - "Mold, cut"
     - "Deburr and clean the aluminum ring so flange-contact and seal-contact surfaces are smooth."
     - "Install the NBR O-ring onto the aluminum ring and inspect fit, concentricity, and visible seal damage."
   source:
@@ -48,7 +48,98 @@ how_to_make:
   assumptions:
     - "The manufacturing route is inferred from the stated aluminum plus NBR construction and the visible thin annular profile, not from a vendor process specification."
   uncertainty_notes:
-    - "targeted_web_search: searched \"311ZRA063 Pfeiffer Vacuum material seal ISO-K DN63\", \"311ZRA063 Pfeiffer Vacuum seal ISO-K DN63 NBR aluminum\", and \"311ZRA063 manufacturing process centering ring\"; found product material and dimensional facts but no vendor manufacturing process description."
+    - "Targeted_web_search: searched \"311ZRA063 Pfeiffer Vacuum material seal ISO-K DN63\", \"311ZRA063 Pfeiffer Vacuum seal ISO-K DN63 NBR aluminum\", and \"311ZRA063 manufacturing process centering ring\" found product material and dimensional facts but no vendor manufacturing process description."
 kb_implications:
-  - "item_granularity: consumable - replaceable ISO-K vacuum centering ring/seal assembly; later KB modeling can keep it as a purchased consumable unless vacuum-seal fabrication becomes in scope."
+  - "item_granularity: simple_part - replaceable ISO-K vacuum centering ring/seal assembly; later KB modeling can keep it as a purchased replaceable or applied part unless vacuum-seal fabrication becomes in scope."
 ---
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0144_3R2.md
+source_research_sha256: "5bfd1657f9c449bf7d47e677bc22c6252fcfbab97e14b733b7f431ba90a0ceef"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Reviewed Pfeiffer 311ZRA063 identity, DN63 ISO-K centering and sealing role, coarse aluminum/NBR mass estimate, annular CAD geometry, material evidence, and replaceable seal assembly KB implication."
+decomposition:
+  decision: decompose_into_parts
+  rationale: "The row is a replaceable flange seal assembly made from at least two closure-relevant materials. Later local manufacture should split the aluminum centering ring from the NBR O-ring rather than treating the whole row as one homogeneous part."
+  proposed_subparts:
+    - aluminum_centering_outer_ring
+    - nbr_o_ring_seal
+process_abstraction:
+  original_process_family: aluminum_centering_ring_and_elastomer_seal_assembly
+  primary_process_bucket: plumbing_connector_fabrication_testing
+  supporting_processes:
+    - precision_machining
+    - elastomer_forming
+    - deburring
+    - cleaning
+    - assembly
+    - leak_testing
+    - dimensional_inspection
+  candidate_existing_processes:
+    - process_id: machining_basic_v0
+      fit: partial
+      reason: "Covers aluminum ring forming by stock removal, with seal-contact geometry needing tighter feature control."
+    - process_id: elastomer_molding_basic_v0
+      fit: supporting
+      reason: "Relevant to producing the NBR O-ring subpart after decomposition."
+    - process_id: seal_installation_v0
+      fit: supporting
+      reason: "Relevant to installing the elastomer ring onto the aluminum centering ring before inspection."
+    - process_id: leak_testing_v0
+      fit: supporting
+      reason: "Relevant to later flange-interface validation after this seal is assembled into the gas-handling joint."
+    - process_id: inspection_basic_v0
+      fit: supporting
+      reason: "Covers concentricity, fit, visible seal damage, and dimensional checks."
+  abstraction_decision: substitute_process_family
+  rationale: "The evidence describes a replaceable flange centering/seal assembly. Plumbing connector fabrication/testing preserves the gas-interface function while recording aluminum machining and elastomer forming as supporting processes."
+  process_guardrails:
+    tolerance: high
+    surface_finish: high
+    sealing_quality: high
+    alignment_accuracy: review
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: centering and elastomer sealing element for an ISO-K flanged joint
+  material: aluminum_ring_with_nbr_o_ring
+  scale_or_capacity:
+    mass_kg: 0.013
+    bom_quantity: 1
+    row_total_mass_kg: 0.013
+    scale_class: small
+  geometry_form: thin_annular_centering_ring_with_integrated_o_ring_seal
+merge_pool:
+  eligible: true
+  functional_purpose_key: joint_sealing
+  precision_guardrails:
+    - seal_material
+    - flange_size
+    - concentricity
+    - seal_contact_surface_finish
+    - leak_tightness_after_installation
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - plumbing_connector_fabrication_testing
+  import_risk_factors:
+    - "NBR production and seal-quality control may be outside the near-term local closure path."
+    - "Aluminum and NBR volume split is estimated from a single-solid CAD proxy rather than measured subpart volumes."
+  post_merge_decision_notes: "Final import/local decision is deferred until merge review compares this DN63 flange seal with other centering rings, O-rings, and flange sealing hardware."
+kb_staging:
+  proposed_item_id: null
+  notes: "Wait for merge review; likely staged as a reusable flange sealing assembly with separate aluminum ring and elastomer seal assumptions."
+assumptions:
+  - "The single CAD solid is a combined proxy for the aluminum ring and NBR O-ring."
+  - "The row-matched Pfeiffer product data is reliable for material and flange-size identity."
+unresolved:
+  - "Exact aluminum alloy, O-ring compound details, material-volume split, seal compression specification, and leak-test requirement are not resolved."
+```

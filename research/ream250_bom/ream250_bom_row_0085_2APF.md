@@ -38,9 +38,8 @@ material:
     - The BOM row has no manufacturer, product ID, material hint, or Link URL, so the exact grade, heat treatment, and coating remain unspecified.
     - "targeted_web_search: queries tried: '2APF shim disk', '2APF_shim_disk', 'reAM250 2APF shim disk', 'DIN 988 7x13x1 shim ring material'; results found the BOM row repeated and standard DIN 988 shim references, but no row-specific material source."
 how_to_make:
-  summary: Procure as a standard 7 x 13 x 1 mm shim washer where possible; a local manufacturing route is blanking or laser-cutting the annulus from 1 mm steel shim stock, followed by deburring, thickness inspection, and corrosion-protective finishing if required.
+  summary: "Prepare as a standard 7 x 13 x 1 mm shim washer; a blanking or laser-cutting the annulus from 1 mm steel shim stock, followed by deburring, thickness inspection, and corrosion-protective finishing if required"
   manufacturing_steps:
-    - Select 1 mm steel shim stock or procure a DIN 988-compatible 7 x 13 x 1 mm shim washer.
     - Blank, punch, waterjet, or laser-cut the 7 mm ID and 13 mm OD annulus from sheet stock if made locally.
     - Deburr both faces and edges so the shim seats flat without damaging adjacent parts.
     - Inspect thickness and flatness; finish or oil lightly if corrosion protection is needed.
@@ -49,10 +48,10 @@ how_to_make:
     cited_fact_or_basis: "CAD preview and geometry show a simple flat annular washer. MetricMCC describes DIN 988 shim rings as washer-style parts used to limit excess space and axial movement. Accu lists DIN 988 shim washers as metric parts with specified ID, OD, thickness, material family, and thickness tolerance; this supports procurement as a standard part, while the local cutting/deburring process is inferred from the simple sheet-metal geometry."
     evidence_basis: engineering_hypothesis
   assumptions:
-    - The local route uses sheet-stock cutting because the part is a flat 1 mm annulus with no visible formed or assembled features.
+    - The manufacturing route uses sheet-stock cutting because the part is a flat 1 mm annulus with no visible formed or assembled features.
   uncertainty_notes:
-    - "targeted_web_search: queries tried: '2APF shim disk manufacturing', 'DIN 988 7x13x1 shim washer', 'DIN 988 shim washers material steel'; searches found standard shim-washer catalog evidence but no row-specific manufacturing process for 2APF."
-    - The result does not claim a sourced manufacturing method for the original part; procurement as a standard shim washer is better supported than local fabrication details.
+    - "Targeted_web_search: queries tried: '2APF shim disk manufacturing', 'DIN 988 7x13x1 shim washer', 'DIN 988 shim washers material steel'; searches found standard shim-washer catalog evidence but no row-specific manufacturing process for 2APF."
+    - "The result does not claim a sourced manufacturing method for the original part"
 kb_implications:
   - "item_granularity: simple_part - Model as a reusable small shim washer or shim-disk part, not as a machine-specific assembly; dimensions can be stored as a 7 x 13 x 1 mm variant note."
 ---

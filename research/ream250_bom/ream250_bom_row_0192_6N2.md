@@ -40,7 +40,7 @@ material:
   uncertainty_notes:
     - "Do not use this as a specific alloy or heat-treatment claim; the evidence supports only a broad mixed actuator-rail material hypothesis."
 how_to_make:
-  summary: "Model as a precision-machined/anodized aluminum actuator rail or base extrusion, with any hardened guide surfaces or inserts treated as purchased precision guide components until the internal LEFS rail construction is modeled."
+  summary: "Model as a precision-machined/anodized aluminum actuator rail or base extrusion, with any hardened guide surfaces or inserts treated as external precision guide components until the internal LEFS rail construction is modeled"
   manufacturing_steps:
     - "Start from aluminum extrusion or machined aluminum bar sized for the LEFS32 base/rail envelope."
     - "Mill the longitudinal channels, mounting faces, slots, and end features visible in the CAD preview."
@@ -59,3 +59,99 @@ how_to_make:
 kb_implications:
   - "item_granularity: simple_part - treat this row as one long actuator rail/base part for coarse BOM closure; split out purchased precision guide inserts only if later evidence resolves them."
 ---
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0192_6N2.md
+source_research_sha256: "95925c034c67c7051353a9ef4a178aff55338008a40ef94dd31143dccb49a0cf"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Reviewed the SMC actuator rail/base function, 5.91 kg per-unit mass with BOM quantity 6 and 35.46 kg row total, aluminum alloy base with possible steel guide elements, inferred extrusion/machining/anodizing route, KB implication, and CAD preview showing a long channeled rail-like body."
+decomposition:
+  decision: simple_part
+  rationale: "The row represents the long fixed rail/base portion of an actuator rather than the full actuator module. Treat as one structural guide/base part while preserving possible precision guide inserts as unresolved."
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: precision_machined_aluminum_actuator_rail_base
+  primary_process_bucket: structural_profile_stock_fabrication_cutting
+  supporting_processes:
+    - stock_preparation
+    - extrusion
+    - cutting
+    - drilling
+    - precision_machining
+    - deburring
+    - coating
+    - dimensional_inspection
+    - assembly
+  candidate_existing_processes:
+    - process_id: aluminum_tube_stock_extrusion_v0
+      fit: poor_fit
+      reason: "Existing extrusion anchor uses tube stock, but it is the closest current process for aluminum profile formation."
+    - process_id: machining_precision_v0
+      fit: partial
+      reason: "Covers machined slots, reference faces, holes, and alignment-critical features after profile stock is made."
+    - process_id: drilling_basic_v0
+      fit: supporting
+      reason: "Covers mounting holes and tapped features after rail/base stock preparation."
+    - process_id: surface_treatment_anodizing_v0
+      fit: supporting
+      reason: "Relevant because SMC construction evidence names anodized aluminum body components."
+    - process_id: finishing_deburring_v0
+      fit: supporting
+      reason: "Covers edge cleanup after profile cutting and machining."
+    - process_id: inspection_basic_v0
+      fit: supporting
+      reason: "Covers basic dimensional checks, with later staging needing straightness and alignment checks."
+  abstraction_decision: substitute_process_family
+  rationale: "The row-specific source is a vendor actuator rail/base, but closure can model the local path as structural profile formation, cutting, precision machining, anodizing, and inspection while leaving guide-contact details unresolved."
+  process_guardrails:
+    tolerance: review
+    surface_finish: review
+    sealing_quality: not_applicable
+    alignment_accuracy: high
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: "long guided support base for an electric linear actuator carriage"
+  material: aluminum_alloy_with_possible_steel_guide_elements
+  scale_or_capacity:
+    mass_kg: 5.91
+    bom_quantity: 6
+    row_total_mass_kg: 35.46
+    scale_class: large
+  geometry_form: long_channeled_actuator_rail_base_profile
+merge_pool:
+  eligible: true
+  functional_purpose_key: linear_guidance
+  precision_guardrails:
+    - straightness
+    - alignment_accuracy
+    - guide_surface_material
+    - anodized_surface
+    - long_profile_geometry
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - structural_profile_stock_fabrication_cutting
+  import_risk_factors:
+    - "Guide-contact material and construction are unresolved; hardened steel inserts could make this more than a simple aluminum profile."
+    - "Straightness, reference-face accuracy, and actuator alignment over the 770 mm length may require precision machining and inspection."
+  post_merge_decision_notes: "Final import/local decision is deferred until this rail/base is compared with other actuator rails, guide bases, and precision linear-guidance rows."
+kb_staging:
+  proposed_item_id: null
+  notes: "Wait for merge review; likely candidate for a generic long aluminum actuator rail/base if precision guide elements are modeled separately."
+assumptions:
+  - "BOM quantity is 6, mass is 5.91 kg per unit, and row total mass is 35.46 kg."
+  - "Aluminum alloy is used as the primary base material based on SMC body construction evidence and CAD form."
+  - "Possible steel guide-contact elements are preserved as unresolved and not assigned a separate subpart during row conversion."
+unresolved:
+  - "Exact alloy, extrusion profile route, guide material, steel insert presence, straightness tolerance, and surface treatment specification remain unresolved."
+  - "Whether this should merge with generic linear rail/base stock versus remain tied to the LEFS actuator family is deferred."
+```

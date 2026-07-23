@@ -45,7 +45,7 @@ how_to_make:
     - "Deburr, clean, and apply corrosion-control finish compatible with the selected alloy."
   source:
     url_or_path: "research/ream250_bom/ream250_bom_row_0058_2AG__views_2x2.png; design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/2AG_cover_plate.step"
-    cited_fact_or_basis: "The CAD preview and STEP geometry show a shallow 210 x 200 x 15 mm cover-like solid with machined-looking ribs/flanges and multiple mounting holes. targeted_web_search: searched \"2AG_cover_plate manufacturing\", \"2AG cover plate reAM250 drawing\", and \"reAM250 2AG cover plate material\"; no row-specific manufacturing note or drawing was found."
+    cited_fact_or_basis: "The CAD preview and STEP geometry show a shallow 210 x 200 x 15 mm cover-like solid with machined-looking ribs/flanges and multiple mounting holes. targeted_web_search: searched \"2AG_cover_plate manufacturing\", \"2AG cover plate reAM250 drawing\", and \"reAM250 2AG cover plate material\" no row-specific manufacturing note or drawing was found."
     evidence_basis: "engineering_hypothesis"
   assumptions:
     - "CNC machining from plate stock is selected as the plausible route for a low-quantity custom machine cover with reliefs and holes."
@@ -58,3 +58,95 @@ kb_implications:
 # reAM250 BOM Row 58 - 2AG
 
 Result for the leased reAM250 BOM research row.
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0058_2AG.md
+source_research_sha256: "da49c09a980288d36afd82ebe2d59931a5d797ea0c78e3c080bea0b879ef71e0"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Reviewed function, mass basis, BOM quantity, material uncertainty, manufacturing route, KB implications, and CAD preview evidence before conversion."
+decomposition:
+  decision: simple_part
+  rationale: "The row describes one rigid cover plate with machined reliefs and mounting holes, not a vendor module and not a multi-part assembly."
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: cnc_machining_from_plate_stock
+  primary_process_bucket: sheet_plate_cutting_drilling
+  supporting_processes:
+    - stock_preparation
+    - cutting
+    - drilling
+    - precision_machining
+    - deburring
+    - surface_finishing
+    - dimensional_inspection
+  candidate_existing_processes:
+    - process_id: sheet_metal_cutting_v0
+      fit: partial
+      reason: "Covers the primary plate-stock cutting route for a cover plate."
+    - process_id: machining_basic_v0
+      fit: supporting
+      reason: "Covers shallow ribs, reliefs, and other local machined features after the plate blank is cut."
+    - process_id: machining_precision_v0
+      fit: supporting
+      reason: "Relevant if the cover establishes alignment and clearance near the z-axis glass scale, though no tight tolerance is sourced."
+    - process_id: drilling_basic_v0
+      fit: supporting
+      reason: "Covers the visible mounting-hole operation after plate machining."
+    - process_id: finishing_deburring_v0
+      fit: supporting
+      reason: "Covers deburring and edge cleanup expected for a machined plate installed in a motion-axis assembly."
+    - process_id: inspection_basic_v0
+      fit: supporting
+      reason: "Covers dimensional and visual checks before assembly around the z-axis/glass-scale hardware."
+  abstraction_decision: add_post_processing
+  rationale: "The row is a plate-like cover, so the closure handle should be sheet/plate cutting and drilling. CNC machining remains a supporting post-process for shallow ribs, reliefs, hole features, clearance, finishing, and inspection."
+  process_guardrails:
+    tolerance: review
+    surface_finish: review
+    sealing_quality: not_applicable
+    alignment_accuracy: review
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: protective closure cover for z-axis and glass-scale area
+  material: unknown_metal_alloy
+  scale_or_capacity:
+    mass_kg: 1.51
+    bom_quantity: 1
+    row_total_mass_kg: 1.51
+    scale_class: small
+  geometry_form: shallow_machined_cover_plate_with_mounting_holes
+merge_pool:
+  eligible: true
+  functional_purpose_key: enclosure_barrier
+  precision_guardrails:
+    - hole_pattern_alignment
+    - clearance_to_motion_axis_components
+    - material_substitution_review
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - sheet_plate_cutting_drilling
+  import_risk_factors:
+    - "Material family is unresolved; aluminum planning mass may be wrong if the original part is steel, stainless, another metal family."
+    - "Potential alignment and clearance requirements near the z-axis glass-scale area need review before merging with generic covers."
+  post_merge_decision_notes: "Final import/local decision is deferred until after merge review; likely local if a generic metal cover plate can satisfy mounting and clearance guardrails."
+kb_staging:
+  proposed_item_id: null
+  notes: "Wait for merge review against other cover plates, enclosure barriers, and small mounting plates before assigning a closure item ID."
+assumptions:
+  - "Treat the BOM quantity as 1 and row total mass as 1.51 kg."
+  - "Treat the item as a rigid metal cover; aluminum is only a mass-planning assumption, not sourced material identity."
+  - "No sourced evidence requires treating the part as a sealed vacuum barrier, precision metrology component, unique module."
+unresolved:
+  - "Actual alloy and finish are not sourced."
+  - "Exact mating interfaces, flatness requirements, and hole tolerances are not sourced."
+```

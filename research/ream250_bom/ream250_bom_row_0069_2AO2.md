@@ -45,7 +45,7 @@ how_to_make:
     - "Deburr, finish, and inspect squareness, height, and fit against the build-platform guidance assembly."
   source:
     url_or_path: "research/ream250_bom/ream250_bom_row_0069_2AO2__views_2x2.png; design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/2AO2_guidance.step"
-    cited_fact_or_basis: "CAD preview and measured bounding box show a simple open rectangular shell without visible precision bearing features. targeted_web_search: queries tried were \"2AO2_guidance manufacturing\", \"2AO0_build_platform_guidance\", and \"2AO2_guidance material\"; results did not provide a row-specific manufacturing route."
+    cited_fact_or_basis: "CAD preview and measured bounding box show a simple open rectangular shell without visible precision bearing features. targeted_web_search: queries tried were \"2AO2_guidance manufacturing\", \"2AO0_build_platform_guidance\", and \"2AO2_guidance material\" results did not provide a row-specific manufacturing route."
     evidence_basis: "engineering_hypothesis"
   assumptions:
     - "The shell can be represented as sheet/plate fabrication for KB planning rather than as a vendor module."
@@ -56,3 +56,99 @@ kb_implications:
 ---
 
 Research result for reAM250 BOM row 69.
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0069_2AO2.md
+source_research_sha256: ff1ccad7fe472f24ea89993e4d7721c9e5b02bba79e5ee1e22130cedfead9409
+evidence_reviewed:
+  original_research_sections:
+  - function
+  - mass
+  - material
+  - how_to_make
+  - kb_implications
+  geometry_evidence_used: true
+  notes: Reviewed the build-platform guidance function, steel-basis CAD mass, unresolved metal evidence, sheet/plate shell
+    fabrication route, KB implication, and CAD preview showing an open rectangular guide shell.
+decomposition:
+  decision: simple_part
+  rationale: The row is one large thin-walled guide shell with no vendor module, moving mechanism, bearing set, and control
+    subsystem to expose during row conversion.
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: sheet_plate_fabrication
+  primary_process_bucket: sheet_plate_cutting_drilling
+  supporting_processes:
+  - stock_preparation
+  - cutting
+  - forming
+  - joining
+  - deburring
+  - surface_finishing
+  - dimensional_inspection
+  candidate_existing_processes:
+  - process_id: sheet_metal_cutting_v0
+    fit: direct
+    reason: Covers cutting sheet and plate blanks for the rectangular guide walls.
+  - process_id: sheet_metal_forming_v0
+    fit: supporting
+    reason: Relevant if the shell is made from bent sheet instead of separate plates.
+  - process_id: welding_and_fabrication_v0
+    fit: supporting
+    reason: Relevant if the corners need welded seams after cutting and forming.
+  - process_id: finishing_deburring_v0
+    fit: supporting
+    reason: Covers edge cleanup before the guide is installed around moving hardware.
+  - process_id: inspection_basic_v0
+    fit: supporting
+    reason: Covers checks for squareness, height, and fit against the build-platform guidance stack.
+  abstraction_decision: keep_original_family
+  rationale: The original route is sheet/plate cutting, bending, possible seam joining, and inspection. The shared sheet/plate
+    bucket captures the primary closure work without inventing a dedicated guide-shell process.
+  process_guardrails:
+    tolerance: review squareness, height, wall spacing, and clearance around the guided build-platform hardware
+    surface_finish: deburr and smooth edges that could contact nearby moving parts
+    sealing_quality: not_applicable
+    alignment_accuracy: shell geometry should preserve guidance clearances, but no precision bearing interface is visible
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: guide and shroud the build-platform mount stack with an open rectangular shell
+  material: unknown_metal_alloy
+  scale_or_capacity:
+    mass_kg: 10.6
+    bom_quantity: 1
+    row_total_mass_kg: 10.6
+    scale_class: large
+  geometry_form: open_rectangular_sheet_plate_guide_shell
+merge_pool:
+  eligible: true
+  functional_purpose_key: structural_guidance_shell
+  precision_guardrails:
+  - squareness
+  - wall_spacing
+  - moving_clearance
+  - seam_integrity
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+  - sheet_plate_cutting_drilling
+  import_risk_factors:
+  - Exact metal family is unresolved; steel and aluminum assumptions change mass substantially.
+  - Production construction method is inferred from CAD shape and could involve bent sheet, welded plate, machined stock,
+    and additive fabrication.
+  post_merge_decision_notes: Final import/local decision is deferred until merge review compares this with other guide shells,
+    enclosure-like barriers, and build-platform structural members.
+kb_staging:
+  proposed_item_id: null
+  notes: Leave final item ID open for merge review; this may converge with other large structural guidance shells if geometry,
+    material, and clearance guardrails are compatible.
+assumptions:
+- The CAD solid is the complete per-unit shell and not a hidden multi-part vendor module.
+- Generic steel is used only for planning mass; material identity remains broad pending drawings.
+- Sheet/plate fabrication is a conservative closure abstraction for a thin-walled open guide shell.
+unresolved:
+- Exact metal grade, production route, wall thickness strategy, and surface treatment are unknown.
+- The guided component, clearance envelope, and fit tolerance are not resolved by the row evidence.
+```

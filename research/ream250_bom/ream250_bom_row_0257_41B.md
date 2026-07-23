@@ -36,10 +36,9 @@ material:
   uncertainty_notes:
     - "The exact belt vendor in the BOM is zahriemen24.de, while the material construction comes from equivalent exact-designation AT5 catalog listings rather than a row-provided product URL."
 how_to_make:
-  summary: "Procure as a standard 10 AT5-340 endless timing belt; for future local manufacture, model it as a molded or cast polyurethane synchronous belt with embedded steel tensile cords."
+  summary: "Local manufacture, model it as a molded or cast polyurethane synchronous belt with embedded steel tensile cords"
   manufacturing_steps:
     - "Specify AT5 profile, 340 mm pitch length, 68 teeth, and 10 mm width."
-    - "Procure an equivalent standard 10 AT5-340 endless timing belt from an industrial belt supplier."
     - "Inspect belt width, tooth count/pitch, and fit on matching AT5 pulleys before installation."
     - "If modeled locally later, use a dedicated timing-belt molding/casting route with continuous tensile cord placement and tooth-form tooling."
   source:
@@ -47,11 +46,10 @@ how_to_make:
     cited_fact_or_basis: "TYMA provides the exact standard purchasable designation and dimensions. Megadyne's timing-belt catalog describes polyurethane timing belts as manufactured by a molding process with helically wound cords inside the belt body."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "Procurement is the preferred near-term route because the row is a standard wear component with a complete catalog designation."
-    - "The local manufacturing route is generalized from polyurethane timing-belt manufacturing literature, not from a reAM250-specific production plan."
+    - "The generalized from polyurethane timing-belt manufacturing literature, not from a reAM250-specific production plan."
   uncertainty_notes:
-    - "targeted_web_search: searched 'site:zahriemen24.de \"10-AT5-340\"', '\"10-AT5-340\" \"zahriemen24\"', and '\"10 AT5 340\" \"zahriemen24\"'; no row-specific zahriemen24 product page was found, so the local manufacturing route remains a general timing-belt hypothesis."
+    - "Targeted_web_search: searched 'site:zahriemen24.de \"10-AT5-340\"', '\"10-AT5-340\" \"zahriemen24\"', and '\"10 AT5 340\" \"zahriemen24\"'; no row-specific zahriemen24 product page was found, so The manufacturing route remains a general timing-belt hypothesis."
 kb_implications:
-  - "item_granularity: consumable - Treat as a replaceable standard timing belt/wear item, not as a custom machine assembly; later KB work should reuse a generic AT5 timing belt family with length/width parameters where possible."
+  - "item_granularity: simple_part - Treat as a replaceable standard timing belt/wear item, not as a custom machine assembly; later KB work should reuse a generic AT5 timing belt family with length/width parameters where possible."
 ---
 

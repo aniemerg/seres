@@ -35,19 +35,18 @@ material:
   assumptions: []
   uncertainty_notes: []
 how_to_make:
-  summary: "Best current route is procurement as Pfeiffer Vacuum standard order 120BSR050; a local fallback would fabricate the stainless clamp halves and screw/wingnut hardware as a simple vacuum fastener."
+  summary: "Fabricate the stainless clamp halves and screw/wingnut hardware as a simple vacuum fastener"
   manufacturing_steps:
-    - "Procure Pfeiffer Vacuum 120BSR050 or an equivalent DN 50 ISO-KF stainless-steel clamping ring for elastomer seals."
     - "For local fabrication, machine or precision-cast the two curved stainless clamp halves to the ISO-KF DN50 profile, including hinge/lug and screw-bearing features."
     - "Drill, deburr, and finish the hinge and tightening-lug interfaces; passivate or clean the stainless surfaces for vacuum service."
     - "Assemble the hinge pin, tightening screw, and wingnut or equivalent fastener, then verify fit on DN50 ISO-KF flanges with an elastomer seal at the specified 2 Nm wingnut torque."
   source:
     url_or_path: "https://www.vacuum-shop.com/shop/en_US/category/2072892/product/120bsr050/clamping-ring-for-elastomer-seals-stainless-steel-1-4301-304.html; design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/35_clamping_ring_ISO_KF_DN50_120BSR050.step; research/ream250_bom/ream250_bom_row_0251_35__views_2x2.png"
-    cited_fact_or_basis: "The Pfeiffer online-shop route identifies 120BSR050 as a DN 50 ISO-KF stainless 1.4301/304 clamping ring for elastomer seals and states 2 Nm wingnut torque. CAD and preview show the curved clamp body and wingnut/screw feature. targeted_web_search: searched \"Pfeiffer Vacuum 120BSR050 clamping ring ISO-KF DN50 material weight\" and \"site:pfeiffer-vacuum.com 120BSR050 clamping ring\"; results resolved product identity, material, dimensions, and procurement route but did not provide a manufacturing process drawing."
+    cited_fact_or_basis: "The Pfeiffer online-shop route identifies 120BSR050 as a DN 50 ISO-KF stainless 1.4301/304 clamping ring for elastomer seals and states 2 Nm wingnut torque. CAD and preview show the curved clamp body and wingnut/screw feature. targeted_web_search: searched \"Pfeiffer Vacuum 120BSR050 clamping ring ISO-KF DN50 material weight\" and \"site:pfeiffer-vacuum.com 120BSR050 clamping ring\" results resolved product identity, material, dimensions, and procurement route but did not provide a manufacturing process drawing."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "The local manufacturing route is inferred from the CAD geometry and standard clamp function; the vendor evidence supports procurement and interface facts, not the detailed fabrication process."
-    - "The screw/wingnut hardware is treated as part of the purchased clamp row because the CAD and vendor product identify one complete clamping ring item."
+    - "The inferred from the CAD geometry and standard clamp function"
+    - "The screw/wingnut hardware is treated as part of the external clamp row because the CAD and vendor product identify one complete clamping ring item"
   uncertainty_notes:
     - "No row-specific tolerance, heat-treatment, surface-finish, or hinge/screw subcomponent specification was found, so local manufacturing details remain approximate."
 kb_implications:
@@ -55,3 +54,111 @@ kb_implications:
 ---
 
 Research result for reAM250 BOM row 251.
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0251_35.md
+source_research_sha256: 086fd82c151295c06d1c5add5f50fd02a20cef6dbb3fd81cd4a0c49defbd424a
+evidence_reviewed:
+  original_research_sections:
+  - function
+  - mass
+  - material
+  - how_to_make
+  - kb_implications
+  geometry_evidence_used: true
+  notes: Read the original function, mass basis, material evidence, inferred manufacturing route, KB implications, and CAD
+    preview showing a segmented clamp ring with hinge and screw/wingnut features.
+decomposition:
+  decision: simple_part
+  rationale: Although the commercial item includes hinge and tightening hardware, closure can treat it as one reusable service
+    clamp hardware item at this row-conversion stage; detailed screw and pin closure can use generic fastener hardware later
+    if needed.
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: machining_precision_casting_manual_assembly
+  primary_process_bucket: general_metal_additive_with_finish_machining
+  supporting_processes:
+  - additive_build
+  - support_removal
+  - precision_machining
+  - deburring
+  - surface_finishing
+  - dimensional_inspection
+  - thread_forming
+  - grinding_lapping
+  - leak_testing
+  candidate_existing_processes:
+  - process_id: wire_arc_additive_manufacturing_v0
+    fit: partial
+    reason: Covers local metal additive buildup for compatible metal parts; final geometry and tolerance still need finish
+      machining.
+  - process_id: electron_beam_additive_manufacturing_v0
+    fit: partial
+    reason: Covers metal additive manufacturing in vacuum-compatible lunar context; material feedstock and resolution need
+      later review.
+  - process_id: machining_finish_basic_v0
+    fit: supporting
+    reason: Covers finish machining after additive buildup.
+  - process_id: inspection_basic_v0
+    fit: supporting
+    reason: Covers dimensional checks before staging selects the final recipe.
+  - process_id: fastener_kit_small_fabrication_v0
+    fit: supporting
+    reason: Relevant when the row depends on thread geometry.
+  - process_id: precision_grinding_basic_v0
+    fit: supporting
+    reason: Relevant when rolling, sliding, and raceway surfaces need precision finishing.
+  - process_id: leak_testing_v0
+    fit: supporting
+    reason: Relevant when sealing and fluid integrity matter.
+  abstraction_decision: add_post_processing
+  rationale: The curved clamp body can converge to the shared metal additive bucket, followed by drilling, deburring, surface
+    cleanup, fit checks, and assembly with standard tightening hardware.
+  process_guardrails:
+    tolerance: review DN50 ISO-KF flange fit, hinge/lug hole alignment, and screw-bearing geometry
+    surface_finish: finish contact and bearing surfaces after additive and casting route
+    sealing_quality: indirect; clamp must apply even load to an elastomer seal but is not itself the sealing material
+    alignment_accuracy: required for hinge pin, screw axis, and opposing clamp-half engagement
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: clamping hardware that fastens an ISO-KF service flange joint around an elastomer seal
+  material: stainless_steel_304
+  scale_or_capacity:
+    mass_kg: 0.185
+    bom_quantity: 4
+    row_total_mass_kg: 0.74
+    scale_class: small
+  geometry_form: segmented_hinged_clamp_ring_with_tightening_screw
+merge_pool:
+  eligible: true
+  functional_purpose_key: joint_clamping
+  precision_guardrails:
+  - flange_fit_dimensions
+  - hinge_and_screw_alignment
+  - clamp_contact_surface_finish
+  - tightening_torque_capacity
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+  - general_metal_additive_with_finish_machining
+  import_risk_factors:
+  - reliable clamp force and hinge/screw durability are required for service seal loading
+  - local route needs compatible small stainless fastener, hinge pin, and wingnut hardware
+  post_merge_decision_notes: Final import/local manufacture decision is deferred until after merge review compares this with
+    other service clamp and flange hardware rows.
+kb_staging:
+  proposed_item_id: null
+  notes: Wait for merge review before assigning an item ID; this may merge into a generic small sealed joint clamp abstraction
+    if material, size, and precision guardrails align.
+assumptions:
+- The STEP-derived mass of 0.185 kg is accepted as one clamping ring mass, with BOM quantity 4 giving 0.740 kg row total.
+- Stainless steel 1.4301/304 is represented as stainless_steel_304 for merge and later KB staging.
+- The screw, wingnut, and hinge features can be represented within the clamp hardware item for this pass rather than decomposed
+  into vendor-level subparts.
+unresolved:
+- Exact hinge pin, screw, and wingnut materials and dimensions were not separately resolved from the row evidence.
+- Whether additive manufacturing and casting/machining is the preferred local route should be decided after reviewing related
+  clamp hardware rows and available process capabilities.
+```

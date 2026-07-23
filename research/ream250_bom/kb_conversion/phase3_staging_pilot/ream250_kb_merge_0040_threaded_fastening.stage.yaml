@@ -1,0 +1,133 @@
+stage_id: phase3_pilot_ream250_kb_merge_0040_threaded_fastening
+stage_status: pilot_only
+source_merge_review: research/ream250_bom/kb_conversion/merge_reviews/ream250_kb_merge_0040_threaded_fastening.md
+source_phase2_decision: merge
+purpose: Test whether a clean Phase 2 merge can map directly to an existing KB item.
+
+evidence_inputs:
+  merge_review_read: true
+  original_rows_read:
+    - research/ream250_bom/ream250_bom_row_0349_613.md
+    - research/ream250_bom/ream250_bom_row_0348_612.md
+    - research/ream250_bom/ream250_bom_row_0109_2AVA.md
+  existing_kb_checked:
+    items:
+      - kb/items/parts/fastener_kit_small.yaml
+    processes:
+      - kb/processes/fastener_kit_small_fabrication_v0.yaml
+  notes: Existing `fastener_kit_small` and `fastener_kit_small_fabrication_v0` are direct enough for pilot reuse.
+
+proposed_items:
+  - action: reuse_existing
+    proposed_item_id: fastener_kit_small
+    existing_kb_path: kb/items/parts/fastener_kit_small.yaml
+    reason_for_action: The rows are all mild-steel DIN 912 M4 socket-head cap screws and fit the existing grouped small-fastener abstraction.
+    kb_like_item:
+      id: fastener_kit_small
+      kind: part
+      unit: unit
+      unit_kind: discrete
+      material_class: steel
+      mass_kg_existing_field_note: "Existing KB file uses `mass: 1.3`, while current schema reference expects `mass_kg`."
+      notes: Existing grouped hardware item includes bolts, nuts, screws, and washers.
+    closure_identity:
+      functional_purpose: small removable threaded fastening for machine assemblies
+      material: mild_steel
+      scale_or_capacity:
+        per_unit_mass_range_kg:
+          - 0.00184
+          - 0.00302
+        bom_quantity_range:
+          - 1
+          - 20
+        row_total_mass_range_kg:
+          - 0.00184
+          - 0.0604
+        nominal_thread: M4x0.7
+        length_variants_mm:
+          - 8
+          - 16
+          - 20
+      geometry_form: din_912_m4_socket_head_cap_screw_variants
+    process_assumptions:
+      primary_process_bucket: fastener_forming_thread_rolling
+      candidate_existing_processes:
+        - process_id: fastener_kit_small_fabrication_v0
+          fit: direct
+          reason: Existing aggregate process produces `fastener_kit_small`.
+        - process_id: inspection_basic_v0
+          fit: supporting
+          reason: Relevant for thread, length, head, and socket checks if modeled in detail.
+    import_local_decision:
+      decision: reuse_existing_local_recipe
+      is_import: false
+      rationale: "The selected existing KB item `fastener_kit_small` is not marked import and has an existing fabrication process. The small M4 screws should reuse that local kit abstraction for pilot staging rather than becoming imported row-specific hardware."
+      local_path_summary: "Use existing aggregate fastener kit fabrication and preserve M4 DIN 912 variants in BOM mapping notes."
+      existing_kb_pattern_used:
+        - "kb/items/parts/fastener_kit_small.yaml: existing non-import small fastener kit."
+        - "kb/processes/fastener_kit_small_fabrication_v0.yaml: existing local fabrication process for the kit."
+        - "kb/items/parts/fastener_kit_heavy.yaml: heavy-duty fastener kit is import, showing that fastener imports depend on strength/criticality class rather than all fasteners being imports."
+      import_risk_factors:
+        - "Property class, coating, exact grade, and thread tolerance are unresolved."
+        - "Existing aggregate recipe does not prove DIN 912 M4 socket-head capability."
+      local_manufacture_blockers:
+        - "Need decide whether kit abstraction is enough for installed joint duty."
+        - "Need resolve schema drift around `mass` versus `mass_kg` before promotion."
+    promotion_blockers:
+      - Decide whether row mappings consume fractions of `fastener_kit_small`, units of kit, or mass from kit inventory.
+      - Existing item uses `mass` instead of `mass_kg`; promotion may need schema migration or a compatibility decision.
+      - Existing process is aggregate and does not preserve M4 length/property-class variants.
+      - Fastener property class, coating, exact grade, and thread tolerance remain unresolved.
+
+proposed_bom_mappings:
+  - source_row: 349
+    source_item: "613"
+    closure_item_id: fastener_kit_small
+    action: reuse_existing
+    quantity: 1
+    unit: unit
+    row_total_mass_kg: 0.00184
+    variant_guardrails:
+      nominal_thread: M4x0.7
+      length_mm: 8
+      standard: DIN 912
+      head_style: socket_head_cap_screw
+    notes: Pilot mapping treats this as a member of the small fastener kit, not a separate KB item.
+  - source_row: 348
+    source_item: "612"
+    closure_item_id: fastener_kit_small
+    action: reuse_existing
+    quantity: 1
+    unit: unit
+    row_total_mass_kg: 0.00263
+    variant_guardrails:
+      nominal_thread: M4x0.7
+      length_mm: 16
+      standard: DIN 912
+      head_style: socket_head_cap_screw
+    notes: Preserve screw length as BOM mapping detail.
+  - source_row: 109
+    source_item: "2AVA"
+    closure_item_id: fastener_kit_small
+    action: reuse_existing
+    quantity: 20
+    unit: unit
+    row_total_mass_kg: 0.0604
+    variant_guardrails:
+      nominal_thread: M4x0.7
+      length_mm: 20
+      standard: DIN 912
+      head_style: socket_head_cap_screw
+    notes: Quantity 20 must be preserved even though item identity is kit-level.
+
+stage_findings:
+  - "Phase 3 must support `reuse_existing` as a first-class action; otherwise the workflow will create unnecessary reAM250-specific fastener items."
+  - "Kit-level reuse needs a row mapping mechanism to preserve exact screw length and quantity."
+  - "Existing KB schema drift is visible here: `fastener_kit_small.yaml` uses `mass`, while the current schema reference expects `mass_kg`."
+  - "A final BOM may need both `item_id: fastener_kit_small` and row-level notes for M4/DIN 912 variants."
+  - "Import/local manufacture belongs in Phase 3: this case should be local via existing kit recipe unless later strength/coating evidence pushes it toward import."
+
+unresolved:
+  - Should small fastener kit consumption be modeled by unit count, mass drawdown, or a nested kit composition?
+  - Should Phase 3 create a follow-up task to migrate `fastener_kit_small.mass` to `mass_kg`?
+  - Should exact M4 socket-head screw variants ever become separate KB items, or remain kit notes permanently?

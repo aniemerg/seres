@@ -32,10 +32,7 @@ SECTION_LIST_FIELDS = ("assumptions", "uncertainty_notes")
 TOP_LEVEL_LIST_FIELDS = ("kb_implications",)
 ITEM_GRANULARITY_VALUES = (
     "simple_part",
-    "assembly",
-    "purchased_module",
-    "consumable",
-    "raw_material_or_stock",
+    "complex_module",
     "unknown",
 )
 ITEM_GRANULARITY_RE = re.compile(
@@ -309,33 +306,23 @@ def validate_kb_implications(data: Dict[str, Any]) -> List[str]:
         ]
 
     row_identity = data.get("row_identity") if isinstance(data.get("row_identity"), dict) else {}
-    function = data.get("function") if isinstance(data.get("function"), dict) else {}
     cad_file = str(row_identity.get("cad_file") or "")
     cad_file_lower = cad_file.lower()
-    function_summary = str(function.get("summary") or "")
-    granularity_context = " ".join([entry, cad_file, function_summary])
     is_belt_item = "belt" in cad_file_lower and "pulley" not in cad_file_lower
     is_replaceable_consumable_item = bool(REPLACEABLE_CONSUMABLE_CAD_RE.search(cad_file))
-    if (is_belt_item or is_replaceable_consumable_item) and value != "consumable":
+    if (is_belt_item or is_replaceable_consumable_item) and value == "complex_module":
         return [
-            "kb_implications item_granularity should be consumable for replaceable "
-            "belts, O-rings, gaskets, filter elements, lubricants, adhesives, and "
-            "similar maintenance items unless the row is clearly a larger calibrated "
-            "vendor subsystem"
+            "kb_implications item_granularity should usually be simple_part for "
+            "replaceable belts, O-rings, gaskets, filter elements, lubricants, "
+            "adhesives, and similar maintenance items; capture replacement or "
+            "application behavior in the explanation, not as granularity"
         ]
-    if value == "purchased_module" and STANDARD_HARDWARE_NOT_MODULE_RE.search(granularity_context):
+    if value == "complex_module" and STANDARD_HARDWARE_NOT_MODULE_RE.search(cad_file):
         return [
-            "kb_implications item_granularity should not be purchased_module for "
+            "kb_implications item_granularity should not be complex_module for "
             "simple standard hardware such as claw clamps, fasteners, bolts, screws, "
             "nuts, or washers; use simple_part unless the row is a calibrated "
             "functional module or a multi-part assembly"
-        ]
-    if value == "raw_material_or_stock" and STANDARD_HARDWARE_CAD_RE.search(cad_file):
-        return [
-            "kb_implications item_granularity should not be raw_material_or_stock "
-            "for finished standard fasteners such as bolts, screws, nuts, or "
-            "washers; use simple_part while noting that later KB work should map "
-            "them to reusable standard hardware or a fastener kit"
         ]
     return []
 

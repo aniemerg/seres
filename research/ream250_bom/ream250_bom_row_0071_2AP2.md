@@ -37,7 +37,7 @@ material:
   uncertainty_notes:
     - "Material family is intentionally broad; downstream KB modeling should not select steel, stainless, or aluminum grade-specific process routes without a drawing, supplier note, or direct design source."
 how_to_make:
-  summary: "Fabricate as a thin one-piece metal plate/frame from sheet or plate stock, or procure as a custom cut plate within the reAM250 build-platform-mount fabrication set."
+  summary: "Fabricate as a thin one-piece metal plate/frame from sheet or plate stock"
   manufacturing_steps:
     - "Cut a 2 mm metal sheet or plate blank to the 252 mm square outside profile and central square opening."
     - "Machine, laser-cut, waterjet-cut, or punch the four small corner holes and frame profile."
@@ -49,7 +49,7 @@ how_to_make:
     cited_fact_or_basis: "FreeCAD measured a 252.00 x 252.00 x 2.00 mm one-solid plate/frame, and the contact sheet shows a flat square frame with central opening and corner holes. targeted_web_search: tried '2AP2_assembly_plate manufacturing reAM250', '2AP2 assembly plate reAM250 material', 'reAM250 build platform mount assembly plate', and 'reAM250 2AP2 assembly_plate'; no source stated the manufacturing route for this row."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "Sheet/plate cutting is the most plausible local route for a flat 2 mm one-piece frame with through features."
+    - "Sheet/plate cutting is the most plausible Manufacturing route for a flat 2 mm one-piece frame with through features."
     - "The CAD preview is used for route triage only; exact cutting tolerances and finish are not available."
   uncertainty_notes:
     - "The row evidence does not specify whether the actual part was laser cut, waterjet cut, machined from plate, stamped, or otherwise produced."
@@ -58,3 +58,99 @@ kb_implications:
 ---
 
 Research result for the leased reAM250 BOM row only.
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0071_2AP2.md
+source_research_sha256: 4d6845c35bdd1302feaa2608bfad8d5301997899d608d0831589b9e67164c598
+evidence_reviewed:
+  original_research_sections:
+  - function
+  - mass
+  - material
+  - how_to_make
+  - kb_implications
+  geometry_evidence_used: true
+  notes: Reviewed the build-platform mount stack function, steel-basis CAD mass, unresolved metal material evidence, sheet/plate
+    cutting route, KB implication, and preview showing a thin square frame plate with central opening and corner holes.
+decomposition:
+  decision: simple_part
+  rationale: The row is one flat plate/frame with through features and no hidden module, sensor, actuator, and assembled
+    mechanism to expose during row conversion.
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: sheet_plate_cutting_drilling
+  primary_process_bucket: sheet_plate_cutting_drilling
+  supporting_processes:
+  - stock_preparation
+  - cutting
+  - drilling
+  - deburring
+  - surface_finishing
+  - cleaning
+  - dimensional_inspection
+  candidate_existing_processes:
+  - process_id: sheet_metal_cutting_v0
+    fit: direct
+    reason: Covers cutting the flat outside profile and central opening from thin sheet/plate stock.
+  - process_id: drilling_basic_v0
+    fit: supporting
+    reason: Covers the corner hole pattern if not made during the primary cutting pass.
+  - process_id: finishing_deburring_v0
+    fit: supporting
+    reason: Covers edge cleanup on the central opening, outside profile, and holes.
+  - process_id: surface_finishing_v0
+    fit: supporting
+    reason: Relevant if the build-platform stack needs light finishing after cutting.
+  - process_id: inspection_basic_v0
+    fit: supporting
+    reason: Covers checks of flatness, hole location, outer size, and central opening geometry.
+  abstraction_decision: keep_original_family
+  rationale: The original route is flat sheet/plate cutting, hole making, deburring, and inspection. The sheet/plate cutting
+    bucket directly captures the closure path for this thin frame plate.
+  process_guardrails:
+    tolerance: review hole pattern, central opening, outer dimensions, and stack-up fit
+    surface_finish: deburr and lightly finish edges that contact the spring, heating, and build-platform mount stack
+    sealing_quality: not_applicable
+    alignment_accuracy: flatness and hole locations affect stack alignment
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: provide a mounting, spacing, and retaining plate in the build-platform mount stack
+  material: unknown_metal_alloy
+  scale_or_capacity:
+    mass_kg: 0.677
+    bom_quantity: 1
+    row_total_mass_kg: 0.677
+    scale_class: medium
+  geometry_form: thin_square_frame_plate_with_central_opening_and_corner_holes
+merge_pool:
+  eligible: true
+  functional_purpose_key: mounting_spacing
+  precision_guardrails:
+  - flatness
+  - hole_pattern
+  - central_opening_geometry
+  - stack_up_fit
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+  - sheet_plate_cutting_drilling
+  import_risk_factors:
+  - Exact metal family is unresolved, and steel plus aluminum assumptions differ substantially in mass and thermal behavior.
+  - Build-platform and heater-adjacent service may impose flatness, cleanliness, and thermal constraints beyond row evidence.
+  post_merge_decision_notes: Final import/local decision is deferred until merge review compares this with other mounting,
+    spacing, retaining, and frame-like plates in the build-platform stack.
+kb_staging:
+  proposed_item_id: null
+  notes: Leave final item ID open for merge review; this may converge with other thin mounting and spacing plates if material,
+    scale, and stack-up guardrails are compatible.
+assumptions:
+- The STEP solid is the complete per-unit row item, with fasteners and seals modeled in adjacent rows.
+- Steel-equivalent mass is a conservative planning value, while material identity remains broad.
+- Sheet/plate cutting is sufficient for closure abstraction unless later evidence requires precision grinding.
+unresolved:
+- Exact alloy, material grade, surface treatment, flatness requirement, and cutting process are unknown.
+- The plate role within the stack could be spacing, retaining, locating, shielding, and clamping; source evidence does not
+  distinguish these functions.
+```

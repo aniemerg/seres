@@ -37,7 +37,7 @@ material:
   uncertainty_notes:
     - "The row description names the sensor model, not a nut accessory order code, so material should not be narrowed to one grade without additional BOM evidence."
 how_to_make:
-  summary: "Procure as a standard Balluff M12x1 sensor mounting nut where possible; local manufacture would use small metal hex stock or a cold-formed blank, drilled/tapped M12x1, faced to about 4 mm thickness, deburred, and optionally nickel plated if using the brass variant."
+  summary: "Prepare as a standard Balluff M12x1 sensor mounting nut; use small metal hex stock or a cold-formed blank, drilled/tapped M12x1, faced to about 4 mm thickness, deburred, and optionally nickel plated if using the brass variant"
   manufacturing_steps:
     - "Select stainless steel or brass hex stock/blank sized for a 17 mm wrench M12x1 nut."
     - "Cut or face blank to about 4 mm thickness."

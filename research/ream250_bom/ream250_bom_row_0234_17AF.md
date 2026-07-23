@@ -37,9 +37,8 @@ material:
     - "The German Ganter page names stainless cast material 1.4408 for the same GN 328.5 family; this is compatible with the AISI 316 stainless family but should be normalized later if the KB needs exact grade semantics."
     - "The local STEP material extractor returned PC/ABS Plastic, conflicting with the row-matched vendor material, so the CAD metadata should not be used as material authority for this row."
 how_to_make:
-  summary: "Use as a procured standard Ganter GN 328.5-140-B-GS handle; a local route would make a stainless precision-cast handle, apply matte shot-blasted finish, and provide the Type B front-mounting holes."
+  summary: "Make a stainless precision-cast handle, apply matte shot-blasted finish, and provide the Type B front-mounting holes"
   manufacturing_steps:
-    - "Procure the standard GN 328.5-140-B-GS cabinet U-handle where vendor supply is allowed."
     - "For local manufacture, precision-cast the U-handle body in AISI 316-family stainless steel."
     - "Finish to GS matte shot-blasted surface and verify the 140 mm grip length / 166.5 mm overall size family."
     - "Provide Type B operator-side mounting geometry and inspect fit against the panel fasteners."
@@ -48,7 +47,7 @@ how_to_make:
     cited_fact_or_basis: "Ganter states GN 328.5 is stainless steel precision casting with GS matte shot-blasted finish and has Type B mounting from the operator side; the BOM product ID fixes the 140-B-GS variant."
     evidence_basis: "bom_provided"
   assumptions:
-    - "The local route keeps only the vendor-stated process family and final geometry; it does not model foundry tooling or detailed finishing fixtures."
+    - "The manufacturing route keeps only the vendor-stated process family and final geometry; it does not model foundry tooling or detailed finishing fixtures."
   uncertainty_notes:
     - "The exact casting tooling, post-cast machining allowance, and inspection tolerances are not provided by the BOM or vendor page."
 kb_implications:

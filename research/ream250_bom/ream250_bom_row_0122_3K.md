@@ -38,7 +38,7 @@ material:
   uncertainty_notes:
     - "Assembly STEP material metadata for this CAD object is only 'Generic' at density 1000, so embedded CAD material is not usable."
 how_to_make:
-  summary: "Procure as Pfeiffer 320SWN063-0250, or manufacture locally as a stainless corrugated vacuum hose with DN 63 ISO-K stainless flanges welded to a 316L bellows tube, followed by cleaning and leak testing."
+  summary: "Prepare as Pfeiffer 320SWN063-0250, or manufacture locally as a stainless corrugated vacuum hose with DN 63 ISO-K stainless flanges welded to a 316L bellows tube, followed by cleaning and leak testing"
   manufacturing_steps:
     - "Form or source a thin-wall 316L stainless corrugated bellows tube to the 250 mm nominal hose length."
     - "Machine or form stainless 1.4301/304 ISO-K DN 63 flange end pieces."
@@ -49,10 +49,116 @@ how_to_make:
     cited_fact_or_basis: "The official exact-product route identifies a DN 63 ISO-K stainless flexible corrugated hose with 250 mm length, and the STEP measurement confirms a 250 mm long, roughly DN 63 hose envelope. targeted_web_search: searched 'Pfeiffer 320SWN063-0250 manufacturing corrugated hose stainless bellows', '320SWN063-0250 datasheet material flange bellows', and 'ISO-K DN63 corrugated hose manufacturing stainless bellows welded flange'; found row-matched product/material facts but no Pfeiffer factory process sheet for this row."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "The local route follows common stainless vacuum bellows hose fabrication practice inferred from the product geometry and material, not a Pfeiffer-published operation sheet."
-    - "The row is better procured as a standard vendor vacuum component unless local bellows forming, weld cleanliness, and leak-test capability are modeled."
+    - "The manufacturing route follows common stainless vacuum bellows hose fabrication practice inferred from the product geometry and material, not a Pfeiffer-published operation sheet."
   uncertainty_notes:
     - "Exact factory details such as hydroforming versus mechanical convolution forming, weld type, and post-weld cleaning specification are not resolved."
 kb_implications:
   - "item_granularity: simple_part - Model as reusable ISO-K DN 63 stainless corrugated hose hardware with length variants, not as a reAM250-specific assembly."
 ---
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0122_3K.md
+source_research_sha256: e7311eb44f04fe29f9ccb3648eee22422b9cf317c45fb6dc31bd26da18026752
+evidence_reviewed:
+  original_research_sections:
+  - function
+  - mass
+  - material
+  - how_to_make
+  - kb_implications
+  geometry_evidence_used: true
+  notes: Read the original function, CAD-derived mass basis, stainless material evidence, inferred bellows/flange fabrication
+    route, KB implications, and STEP geometry measurements before conversion. Render preview was unavailable, so geometry
+    evidence is from the STEP volume and bounding box rather than a contact sheet.
+decomposition:
+  decision: simple_part
+  rationale: The row is one reusable stainless corrugated hose with welded ISO-K flange ends. It has no actuator, electronics,
+    calibrated valve mechanism, and no hidden vendor subassembly that needs decomposition, although bellows fabrication and
+    leak-test requirements remain precision guardrails.
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: stainless_bellows_hose_fabrication
+  primary_process_bucket: plumbing_connector_fabrication_testing
+  supporting_processes:
+  - stock_preparation
+  - forming
+  - precision_machining
+  - joining
+  - cleaning
+  - leak_testing
+  - dimensional_inspection
+  candidate_existing_processes:
+  - process_id: fitting_assembly_basic_v0
+    fit: partial
+    reason: Covers generic fitting and connector assembly work.
+  - process_id: plumbing_and_pneumatics_v0
+    fit: partial
+    reason: Covers fluid and gas handling connector work at the system level.
+  - process_id: leak_testing_v0
+    fit: supporting
+    reason: Covers leak checks when sealing function matters.
+  - process_id: cleaning_basic_v0
+    fit: supporting
+    reason: Covers cleaning before connector assembly and test.
+  - process_id: leak_testing_v0
+    fit: supporting
+    reason: Relevant when sealing and fluid integrity matter.
+  - process_id: welding_basic_v0
+    fit: supporting
+    reason: Relevant when the row needs permanent joining.
+  abstraction_decision: substitute_process_family
+  rationale: 'The row-specific bellows hose route should converge to the shared plumbing connector bucket: form thin-wall
+    metal connector geometry, join end interfaces, clean, inspect, and leak test when the downstream design keeps that requirement.'
+  process_guardrails:
+    tolerance: review ISO-K DN 63 flange dimensions, hose length, bellows convolution geometry, and weld distortion
+    surface_finish: review sealing-face finish, internal cleanliness, and passivation requirements
+    sealing_quality: review leak-test requirement retained by downstream connector design
+    alignment_accuracy: flexible hose tolerates small misalignment, but flange concentricity and clamp fit remain required
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: flexible connector between process plumbing components with vibration and misalignment compliance
+  material: stainless_steel_304_flanges_with_316l_bellows
+  scale_or_capacity:
+    mass_kg: 1.055
+    bom_quantity: 1
+    row_total_mass_kg: 1.055
+    scale_class: small
+  geometry_form: dn63_iso_k_corrugated_flexible_hose_250mm
+merge_pool:
+  eligible: true
+  functional_purpose_key: flexible_plumbing_connector
+  precision_guardrails:
+  - connector_sealing_requirement
+  - flange_interface_geometry
+  - sealing_face_finish
+  - bellows_flex_fatigue_life
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+  - plumbing_connector_fabrication_testing
+  import_risk_factors:
+  - reliable thin-wall stainless bellows forming and clean leak-tested joining may be outside early local manufacturing scope
+  - leak testing, passivation, and clean surface handling add inspection and process dependencies
+  - exact factory process and joining specification are unresolved
+  post_merge_decision_notes: Final import/local manufacture decision is deferred. Merge review should compare this with other
+    flexible hose and bellows connector rows, and later staging should decide the generic plumbing abstraction.
+kb_staging:
+  proposed_item_id: null
+  notes: Wait for merge review before assigning an item ID. This likely belongs with flexible plumbing connector and bellows
+    hose candidates rather than a row-specific reAM250 item.
+assumptions:
+- The CAD-derived 1.055 kg mass and 250 mm hose envelope are adequate for scale classification.
+- 304/1.4301 flange stainless and 316L bellows stainless can be treated as one stainless hose material family for row-level
+  closure staging.
+- The hose remains useful evidence if later lunarized design abstracts service-specific details into a simpler flexible process
+  connector.
+unresolved:
+- The preview render timed out, so visual inspection did not confirm small omitted CAD features beyond STEP volume and bounding
+  box.
+- Exact bellows forming method, joining process, leak-rate acceptance criterion, cleaning specification, and fatigue life
+  are not resolved.
+- Merge review must decide the condition that DN 63 ISO-K, 250 mm length, and sealing requirement are preserved item identity
+  constraints.
+```

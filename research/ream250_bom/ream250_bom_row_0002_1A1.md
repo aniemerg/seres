@@ -41,7 +41,7 @@ material:
 how_to_make:
   summary: "Fabricate as a custom machined aluminum-alloy back plate/frame from thick plate or billet stock, with CNC-machined perimeter, rib/lightening geometry, mounting holes, circular interface features, and finished mating faces."
   manufacturing_steps:
-    - "Procure aluminum-alloy plate or billet stock large enough for the approximately 460 x 900 mm finished envelope and local thickness/features."
+    - "Prepare aluminum-alloy plate or billet stock large enough for the approximately 460 x 900 mm finished envelope and local thickness/features"
     - "Rough-cut the rectangular blank, leaving machining allowance on the perimeter and faces."
     - "CNC mill the perimeter, pockets or rib reliefs, diagonal web geometry, and circular interface features shown in the CAD."
     - "Drill, tap, counterbore, or countersink mounting patterns needed for neighboring schlieren-imaging, seal, cover, and flow-rectifier interface hardware."

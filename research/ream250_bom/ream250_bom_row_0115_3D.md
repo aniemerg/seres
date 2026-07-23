@@ -35,16 +35,15 @@ material:
   uncertainty_notes:
     - "A distributor page contains generic stainless-steel wording for LF fittings, but the exact Pfeiffer catalog row places 110ASC040-12 in the aluminum section; the exact row was preferred."
 how_to_make:
-  summary: "Procure as Pfeiffer Vacuum 110ASC040-12 DN 40 ISO-KF hose connector; a local substitute would be machined as a one-piece aluminum KF flange and hose-barb fitting."
+  summary: "Machined as a one-piece aluminum KF flange and hose-barb fitting"
   manufacturing_steps:
-    - "Procurement route: order the finished Pfeiffer 110ASC040-12 hose connector and install it with the matching DN40 ISO-KF seal/filter and clamp hardware."
     - "Local fabrication route if needed: machine or turn EN AW-6082 aluminum bar/forging into the KF flange face, central bore, shoulder, and hose-barb ribs, then deburr and clean for vacuum service."
   source:
     url_or_path: "design/real-mechanical/reAm250/reAM250_cad_gold_package/reAm250_BOM_gold.csv; https://www.idealvac.com/files/manuals/Pfeiffer_Vacuum_Technology_Chambers_and_Components.pdf; research/ream250_bom/ream250_bom_row_0115_3D__views_2x2.png"
     cited_fact_or_basis: "BOM row 115 specifies Pfeiffer Vacuum 110ASC040-12. The Pfeiffer catalog identifies 110ASC040-12 as a DN 40 KF hose connection in Aluminum EN AW-6082/3.2315. The rendered CAD preview shows a one-piece flange plus hose-barb geometry. bom_url_route_check: the BOM Pfeiffer shop URL was checked first but did not expose parseable product details locally; the linked Pfeiffer catalog route resolved the exact order number."
     evidence_basis: "independent_vendor_spec"
   assumptions:
-    - "The CAD shape is a single machined connector body, so machining from aluminum stock is the plausible local manufacturing route."
+    - "The CAD shape is a single machined connector body, so machining from aluminum stock is the plausible Manufacturing route."
   uncertainty_notes:
     - "No row-specific process drawing or tolerance callout was found; vacuum sealing dimensions should be checked against ISO 2861/Pfeiffer drawings before local manufacture."
 kb_implications:

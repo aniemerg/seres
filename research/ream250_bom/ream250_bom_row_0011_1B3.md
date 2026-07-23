@@ -37,14 +37,14 @@ material:
   uncertainty_notes:
     - "No sourced alloy family or grade was found; downstream modeling should keep this broad until original CAD material, drawing, or build documentation is available."
 how_to_make:
-  summary: Make as a simple machined plate/flange from metal stock, or procure as a custom-cut local machine part from the CAD drawing.
+  summary: "Make as a simple machined plate/flange from metal stock"
   manufacturing_steps:
     - "Cut rectangular blank from approximately 10 mm metal plate or bar stock."
     - "Mill the perimeter, aperture/frame reliefs, diagonal rib or groove features, and any counterbored or through-hole details visible in the CAD."
     - "Deburr and inspect flatness, hole positions, and sealing/mating faces before assembly with the glass, seals, and adjacent frame parts."
   source:
     url_or_path: "design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/1B3_flange_schlieren_imaging.step; research/ream250_bom/ream250_bom_row_0011_1B3__views_2x2.png; web_search"
-    cited_fact_or_basis: "The row-specific STEP and preview show a single thin rectangular flanged part, 80.00 x 10.00 x 160.00 mm, with holes and machined-looking frame features. targeted_web_search: queries tried: \"1B3_flange_schlieren_imaging manufacturing\", \"reAM250 flange_schlieren_imaging drawing\", and \"reAM250 1B3 flange schlieren\"; no row-specific manufacturing route or drawing notes were found."
+    cited_fact_or_basis: "The row-specific STEP and preview show a single thin rectangular flanged part, 80.00 x 10.00 x 160.00 mm, with holes and machined-looking frame features. targeted_web_search: queries tried: \"1B3_flange_schlieren_imaging manufacturing\", \"reAM250 flange_schlieren_imaging drawing\", and \"reAM250 1B3 flange schlieren\" no row-specific manufacturing route or drawing notes were found."
     evidence_basis: engineering_hypothesis
   assumptions:
     - "Machining from plate is selected as the plausible route because the CAD shape is prismatic and hole/relief features are accessible with common milling and drilling operations."
@@ -54,3 +54,90 @@ kb_implications:
   - "item_granularity: simple_part - Model as one custom machined flange/plate, not as a purchased optical module or multi-part assembly."
 ---
 
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0011_1B3.md
+source_research_sha256: "b4ffb94e666ec55f2ad2a806d8888c29fa900e1610d0267bfe3dc2206773b177"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Reviewed the schlieren-window mounting function, CAD-derived planning mass, unresolved metal material evidence, machined plate route, and rectangular aperture-frame geometry before conversion."
+decomposition:
+  decision: simple_part
+  rationale: "The row is one metal mounting frame; glass, seals, optical adapter, fasteners, and adjacent door parts are separate BOM rows."
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: machined_metal_optical_mounting_frame
+  primary_process_bucket: sheet_plate_cutting_drilling
+  supporting_processes:
+    - stock_preparation
+    - cutting
+    - drilling
+    - precision_machining
+    - deburring
+    - surface_finishing
+    - dimensional_inspection
+  candidate_existing_processes:
+    - process_id: sheet_metal_cutting_v0
+      fit: partial
+      reason: "Covers cutting metal plate stock into frame blanks."
+    - process_id: drilling_basic_v0
+      fit: supporting
+      reason: "Covers through-hole and counterbore preparation for the bolted interface."
+    - process_id: machining_precision_v0
+      fit: supporting
+      reason: "Relevant for flat sealing faces, aperture edges, and optical-side alignment features."
+    - process_id: inspection_basic_v0
+      fit: supporting
+      reason: "Covers dimensional checks before stronger optical flatness metrology is selected."
+  abstraction_decision: substitute_process_family
+  rationale: "Although source fabrication is described as machining, the part is a shallow plate-like frame, so sheet and plate cutting with secondary precision machining is the conservative closure abstraction."
+  process_guardrails:
+    tolerance: review
+    surface_finish: review
+    sealing_quality: review
+    alignment_accuracy: review
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: bolted mounting interface around an optical access aperture
+  material: structural_metal_unknown_aluminum_assumed_for_mass
+  scale_or_capacity:
+    mass_kg: 0.331
+    bom_quantity: 1
+    row_total_mass_kg: 0.331
+    scale_class: small
+  geometry_form: thin_rectangular_aperture_frame_with_corner_holes_and_diagonal_features
+merge_pool:
+  eligible: true
+  functional_purpose_key: optical_access
+  precision_guardrails:
+    - material_family
+    - flatness
+    - aperture_alignment
+    - hole_position
+    - sealing_face_quality
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - sheet_plate_cutting_drilling
+  import_risk_factors:
+    - "Material uncertainty changes mass and may affect sealing-face finishing."
+    - "Optical window stack may require tighter flatness and cleanliness than ordinary frame plates."
+  post_merge_decision_notes: "Final import/local decision is deferred until merge review; compare with other optical aperture frames and environment barrier interfaces."
+kb_staging:
+  proposed_item_id: null
+  notes: "Wait for merge review before assigning a closure item ID for optical access mounting frames."
+assumptions:
+  - "Aluminum is only a planning-density assumption."
+  - "The row is a passive mounting frame, not the glass, seal, adapter, nor complete optical module."
+  - "Sealing and optical alignment requirements are possible guardrails rather than confirmed blockers."
+unresolved:
+  - "Material family and surface treatment remain unresolved."
+  - "Required flatness, sealing compression, and optical-side alignment tolerance are not specified."
+```

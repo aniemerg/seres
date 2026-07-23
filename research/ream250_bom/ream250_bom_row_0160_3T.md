@@ -45,7 +45,7 @@ how_to_make:
     - "Clean for the machine gas path and apply anodizing or other surface treatment only if later design evidence requires it."
   source:
     url_or_path: "design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/3T_diffusor.step; research/ream250_bom/ream250_bom_row_0160_3T__views_2x2.png"
-    cited_fact_or_basis: "CAD and preview show one Aluminum 6061 diffuser-shaped solid with tapered walls, a rectangular upper flange/opening, a smaller round lower neck/flange, internal divider/vanes, and a 300.00 x 100.00 x 300.00 mm bounding box. targeted_web_search: searched \"3T_diffusor reAM250 material manufacturing\", \"3T diffusor reAM250\", and \"3T_diffusor aluminum diffuser CAD\"; results found mirrored BOM listings but no row-specific drawing, fabrication note, or vendor manufacturing route."
+    cited_fact_or_basis: "CAD and preview show one Aluminum 6061 diffuser-shaped solid with tapered walls, a rectangular upper flange/opening, a smaller round lower neck/flange, internal divider/vanes, and a 300.00 x 100.00 x 300.00 mm bounding box. targeted_web_search: searched \"3T_diffusor reAM250 material manufacturing\", \"3T diffusor reAM250\", and \"3T_diffusor aluminum diffuser CAD\" results found mirrored BOM listings but no row-specific drawing, fabrication note, or vendor manufacturing route."
     evidence_basis: "engineering_hypothesis"
   assumptions:
     - "The row is treated as a custom fabricated simple part because the BOM has no manufacturer, product ID, or Link URL, while the manifest classifies the CAD export as a matched part."

@@ -44,7 +44,7 @@ how_to_make:
     - "Deburr, clean, and inspect the openings and mating edges before assembly."
   source:
     url_or_path: "design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/3S35_part_5.step; research/ream250_bom/ream250_bom_row_0151_3S35__views_2x2.png"
-    cited_fact_or_basis: "FreeCAD measured one solid with 60.00 x 60.00 x 80.00 mm bounding box; the preview shows a hollow tapered square duct with thin walls and open square end geometry. targeted_web_search: searched \"3S35_part_5 gas outlet pipe material\", \"3S35 gas outlet pipe reAM250 material\", \"reAM250 gas outlet pipe 3S35\", and \"3S35_part_5\"; found duplicate BOM text and no row-specific fabrication drawing or manufacturing source."
+    cited_fact_or_basis: "FreeCAD measured one solid with 60.00 x 60.00 x 80.00 mm bounding box; the preview shows a hollow tapered square duct with thin walls and open square end geometry. targeted_web_search: searched \"3S35_part_5 gas outlet pipe material\", \"3S35 gas outlet pipe reAM250 material\", \"reAM250 gas outlet pipe 3S35\", and \"3S35_part_5\" found duplicate BOM text and no row-specific fabrication drawing or manufacturing source."
     evidence_basis: "engineering_hypothesis"
   assumptions:
     - "The CAD form represents a fabricated duct shell, so sheet cutting/forming plus seam joining is the dominant route."

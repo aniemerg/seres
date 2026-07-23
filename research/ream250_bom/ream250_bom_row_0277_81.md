@@ -38,9 +38,8 @@ material:
   uncertainty_notes:
     - "Do not treat the broad material set as a sourced Pfeiffer sub-BOM; local manufacturing would require a teardown, parts list, or manufacturer drawing."
 how_to_make:
-  summary: "Near-term KB route should procure the Pfeiffer Duo 35 / PK D45 602 E as a calibrated purchased vacuum pump module; a later self-manufacturing route would decompose it into precision rotary-vane pump internals, housing, motor, seals, valves, oil system, base hardware, assembly, and acceptance testing."
+  summary: "Decompose it into precision rotary-vane pump internals, housing, motor, seals, valves, oil system, base hardware, assembly, and acceptance testing"
   manufacturing_steps:
-    - "Procure the Pfeiffer Duo 35 pump as a finished vendor module for the reAM250 BOM."
     - "Install the pump on its base rails or machine mounting points, connect DN/KF vacuum plumbing and exhaust, fill/verify P3 operating oil, and wire the 3-phase motor according to the required supply."
     - "For future local manufacture, split the module into cast or machined pump housing, rotor, vanes, stator surfaces, bearings, motor, safety/gas-ballast valve parts, seals, base hardware, oil fill/drain hardware, final assembly, leak/performance testing, and electrical safety testing."
   source:
@@ -48,10 +47,111 @@ how_to_make:
     cited_fact_or_basis: "Ideal Vacuum identifies PN PK D45 602 as a Pfeiffer DUO35 two-stage rotary vane pump with 3-phase motor for low to medium vacuum. The operating manual gives Duo 35 order-number, motor, operating-fluid, performance, and weight data. The CAD contact sheet shows the row as one complete pump-and-motor module. targeted_web_search: 'PK D45 602 E manufacturing route', 'Pfeiffer Duo 35 pump manufacturing', and 'Pfeiffer Duo 35 material housing rotor vane' found product/manual data but no row-specific factory manufacturing process."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "Procurement is the correct near-term route because the row is a calibrated vendor vacuum pump module without a sub-BOM."
     - "The local-manufacture decomposition is a planning hypothesis based on the rotary-vane pump function, CAD shape, and common electromechanical pump architecture."
   uncertainty_notes:
     - "A concrete self-manufacturing recipe would need rotor/stator tolerances, vane material, bearing and seal specifications, motor design, valve details, oil compatibility, balancing, leak-rate, ultimate-pressure, and run-test requirements."
 kb_implications:
-  - "item_granularity: purchased_module - Model as one Pfeiffer Duo 35 vacuum pump module for now; split into pump body/internals, motor, seals, valves, oil system, base hardware, and calibration/testing workflow only if vacuum-pump manufacturing becomes a priority."
+  - "item_granularity: complex_module - Model as one Pfeiffer Duo 35 vacuum pump complex module for this pass; split into pump body/internals, motor, seals, valves, oil system, base hardware, and calibration/testing workflow only if vacuum-pump manufacturing becomes a priority."
 ---
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0277_81.md
+source_research_sha256: "beb0a831f1e63c210be6944923ef07dfaac8a3481d1be2502795e8466def5397"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Read the pump function, manual-derived installed mass, multi-material module evidence, decomposition-oriented manufacturing notes, KB implications, and CAD preview before conversion."
+decomposition:
+  decision: decompose_into_parts
+  rationale: "The row is a complete oil-sealed rotary-vane pump and motor module. It contains precision pump internals, motor materials, seals, valves, oil system, base hardware, assembly, and performance-test dependencies that should be exposed before any local-manufacture decision."
+  proposed_subparts:
+    - pump_housing_and_stator_surfaces
+    - rotor_and_vane_set
+    - shaft_bearings_and_seals
+    - electric_motor_module
+    - valve_and_gas_ballast_hardware
+    - operating_oil_system
+    - base_rails_and_mounting_hardware
+    - electrical_connection_hardware
+process_abstraction:
+  original_process_family: vendor_oil_sealed_rotary_vane_pump_module
+  primary_process_bucket: precision_component_import_decompose_later
+  supporting_processes:
+    - decomposition_required
+    - import_assumption
+    - assembly
+    - leak_testing
+    - pressure_testing
+    - calibration
+    - dimensional_inspection
+  candidate_existing_processes:
+    - process_id: hydraulic_pump_unit_assembly_v0
+      fit: poor_fit
+      reason: "Only a rough pump-module assembly analogy; it does not cover rotary-vane low-pressure pump tolerances and oil-sealed gas handling."
+    - process_id: pump_housing_machining_v0
+      fit: supporting
+      reason: "Relevant to precision housing and stator-surface machining if the pump body is decomposed later."
+    - process_id: motor_assembly_standard_fabrication_v0
+      fit: supporting
+      reason: "Relevant to the attached 3-phase motor portion of the module."
+    - process_id: vacuum_testing_v0
+      fit: supporting
+      reason: "Covers pumpdown/performance testing context after assembly."
+    - process_id: leak_testing_v0
+      fit: supporting
+      reason: "Covers seal and joint leak checks in the pump and connected gas path."
+    - process_id: inspection_basic_v0
+      fit: supporting
+      reason: "Covers interface, mounting, and incoming module checks."
+  abstraction_decision: needs_human
+  rationale: "This is a heavy calibrated pump module with precision internals and motor integration. Phase 1 should preserve it as a decomposition target and likely import-risk item rather than map it to a simple fabrication bucket."
+  process_guardrails:
+    tolerance: review
+    surface_finish: review
+    sealing_quality: review
+    alignment_accuracy: review
+    blocked_by_precision: true
+identity_for_merge:
+  functional_purpose: pump gas from the machine chamber to maintain low-pressure operation
+  material: mixed_electromechanical_fluidic
+  scale_or_capacity:
+    mass_kg: 68.0
+    bom_quantity: 1
+    row_total_mass_kg: 68.0
+    scale_class: large
+  geometry_form: rotary_vane_pump_module_with_motor_base_and_ports
+merge_pool:
+  eligible: true
+  functional_purpose_key: gas_pumping
+  precision_guardrails:
+    - pumping_speed
+    - ultimate_pressure
+    - oil_compatibility
+    - motor_voltage
+    - leak_rate
+    - vibration
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - precision_component_import_decompose_later
+  import_risk_factors:
+    - "Rotary-vane pump manufacture requires precision rotor/stator geometry, vane material, bearings, seals, oil compatibility, motor integration, balancing, and performance testing."
+    - "Vendor manual mass and performance imply a purchased industrial module beyond the current simple fabrication scope."
+  post_merge_decision_notes: "Final import/local decision is deferred until merge review groups comparable gas-pumping modules and a later decomposition pass defines pump internals."
+kb_staging:
+  proposed_item_id: null
+  notes: "Wait for merge review and decomposition; do not create a row-specific Pfeiffer item unless no reusable gas-pumping abstraction fits."
+assumptions:
+  - "The 68 kg manual value with motor is the installed module mass for closure grouping."
+  - "The BOM suffix is treated as part of the same Duo 35 order-number family for planning."
+  - "P3 operating oil and performance tests are part of the module closure problem."
+unresolved:
+  - "Rotor/stator tolerances, vane material, bearing and seal specifications, motor sub-BOM, valve details, oil fill amount, balancing, leak-rate target, ultimate pressure, and run-test requirements are not resolved by row evidence."
+```

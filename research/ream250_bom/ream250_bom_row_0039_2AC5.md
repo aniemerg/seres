@@ -37,7 +37,7 @@ material:
   uncertainty_notes:
     - "The reAM250 CAD/STEP package does not provide a non-placeholder material for this row, so the material should be treated as inferred until a drawing, purchase record, or assembly note confirms it."
 how_to_make:
-  summary: "Procure as a precision bearing ball when possible; local manufacture would use bearing-steel wire or rod slugging, cold heading or forging, flashing removal, heat treatment, grinding/lapping, polishing, and inspection."
+  summary: "Prepare as a precision bearing ball when possible; use bearing-steel wire or rod slugging, cold heading or forging, flashing removal, heat treatment, grinding/lapping, polishing, and inspection"
   manufacturing_steps:
     - "Select bearing-quality chrome steel stock sized for a roughly 5.4 mm ball."
     - "Form near-spherical blanks by cold heading or similar ball-blank forming."
@@ -50,7 +50,93 @@ how_to_make:
   assumptions:
     - "The KB should initially model this as a finished precision rolling element rather than raw spherical stock."
   uncertainty_notes:
-    - "A true local manufacturing route would need tolerance, grade, heat-treatment, and surface-finish requirements that are not present in the BOM row."
+    - "A true Manufacturing route would need tolerance, grade, heat-treatment, and surface-finish requirements that are not present in the BOM row."
 kb_implications:
   - "item_granularity: simple_part - Model as a reusable small precision bearing-ball item, likely shared with adjacent 2AC bottom-axis-bearing rows, rather than as a purchased module or raw stock."
 ---
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0039_2AC5.md
+source_research_sha256: "313854427f289c2c8a7594e086cff7d1b99a89367d004a8a897a3fb271cf136f"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Read the bearing-contact function, chrome-steel mass assumption, inferred bearing-ball material evidence, precision ball manufacturing route, KB implications, and CAD preview before conversion."
+decomposition:
+  decision: simple_part
+  rationale: "The row is one small spherical rolling/contact element. It remains a simple item, but precision grade, hardness, and surface finish may block local manufacture."
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: precision_bearing_ball_forming_grinding_lapping
+  primary_process_bucket: precision_component_import_decompose_later
+  supporting_processes:
+    - forming
+    - heat_treatment
+    - grinding_lapping
+    - surface_finishing
+    - dimensional_inspection
+    - import_assumption
+  candidate_existing_processes:
+    - process_id: bearing_set_fabrication_v0
+      fit: partial
+      reason: "Only a coarse bearing-family fabrication anchor; it lacks bearing-ball grade, roundness, hardness, and lapping detail."
+    - process_id: metal_forming_basic_v0
+      fit: supporting
+      reason: "Relevant to forming near-spherical blanks before precision finishing."
+    - process_id: precision_grinding_and_scraping_v0
+      fit: supporting
+      reason: "Closest existing anchor for precision finishing, though ball lapping differs from flat grinding."
+    - process_id: inspection_basic_v0
+      fit: supporting
+      reason: "Covers diameter, roundness, surface, and incoming quality checks at coarse KB level."
+  abstraction_decision: needs_human
+  rationale: "The item is physically simple but precision bearing-ball manufacture depends on hardness, roundness, lapping, and surface finish that the current generic process set does not fully capture."
+  process_guardrails:
+    tolerance: review
+    surface_finish: review
+    sealing_quality: not_applicable
+    alignment_accuracy: review
+    blocked_by_precision: true
+identity_for_merge:
+  functional_purpose: provide low-friction rolling contact in a bearing assembly
+  material: unknown_bearing_metal
+  scale_or_capacity:
+    mass_kg: 0.000644
+    bom_quantity: 1
+    row_total_mass_kg: 0.000644
+    scale_class: tiny
+  geometry_form: small_precision_spherical_bearing_ball
+merge_pool:
+  eligible: true
+  functional_purpose_key: rolling_contact
+  precision_guardrails:
+    - diameter
+    - roundness
+    - hardness
+    - surface_finish
+    - material_grade
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - precision_component_import_decompose_later
+  import_risk_factors:
+    - "Bearing-ball grade, roundness, hardness, heat treatment, and lapped surface finish may exceed current generic local process capability."
+    - "Material is inferred from bearing context rather than row-specific material metadata."
+  post_merge_decision_notes: "Final import/local decision is deferred until merge review compares this row with adjacent bearing-ball and rolling-contact rows."
+kb_staging:
+  proposed_item_id: null
+  notes: "Wait for merge review; likely reusable small bearing-ball item with precision guardrails."
+assumptions:
+  - "Chrome bearing steel is used as a planning material assumption for mass and process triage."
+  - "The CAD sphere represents one physical rolling/contact element."
+  - "The part should not be modeled as raw spherical stock because bearing function requires precision finish."
+unresolved:
+  - "Actual material grade, ball grade, diameter tolerance, roundness, hardness, heat treatment, and surface finish are not resolved by row evidence."
+```

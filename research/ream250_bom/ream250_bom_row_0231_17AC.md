@@ -38,10 +38,10 @@ material:
   uncertainty_notes:
     - "The exact procurement alloy grade for this cut piece is not locked by row-specific STEP metadata; catalog evidence supports the anodized aluminum 6xxx-family profile material."
 how_to_make:
-  summary: "Procure as Bosch Rexroth 20x20 slot-6 anodized aluminum strut profile cut to the row length; a plausible local route is aluminum-alloy extrusion through a matching 20x20 slotted die, straightening/aging as required, anodizing, saw-cutting to length, and deburring."
+  summary: "Prepare as Bosch Rexroth 20x20 slot-6 anodized aluminum strut profile cut to the row length; aluminum-alloy extrusion through a matching 20x20 slotted die, straightening/aging as required, anodizing, saw-cutting to length, and deburring"
   manufacturing_steps:
-    - "Procure/catalog route: order Bosch Rexroth 20x20, slot-6 anodized aluminum strut profile and cut to the required machine length."
-    - "Local route: extrude compatible 6xxx-series aluminum billet through a 20 x 20 mm slot-6 profile die."
+    - "Cut to the required machine length"
+    - "Manufacturing route: extrude compatible 6xxx-series aluminum billet through a 20 x 20 mm slot-6 profile die."
     - "Straighten and finish the extrusion, then anodize or apply an equivalent protective surface finish."
     - "Saw-cut to the row length, deburr the ends, and add any end drilling/tapping only if required by the assembly."
   source:
@@ -49,10 +49,102 @@ how_to_make:
     cited_fact_or_basis: "CAD preview/STEP show a constant-section 288.00 x 20.00 x 20.00 mm slotted extrusion. Bosch Rexroth data lists anodized aluminum 20x20 profiles and standard/customized profile finishes with ordering lengths in the 50-3000 mm range. The authorized-distributor page states the profile can be cut to required size and that cuts remove about 3 mm of available length. The detailed extrusion, anodizing, cutting, and deburring sequence is inferred from the standard aluminum-profile geometry and material, not directly specified as the supplier's row-specific production route. targeted_web_search: searched 'Bosch Rexroth strut profile 20x20 material mass kg m', 'Bosch Rexroth 3842992888 weight per metre anodized aluminum', and 'Bosch Rexroth 20x20 strut profile manufacturing extrusion anodized'; results resolved material, linear mass, profile finish, and cut-to-size procurement but did not provide a row-specific factory manufacturing process for item 17AC."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "For KB planning, procurement as cut profile stock is preferred unless future modeling needs to represent extrusion and anodizing as local processes."
+    - "Cut profile stock is preferred unless future modeling needs to represent extrusion and anodizing as local processes"
     - "Any row-specific end features are not visible in the current CAD preview and are therefore not included as required operations."
   uncertainty_notes:
-    - "The local manufacturing route is plausible for an aluminum T-slot profile but is not sourced as Bosch Rexroth's exact factory process for this row."
+    - "The plausible for an aluminum T-slot profile but is not sourced as Bosch Rexroth's exact factory process for this row."
 kb_implications:
-  - "item_granularity: raw_material_or_stock - model as reusable Bosch/Rexroth-compatible 20x20 aluminum strut profile stock with length captured in BOM or recipe notes rather than as a unique reAM250-only assembly."
+  - "item_granularity: simple_part - model as reusable Bosch/Rexroth-compatible 20x20 aluminum strut profile stock with length captured in BOM or recipe notes rather than as a unique reAM250-only assembly."
 ---
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0231_17AC.md
+source_research_sha256: "20f19cab8a2915ac95cf6e8b481f4fed4f8d043618ba1cd7739266e8b8107a96"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Reviewed the 20x20 aluminum strut-profile frame-member function, 0.1152 kg catalog-mass estimate, anodized aluminum 6xxx-family material evidence, extrusion/cut-to-length route, KB implication, and CAD preview showing a 288 mm slotted square extrusion."
+decomposition:
+  decision: simple_part
+  rationale: "The row is one cut length of constant-section aluminum profile stock; no internal decomposition is needed."
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: aluminum_profile_extrusion_cut_to_length
+  primary_process_bucket: structural_profile_stock_fabrication_cutting
+  supporting_processes:
+    - extrusion
+    - stock_preparation
+    - cutting
+    - deburring
+    - coating
+    - dimensional_inspection
+  candidate_existing_processes:
+    - process_id: aluminum_tube_stock_extrusion_v0
+      fit: poor_fit
+      reason: "Existing aluminum extrusion anchor is for tube stock, but it is the closest current process to generic aluminum profile extrusion."
+    - process_id: heat_sink_extrusion_v0
+      fit: poor_fit
+      reason: "Captures aluminum profile extrusion concepts, though the product geometry differs from structural strut profile."
+    - process_id: metal_cutting_basic_v0
+      fit: supporting
+      reason: "Covers saw-cutting profile stock to the required length."
+    - process_id: surface_treatment_anodizing_v0
+      fit: supporting
+      reason: "Relevant because catalog evidence identifies anodized aluminum profile stock."
+    - process_id: finishing_deburring_v0
+      fit: supporting
+      reason: "Covers cut-end deburring."
+    - process_id: inspection_basic_v0
+      fit: supporting
+      reason: "Covers cut length, cross-section, and end finish checks."
+  abstraction_decision: keep_original_family
+  rationale: "The source item is already standardized structural profile stock cut to length, matching the structural profile stock fabrication/cutting bucket."
+  process_guardrails:
+    tolerance: low_to_moderate
+    surface_finish: anodized_finish_review
+    sealing_quality: not_applicable
+    alignment_accuracy: low_to_moderate
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: "light structural rail frame member"
+  material: anodized_aluminum_6xxx_profile
+  scale_or_capacity:
+    mass_kg: 0.1152
+    bom_quantity: 1
+    row_total_mass_kg: 0.1152
+    scale_class: small
+  geometry_form: cut_length_20x20_slotted_square_extrusion
+merge_pool:
+  eligible: true
+  functional_purpose_key: structural_frame_member
+  precision_guardrails:
+    - profile_size_20x20
+    - slot_6_geometry
+    - cut_length
+    - anodized_finish
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - structural_profile_stock_fabrication_cutting
+  import_risk_factors:
+    - "Profile extrusion die, slot geometry, anodizing, and standardized T-slot compatibility may be high-effort if not already modeled locally."
+    - "Filename length and measured CAD length differ slightly."
+  post_merge_decision_notes: "Final import/local decision is deferred until merge review compares this with other aluminum strut profiles and frame members."
+kb_staging:
+  proposed_item_id: null
+  notes: "Wait for merge review; likely reusable as a generic 20x20 anodized aluminum strut profile with cut length carried in BOM notes."
+assumptions:
+  - "BOM quantity is 1 and row total mass is 0.1152 kg using 0.4 kg/m and the measured 288 mm CAD length."
+  - "Catalog profile mass is preferred over CAD-density mass because it better captures the standardized extrusion family."
+  - "No end drilling/tapping is required unless later assembly evidence shows it."
+unresolved:
+  - "Exact intended length, procurement alloy grade, end operations, and whether local extrusion/anodizing is in scope remain unresolved."
+  - "Whether multiple 20x20 profile lengths should share one staged stock item is deferred."
+```

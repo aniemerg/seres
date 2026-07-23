@@ -53,15 +53,15 @@ how_to_make:
     url_or_path: design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/6S1_support_1.step; https://www.xometry.com/sheet-metal-fabrication/custom-metal-bracket-fabrication/; https://www.approvedmachining.com/custom-machined-motor-mounts
     cited_fact_or_basis: >-
       The CAD preview shows a simple steel wedge/rib support without visible
-      purchased-module features. Xometry describes custom metal brackets as
-      manufacturable by CNC machining, sheet metal fabrication, or 3D printing;
+      Purchased-module features. Xometry describes custom metal brackets as
+      Manufacturable by CNC machining, sheet metal fabrication, or 3D printing;
       Approved Machining describes custom machined motor mounts made to
-      submitted 3D CAD data in aluminum or carbon steel. targeted_web_search:
-      queries tried were "motor mount triangular steel support bracket
-      manufacturing laser cut machined wedge bracket" and "steel motor mount
-      support bracket fabrication plate machined laser cut"; results supported
-      generic bracket/motor-mount fabrication routes but did not identify a
-      row-specific 6S1 vendor process.
+      Submitted 3D CAD data in aluminum or carbon steel. targeted_web_search:
+      Queries tried were "motor mount triangular steel support bracket
+      Manufacturing laser cut machined wedge bracket" and "steel motor mount
+      Support bracket fabrication plate machined laser cut" results supported
+      Generic bracket/motor-mount fabrication routes but did not identify a
+      Row-specific 6S1 vendor process.
     evidence_basis: engineering_hypothesis
   assumptions:
     - Because the local package gives geometry and steel material but not process history, the route is selected as a plausible low-complexity fabrication path for a small steel support.
@@ -70,3 +70,87 @@ how_to_make:
 kb_implications:
   - "item_granularity: simple_part - Model 6S1 as a reusable small steel support/bracket part rather than a purchased module; it has one CAD solid, one material family, and no sub-BOM evidence."
 ---
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0197_6S1.md
+source_research_sha256: "065f1c5ec3d854442dc6a786d7d1f08c22c515d085d8e435fa0771299a2fb7a5"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Reviewed the motor-mount support function, CAD-derived steel mass, material metadata, fabrication route, and triangular rib geometry before conversion."
+decomposition:
+  decision: simple_part
+  rationale: "The row is one small steel rib/support solid with no internal subparts, fasteners, electronics, nor module evidence."
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: small_steel_support_cutting_and_machining
+  primary_process_bucket: sheet_plate_cutting_drilling
+  supporting_processes:
+    - stock_preparation
+    - cutting
+    - precision_machining
+    - deburring
+    - surface_finishing
+    - dimensional_inspection
+  candidate_existing_processes:
+    - process_id: sheet_metal_cutting_v0
+      fit: partial
+      reason: "Covers cutting small steel plate stock into bracket and rib blanks."
+    - process_id: metal_cutting_basic_v0
+      fit: supporting
+      reason: "Covers saw and abrasive stock cutting when treated as a small steel support."
+    - process_id: machining_basic_v0
+      fit: supporting
+      reason: "Covers local milling of wedge faces and final fit-up surfaces."
+    - process_id: inspection_basic_v0
+      fit: supporting
+      reason: "Covers dimensional and fit checks before motor-mount assembly."
+  abstraction_decision: substitute_process_family
+  rationale: "The source evidence allows cutting and milling, but the part is a thin simple rib support, so sheet and plate cutting with secondary machining is the simplest closure handle."
+  process_guardrails:
+    tolerance: review
+    surface_finish: review
+    sealing_quality: not_applicable
+    alignment_accuracy: review
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: support rib for motor mount structure
+  material: steel
+  scale_or_capacity:
+    mass_kg: 0.00549
+    bom_quantity: 1
+    row_total_mass_kg: 0.00549
+    scale_class: small
+  geometry_form: small_triangular_wedge_rib
+merge_pool:
+  eligible: true
+  functional_purpose_key: structural_support
+  precision_guardrails:
+    - thickness
+    - wedge_angle
+    - fit_up_surface
+    - motor_mount_alignment
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - sheet_plate_cutting_drilling
+  import_risk_factors: []
+  post_merge_decision_notes: "Final import/local decision is deferred until merge review; this row is likely mergeable with other small steel support brackets if geometry and alignment needs remain modest."
+kb_staging:
+  proposed_item_id: null
+  notes: "Wait for merge review with other motor-mount supports and small steel brackets before assigning a closure item ID."
+assumptions:
+  - "The row is a simple steel support made from stock."
+  - "Surface coating, if needed, is a finishing detail rather than an identity axis."
+  - "No separate fasteners are included in this row."
+unresolved:
+  - "Exact motor interface and alignment requirement are not visible in the part-only evidence."
+  - "Steel alloy grade and coating are not specified beyond the Stahl-1 metadata."
+```

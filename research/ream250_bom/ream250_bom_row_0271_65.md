@@ -36,24 +36,111 @@ material:
   uncertainty_notes:
     - "The row-specific CAD metadata resolves the material family as steel but may not preserve the exact production spring-steel grade, hardness, or coating used for a real DIN 471 retaining ring."
 how_to_make:
-  summary: "Procure as a standard DIN 471 10x1 external retaining ring where possible; a plausible local route is to make it from spring-steel strip by blanking the ring profile and lug holes, hardening/tempering for spring behavior, deburring, and applying a corrosion-protection finish."
+  summary: "Prepare as a standard DIN 471 10x1 external retaining ring; make it from spring-steel strip by blanking the ring profile and lug holes, hardening/tempering for spring behavior, deburring, and applying a corrosion-protection finish"
   manufacturing_steps:
-    - "Use a standard DIN 471 10x1 ring as the preferred purchased hardware item or reference geometry."
-    - "For local production, start from spring-steel sheet or strip near 1 mm thickness."
+    - "Use a standard DIN 471 10x1 ring as the preferred external hardware item or reference geometry"
+    - "Start from spring-steel sheet or strip near 1 mm thickness."
     - "Blank, punch, fineblank, or laser-cut the split ring profile and two plier holes."
     - "Heat treat and temper to obtain the needed spring behavior, then deburr edges and inspect free diameter, thickness, lug-hole geometry, and fit in the shaft groove."
     - "Apply phosphate/oil, black oxide, zinc, or another finish only when the machine environment requires it."
   source:
     url_or_path: "design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/65_retaining_ring_DIN 471 - 10x1.step; research/ream250_bom/ream250_bom_row_0271_65__views_2x2.png; https://www.keller-kalmbach.com/products/fasteners/safety-elements/retaining-rings-and-washers/din-471-circlip/p/10047110; https://www.huyett.com/dsh-010-zc"
-    cited_fact_or_basis: "CAD and preview show a flat 1 mm split ring with lug holes. Keller & Kalmbach identifies a DIN 471 10x1 circlip as spring steel and phosphated. Huyett search result for an M10 DIN 471 retaining ring reports carbon spring steel, 1.00 mm thickness, and stamped style. targeted_web_search: searched \"DIN 471 retaining ring 10x1 material\", \"DIN 471 retaining ring manufacturing stamped\", \"DIN 471 external retaining ring spring steel\", and \"DIN 471 10x1 circlip phosphated\"; found standard/vendor pages confirming DIN 471 identity and spring-steel/phosphated/stamped conventions, but no row-specific manufacturing drawing for this reAM250 instance."
+    cited_fact_or_basis: "CAD and preview show a flat 1 mm split ring with lug holes. Keller & Kalmbach identifies a DIN 471 10x1 circlip as spring steel and phosphated. Huyett search result for an M10 DIN 471 retaining ring reports carbon spring steel, 1.00 mm thickness, and stamped style. targeted_web_search: searched \"DIN 471 retaining ring 10x1 material\", \"DIN 471 retaining ring manufacturing stamped\", \"DIN 471 external retaining ring spring steel\", and \"DIN 471 10x1 circlip phosphated\" found standard/vendor pages confirming DIN 471 identity and spring-steel/phosphated/stamped conventions, but no row-specific manufacturing drawing for this reAM250 instance."
     evidence_basis: "engineering_hypothesis"
   assumptions:
     - "The row should be treated as standard hardware rather than a custom machined part because the CAD filename carries the DIN 471 standard designation and the geometry matches a catalog retaining ring."
-    - "The local manufacturing route is inferred from retaining-ring geometry and standard-part vendor descriptions; exact tooling, heat treatment, and finish are not specified by the BOM."
+    - "The inferred from retaining-ring geometry and standard-part vendor descriptions; exact tooling, heat treatment, and finish are not specified by the BOM."
   uncertainty_notes:
-    - "The local route is process-plausible but not sourced from the reAM250 BOM package; production-grade spring properties and coating should be specified before substituting a locally made ring for purchased hardware."
+    - "The manufacturing route is process-plausible but not sourced from the reAM250 BOM package; production-grade spring properties and coating should be specified before substituting a locally made ring for external hardware"
 kb_implications:
   - "item_granularity: simple_part - model as reusable standard retaining-ring hardware, likely shared with a generic circlip or retaining-ring kit rather than as a machine-specific custom item."
 ---
 
 Research result for reAM250 BOM row 271.
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0271_65.md
+source_research_sha256: "88cd4ac236c9db5dd00872c1125143adef52839288c207140432cc41477490ac"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Reviewed the DIN 471 function, CAD-derived mass, steel material evidence, stamped spring-ring manufacturing route, and preview evidence showing a flat split ring with lug holes."
+decomposition:
+  decision: simple_part
+  rationale: "A one-piece external retaining ring is closure-relevant as reusable standard hardware, not a module needing decomposition."
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: stamped_spring_steel_retaining_ring
+  primary_process_bucket: sheet_plate_cutting_drilling
+  supporting_processes:
+    - stock_preparation
+    - cutting
+    - drilling
+    - deburring
+    - heat_treatment
+    - surface_finishing
+    - dimensional_inspection
+  candidate_existing_processes:
+    - process_id: sheet_metal_cutting_v0
+      fit: partial
+      reason: "Covers cutting the flat split-ring profile from thin steel strip; production stamping and fineblanking remain later recipe details."
+    - process_id: metal_stamping_process_v0
+      fit: partial
+      reason: "Closer to standard retaining-ring blanking, but the closure bucket remains generic sheet/plate cutting."
+    - process_id: heat_treatment_hardening_v0
+      fit: supporting
+      reason: "Needed if locally made spring steel must be hardened and tempered to provide retaining-ring spring behavior."
+    - process_id: surface_finishing_basic_v0
+      fit: supporting
+      reason: "Covers optional phosphate, black oxide, zinc, and equivalent corrosion-protection finishes."
+    - process_id: inspection_basic_v0
+      fit: supporting
+      reason: "Covers dimensional checks for thickness, free diameter, lug holes, and shaft-groove fit."
+  abstraction_decision: substitute_process_family
+  rationale: "The source route is standard stamped spring hardware; for closure it can share a thin sheet/plate cutting path with heat treatment and inspection instead of a unique DIN-specific process."
+  process_guardrails:
+    tolerance: review
+    surface_finish: review
+    sealing_quality: not_applicable
+    alignment_accuracy: review
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: removable axial retention shoulder for a shaft-mounted component
+  material: steel_with_spring_property_guardrail
+  scale_or_capacity:
+    mass_kg: 0.000482
+    bom_quantity: 1
+    row_total_mass_kg: 0.000482
+    scale_class: tiny
+  geometry_form: split_external_retaining_ring_for_10_mm_shaft_groove
+merge_pool:
+  eligible: true
+  functional_purpose_key: shaft_retention
+  precision_guardrails:
+    - spring_temper
+    - groove_fit
+    - lug_hole_geometry
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - sheet_plate_cutting_drilling
+  import_risk_factors:
+    - "Local manufacture must reproduce spring behavior and small retaining-ring geometry; otherwise use a standard imported retaining-ring assortment."
+  post_merge_decision_notes: "Final import/local decision is deferred until merge review determines placement in a generic retaining ring hardware item versus a small hardware kit closure item."
+kb_staging:
+  proposed_item_id: null
+  notes: "Wait for merge review; likely candidate for a reusable retaining-ring and circlip hardware item rather than a row-specific part."
+assumptions:
+  - "The DIN 471 designation and CAD preview are sufficient to treat the row as standard external retaining hardware."
+  - "The row-specific material is normalized to steel with a spring-property guardrail because the CAD metadata says mild steel while standard DIN retaining rings are commonly spring steel."
+unresolved:
+  - "Exact spring-steel grade, heat-treatment state, and coating are not specified by the reAM250 source package."
+  - "The retained component and groove tolerance in the assembly were not identified from this row."
+```

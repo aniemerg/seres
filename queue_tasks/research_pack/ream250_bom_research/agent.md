@@ -57,7 +57,13 @@ For each leased row, research and write one Markdown result at
   total in `mass.basis`.
 - `material`: the best supported material family, grade, or component material
   set.
-- `how_to_make`: a plausible manufacturing, assembly, or procurement route.
+- `how_to_make`: a plausible local manufacturing, assembly, inspection, or
+  deferred sub-BOM decomposition route. Do not use procurement, buying, ordering,
+  quote, inventory, or vendor replacement as the route.
+  Because local production is the default, do not write fallback-style wording
+  such as "a plausible local route is", "a local route would", "local fallback",
+  "local substitute", or "local approximation"; state the manufacturing or
+  decomposition action directly.
 - `kb_implications`: exactly one item granularity planning signal for later KB
   modeling.
 
@@ -200,10 +206,22 @@ Use that file as the authority for result-quality decisions, especially:
 - standard part convention parameter completeness
 - source / assumptions / uncertainty separation
 - item_granularity selection
-  - finished bolts, screws, nuts, washers, and similar fasteners should usually
-    be `simple_part`, not `raw_material_or_stock`
-  - reserve `raw_material_or_stock` for stock forms such as sheet, bar, tube,
-    extrusion, profile, wire, plate, rod, or cut-to-length stock
+  - this research is local-manufacturing oriented; do not use procurement,
+    consumable behavior, or stock form as item granularity
+  - finished bolts, screws, nuts, washers, simple clamps, simple vacuum fittings,
+    seals, gaskets, belts, adhesives, and cut-to-length stock/profile rows should
+    usually be `simple_part`
+  - single precision rails, guide rails, shafts, and machined profiles are still
+    usually `simple_part`; capture hardening, grinding, coating, inspection, and
+    mating-carriage compatibility in the explanation
+  - standard bearings, shaft seals, bellows hoses, vacuum fittings, clamps,
+    couplings, powder containers, and optical window panels are usually
+    `simple_part` when the row-level local route can be written as one
+    fabrication or manufacturing workflow
+  - use `complex_module` for multi-part assemblies, functional modules,
+    calibrated subsystems, linear-guide carriages/blocks, bearing units, or
+    complex mechanisms that should be decomposed in later KB work instead of
+    this row-level pass
 
 Keep research concise. Use at most 4 external sources per result unless the row
 cannot be resolved without more. Follow BOM-provided URL routes first when they

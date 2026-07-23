@@ -38,7 +38,7 @@ material:
   uncertainty_notes:
     - "The exact bearing steel, heat treatment, and coating/plating are not identified by the BOM, STEP material metadata, or searched sources."
 how_to_make:
-  summary: "Procure as part of an SFA10 fixed bearing unit for near-term modeling; a plausible local route would machine and heat-treat steel bearing races or housing features, assemble with rolling elements/retainers, and inspect the bearing geometry."
+  summary: "Machine and heat-treat steel bearing races or housing features, assemble with rolling elements/retainers, and inspect the bearing geometry"
   manufacturing_steps:
     - "Start from steel billet, tube, or forged blank sized for the bearing race/housing subpart."
     - "Turn and/or mill the central bore, outer bearing features, mounting/retainer geometry, and reference faces."
@@ -51,7 +51,6 @@ how_to_make:
     evidence_basis: "engineering_hypothesis"
   assumptions:
     - "The detailed route is inferred from bearing race/housing geometry and SFA10 fixed-bearing function, not from a row-specific process drawing."
-    - "Procurement of the SFA10 unit is the preferred near-term KB route unless this bearing becomes a high-priority self-manufacturing target."
   uncertainty_notes:
     - "No source gives tolerances, bearing grade, hardness, preload, or factory assembly sequence for this subpart."
 kb_implications:

@@ -38,7 +38,7 @@ material:
   uncertainty_notes:
     - "The Bosch strut-profile family is commonly sold as anodized aluminum, but the row-specific local metadata does not separately specify anodized surface finish or temper."
 how_to_make:
-  summary: "Procure as a Bosch Rexroth modular aluminum strut profile cut to the CAD length, or locally make by extruding a 20 x 20 mm slotted aluminum profile, cutting to about 463.7 mm, deburring, and applying a protective/anodized finish if needed."
+  summary: "Prepare as a Bosch Rexroth modular aluminum strut profile cut to the CAD length, or locally make by extruding a 20 x 20 mm slotted aluminum profile, cutting to about 463.7 mm, deburring, and applying a protective/anodized finish if needed"
   manufacturing_steps:
     - "Extrude Aluminum 6061 billet through a die matching the 20 x 20 mm slotted profile cross-section."
     - "Cut the extrusion to the CAD length of about 463.7 mm."
@@ -50,9 +50,90 @@ how_to_make:
     evidence_basis: "engineering_hypothesis"
   assumptions:
     - "A slotted constant-cross-section aluminum profile is best produced as an extrusion and then cut to length."
-    - "Procurement remains the preferred near-term route because this is standard modular framing hardware."
   uncertainty_notes:
     - "The detailed die design, alloy temper, and finish specification are not provided by the row evidence."
 kb_implications:
   - "item_granularity: simple_part - Model as a reusable cut-to-length aluminum structural profile, with length captured in BOM/recipe notes rather than as a calibrated purchased module."
 ---
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0223_17A4.md
+source_research_sha256: "f19848c508f48ef336e4827f88ddba1797839ba9585e4825d8d563f246352b90"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Reviewed strut-profile function, per-unit and row-total mass basis, Aluminum 6061 material metadata, extrusion/cut-to-length route, and CAD preview showing a long 20x20 slotted profile."
+decomposition:
+  decision: simple_part
+  rationale: "The row is two identical cut aluminum profile segments with no internal module structure."
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: aluminum_extrusion_cut_to_length
+  primary_process_bucket: structural_profile_stock_fabrication_cutting
+  supporting_processes:
+    - extrusion
+    - cutting
+    - deburring
+    - surface_finishing
+    - dimensional_inspection
+  candidate_existing_processes:
+    - process_id: metal_extrusion_process_v0
+      fit: partial
+      reason: "Represents aluminum extrusion from ingot to profile stock, but current bindings are heat-sink-specific rather than generic strut stock."
+    - process_id: metal_cutting_basic_v0
+      fit: supporting
+      reason: "Covers cutting metal stock to the required profile length."
+    - process_id: surface_treatment_anodizing_v0
+      fit: supporting
+      reason: "Relevant if merge review preserves anodized aluminum finish as a functional requirement."
+    - process_id: inspection_basic_v0
+      fit: supporting
+      reason: "Covers length, straightness, and slot-geometry checks before frame assembly."
+  abstraction_decision: keep_original_family
+  rationale: "The source route is already a structural aluminum extrusion workflow; the closure abstraction keeps that family and defers exact profile consolidation to merge review."
+  process_guardrails:
+    tolerance: low
+    surface_finish: review
+    sealing_quality: not_applicable
+    alignment_accuracy: low
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: light structural rail member for modular fastening in the frame
+  material: aluminum_alloy_6061
+  scale_or_capacity:
+    mass_kg: 0.207
+    bom_quantity: 2
+    row_total_mass_kg: 0.415
+    scale_class: small
+  geometry_form: cut_20x20_slotted_t_slot_extrusion_profile_464mm
+merge_pool:
+  eligible: true
+  functional_purpose_key: structural_frame_member
+  precision_guardrails:
+    - slot_geometry
+    - cut_length
+    - straightness
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - structural_profile_stock_fabrication_cutting
+  import_risk_factors:
+    - "Requires an extrusion die and reusable profile-forming capability for the 20x20 slotted section."
+  post_merge_decision_notes: "Final import/local decision is deferred until after merge review; compare with other small aluminum profile rows before assigning a closure item."
+kb_staging:
+  proposed_item_id: null
+  notes: "Wait for merge review; likely merge candidate with other 20x20 aluminum slotted profile lengths."
+assumptions:
+  - "Aluminum 6061 metadata is sufficient for row conversion despite unresolved temper and finish."
+  - "The two BOM units can share one closure item with quantity two."
+  - "Length variation should remain a BOM/recipe parameter unless merge review finds a precision reason for separate items."
+unresolved:
+  - "Exact Bosch article number, alloy temper, surface finish, and installed load path are not specified."
+```

@@ -36,7 +36,7 @@ material:
   uncertainty_notes:
     - "The STEP metadata does not identify a stainless grade such as 304, 316, or 1.4301."
 how_to_make:
-  summary: "Make from approximately 1 mm stainless sheet by cutting the rectangular profile, deburring, flattening if needed, and cleaning or passivating before assembly; procurement as a simple custom laser-cut sheet-metal plate is also plausible."
+  summary: "Make from approximately 1 mm stainless sheet by cutting the rectangular profile, deburring, flattening if needed, and cleaning or passivating before assembly; Cut sheet-metal plate is also plausible"
   manufacturing_steps:
     - "Select stainless sheet stock about 1.0 mm thick."
     - "CNC laser cut, shear, or otherwise blank a roughly 118.5 x 268.0 mm rectangular plate from the sheet."

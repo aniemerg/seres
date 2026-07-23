@@ -37,7 +37,7 @@ material:
   uncertainty_notes:
     - "The exact grade and heat treatment are not proven for this row; stainless steel, ceramic, or another bearing-ball material would change the material model, but no row-specific evidence supports those alternatives."
 how_to_make:
-  summary: "Procure as a standard approximately 5.4-5.5 mm precision bearing ball where possible; a local route would form bearing-steel wire into a ball blank, harden it, then grind and lap to diameter and surface finish."
+  summary: "Prepare as a standard approximately 5.4-5.5 mm precision bearing ball; form bearing-steel wire into a ball blank, harden it, then grind and lap to diameter and surface finish"
   manufacturing_steps:
     - "Start from bearing-steel wire or rod stock sized near the finished 5.40 mm ball diameter."
     - "Cold-head or otherwise form a near-spherical blank."
@@ -49,8 +49,7 @@ how_to_make:
     cited_fact_or_basis: "Hartford describes precision ball production using wire/slug cutting, cold heading, flashing, heat treatment, grinding, lapping, and cleaning. GlobalSpec describes bearing-ball manufacturing steps including heading, flashing, soft grinding, heat treating, grinding, lapping, washing, and sizing. The local STEP/preview identifies this row as a single small spherical bearing element. targeted_web_search: searched 'bearing balls manufacturing process cold heading flashing grinding lapping', '5.5 mm bearing ball manufacturing process', and '2AC6_part_6 axis bearing bottom manufacturing'; found generic precision-ball manufacturing routes but no row-specific reAM250 production process."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "The local manufacturing route follows common precision bearing-ball practice because no row-specific production drawing is available."
-    - "For KB planning, procurement/import of a standard bearing ball is more realistic than decomposing the full precision-ball production line for this tiny component unless bearing balls become a major dependency."
+    - "The manufacturing route follows common precision bearing-ball practice because no row-specific production drawing is available."
   uncertainty_notes:
     - "Required grade, tolerance class, surface finish, and hardness are not specified by the BOM row."
 kb_implications:

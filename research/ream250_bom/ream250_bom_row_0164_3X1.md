@@ -39,10 +39,9 @@ material:
   uncertainty_notes:
     - "The BOM text does not identify whether any EPDM volume is physically included in part 1 versus adjacent valve rows, so downstream modeling should avoid assigning an EPDM fraction to this row until the valve subassembly is split."
 how_to_make:
-  summary: "Procure as the AMproved ISO-KF DN40 disc-valve component for current modeling; a plausible local route is machined 316L stainless valve-body production, EPDM seal integration at valve assembly level, cleaning/passivation, and fit/leak inspection."
+  summary: "Machined 316L stainless valve-body production, EPDM seal integration at valve assembly level, cleaning/passivation, and fit/leak inspection"
   manufacturing_steps:
-    - "Procure route: buy the AMproved ISO-KF DN40 disc valve and treat 3X1 as one vendor-supplied valve component."
-    - "Local route: machine the roughly 38 x 45.5 x 38 mm stainless valve-body component from 316L/1.4404 bar or near-net blank, including the central bore and external lug features visible in CAD."
+    - "Manufacturing route: machine the roughly 38 x 45.5 x 38 mm stainless valve-body component from 316L/1.4404 bar or near-net blank, including the central bore and external lug features visible in CAD."
     - "Deburr, clean, and passivate the stainless surfaces for vacuum/powder-handling service."
     - "Assemble with the mating valve part and EPDM sealing element, then inspect manual positions, fit, closure, and leak/powder-tightness."
   source:
@@ -50,7 +49,7 @@ how_to_make:
     cited_fact_or_basis: "AMproved identifies the product as an ISO-KF DN40 disc valve with 3 detent positions for manual control/closure in AM-machine pipework. FreeCAD measured a 38.00 x 45.50 x 38.00 mm one-solid part, and the contact sheet shows a compact bored cylindrical valve-body component with lugs. The detailed machining, passivation, seal integration, and inspection route is inferred from material, geometry, and valve service rather than stated by the vendor. targeted_web_search: searched 'AMPROVED ISO-KF DN 40 Scheibenventil AISI 316L 1.4404 EPDM', 'AMproved ISO-KF DN40 Scheibenventil weight material', 'sv04_din_cc_dn40 316L EPDM valve', and 'ISO-KF DN40 disc valve 316L EPDM manufacturing'; results resolved row-matched product function/material wording but did not provide a row-specific manufacturing process or catalog mass."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "The visible compact bored body and stainless material make subtractive machining from stainless stock a plausible local manufacturing route."
+    - "The visible compact bored body and stainless material make subtractive machining from stainless stock a plausible Manufacturing route."
     - "EPDM sealing is handled during valve-level assembly rather than during fabrication of the metal part-1 body."
   uncertainty_notes:
     - "The vendor page does not specify production method, tolerances, seal geometry, surface finish, or leak-test standard; those would matter for a self-manufactured replacement."
@@ -59,3 +58,99 @@ kb_implications:
 ---
 
 Research result for reAM250 BOM row 164.
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0164_3X1.md
+source_research_sha256: "f3d7abf59171a5b2e8e17ffb8e7b5aef38f3a04ace4776ff5f1274c9ac507565"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Reviewed the AMproved ISO-KF DN40 valve-component function, 0.173 kg CAD-derived mass, 316L/1.4404 stainless plus valve-level EPDM evidence, machined valve-body route, KB implication, and CAD preview showing a bored cylindrical body with lugs."
+decomposition:
+  decision: simple_part
+  rationale: "This row is part 1 of a valve assembly and appears as one stainless body component; decomposition belongs at the complete valve assembly level, not inside this metal body."
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: machined_stainless_valve_body
+  primary_process_bucket: plumbing_connector_fabrication_testing
+  supporting_processes:
+    - stock_preparation
+    - cutting
+    - precision_machining
+    - deburring
+    - cleaning
+    - surface_finishing
+    - leak_testing
+    - pressure_testing
+    - dimensional_inspection
+    - assembly
+  candidate_existing_processes:
+    - process_id: machining_precision_v0
+      fit: partial
+      reason: "Covers the bored stainless body and lug features, but valve sealing surfaces need explicit guardrails."
+    - process_id: fitting_assembly_basic_v0
+      fit: supporting
+      reason: "Relevant to later assembly with mating valve parts and sealing elements."
+    - process_id: plumbing_and_pneumatics_v0
+      fit: supporting
+      reason: "Anchors the broader pipework and valve installation context for fluid and powder paths."
+    - process_id: leak_testing_v0
+      fit: supporting
+      reason: "Relevant to closure checks after the valve body is assembled with EPDM sealing elements."
+    - process_id: pressure_test_basic_v0
+      fit: supporting
+      reason: "Relevant if pressure retention is required for the finished DN40 valve assembly."
+    - process_id: surface_treatment_basic_v0
+      fit: supporting
+      reason: "Covers cleaning, passivation, and surface preparation for stainless service."
+  abstraction_decision: substitute_process_family
+  rationale: "Although the visible body is machined, its closure role is a plumbing/powder-flow valve component where sealing, fit, and leak testing drive staging decisions."
+  process_guardrails:
+    tolerance: review
+    surface_finish: review
+    sealing_quality: review
+    alignment_accuracy: moderate
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: "valve body component for manually closing a DN40 machine flow path"
+  material: stainless_steel_316l_with_valve_level_epdm_context
+  scale_or_capacity:
+    mass_kg: 0.173
+    bom_quantity: 1
+    row_total_mass_kg: 0.173
+    scale_class: small
+  geometry_form: compact_bored_cylindrical_valve_body_with_external_lugs
+merge_pool:
+  eligible: true
+  functional_purpose_key: plumbing_connection
+  precision_guardrails:
+    - sealing_quality
+    - bore_surface_finish
+    - dn40_interface
+    - epdm_context
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - plumbing_connector_fabrication_testing
+  import_risk_factors:
+    - "Valve leak performance, seal geometry, surface finish, and manual detent fit are not specified."
+    - "EPDM is known at valve material-set level, but its physical allocation across adjacent valve rows is unresolved."
+  post_merge_decision_notes: "Final import/local decision is deferred until this part is reviewed with the mating DN40 valve rows and other plumbing connection components."
+kb_staging:
+  proposed_item_id: null
+  notes: "Wait for merge review; likely staged as part of a generic DN40 stainless valve body family if adjacent valve parts converge."
+assumptions:
+  - "BOM quantity is 1 and row total mass is treated as 0.173 kg from the CAD stainless-density estimate."
+  - "The part-1 STEP is modeled as predominantly 316L stainless steel; EPDM is retained as valve-level context."
+  - "Subtractive machining from stainless stock is a sufficient closure abstraction for the body, with leak testing handled at assembly level."
+unresolved:
+  - "Exact surface finish, tolerance, seal groove allocation, detent geometry, leak-test standard, and mating part responsibility remain unknown."
+  - "Whether this row should merge with adjacent valve parts into a complete valve module is deferred to merge review."
+```

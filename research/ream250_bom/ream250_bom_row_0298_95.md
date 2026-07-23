@@ -38,9 +38,8 @@ material:
   uncertainty_notes:
     - "The specific aluminum alloy grade and surface finish are not stated in the BOM or local STEP metadata; a row-matched Bosch Rexroth 60 x 60 profile listing describes anodized aluminum, but the local row evidence only resolves aluminum."
 how_to_make:
-  summary: "Procure Bosch Rexroth-compatible 60 x 60 anodized aluminum strut profile stock and cut to 740 mm length; local reproduction would require aluminum extrusion of the profile cross-section followed by sawing, deburring, and anodizing."
+  summary: "Prepare Bosch Rexroth-compatible 60 x 60 anodized aluminum strut profile stock and cut to 740 mm length; local reproduction would require aluminum extrusion of the profile cross-section followed by sawing, deburring, and anodizing"
   manufacturing_steps:
-    - "Preferred route: buy Bosch Rexroth 60 x 60 strut profile or compatible profile stock from the modular framing system."
     - "Cut the profile to 740 mm length for this row, preserving square ends and the slot geometry."
     - "Deburr cut edges and clean the profile before assembly."
     - "For local manufacturing, extrude aluminum through a die matching the 60 x 60 slotted cross-section, stretch/straighten as required, age or heat treat if the alloy requires it, cut to length, and anodize or otherwise finish the surface."
@@ -49,12 +48,98 @@ how_to_make:
     cited_fact_or_basis: "BOM row 298 names Bosch Rexroth AG and strut profile. CAD and preview show a 740.00 x 60.00 x 60.00 mm slotted profile. The row-matched Bosch Rexroth 60 x 60 profile listing describes a variable-length cut-to-order anodized aluminum strut profile with 4 open slots and length range 50-6070 mm. bom_url_route_check: the BOM-provided Bosch Rexroth category route was checked first but did not resolve a specific 60 x 60 technical line in accessible text, so the independent row-matched listing was used for the cut-to-length procurement detail. targeted_web_search: searched \"Bosch Rexroth strut profile 60x60 aluminum profile 60x60\", \"95_profile_60x60_740 Bosch Rexroth\", and the BOM-provided Bosch Rexroth strut-profile URL; found row-family procurement and product-family facts, but no exact row-specific manufacturing process sheet for the 740 mm profile."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "Cut-to-length procurement is the normal route because the BOM row is a vendor_component from Bosch Rexroth AG."
-    - "Extrusion plus cut/deburr/anodize is the plausible local manufacturing route inferred from the constant slotted aluminum profile geometry and common production of aluminum structural framing."
+    - "Local manufacturing follows aluminum extrusion, finishing, cut-to-length, deburring, and profile inspection for the Bosch-style slot profile"
+    - "Extrusion plus cut/deburr/anodize is the plausible Manufacturing route inferred from the constant slotted aluminum profile geometry and common production of aluminum structural framing."
   uncertainty_notes:
     - "The cited sources do not state the extrusion die, alloy temper, heat treatment, or surface-finish process parameters for this exact row; those would be separate manufacturing-detail research."
 kb_implications:
-  - "item_granularity: purchased_module - model as a reusable Bosch Rexroth 60 x 60 aluminum strut-profile stock/cut-length family rather than creating a unique item for every nearby length."
+  - "item_granularity: simple_part - model as a reusable Bosch Rexroth 60 x 60 aluminum strut-profile stock/cut-length family rather than creating a unique item for every nearby length."
 ---
 
 Research result for reAM250 BOM row 298.
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0298_95.md
+source_research_sha256: "50a84188da522f302aab5510d323e8c8a165acbe19f6c5c88f8f64316d07c59a"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Read the structural profile function, aluminum mass basis, material metadata, extrusion and cut-to-length route, KB implications, and CAD preview showing a 60 x 60 mm slotted profile at 740 mm length."
+decomposition:
+  decision: simple_part
+  rationale: "The row is a single aluminum structural profile cut length, with connectors and end hardware represented by other rows."
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: aluminum_extrusion_cut_to_length
+  primary_process_bucket: structural_profile_stock_fabrication_cutting
+  supporting_processes:
+    - extrusion
+    - cutting
+    - deburring
+    - surface_finishing
+    - dimensional_inspection
+  candidate_existing_processes:
+    - process_id: extrusion_basic_v0
+      fit: partial
+      reason: "Generic extrusion process can represent profile forming at a coarse level but lacks the exact 60 x 60 slot die."
+    - process_id: metal_extrusion_process_v0
+      fit: partial
+      reason: "Covers aluminum extrusion family behavior, though currently framed around fin extrusion rather than structural framing profiles."
+    - process_id: aluminum_tube_stock_extrusion_v0
+      fit: supporting
+      reason: "Relevant aluminum stock extrusion precedent, but tube stock is not the same profile geometry."
+    - process_id: cutting_basic_v0
+      fit: supporting
+      reason: "Covers cutting extruded profile stock to the 740 mm row length."
+    - process_id: inspection_basic_v0
+      fit: supporting
+      reason: "Covers cut length, squareness, slot integrity, and profile fit checks."
+  abstraction_decision: keep_original_family
+  rationale: "The source route is aluminum profile extrusion followed by cut-to-length preparation. The canonical structural profile stock bucket preserves that closure handle without creating a unique item for each nearby length."
+  process_guardrails:
+    tolerance: review
+    surface_finish: review
+    sealing_quality: not_applicable
+    alignment_accuracy: review
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: "modular machine-frame structural support member"
+  material: aluminum
+  scale_or_capacity:
+    mass_kg: 2.889
+    bom_quantity: 2
+    row_total_mass_kg: 5.78
+    scale_class: large
+  geometry_form: slotted_square_structural_profile_60x60_cut_length
+merge_pool:
+  eligible: true
+  functional_purpose_key: structural_frame_member
+  precision_guardrails:
+    - cut_length
+    - end_squareness
+    - slot_geometry
+    - profile_straightness
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - structural_profile_stock_fabrication_cutting
+  import_risk_factors:
+    - "Local manufacture requires an extrusion die and aluminum profile process control for the slotted 60 x 60 mm section."
+    - "Exact alloy, temper, anodizing, and profile tolerance are unresolved."
+  post_merge_decision_notes: "Final import/local decision is deferred until merge review groups structural profile lengths and decides whether a generic aluminum profile stock item is sufficient."
+kb_staging:
+  proposed_item_id: null
+  notes: "Wait for merge review; likely belongs to a reusable aluminum structural profile family with length as a quantity/detail."
+assumptions:
+  - "The 740 mm length is a cut-length variant of a reusable 60 x 60 mm profile family."
+  - "Aluminum STEP metadata and CAD volume are accepted for row-level mass and material classification."
+unresolved:
+  - "Specific aluminum alloy, temper, anodized finish, extrusion die details, load path, and connector interfaces are not specified."
+```

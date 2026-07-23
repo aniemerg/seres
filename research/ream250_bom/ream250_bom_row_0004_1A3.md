@@ -46,10 +46,10 @@ how_to_make:
     - "Apply anodizing, passivation, blackening, or cleaning only if later design evidence requires a specific surface finish."
   source:
     url_or_path: "design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/1A3_mounting_plate_flow_rectifier.step; research/ream250_bom/ream250_bom_row_0004_1A3__views_2x2.png"
-    cited_fact_or_basis: "CAD and preview show one 278.00 x 35.30 x 5.00 mm solid: a long, thin plate with small end features. targeted_web_search: searched \"1A3_mounting_plate_flow_rectifier material\", \"1A3 mounting plate flow rectifier mass\", \"reAM250 1A3 flow rectifier mounting plate\", \"SM2A53 adapter external material weight\", and \"SM2A53 anodized aluminum 0.02 kg\"; no row-specific manufacturing drawing, material callout, tolerance note, or process note was found."
+    cited_fact_or_basis: "CAD and preview show one 278.00 x 35.30 x 5.00 mm solid: a long, thin plate with small end features. targeted_web_search: searched \"1A3_mounting_plate_flow_rectifier material\", \"1A3 mounting plate flow rectifier mass\", \"reAM250 1A3 flow rectifier mounting plate\", \"SM2A53 adapter external material weight\", and \"SM2A53 anodized aluminum 0.02 kg\" no row-specific manufacturing drawing, material callout, tolerance note, or process note was found."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "The part is treated as a custom simple part rather than a purchased module because the BOM row has no manufacturer or link and the CAD file name is a custom assembly-specific mounting plate."
+    - "The part is treated as a custom simple part because the BOM row has no manufacturer or link and the CAD file name is a custom assembly-specific mounting plate"
     - "Subtractive plate fabrication is assumed from the flat 5 mm-thick geometry and expected need for accurate mounting features."
   uncertainty_notes:
     - "The CAD/BOM evidence does not specify tolerances, surface finish, coating, or whether any end features are clearance, locating, or fastening features."

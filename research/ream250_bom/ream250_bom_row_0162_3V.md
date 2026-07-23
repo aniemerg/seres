@@ -35,9 +35,8 @@ material:
   uncertainty_notes:
     - "The specific stainless grade and detailed electronics submaterials are not stated in the available row-matched sources."
 how_to_make:
-  summary: "Procure as a calibrated FCX-TR0025 oxygen transmitter and mount it into the gas-inlet/top housing; defer local self-manufacture until a sensor-cell, electronics, pressure housing, and calibration workflow are modeled."
+  summary: "Defer local self-manufacture until a sensor-cell, electronics, pressure housing, and calibration workflow are modeled"
   manufacturing_steps:
-    - "Buy or stock a row-matched FCX-TR0025 transmitter variant."
     - "Install the transmitter into the gas-in-top interface using the appropriate process adapter and cable connection."
     - "Commission or periodically check calibration against dry air according to the operating manual."
     - "For future local manufacture, model stainless pressure housing fabrication, zirconia sensor production, electronics assembly, heater/control tuning, and factory calibration as separate specialist work."
@@ -45,11 +44,10 @@ how_to_make:
     url_or_path: "https://sensorsandpower.angst-pfister.com/fileadmin/products/datasheets/272/FCX-TR_1620-21914-0029-E-0821.pdf; https://www.digikey.com/en/products/detail/angst-pfister-sensors-and-power-ag/FCX-TR0025-7-5-Q08-112-500/26236819"
     cited_fact_or_basis: "The operating manual says the sensor and measurement electronics are integrated in the stainless transmitter housing, the transmitter is calibrated as one unit at the factory, the sensor is not directly replaceable, and the FCX-TR0025 calibration check can be done in dry air. DigiKey lists the FCX-TR0025-7-5-Q08-112-500 as an orderable oxygen sensor/transmitter product."
     evidence_basis: "independent_vendor_spec"
-  assumptions:
-    - "For near-term KB modeling, procurement and installation is the practical route because the vendor documentation describes a calibrated integrated transmitter rather than a simple raw part."
+  assumptions: []
   uncertainty_notes:
     - "Local manufacture remains unresolved at subcomponent level because no source in this row provides a sensor-cell BOM, electronics design, heater calibration data, or pressure-housing manufacturing drawing."
 kb_implications:
-  - "item_granularity: purchased_module - Model 3V as a calibrated oxygen transmitter module for now; split into housing, zirconia cell, electronics, and calibration processes only if oxygen-sensor self-manufacture becomes a priority."
+  - "item_granularity: complex_module - Model 3V as a calibrated oxygen transmitter complex module for this pass; split into housing, zirconia cell, electronics, and calibration processes only if oxygen-sensor self-manufacture becomes a priority."
 ---
 

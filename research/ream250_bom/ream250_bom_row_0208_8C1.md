@@ -39,21 +39,20 @@ material:
   uncertainty_notes:
     - No separate gasket or clamp material is included in this row; it is treated as the hose assembly material set only.
 how_to_make:
-  summary: Procure as a standard Pfeiffer 120SWG040-0500 DN 40 ISO-KF corrugated stainless vacuum hose; local manufacture would form/weld a thin 316L corrugated bellows tube and attach 304/1.4301 KF flanges, followed by leak and cleanliness checks.
+  summary: "Prepare as a standard Pfeiffer 120SWG040-0500 DN 40 ISO-KF corrugated stainless vacuum hose; form/weld a thin 316L corrugated bellows tube and attach 304/1.4301 KF flanges, followed by leak and cleanliness checks"
   manufacturing_steps:
-    - Procure the row item as Pfeiffer 120SWG040-0500 when vendor supply is allowed.
-    - For a local route, roll or draw thin 316L stainless tube, seam weld it, and form annular corrugations over the hose length.
+    - For a Manufacturing route, roll or draw thin 316L stainless tube, seam weld it, and form annular corrugations over the hose length.
     - Machine or form 304/1.4301 DN 40 ISO-KF end flanges and weld them to the bellows ends.
     - Clean, passivate if required, inspect dimensions, and helium leak test for vacuum service.
   source:
     url_or_path: "https://vacuum-shop.com/2074124/downloads/datasheets/Datasheet_120SWG040-0500_en.pdf; research/ream250_bom/ream250_bom_row_0208_8C1__views_2x2.png; https://hoseflex.com/wp-content/uploads/2023/11/02.-Stainless-Steel-Hose-2.pdf"
-    cited_fact_or_basis: "The official datasheet identifies a purchasable corrugated, flexible, annealed stainless DN 40 ISO-KF hose with 500 mm length and stainless 316L/304 material set; the CAD preview confirms a corrugated circular hose/end form. A general stainless hose manufacturing reference describes corrugated hose as made from thin-walled tube formed from rolled strip and welded at the seam, with an impressed corrugated annular profile. targeted_web_search: tried \"120SWG040-0500 manufacturing corrugated hose\", \"stainless corrugated hose manufactured rolled strip welded seam annular corrugation\", and \"KF40 stainless bellows hose manufacturing\"; no row-specific Pfeiffer manufacturing process was found, so the local route is inferred from generic corrugated stainless hose practice."
+    cited_fact_or_basis: "The official datasheet identifies a purchasable corrugated, flexible, annealed stainless DN 40 ISO-KF hose with 500 mm length and stainless 316L/304 material set; the CAD preview confirms a corrugated circular hose/end form. A general stainless hose manufacturing reference describes corrugated hose as made from thin-walled tube formed from rolled strip and welded at the seam, with an impressed corrugated annular profile. targeted_web_search: tried \"120SWG040-0500 manufacturing corrugated hose\", \"stainless corrugated hose manufactured rolled strip welded seam annular corrugation\", and \"KF40 stainless bellows hose manufacturing\" no row-specific Pfeiffer manufacturing process was found, so The manufacturing route is inferred from generic corrugated stainless hose practice."
     evidence_basis: engineering_hypothesis
   assumptions:
-    - Local manufacturing is only a plausible route for later modeling; vendor procurement is the preferred near-term representation.
+    - "Local manufacturing is only a plausible route for later modeling"
     - Vacuum acceptance testing is needed because the hose is part of a vacuum boundary.
   uncertainty_notes:
-    - Pfeiffer's own manufacturing process, wall thickness, weld details, and acceptance thresholds were not located for this exact order number.
+    - "Pfeiffer's own manufacturing process, wall thickness, weld details, and acceptance thresholds were not located for this exact part number"
 kb_implications:
-  - "item_granularity: purchased_module - Treat as one purchased hose assembly with material metadata and estimated mass; avoid splitting bellows and flanges unless a later manufacturing model specifically targets vacuum hose fabrication."
+  - "item_granularity: simple_part - Treat as a reusable DN40 ISO-KF corrugated vacuum hose item; capture thin-wall bellows forming, KF flange joining, cleaning, and leak testing in the manufacturing route."
 ---

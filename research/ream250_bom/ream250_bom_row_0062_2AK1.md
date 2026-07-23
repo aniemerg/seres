@@ -38,9 +38,9 @@ material:
   uncertainty_notes:
     - "Exact shaft steel grade, case depth, hardness tolerance, and coating are not resolved by the row evidence."
 how_to_make:
-  summary: "Near-term route is to procure Dold Mechatronik 16 mm h6 hardened and ground precision shaft stock cut to the required length. A plausible local route is alloy-steel round bar preparation, straightening, heat treatment or case hardening, cylindrical/centerless grinding to h6 tolerance, cut-to-length, deburring, and inspection for diameter, straightness, surface finish, and end length."
+  summary: "Cut to the required length. alloy-steel round bar preparation, straightening, heat treatment or case hardening, cylindrical/centerless grinding to h6 tolerance, cut-to-length, deburring, and inspection for diameter, straightness, surface finish, and end length"
   manufacturing_steps:
-    - "Procure 16 mm h6 hardened and ground precision shaft stock from the BOM-provided Dold Mechatronik cut-to-length product route."
+    - "Prepare 16 mm h6 hardened and ground precision shaft stock from the BOM-provided Dold Mechatronik cut-to-length product route"
     - "For local manufacture, start from suitable alloy-steel round bar stock sized for finish grinding."
     - "Straighten, heat treat or case harden as required for a wear-resistant guide shaft."
     - "Cylindrically or centerlessly grind the outside diameter to the h6 precision-shaft tolerance and required surface finish."
@@ -50,10 +50,10 @@ how_to_make:
     cited_fact_or_basis: "The BOM-provided Dold Mechatronik URL identifies a 16 mm h6 precision shaft, ground and hardened, sold as cut-to-length stock. The rendered row CAD preview shows a plain round shaft. targeted_web_search: searched 'Dold Mechatronik Praezisionswelle 16mm h6 geschliffen gehaertet Zuschnitt', '16 mm h6 hardened ground precision shaft manufacturing', and 'DOLD precision shaft 16mm h6 material'; results supported the precision-shaft product identity but did not provide a row-specific Dold manufacturing process or exact material grade."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "Procurement is the preferred current KB route because the row is standard precision shaft stock, not a machine-specific multi-part subsystem."
-    - "The local manufacturing route is inferred from the sourced hardened/ground h6 shaft identity and simple cylindrical CAD geometry."
+    - "Machine-specific multi-part subsystem"
+    - "The inferred from the sourced hardened/ground h6 shaft identity and simple cylindrical CAD geometry."
   uncertainty_notes:
     - "The actual Dold supplier process, heat-treatment specification, final hardness, and exact grinding/straightening controls are not published in the row evidence."
 kb_implications:
-  - "item_granularity: raw_material_or_stock - model as reusable 16 mm hardened/ground precision shaft stock or cut-to-length rod; keep length variation in BOM/recipe quantities rather than creating a machine-specific custom part."
+  - "item_granularity: simple_part - model as reusable 16 mm hardened/ground precision shaft stock or cut-to-length rod; keep length variation in BOM/recipe quantities rather than creating a machine-specific custom part."
 ---

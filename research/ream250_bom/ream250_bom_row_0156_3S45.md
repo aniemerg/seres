@@ -56,3 +56,101 @@ kb_implications:
   - "item_granularity: simple_part - Model as one custom fabricated sheet-metal gas outlet segment, with assembly-level joining handled by the larger 3S outlet group."
 ---
 
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0156_3S45.md
+source_research_sha256: 328c27fa110ff225ee4fe3793b1581ca61aa7e51ff149bff520a624d285282dd
+evidence_reviewed:
+  original_research_sections:
+  - function
+  - mass
+  - material
+  - how_to_make
+  - kb_implications
+  geometry_evidence_used: true
+  notes: Reviewed the gas-outlet segment function, steel-equivalent CAD mass, unresolved sheet-metal material evidence,
+    cut and brake-formed manufacturing route, KB implication, and preview showing a thin folded panel segment.
+decomposition:
+  decision: simple_part
+  rationale: The row is one small formed sheet-metal gas outlet segment within a larger outlet group. Assembly-level joints
+    and seals matter later, but this row does not need internal decomposition.
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: sheet_cutting_brake_forming
+  primary_process_bucket: sheet_plate_cutting_drilling
+  supporting_processes:
+  - stock_preparation
+  - cutting
+  - forming
+  - joining
+  - deburring
+  - cleaning
+  - leak_testing
+  - dimensional_inspection
+  candidate_existing_processes:
+  - process_id: sheet_metal_cutting_v0
+    fit: direct
+    reason: Covers cutting the thin blank before forming the outlet segment.
+  - process_id: sheet_metal_forming_v0
+    fit: supporting
+    reason: Covers brake forming and bending of the panel geometry.
+  - process_id: welding_and_fabrication_v0
+    fit: supporting
+    reason: Relevant if this segment is joined to neighboring outlet pieces with welded seams.
+  - process_id: sealing_and_assembly_basic_v0
+    fit: supporting
+    reason: Relevant at the larger gas outlet assembly stage where joints need sealing and cleanliness checks.
+  - process_id: leak_testing_v0
+    fit: supporting
+    reason: Relevant when assembled gas path integrity must be checked.
+  - process_id: inspection_basic_v0
+    fit: supporting
+    reason: Covers checks of bend angle, edge fit, and outlet assembly fit.
+  abstraction_decision: keep_original_family
+  rationale: The original route is sheet cutting, forming, deburring, cleaning, and later joining. The sheet/plate bucket
+    is the simplest closure handle for this small folded gas-path segment.
+  process_guardrails:
+    tolerance: review bend angles, edge alignment, and fit against neighboring gas outlet parts
+    surface_finish: deburr and clean edges to avoid leaks, trapped powder, and flow obstructions
+    sealing_quality: review at the larger outlet assembly because this segment is part of a gas path
+    alignment_accuracy: formed geometry should match adjacent outlet segments, but no calibrated guide feature is visible
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: form one segment of a gas outlet path in the reAM250 gas-flow assembly
+  material: unknown_metal_alloy_sheet
+  scale_or_capacity:
+    mass_kg: 0.0373
+    bom_quantity: 1
+    row_total_mass_kg: 0.0373
+    scale_class: small
+  geometry_form: small_folded_sheet_metal_outlet_segment
+merge_pool:
+  eligible: true
+  functional_purpose_key: gas_flow_path_segment
+  precision_guardrails:
+  - bend_angle
+  - edge_fit
+  - joint_sealing
+  - outlet_clearance
+  - cleanliness
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+  - sheet_plate_cutting_drilling
+  import_risk_factors:
+  - Exact sheet metal family and grade are unresolved.
+  - Gas outlet service may require cleanliness, seam sealing, and temperature compatibility beyond the row evidence.
+  post_merge_decision_notes: Final import/local decision is deferred until merge review compares this with adjacent gas outlet
+    segments and other small formed gas-path parts.
+kb_staging:
+  proposed_item_id: null
+  notes: Leave final item ID open for merge review; this should be compared with other 3S gas outlet segments before staging.
+assumptions:
+- The STEP solid is the complete per-unit segment and fasteners plus seals belong to the larger outlet assembly.
+- Steel-equivalent mass is a planning value only; material remains broad pending drawings.
+- Sheet cutting and brake forming are an adequate closure abstraction for the thin folded geometry.
+unresolved:
+- Exact alloy, bend radius requirements, edge preparation, and joining method are unknown.
+- Flow direction, adjacent mating surfaces, and gas leakage requirement are not resolved by the row file.
+```

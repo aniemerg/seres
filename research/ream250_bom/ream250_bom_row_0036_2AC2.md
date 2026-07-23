@@ -41,20 +41,117 @@ material:
     - Exact housing alloy/grade, bearing steel grade, seal elastomer, lubricant, and heat treatment are not resolved for 2AC2.
     - The CAD metadata itself does not confirm material; it only provides placeholder Generic material.
 how_to_make:
-  summary: Procure as a HIWIN SLA10-class supported bearing unit for near-term modeling; a plausible local route is precision fabrication of the steel pillow-block housing, installation of a 6200.2RS bearing and DIN 471 circlip, then alignment and fit inspection.
+  summary: "Precision fabrication of the steel pillow-block housing, installation of a 6200.2RS bearing and DIN 471 circlip, then alignment and fit inspection"
   manufacturing_steps:
-    - Procure a HIWIN SLA10 or dimensionally equivalent supported bearing unit when modeling the current machine as assembled from purchased precision motion components.
-    - For local production, machine or cast the pillow-block housing to the 86 mm x 24 mm x 58 mm envelope with the bearing seat, mounting holes, and alignment stop features.
+    - "Machine as assembled from precision motion components"
+    - Machine or cast the pillow-block housing to the 86 mm x 24 mm x 58 mm envelope with the bearing seat, mounting holes, and alignment stop features.
     - Install or locally manufacture a 6200.2RS deep-groove bearing, fit the circlip/retainer, lubricate as required, and inspect bore alignment and radial support function in the bottom-axis assembly.
   source:
     url_or_path: "research/ream250_bom/ream250_bom_row_0036_2AC2__views_2x2.png; https://www.hiwin.de/en/Products/Bearings/Bearings-SFA-SLA/SLA/SLA10/p/18-000127; https://po-center.ru/HIWIN/hiwin_compact.pdf"
     cited_fact_or_basis: "HIWIN identifies SLA10 as a ready supported bearing, and the compact catalog states the SLA supported-bearing stack as steel pillow block housing, deep-groove ball bearing 62...2RS, and DIN 471 circlip. The rendered CAD context shows a compact bearing block with a central bore, mounting feet, and through holes. The detailed machining/casting, bearing manufacture, assembly, and inspection route is inferred from the geometry and catalog component stack rather than directly stated as a manufacturing process. targeted_web_search: tried 'HIWIN SLA10 manufacturing housing material', 'SLA10 supported bearing manufacturing process', 'bearing pillow block manufacturing process', and '2AC2_part_2 manufacturing'; results did not provide a row-specific manufacturing route."
     evidence_basis: engineering_hypothesis
   assumptions:
-    - Procurement is the preferred near-term route because the row corresponds to a standard supported-bearing unit and no sub-BOM drawing is available.
-    - The local route assumes conventional bearing-block construction with a precision bearing seat, standard rolling bearing insertion, and retainer hardware.
+    - The manufacturing route assumes conventional bearing-block construction with a precision bearing seat, standard rolling bearing insertion, and retainer hardware.
   uncertainty_notes:
     - Local manufacturing details such as fits, tolerances, surface finish, heat treatment, seal specification, and quality checks require a manufacturer drawing or teardown before process modeling.
 kb_implications:
-  - "item_granularity: purchased_module - Model this row as a vendor SLA10-class supported bearing module for now; split into housing, 6200.2RS bearing, circlip/seal, lubricant, and assembly operations only if later KB work needs bearing-unit closure."
+  - "item_granularity: complex_module - Model this row as a functional SLA10-class supported bearing complex module for this pass; split into housing, 6200.2RS bearing, circlip/seal, lubricant, and assembly operations only if later KB work needs bearing-unit closure."
 ---
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0036_2AC2.md
+source_research_sha256: "3297a099c27eb3bc234a3c133e1381dc5e0af96e0a649779dab1b2bbe8089109"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Read the bottom-axis bearing support function, SLA10 vendor context, mass proxy from parent assembly volume, steel-family material stack, inferred housing/bearing assembly route, and preview showing a pillow-block-like supported bearing."
+decomposition:
+  decision: complex_module
+  rationale: "The row represents an SLA10-class supported bearing unit with housing, sealed bearing, circlip, lubricant, and alignment requirements; local closure should expose those dependencies before recipe staging."
+  proposed_subparts:
+    - steel_pillow_block_housing
+    - sealed_deep_groove_bearing_6200_2rs
+    - circlip_retainer
+    - bearing_seals
+    - bearing_lubricant
+process_abstraction:
+  original_process_family: precision_supported_bearing_assembly
+  primary_process_bucket: precision_component_import_decompose_later
+  supporting_processes:
+    - decomposition_required
+    - precision_machining
+    - grinding_lapping
+    - heat_treatment
+    - assembly
+    - cleaning
+    - dimensional_inspection
+  candidate_existing_processes:
+    - process_id: machining_precision_v0
+      fit: supporting
+      reason: "Relevant to the bearing-seat housing, mounting faces, and alignment features."
+    - process_id: assembly_process_bearing_v0
+      fit: partial
+      reason: "Covers sealed bearing assembly from rings, balls, cage, seals, and grease, but not the pillow-block housing."
+    - process_id: bearing_set_heavy_production_v0
+      fit: poor_fit
+      reason: "Captures bearing manufacturing complexity, but the scale is heavier than a 6200.2RS bearing and needs downsizing."
+    - process_id: grinding_process_precision_v0
+      fit: supporting
+      reason: "Relevant to bearing race and bore surface finishing after decomposition."
+    - process_id: assembly_process_general_v0
+      fit: supporting
+      reason: "Useful for installing the bearing, circlip, and lubricant into the housing after subparts exist."
+    - process_id: inspection_basic_v0
+      fit: supporting
+      reason: "Covers fit, bore alignment, radial support function, and mounting geometry checks."
+  abstraction_decision: substitute_process_family
+  rationale: "Although the housing could be machined, the row-level item is a precision bearing module with rolling elements and seals, so Phase 1 should defer final local manufacture until decomposition."
+  process_guardrails:
+    tolerance: high
+    surface_finish: high
+    sealing_quality: review
+    alignment_accuracy: high
+    blocked_by_precision: true
+identity_for_merge:
+  functional_purpose: supported radial bearing point for lower shaft/ballscrew axis
+  material: multi_material_steel_bearing_unit
+  scale_or_capacity:
+    mass_kg: 0.53
+    bom_quantity: 1
+    row_total_mass_kg: 0.53
+    scale_class: small
+  geometry_form: compact_pillow_block_supported_bearing_with_mounting_feet_and_central_bore
+merge_pool:
+  eligible: false
+  functional_purpose_key: bearing_support
+  precision_guardrails:
+    - bearing_bore_alignment
+    - radial_play
+    - bearing_seal_integrity
+    - mounting_face_accuracy
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - precision_component_import_decompose_later
+  import_risk_factors:
+    - "Rolling bearing manufacture requires hardened races, precision grinding, rolling elements, seals, and lubricant."
+    - "The isolated row geometry is uncertain because the row-specific product imports with zero solids."
+    - "Alignment and radial play requirements may dominate manufacturability."
+  post_merge_decision_notes: "Final import/local decision is deferred; this supported-bearing unit should be decomposed before merge/local manufacturing decisions."
+kb_staging:
+  proposed_item_id: null
+  notes: "Do not assign a simple item ID yet; merge review should wait until bearing-unit decomposition strategy is chosen."
+assumptions:
+  - "The SLA10 parent assembly context is treated as the row-level physical item because the row-specific CAD product has no imported solids."
+  - "The 0.53 kg steel-family estimate is a planning proxy for the supported bearing unit."
+unresolved:
+  - "Exact split between housing, bearing, circlip, seals, and lubricant is not available from the row evidence."
+  - "Housing alloy, bearing grade, seal elastomer, lubricant specification, and inspection class remain unresolved."
+```

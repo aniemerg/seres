@@ -38,19 +38,17 @@ material:
   uncertainty_notes:
     - "The exact bearing steel grade, heat treatment, lubricant, and cage stamping alloy are not resolved by the BOM-side evidence."
 how_to_make:
-  summary: "Procure as a standard SKF 61800 deep-groove ball bearing; for local closure, model later as a precision steel bearing assembly rather than a custom reAM250-machined part."
+  summary: "Model later as a precision steel bearing assembly rather than a custom reAM250-machined part"
   manufacturing_steps:
-    - "Buy or inventory SKF 61800 / DIN 625 thin-section deep-groove ball bearing matching 10 mm bore, 19 mm outside diameter, and 5 mm width."
     - "Incoming inspection should verify bearing designation, open bearing style, dimensions, free rotation, and absence of contamination or brinelling."
     - "Install into the mating bearing seat/shaft interface as a reusable precision component."
   source:
     url_or_path: "design/real-mechanical/reAm250/reAM250_cad_gold_package/reAm250_BOM_gold.csv; https://www.skf.com/de/products/rolling-bearings/ball-bearings/deep-groove-ball-bearings/productid-61800; research/ream250_bom/ream250_bom_row_0268_62__views_2x2.png"
     cited_fact_or_basis: "BOM row gives SKF and product 61800 with SKF product URL. SKF route identifies the row as a deep-groove ball bearing. CAD preview confirms the row is a complete bearing geometry rather than raw stock or a custom machined placeholder."
     evidence_basis: "bom_provided"
-  assumptions:
-    - "Near-term KB modeling should use procurement/import for this precision purchased component until a bearing sub-BOM and precision bearing manufacturing workflow are intentionally modeled."
+  assumptions: []
   uncertainty_notes:
     - "A self-manufacturing route would require additional modeling for hardened races, balls, cage, grinding/lapping, lubrication, cleaning, and bearing-grade inspection."
 kb_implications:
-  - "item_granularity: purchased_module - Treat row 62 as a standard SKF precision bearing component for now; later consolidation should map it to a reusable bearing item family rather than a reAM250-specific custom part."
+  - "item_granularity: simple_part - Treat SKF 61800 as reusable standard precision bearing hardware; model bearing-ring, ball, cage, seal/grease, and inspection details only if standard bearing manufacturing becomes a focused KB target."
 ---

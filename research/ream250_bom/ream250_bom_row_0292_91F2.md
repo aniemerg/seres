@@ -37,7 +37,7 @@ material:
   uncertainty_notes:
     - "The STEP metadata gives mild steel but no specific alloy grade, heat treatment, coating, or surface finish."
 how_to_make:
-  summary: "Procure or locally fabricate as a simple mild-steel plate: cut an 80 x 80 x 10 mm blank from mild-steel plate stock, drill or machine the central M12 clearance/tapped feature as required by the mating fastener, add the visible chamfer/countersink or diagonal relief geometry, deburr, and apply any required corrosion-protection finish."
+  summary: "Locally fabricate as a simple mild-steel plate: cut an 80 x 80 x 10 mm blank from mild-steel plate stock, drill or machine the central M12 clearance/tapped feature as required by the mating fastener, add the visible chamfer/countersink or diagonal relief geometry, deburr, and apply any required corrosion-protection finish"
   manufacturing_steps:
     - "Cut square blank from 10 mm mild-steel plate stock."
     - "Drill, bore, or tap the central M12-sized feature according to the mating bolt requirement."
@@ -46,7 +46,7 @@ how_to_make:
     - "Apply finish or coating if required by the surrounding assembly."
   source:
     url_or_path: "design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/91F2_plate_80x80x10_M12.step; research/ream250_bom/ream250_bom_row_0292_91F2__views_2x2.png"
-    cited_fact_or_basis: "CAD geometry shows a one-piece square plate, 80.00 x 80.00 x 10.00 mm, with a central round M12-named feature and visible chamfer/relief faces. targeted_web_search: searched \"91F2 plate_80x80x10_M12\", \"91F2 80x80x10 M12 plate\", and \"91F2_plate_80x80x10_M12 material\"; results did not provide a row-specific vendor drawing, process sheet, or catalog route."
+    cited_fact_or_basis: "CAD geometry shows a one-piece square plate, 80.00 x 80.00 x 10.00 mm, with a central round M12-named feature and visible chamfer/relief faces. targeted_web_search: searched \"91F2 plate_80x80x10_M12\", \"91F2 80x80x10 M12 plate\", and \"91F2_plate_80x80x10_M12 material\" results did not provide a row-specific vendor drawing, process sheet, or catalog route."
     evidence_basis: "engineering_hypothesis"
   assumptions:
     - "Because no row-specific manufacturing document was found, standard plate-cutting and drilling/milling operations are assumed from the simple steel-plate geometry."

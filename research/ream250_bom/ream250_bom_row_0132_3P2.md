@@ -43,7 +43,7 @@ how_to_make:
     - "Deburr, clean for vacuum compatibility, and inspect dimensions and surface condition before assembly into the vacuum line."
   source:
     url_or_path: "design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/3P2_flange_ISO_K_DN63.step; research/ream250_bom/ream250_bom_row_0132_3P2__views_2x2.png; https://vacuum-shop.com/shop/en_US/category/2073040/product/320fan06376/welding-flange-ring-stainless-steel-1-4301-304.html; https://vacuum-shop.com/2073853/downloads/datasheets/Datasheet_320FAN063-76_en.pdf"
-    cited_fact_or_basis: "The refreshed STEP/contact sheet shows a single annular ring/flange; the row-matched Pfeiffer shop page and datasheet identify 320FAN063-76 as a DN 63 ISO-K welding flange ring with stainless steel 1.4301/304 and dimensions A 95 mm, B 70 mm, C 12 mm, D 76.4 mm, E 6 mm. targeted_web_search: searched \"320FAN063-76 Pfeiffer Vacuum ISO-K DN 63 weld ring flange stainless 1.4301 304\", \"320FAN063_76 Pfeiffer Vacuum 320FAN063-76\", \"site:pfeiffer-vacuum.com 320FAN063-76\", and \"320FAN063-76 1.4301\"; found row-matched Pfeiffer shop/catalog data for product identity, material, and dimensions but no process sheet specifying the factory route."
+    cited_fact_or_basis: "The refreshed STEP/contact sheet shows a single annular ring/flange; the row-matched Pfeiffer shop page and datasheet identify 320FAN063-76 as a DN 63 ISO-K welding flange ring with stainless steel 1.4301/304 and dimensions A 95 mm, B 70 mm, C 12 mm, D 76.4 mm, E 6 mm. targeted_web_search: searched \"320FAN063-76 Pfeiffer Vacuum ISO-K DN 63 weld ring flange stainless 1.4301 304\", \"320FAN063_76 Pfeiffer Vacuum 320FAN063-76\", \"site:pfeiffer-vacuum.com 320FAN063-76\", and \"320FAN063-76 1.4301\" found row-matched Pfeiffer shop/catalog data for product identity, material, and dimensions but no process sheet specifying the factory route."
     evidence_basis: "engineering_hypothesis"
   assumptions:
     - "The fabrication route is inferred from the simple rotationally symmetric stainless flange geometry and standard vacuum-flange manufacturing practice."
@@ -55,3 +55,104 @@ kb_implications:
 ---
 
 Research result for reAM250 BOM row 132.
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0132_3P2.md
+source_research_sha256: c83c7a5287c22492f4a22a4abfee3dfcf05663a1aff0db6df55e484ee8ba87ed
+evidence_reviewed:
+  original_research_sections:
+  - function
+  - mass
+  - material
+  - how_to_make
+  - kb_implications
+  geometry_evidence_used: true
+  notes: Read the original function, mass basis, material evidence, inferred manufacturing route, KB implications, and CAD
+    preview showing a single annular ISO-K weld-ring flange.
+decomposition:
+  decision: simple_part
+  rationale: The row is one stainless annular service flange with no internal subassemblies; its closure-relevant properties
+    are material, flange geometry, sealing/clamping faces, and cleanliness.
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: cnc_turning_machining
+  primary_process_bucket: plumbing_connector_fabrication_testing
+  supporting_processes:
+  - stock_preparation
+  - forming
+  - precision_machining
+  - joining
+  - cleaning
+  - leak_testing
+  - dimensional_inspection
+  candidate_existing_processes:
+  - process_id: fitting_assembly_basic_v0
+    fit: partial
+    reason: Covers generic fitting and connector assembly work.
+  - process_id: plumbing_and_pneumatics_v0
+    fit: partial
+    reason: Covers fluid and gas handling connector work at the system level.
+  - process_id: leak_testing_v0
+    fit: supporting
+    reason: Covers leak checks when sealing function matters.
+  - process_id: cleaning_basic_v0
+    fit: supporting
+    reason: Covers cleaning before connector assembly and test.
+  - process_id: leak_testing_v0
+    fit: supporting
+    reason: Relevant when sealing and fluid integrity matter.
+  - process_id: welding_basic_v0
+    fit: supporting
+    reason: Relevant when the row needs permanent joining.
+  abstraction_decision: substitute_process_family
+  rationale: The stainless ring is a plumbing connection interface. Use the shared plumbing connector bucket with turning,
+    sealing-surface finishing, cleaning, and interface inspection rather than a service-specific process label.
+  process_guardrails:
+    tolerance: review DN63 ISO-K interface diameters, tube landing, and clamp engagement dimensions
+    surface_finish: required on sealing and clamping faces; finish machining is retained
+    sealing_quality: required for plumbing line service; cleaning and inspection remain part of the route
+    alignment_accuracy: moderate; maintain concentricity between bore, weld neck, and flange faces
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: weld-ring flange joining a service tube to an ISO-K plumbing line interface
+  material: stainless_steel_304
+  scale_or_capacity:
+    mass_kg: 0.247
+    bom_quantity: 2
+    row_total_mass_kg: 0.494
+    scale_class: small
+  geometry_form: annular_weld_ring_flange
+merge_pool:
+  eligible: true
+  functional_purpose_key: plumbing_connection
+  precision_guardrails:
+  - sealing_face_surface_finish
+  - clamp_interface_dimensions
+  - bore_and_weld_neck_concentricity
+  - service_cleanliness
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+  - plumbing_connector_fabrication_testing
+  import_risk_factors:
+  - connector sealing quality depends on surface finish and cleanliness controls
+  - stainless 304/1.4301 supply chain must be available and substituted deliberately
+  post_merge_decision_notes: Final import/local manufacture decision is deferred until after merge review compares this with
+    other service flange rows and available stainless machining capability.
+kb_staging:
+  proposed_item_id: null
+  notes: Do not assign a closure item ID during row conversion; likely merge with other stainless ISO-K and service weld flange
+    abstractions if material, scale, and precision guardrails align.
+assumptions:
+- The STEP-derived mass of 0.247 kg is accepted as one flange mass, with BOM quantity 2 giving 0.494 kg row total.
+- Stainless steel 1.4301/304 is represented as stainless_steel_304 for merge and later KB staging.
+- General machining and turning can meet the required DN63 ISO-K flange geometry when paired with finish machining, cleaning,
+  and inspection.
+unresolved:
+- Exact connector sealing surface finish and dimensional tolerances were not present in the row evidence and should be checked
+  during merge and staging.
+- Whether this remains a distinct ISO-K flange item and merges into a broader service flange closure item is deferred to merge
+  review.
+```

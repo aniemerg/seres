@@ -38,7 +38,7 @@ material:
   uncertainty_notes:
     - "The supplier page specifies material at the parent spring-bellows product level, not a separate standalone 3O4 end-piece line item."
 how_to_make:
-  summary: "Procure as part of the Pfeiffer 320SFK063-130 ISO-K spring bellows/flexible connector family; a plausible local route is to machine or form the 304 stainless ISO-K end ring/flange, finish the sealing/clamp surfaces, and weld or join it to the stainless bellows body during the larger bellows assembly."
+  summary: "Machine or form the 304 stainless ISO-K end ring/flange, finish the sealing/clamp surfaces, and weld or join it to the stainless bellows body during the larger bellows assembly"
   manufacturing_steps:
     - "Start from 304 stainless round bar, tube, or near-net ring stock sized for a DN 63 ISO-K end connector."
     - "Turn the bore, outside diameter, stepped faces, and sealing or clamp-interface features; deburr and clean for vacuum service."
@@ -49,9 +49,101 @@ how_to_make:
     cited_fact_or_basis: "Pfeiffer's product route identifies the parent item as a stainless DN 63 ISO-K spring bellows, material flange 304 and bellows 316L, with tightness 1e-11 Pa m3/s and axial stroke. CAD/rendered row evidence shows a one-piece annular end connector geometry. targeted_web_search: queries tried: '320SFK063 Pfeiffer end piece manufacturing', '320SWN063 end piece material', and 'ISO-K stainless bellows flange 304 welded end piece'; result: found row-matched product/material/interface facts but no supplier statement for the standalone end-piece manufacturing route."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "Local manufacture would model this as a vacuum-clean machined or formed stainless end piece plus assembly joining to the bellows, because the standalone row is not exposed as a separately documented purchased part."
+    - "Model this as a vacuum-clean machined or formed stainless end piece plus assembly joining to the bellows, because the standalone row is not exposed as a separately documented part"
   uncertainty_notes:
-    - "The actual supplier process may use proprietary forming, spinning, or purchased subcomponents rather than the generic machining/forming route listed here."
+    - "The actual supplier process may use proprietary forming, spinning, or external subcomponents rather than the generic machining/forming route listed here"
 kb_implications:
   - "item_granularity: simple_part - Model as one reusable stainless ISO-K bellows end/flange piece; keep the full spring bellows as an assembly or purchased module if later KB work models the complete 320SFK063 connector."
 ---
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0130_3O4.md
+source_research_sha256: "8f657553195e9ba7ad4e91aefdd1c94e25665698d05c39fb0006f2a1f7ddb020"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Read the bellows end-connector function, CAD-derived stainless mass basis, 304 flange material evidence, machining/joining route, KB implications, and CAD preview before conversion."
+decomposition:
+  decision: simple_part
+  rationale: "The row is a rigid stainless ISO-K end/flange component from a bellows connector family. It can be modeled as one simple plumbing connector part, while the full flexible bellows assembly remains separate."
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: machined_stainless_iso_k_bellows_end_connector
+  primary_process_bucket: plumbing_connector_fabrication_testing
+  supporting_processes:
+    - stock_preparation
+    - cutting
+    - precision_machining
+    - joining
+    - cleaning
+    - leak_testing
+    - dimensional_inspection
+  candidate_existing_processes:
+    - process_id: plumbing_and_pneumatics_v0
+      fit: partial
+      reason: "Covers gas-plumbing fitting context and testing, but not full stainless end-piece fabrication."
+    - process_id: machining_process_turning_v0
+      fit: supporting
+      reason: "Relevant to turning the annular bore, outer diameter, steps, and flange faces."
+    - process_id: machining_basic_v0
+      fit: supporting
+      reason: "Covers additional machining of clamp and sealing-interface features."
+    - process_id: welding_brazing_basic_v0
+      fit: supporting
+      reason: "Covers joining the end piece to bellows tube sections in a later assembly route."
+    - process_id: leak_testing_v0
+      fit: supporting
+      reason: "Covers leak checks for the connector and bellows interface."
+    - process_id: inspection_basic_v0
+      fit: supporting
+      reason: "Covers concentricity, sealing face, and flange-interface checks."
+  abstraction_decision: substitute_process_family
+  rationale: "The source route is inferred from a commercial bellows connector, while closure analysis can group the row under reusable plumbing connector fabrication and testing with turning, joining, cleaning, and inspection support."
+  process_guardrails:
+    tolerance: review
+    surface_finish: review
+    sealing_quality: review
+    alignment_accuracy: review
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: provide a rigid flange end connection for a flexible gas line
+  material: stainless_steel_304
+  scale_or_capacity:
+    mass_kg: 0.412
+    bom_quantity: 1
+    row_total_mass_kg: 0.412
+    scale_class: small
+  geometry_form: annular_iso_k_flange_end_piece_with_stepped_bore
+merge_pool:
+  eligible: true
+  functional_purpose_key: plumbing_connection
+  precision_guardrails:
+    - flange_fit
+    - concentricity
+    - sealing_surface_finish
+    - leak_tightness
+    - bellows_join_interface
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - plumbing_connector_fabrication_testing
+  import_risk_factors:
+    - "Commercial bellows connectors may require clean stainless joining, tight leak-rate performance, and flange surface finish beyond basic machining."
+  post_merge_decision_notes: "Final import/local decision is deferred until merge review compares this end piece with other plumbing connector and bellows-interface rows."
+kb_staging:
+  proposed_item_id: null
+  notes: "Wait for merge review; likely reusable stainless flange/end connector hardware rather than a row-specific Pfeiffer part."
+assumptions:
+  - "The row-specific CAD volume represents one rigid end/flange piece, not the complete bellows assembly."
+  - "Pfeiffer flange 304 material maps to stainless_steel_304 for closure identity."
+  - "Gas-line service is preserved through sealing and leak-test guardrails rather than a separate key axis."
+unresolved:
+  - "Exact supplier process, weld lip detail, leak-rate requirement, surface finish, and attachment method to the bellows body are not resolved by row evidence."
+```

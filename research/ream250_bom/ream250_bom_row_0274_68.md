@@ -47,7 +47,7 @@ how_to_make:
     cited_fact_or_basis: "CAD evidence shows one long axisymmetric crowned shaft/roller with end journals. AELM Roller Company describes crowned roller services that grind and shape convex, concave, cylindrical, straight-taper, and other roller profiles. targeted_web_search: tried 'convex crowned shaft manufacturing turning grinding crowned shaft' and 'crowned roller shaft machining crowned shaft lathe grinding'; results supported crowning/grinding as a plausible roller profile route but did not provide a row-specific reAM250 manufacturing drawing."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "Because the part is a one-piece stainless axisymmetric shaft, turning plus profile grinding/finishing is the most plausible local route."
+    - "Because the part is a one-piece stainless axisymmetric shaft, turning plus profile grinding/finishing is the most plausible Manufacturing route."
     - "The crowned surface is functionally important enough to require inspection rather than treating the part as plain cut round stock."
   uncertainty_notes:
     - "No row-specific drawing states tolerances, crown height, bearing fits, heat treatment, or required surface roughness."
@@ -56,3 +56,87 @@ kb_implications:
 ---
 
 Research result for the leased reAM250 BOM row.
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0274_68.md
+source_research_sha256: "8fe5801e4e369b23da74e9b94e21fa7bb935c5f757b29629f97f9d8eb72df12a"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Read the function, mass basis, stainless material metadata, manufacturing route, KB implications, and CAD preview showing a long crowned shaft with small end journals."
+decomposition:
+  decision: simple_part
+  rationale: "The row is one solid stainless shaft and roller-like element with no evidence of internal subassemblies; closure can treat it as a single machined part."
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: cnc_turning_profile_grinding
+  primary_process_bucket: general_subtractive_machining
+  supporting_processes:
+    - stock_preparation
+    - cutting
+    - precision_machining
+    - grinding_lapping
+    - deburring
+    - cleaning
+    - dimensional_inspection
+  candidate_existing_processes:
+    - process_id: machining_basic_v0
+      fit: partial
+      reason: "Covers general removal of metal stock but needs additional crown profile, runout, and surface-finish controls."
+    - process_id: machining_precision_v0
+      fit: supporting
+      reason: "Relevant for journal fits, concentricity, and the crowned contact profile when staging selects a final route."
+    - process_id: cutting_basic_v0
+      fit: supporting
+      reason: "Covers cutting round bar stock to length before turning."
+    - process_id: inspection_basic_v0
+      fit: supporting
+      reason: "Covers dimensional inspection of length, diameters, runout, and crown profile."
+  abstraction_decision: keep_original_family
+  rationale: "The source route is already a subtractive shaft route: cut stainless bar, turn journals and crown, finish/grind, clean, and inspect. The lunar closure bucket can remain general subtractive machining with precision finishing guardrails."
+  process_guardrails:
+    tolerance: review
+    surface_finish: review
+    sealing_quality: not_applicable
+    alignment_accuracy: review
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: "rotating support contact surface with end journals for mounting"
+  material: stainless_steel
+  scale_or_capacity:
+    mass_kg: 1.056
+    bom_quantity: 1
+    row_total_mass_kg: 1.056
+    scale_class: medium
+  geometry_form: crowned_cylindrical_shaft_with_end_journals
+merge_pool:
+  eligible: true
+  functional_purpose_key: rotating_contact_support
+  precision_guardrails:
+    - runout
+    - crown_profile
+    - surface_finish
+    - journal_fit
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - general_subtractive_machining
+  import_risk_factors:
+    - "Unknown crown height, runout tolerance, journal fits, and surface roughness could require precision grinding beyond a basic machining route."
+  post_merge_decision_notes: "Final import/local decision is deferred until after merge review compares other roller and shaft rows."
+kb_staging:
+  proposed_item_id: null
+  notes: "Leave item ID open for merge review with other stainless shafts, rollers, and crowned contact elements."
+assumptions:
+  - "The STEP material metadata is accepted as stainless steel without selecting a specific grade."
+  - "The crowned surface is functionally relevant and should remain a precision guardrail, even though the exact crown height is not known."
+unresolved:
+  - "Parent subsystem, drive and bearing interface, crown profile tolerance, surface finish, heat treatment, and bearing fits are not specified in the row evidence."
+```

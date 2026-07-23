@@ -58,3 +58,90 @@ kb_implications:
 ---
 
 Research result for reAM250 BOM row 149.
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0149_3S33.md
+source_research_sha256: "9aad52bf5772acdef69b56150d0ad3b78ca0ec26ef9ce51e0bcf8620fdfae914"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Reviewed gas-outlet duct function, CAD-derived planning mass, unresolved metal material evidence, sheet/tube duct fabrication route, and CAD preview showing a hollow square segment with angled transition faces."
+decomposition:
+  decision: simple_part
+  rationale: "The row is one fabricated duct segment in a larger gas outlet group, with no internal module structure."
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: fabricated_sheet_metal_gas_duct_segment
+  primary_process_bucket: plumbing_connector_fabrication_testing
+  supporting_processes:
+    - cutting
+    - forming
+    - joining
+    - deburring
+    - cleaning
+    - dimensional_inspection
+    - leak_testing
+  candidate_existing_processes:
+    - process_id: sheet_metal_fabrication_v0
+      fit: partial
+      reason: "Covers cutting, bending, forming, and deburring of sheet metal duct geometry, but lacks gas-path leak verification."
+    - process_id: plumbing_and_pneumatics_v0
+      fit: partial
+      reason: "Covers gas handling installation and pressure testing patterns, but is assembly-oriented rather than a single duct segment fabrication process."
+    - process_id: leak_testing_v0
+      fit: supporting
+      reason: "Relevant for verifying gas-tight operation after seams and mating edges are prepared."
+    - process_id: inspection_basic_v0
+      fit: supporting
+      reason: "Covers dimensional checks for square openings, length, angled faces, and fit-up edges."
+  abstraction_decision: substitute_process_family
+  rationale: "The source route is custom duct fabrication, but the closure handle should group it with gas-flow plumbing fabrication and testing because sealing and clean gas-path function drive the risk."
+  process_guardrails:
+    tolerance: review
+    surface_finish: review
+    sealing_quality: high
+    alignment_accuracy: review
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: routes outlet process gas through the machine gas path
+  material: metal_duct_material_unresolved
+  scale_or_capacity:
+    mass_kg: 0.574
+    bom_quantity: 1
+    row_total_mass_kg: 0.574
+    scale_class: small
+  geometry_form: hollow_square_duct_segment_with_angled_transition
+merge_pool:
+  eligible: true
+  functional_purpose_key: gas_flow_routing
+  precision_guardrails:
+    - duct_opening_geometry
+    - mating_edge_fit
+    - leak_tightness
+    - internal_cleanliness
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - plumbing_connector_fabrication_testing
+  import_risk_factors:
+    - "Actual alloy, wall thickness detail, surface finish, and gas-tightness class are unresolved."
+    - "Seam joining method may require welding, brazing, and equivalent leak-tight metal joining."
+  post_merge_decision_notes: "Final import/local decision is deferred until after merge review; compare with neighboring gas outlet pipe rows before assigning a closure item."
+kb_staging:
+  proposed_item_id: null
+  notes: "Wait for merge review; likely candidate for a reusable fabricated gas duct segment family if material and geometry guardrails align."
+assumptions:
+  - "Generic steel density is retained as a conservative scale estimate while material remains unresolved."
+  - "The segment belongs to the 3S31-3S35 gas outlet group, but row conversion keeps it as one simple fabricated part."
+  - "Assembly-level sealing hardware and fasteners are deferred to the larger gas outlet assembly."
+unresolved:
+  - "Exact material, wall thickness callouts, joining method, finish, and gas-tightness class are not specified."
+  - "Mating interfaces and flow direction are not clear from this row alone."
+```

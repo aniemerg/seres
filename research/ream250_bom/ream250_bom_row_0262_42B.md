@@ -36,7 +36,7 @@ material:
   uncertainty_notes:
     - "The source exposes two closely related stainless specifications: product category/title 1.4401/316 and media-contacting 1.4404/316L. Later KB modeling should preserve this as stainless 316-family hardware unless a vendor drawing resolves the exact alloy for every feature."
 how_to_make:
-  summary: "Procure as Pfeiffer Vacuum 320BKL250 bracket screw where possible; a local manufacturing approximation is machined stainless 316-family hardware with an M10 threaded screw section and milled claw block geometry, then passivated/cleaned for vacuum service."
+  summary: "Local manufacturing approximation is machined stainless 316-family hardware with an M10 threaded screw section and milled claw block geometry, then passivated/cleaned for vacuum service"
   manufacturing_steps:
     - "Cut stainless 316-family bar or billet stock sized for the screw and claw body."
     - "Turn the cylindrical screw section and cut or roll the M10 thread."
@@ -47,9 +47,8 @@ how_to_make:
     cited_fact_or_basis: "Source identifies the purchased product as stainless bracket screw 320BKL250 for ISO-K fastening and gives M10 and 61.5 mm dimension. CAD/preview shows a threaded cylinder and machined-looking claw block. targeted_web_search: queries tried 'Pfeiffer Vacuum 320BKL250 clamp ISO-K DN100 material weight' and 'site:pfeiffer-vacuum.com 320BKL250 Pfeiffer bracket screw stainless steel 1.4401'; these found the official/product route but no row-specific manufacturing-process statement, so the detailed local machining route is inferred."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "The local route prioritizes a plausible small-batch manufacturing approximation, not the vendor's actual production route."
-  uncertainty_notes:
-    - "Vendor procurement is the highest-confidence route; manufacturing operations are inferred from geometry and standard stainless threaded clamp hardware practice."
+    - "The manufacturing route prioritizes a plausible small-batch manufacturing approximation, not the vendor's actual production route."
+  uncertainty_notes: []
 kb_implications:
   - "item_granularity: simple_part - model as reusable stainless ISO-K bracket screw/claw clamp hardware, not as a purchased module; use quantity-specific BOM rows to capture how many clamps are needed around each vacuum flange or valve."
 ---

@@ -38,7 +38,7 @@ material:
 how_to_make:
   summary: "Plausible route: cut stainless bar or plate stock to length, machine the profiled ends and contact geometry, deburr, and finish or polish the sliding/contact face before inspection."
   manufacturing_steps:
-    - "Procure stainless steel rectangular bar or plate stock sized for the 50 x 10 x 274 mm envelope."
+    - "Prepare stainless steel rectangular bar or plate stock sized for the 50 x 10 x 274 mm envelope"
     - "Saw or abrasive-cut the blank to length."
     - "Mill the end profiles and any relieved rail features visible in the CAD preview."
     - "Deburr edges and polish or grind the gliding contact face to the required sliding finish."
@@ -55,3 +55,105 @@ how_to_make:
 kb_implications:
   - "item_granularity: simple_part - Model as a reusable stainless machined wear rail/gliding surface rather than a purchased module; no sub-BOM is implied by the single-solid CAD and BOM row."
 ---
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0168_6B1.md
+source_research_sha256: 155361f1a130a0fa6760a754bf793e167851572dae63569c2d09d47f603a36bb
+evidence_reviewed:
+  original_research_sections:
+  - function
+  - mass
+  - material
+  - how_to_make
+  - kb_implications
+  geometry_evidence_used: true
+  notes: Read the function, CAD-derived stainless mass, material evidence, machining-and-finishing route, KB implications,
+    and preview image showing a long profiled rail before conversion.
+decomposition:
+  decision: simple_part
+  rationale: The row is a single-solid stainless gliding and wear rail with no internal subassembly. Closure should model
+    it as one reusable monolithic part whose important requirements are material, straightness, contact-face finish, and end/profile
+    geometry.
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: subtractive_machining_from_bar_plate
+  primary_process_bucket: general_subtractive_machining
+  supporting_processes:
+  - stock_preparation
+  - cutting
+  - precision_machining
+  - deburring
+  - surface_finishing
+  - dimensional_inspection
+  - grinding_lapping
+  - coating
+  candidate_existing_processes:
+  - process_id: machining_basic_v0
+    fit: partial
+    reason: Covers basic stock removal; row-specific precision features remain guardrails.
+  - process_id: machining_precision_v0
+    fit: supporting
+    reason: Relevant when bore, sliding, concentricity, and finish control matter.
+  - process_id: inspection_basic_v0
+    fit: supporting
+    reason: Covers dimensional checks before staging selects the final recipe.
+  - process_id: precision_grinding_basic_v0
+    fit: supporting
+    reason: Relevant when rolling, sliding, and raceway surfaces need precision finishing.
+  - process_id: surface_treatment_basic_v0
+    fit: supporting
+    reason: Relevant when the row needs protective surface treatment.
+  abstraction_decision: add_post_processing
+  rationale: The wear rail should use the shared subtractive machining bucket, with surface finishing called out for the sliding
+    contact face. Metal additive manufacturing is less suitable for straightness and finish.
+  process_guardrails:
+    tolerance: required - length, thickness, straightness, and profile geometry control sliding fit
+    surface_finish: required - gliding/contact face likely needs grinding, polishing, and equivalent finishing
+    sealing_quality: not_applicable - no evidence this is a pressure and service seal
+    alignment_accuracy: required - rail must register with adjacent recoater/gliding components
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: provide a smooth sliding contact face for recoater and adjacent machine elements
+  material: stainless_steel
+  scale_or_capacity:
+    mass_kg: 0.864
+    bom_quantity: 1
+    row_total_mass_kg: 0.864
+    scale_class: small
+  geometry_form: long_narrow_profiled_wear_rail
+merge_pool:
+  eligible: true
+  functional_purpose_key: sliding_contact_guidance
+  precision_guardrails:
+  - straightness
+  - contact_surface_finish
+  - wear_resistance
+  - profile_accuracy
+  - alignment_registration
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+  - general_subtractive_machining
+  import_risk_factors:
+  - stainless grade is unspecified
+  - required surface roughness, hardening, passivation, and coating is unknown
+  - wear life and mating surface requirements are not identified
+  post_merge_decision_notes: Final import/local decision is deferred until merge review compares other sliding-contact and
+    wear-rail rows and decides the condition that one generalized closure item can cover them.
+kb_staging:
+  proposed_item_id: null
+  notes: Wait for merge review before assigning an item ID; likely candidate for a generalized stainless sliding contact and
+    wear rail if precision requirements align.
+assumptions:
+- The STEP single solid represents one physical gliding-surface part for BOM quantity 1.
+- The stainless steel density from assembly metadata applies to the whole rail.
+- A shared machining plus surface-finishing process can meet the closure-level requirements if detailed tolerances are not
+  unusually tight.
+unresolved:
+- Exact stainless alloy, hardness, finish roughness, coating/passivation, and wear specification are not provided.
+- The mating component and sliding load direction are not visible from the isolated part export.
+- Merge review must check the condition that this is functionally compatible with other guide, rail, and wear-surface rows
+  despite geometry differences.
+```

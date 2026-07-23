@@ -6,48 +6,145 @@ row_identity:
   source_csv: "design/real-mechanical/reAm250/reAM250_cad_gold_package/reAm250_BOM_gold.csv"
   link_url: "https://www.pfeiffer-vacuum.com/global/de/shop/products/120BSR040"
 function:
-  summary: "ISO-KF DN 32-40 clamping ring used to fasten an elastomer-sealed small-flange vacuum joint; the row quantity is 12 clamps."
+  summary: "ISO-KF DN 32-DN 40 clamping ring used to mechanically close matching small-flange vacuum hardware around an elastomer seal; the reAM250 BOM row uses quantity 12 of this standard clamp."
   source:
-    url_or_path: "design/real-mechanical/reAm250/reAM250_cad_gold_package/reAm250_BOM_gold.csv; https://www.pfeiffer-vacuum.com/global/de/shop/products/120BSR040; https://www.vacuum-shop.com/shop/en_US/category/2072892/product/120bsr040/clamping-ring-for-elastomer-seals-stainless-steel-1-4301-304.html; research/ream250_bom/ream250_bom_row_0279_83__views_2x2.png"
-    cited_fact_or_basis: "BOM row 279 identifies item 83 as Pfeiffer Vacuum 120BSR040. The official shop route identifies 120BSR040 as a clamping ring for elastomer seals with connection flange DN 32-DN 40 ISO-KF and 2 Nm wingnut torque. The local contact sheet shows clamp/screw geometry. official_alternate_route_check: the BOM URL on pfeiffer-vacuum.com redirects or canonically corresponds to the official Pfeiffer/Busch shop route; vacuum-shop.com identifies Pfeiffer Vacuum Components & Solutions and the same product ID 120BSR040."
-    evidence_basis: "bom_provided"
-  assumptions: []
-  uncertainty_notes:
-    - "The local per-row STEP export shows only a small subbody-like clamp feature, so the function is taken from the row-matched vendor product identity rather than the small local preview alone."
-mass:
-  value_kg: 0.247
-  basis: "Per unit: vendor STEP volume 30759.372 mm^3 = 3.0759372e-5 m^3 multiplied by local stainless_steel_304 density 8030 kg/m^3 gives 0.246998 kg, rounded to 0.247 kg. BOM quantity is 12, so the row total is about 2.96 kg."
-  source:
-    url_or_path: "https://www.vacuum-shop.com/shop/en_US/category/2072892/product/120bsr040/clamping-ring-for-elastomer-seals-stainless-steel-1-4301-304.html; /tmp/120BSR040.stp; kb/materials/properties.yaml; design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/83_clamping_ring_ISO_KF_DN40_120BSR040.step"
-    cited_fact_or_basis: "The official shop page provides a 3D STEP download for row-matched product 120BSR040 and states stainless steel 1.4301/304. FreeCAD measured the downloaded product STEP as 8 solids, volume 30759.371872947188 mm^3, bounding box 99.60382945588033 x 87.67677092980742 x 17.169032225746005 mm. The local density table gives stainless_steel_304 density 8030 kg/m^3. The local row STEP measured 1014.1884788467468 mm^3 with a 6.20 x 45.00 x 15.30 mm bounding box, which appears incomplete for the full clamp. official_alternate_route_check: the BOM URL on pfeiffer-vacuum.com is the row link for 120BSR040; vacuum-shop.com is an official Pfeiffer Vacuum Components & Solutions shop route for the same product ID and provides the product STEP used for full-geometry mass."
+    url_or_path: "design/real-mechanical/reAm250/reAM250_cad_gold_package/reAm250_BOM_gold.csv; design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/manifest.csv; research/ream250_bom/ream250_bom_row_0279_83__views_2x2.png; https://www.pfeiffer-vacuum.com/global/de/shop/products/120BSR040; https://www.vacuum-shop.com/shop/en_US/category/2072892/product/120bsr040/clamping-ring-for-elastomer-seals-stainless-steel-1-4301-304.html"
+    cited_fact_or_basis: "BOM row 279 identifies item 83 as quantity 12 of Pfeiffer Vacuum product 120BSR040 with CAD file 83_clamping_ring_ISO_KF_DN40_120BSR040. The manifest maps the row to a matched vendor-component STEP file. The row contact sheet shows a narrow clamp screw/handle or hinge-side subfeature. The BOM-provided Pfeiffer URL redirects to the official Busch Group shop page for order number 120BSR040, titled as a stainless steel 304/1.4301 DN 32-DN 40 ISO-KF clamping ring for elastomer seals. The official Pfeiffer vacuum-shop page for the same order number states it is suitable for elastomer seals. official_alternate_route_check: original BOM URL https://www.pfeiffer-vacuum.com/global/de/shop/products/120BSR040 redirects to https://www.shop.buschgroup.com/global/en/products/120BSR040/ with Busch Group and Pfeiffer branding; the vacuum-shop alternate lists Pfeiffer Vacuum Components & Solutions GmbH contact information and matches order number 120BSR040."
     evidence_basis: "bom_provided"
   assumptions:
-    - "The vendor STEP represents the full purchased 120BSR040 clamping ring, while the smaller local row STEP is treated as incomplete for mass."
-    - "The stainless 304 density constant from kb/materials/properties.yaml is suitable for the vendor-stated stainless steel 1.4301/304."
+    - "The row is locked to BOM item 83 and product 120BSR040; neighboring BOM rows that reference the same commercial clamp are not separate product identities."
   uncertainty_notes:
-    - "The vendor page did not provide a catalog weight; mass is calculated from CAD volume and material density, so any hidden non-stainless hardware or STEP simplification would shift the estimate."
+    - "The local per-row STEP preview is an incomplete subfeature, so function is resolved from the row-matched product identity and official product route rather than from the local geometry alone."
+mass:
+  value_kg: 0.247
+  basis: "Per-unit estimate for one physical clamping ring. The local row STEP measured one solid, volume 1014.188 mm^3, surface area 855.769 mm^2, and bounding box about 6.20 x 45.00 x 15.30 mm, which is too small for the full DN 32-DN 40 clamp. The BOM-route official 120BSR040 STEP download measured 8 solids, volume 30759.372 mm^3, surface area 20265.342 mm^2, and bounding box about 99.60 x 87.68 x 17.17 mm, consistent with the vendor dimensions A 90 mm, B 68 mm, C 17 mm. Converting 30759.372 mm^3 to 3.0759372e-5 m^3 and multiplying by the local stainless_steel_304 density 8030 kg/m^3 gives 0.246998 kg, rounded to 0.247 kg per clamp. BOM quantity is 12, so row total is about 2.96 kg."
+  source:
+    url_or_path: "design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/83_clamping_ring_ISO_KF_DN40_120BSR040.step; https://www.vacuum-shop.com/2075879/downloads/step/120BSR040.stp; https://www.vacuum-shop.com/shop/en_US/category/2072892/product/120bsr040/clamping-ring-for-elastomer-seals-stainless-steel-1-4301-304.html; kb/materials/properties.yaml"
+    cited_fact_or_basis: "FreeCAD measured the local row STEP as volume 1014.188 mm^3 and bounding box 6.20 x 45.00 x 15.30 mm. FreeCAD measured the official row-matched 120BSR040 STEP as 8 solids, volume 30759.372 mm^3, surface area 20265.342 mm^2, and bounding box 99.60 x 87.68 x 17.17 mm. The official product page identifies material as stainless steel 1.4301/304 and lists dimensions A 90 mm, B 68 mm, C 17 mm. kb/materials/properties.yaml lists stainless_steel_304 density as 8030 kg/m^3. official_alternate_route_check: original BOM URL https://www.pfeiffer-vacuum.com/global/de/shop/products/120BSR040 is a Pfeiffer product route; vacuum-shop.com is an official Pfeiffer Vacuum Components & Solutions route for the same order number and provides the product STEP used for full-geometry mass."
+    evidence_basis: "bom_provided"
+  assumptions:
+    - "The official 120BSR040 STEP solid volume is used as the material-volume proxy for one complete clamping ring because the local row STEP is a partial exported subfeature."
+    - "The local stainless_steel_304 density constant is appropriate for vendor-stated stainless steel 1.4301/304."
+  uncertainty_notes:
+    - "The mass is CAD-volume-derived rather than a published catalog weight."
+    - "If the official STEP omits small hardware details or represents simplified solids, the calculated mass will shift accordingly."
 material:
   primary_material: "stainless steel 1.4301/304 clamping ring hardware"
   source:
     url_or_path: "https://www.pfeiffer-vacuum.com/global/de/shop/products/120BSR040; https://www.vacuum-shop.com/shop/en_US/category/2072892/product/120bsr040/clamping-ring-for-elastomer-seals-stainless-steel-1-4301-304.html; design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/assemblies/00_assembly.step"
-    cited_fact_or_basis: "The official product route states material Stainless steel 1.4301/304 for 120BSR040. The local assembly material extractor found only Generic material with density 1000.0 for this CAD product, so that metadata is not used as the material source. official_alternate_route_check: the BOM URL identifies the same Pfeiffer product 120BSR040; the alternate official shop page is row-matched by product ID and official Pfeiffer Vacuum Components & Solutions shop identity."
+    cited_fact_or_basis: "The BOM-provided Pfeiffer URL redirects to the official Busch Group product page titled as stainless steel 304/1.4301 for order number 120BSR040. The official Pfeiffer vacuum-shop page for the same order number lists Material Stainless steel 1.4301/304. The local assembly STEP material extractor returned material Generic with density 1000.0 for this product, so that placeholder metadata is not used as material evidence. official_alternate_route_check: original BOM URL https://www.pfeiffer-vacuum.com/global/de/shop/products/120BSR040 redirects to the official Busch/Pfeiffer shop route; the vacuum-shop alternate lists Pfeiffer Vacuum Components & Solutions GmbH and matches product ID 120BSR040."
     evidence_basis: "bom_provided"
   assumptions: []
   uncertainty_notes:
-    - "The source names the product material but does not separately describe the screw, hinge, or wingnut submaterials; all are modeled under the stainless 1.4301/304 hardware family unless later split data is found."
+    - "The source names the product material but does not separately describe hinge, screw, or wingnut submaterials; this row-level result keeps them within the stainless 1.4301/304 hardware family unless later split data is found."
 how_to_make:
-  summary: "Procure as Pfeiffer Vacuum 120BSR040, a standard ISO-KF DN 32-40 stainless clamping ring for elastomer-sealed vacuum joints."
+  summary: "Use Pfeiffer Vacuum 120BSR040 or a compatible DN 32-DN 40 ISO-KF stainless clamping ring; for local closure, model it as a simple stainless clamp made by forming or machining the clamp body, adding hinge and wingnut-side tightening hardware, cleaning/passivating, and verifying ISO-KF fit and 2 Nm wingnut tightening."
   manufacturing_steps:
-    - "Purchase or stock the row-matched Pfeiffer Vacuum 120BSR040 clamping ring."
-    - "Install by placing it around the ISO-KF DN 32-40 elastomer-sealed flange joint and tightening the wingnut to the vendor-stated 2 Nm torque."
+    - "Local fabrication route: start from stainless steel 304/1.4301 strip, sheet, or near-net blanks sized for the DN 32-DN 40 ISO-KF clamp geometry."
+    - "Form, stamp, or machine the curved clamp body and lug/hinge/tightening features indicated by the product CAD and local row preview."
+    - "Add hinge and screw or wingnut tightening hardware, then deburr, clean, and passivate stainless surfaces for vacuum-service use."
+    - "Inspect flange fit, clamp closure, surface condition, and tightening behavior against the vendor-stated 2 Nm wingnut torque."
   source:
-    url_or_path: "design/real-mechanical/reAm250/reAM250_cad_gold_package/reAm250_BOM_gold.csv; https://www.pfeiffer-vacuum.com/global/de/shop/products/120BSR040; https://www.vacuum-shop.com/shop/en_US/category/2072892/product/120bsr040/clamping-ring-for-elastomer-seals-stainless-steel-1-4301-304.html"
-    cited_fact_or_basis: "BOM row 279 specifies Pfeiffer Vacuum 120BSR040. The official shop route states it is suitable for elastomer seals, DN 32-DN 40 ISO-KF, and uses 2 Nm torque on the wingnut. official_alternate_route_check: vacuum-shop.com is an official Pfeiffer Vacuum Components & Solutions route for the same 120BSR040 product linked by the BOM-provided Pfeiffer URL."
-    evidence_basis: "bom_provided"
-  assumptions: []
+    url_or_path: "research/ream250_bom/ream250_bom_row_0279_83__views_2x2.png; https://www.pfeiffer-vacuum.com/global/de/shop/products/120BSR040; https://www.vacuum-shop.com/shop/en_US/category/2072892/product/120bsr040/clamping-ring-for-elastomer-seals-stainless-steel-1-4301-304.html"
+    cited_fact_or_basis: "The official product route identifies 120BSR040 as a purchasable DN 32-DN 40 ISO-KF stainless clamping ring for elastomer seals and states 2 Nm torque on the wingnut. The CAD preview shows a clamp screw/handle or hinge-side feature, while the official STEP gives the complete clamp geometry. targeted_web_search: searched \"120BSR040 clamping ring stainless steel 304 1.4301 manufacturing drawing\", \"Pfeiffer 120BSR040 DN40 clamping ring material weight\", and \"ISO-KF DN40 clamping ring stainless steel manufacturing\" results found official product/spec/CAD evidence and generic ISO-KF clamp information but no row-specific manufacturing process sheet. official_alternate_route_check: original BOM URL https://www.pfeiffer-vacuum.com/global/de/shop/products/120BSR040 redirects to the official Busch/Pfeiffer route for order number 120BSR040; vacuum-shop.com is an official Pfeiffer Vacuum Components & Solutions route matching the same row identity."
+    evidence_basis: "engineering_hypothesis"
+  assumptions:
+    - "The detailed inferred from clamp geometry, stainless material, and ordinary small stainless clamp production practice because the official product evidence supports product identity and installation facts, not the factory process."
   uncertainty_notes:
-    - "This is a procurement and installation route, not a locally sourced fabrication plan; detailed local manufacture of the clamp parts would need separate process modeling."
+    - "Exact vendor production tooling, hinge pin construction, thread specification, surface finish, and inspection tolerances are not resolved in this row-level pass."
 kb_implications:
-  - "item_granularity: simple_part - Model as a reusable standard ISO-KF DN 32-40 stainless clamping-ring hardware item rather than a calibrated purchased module; keep quantity separate in BOMs."
+  - "item_granularity: simple_part - Model as reusable standard ISO-KF stainless vacuum fastening hardware; keep DN size, stainless grade, hinge/wingnut tightening, cleaning, and torque requirements as parameters or notes rather than decomposing it into a complex module."
 ---
 
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0279_83.md
+source_research_sha256: "8dcf7e9d43c86f906b4a9438b847a86a641de4fa2b285243396937f97315c3d8"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Read ISO-KF clamping-ring function, official complete-STEP mass basis, stainless 304 material evidence, local fabrication route, KB implication, and partial local CAD preview of the tightening/hinge feature."
+decomposition:
+  decision: simple_part
+  rationale: "Although the commercial clamp includes hinge and tightening details, it functions as one standard vacuum fastening hardware item at current closure granularity."
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: formed_stainless_vacuum_clamping_ring_with_tightening_hardware
+  primary_process_bucket: plumbing_connector_fabrication_testing
+  supporting_processes:
+    - cutting
+    - forming
+    - drilling
+    - thread_forming
+    - precision_machining
+    - assembly
+    - cleaning
+    - dimensional_inspection
+  candidate_existing_processes:
+    - process_id: vacuum_seal_assembly_fabrication_v0
+      fit: supporting
+      reason: "Covers aligning vacuum seal hardware, torqueing fasteners, and verifying seal fit, though it models a broader seal assembly."
+    - process_id: metal_forming_basic_v0
+      fit: supporting
+      reason: "Covers forming stainless clamp body features from strip/sheet stock."
+    - process_id: machining_basic_v0
+      fit: supporting
+      reason: "Covers machined hinge, lug, and tightening details after forming."
+    - process_id: fastener_kit_small_fabrication_v0
+      fit: supporting
+      reason: "Relevant for the small threaded tightening hardware if staged separately."
+    - process_id: inspection_basic_v0
+      fit: supporting
+      reason: "Covers checks of clamp closure, flange fit, and tightening geometry."
+  abstraction_decision: keep_original_family
+  rationale: "The product is vacuum flange clamping hardware; the selected bucket preserves flange-fit, cleaning, tightening, and seal-interface requirements better than generic fastener production alone."
+  process_guardrails:
+    tolerance: review
+    surface_finish: review
+    sealing_quality: high
+    alignment_accuracy: review
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: clamp hardware closing small-flange vacuum fittings around an elastomer seal
+  material: stainless_steel_304_hardware_family
+  scale_or_capacity:
+    mass_kg: 0.247
+    bom_quantity: 12
+    row_total_mass_kg: 2.96
+    scale_class: small
+  geometry_form: iso_kf_dn32_dn40_clamping_ring_with_hinge_and_wingnut_tightening
+merge_pool:
+  eligible: true
+  functional_purpose_key: interface_clamping
+  precision_guardrails:
+    - flange_standard_fit
+    - clamp_closure_geometry
+    - tightening_torque
+    - elastomer_seal_compatibility
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - plumbing_connector_fabrication_testing
+  import_risk_factors:
+    - "The local row STEP is partial; complete geometry and mass depend on the official product STEP."
+    - "Hinge, screw, and wingnut details may need separate fastener assumptions during staging."
+    - "Clamp fit and 2 Nm tightening behavior are functional acceptance guardrails."
+  post_merge_decision_notes: "Final import/local manufacture decision is deferred until after merge review with other vacuum clamp and interface-clamping rows."
+kb_staging:
+  proposed_item_id: null
+  notes: "Leave final closure item ID open; likely merge with other ISO-KF clamp hardware by function and scale."
+assumptions:
+  - "Use official complete STEP geometry for mass because the local row STEP is a partial subfeature."
+  - "Treat stainless 304/1.4301 as the resolved material family."
+  - "Treat the clamp as a single closure item unless later staging needs hinge and tightening hardware split out."
+unresolved:
+  - "Exact hinge pin, screw, and wingnut submaterials."
+  - "Detailed production route for the curved clamp body."
+  - "Acceptance dimensions for DN32-DN40 flange fit and torque behavior."
+```

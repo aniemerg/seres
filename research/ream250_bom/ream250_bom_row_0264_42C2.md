@@ -37,9 +37,9 @@ material:
   uncertainty_notes:
     - "The BOM material wording identifies the primary metal grade and seal family, but not the detailed breakdown of body, disc, shaft, handle, spring/fastener, and seal subcomponents."
 how_to_make:
-  summary: "Treat as a purchased AMPROVED ISO-KF DN40 manual disc valve module for current KB planning; local manufacture would require a stainless DN40 valve body/disc/shaft/lever assembly plus EPDM seals, but that sub-BOM is not resolved by this row."
+  summary: "Treat as a external AMPROVED ISO-KF DN40 manual disc valve module for current KB planning; Manufacturing requires a stainless DN40 valve body/disc/shaft/lever assembly plus EPDM seals, but that sub-BOM is not resolved by this row"
   manufacturing_steps:
-    - "Procure or specify one AMPROVED ISO-KF DN40 Scheibenventil matching the BOM URL and material wording AISI 316L / 1.4404 with EPDM sealing."
+    - "Prepare or specify one AMPROVED ISO-KF DN40 Scheibenventil matching the BOM URL and material wording AISI 316L / 1.4404 with EPDM sealing"
     - "On receipt, verify the DN40 ISO-KF interface, lever action, and three detent positions against the AMPROVED product description and drawing."
     - "Clean for powder/vacuum service and install with compatible DN40 centering/sealing and clamp hardware as required by the neighboring reAM250 assembly."
     - "For a future local-manufacturing model, decompose into stainless machined/turned valve body, disc, shaft, lever/knob, fasteners or detent hardware, and molded/cut EPDM seals before assigning fabrication recipes."
@@ -50,9 +50,104 @@ how_to_make:
   assumptions:
     - "Current KB planning should model the row as a vendor functional valve module until a sub-BOM and local valve manufacturing workflow are available."
   uncertainty_notes:
-    - "The AMPROVED page supports procurement and gross installation route, but not a detailed local manufacturing process, tolerances, seal profile, detent mechanism design, or internal valve subcomponent quantities."
+    - "Local manufacturing process, tolerances, seal profile, detent mechanism design, or internal valve subcomponent quantities"
 kb_implications:
-  - "item_granularity: purchased_module - row 42C2 is a vendor DN40 manual valve assembly with stainless and EPDM materials; model as a purchased functional module unless later work decomposes the valve body, seal, lever, shaft, and detent subassembly."
+  - "item_granularity: complex_module - row 42C2 is a functional DN40 manual valve assembly with stainless and EPDM materials; model as a complex functional module unless later work decomposes the valve body, seal, lever, shaft, and detent subassembly."
 ---
 
 Research result for reAM250 BOM row 264.
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0264_42C2.md
+source_research_sha256: "b753ef16f861eb6ac59f4b18529fb048289879ca3f10b03c468107b786959dee"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Reviewed AMPROVED ISO-KF DN40 disc valve function, levered valve CAD geometry, 0.35 kg planning mass, 316L/1.4404 plus EPDM material evidence, vendor product route, and complex-module KB implication."
+decomposition:
+  decision: decompose_into_parts
+  rationale: "The row is a complete manual valve assembly with stainless structural parts, EPDM seals, actuation hardware, detent features, cleaning, assembly, and leak-test dependencies. Local closure needs a valve sub-BOM before recipe staging."
+  proposed_subparts:
+    - stainless_valve_body_and_flanges
+    - valve_disc_and_shaft
+    - lever_and_detent_hardware
+    - epdm_sealing_elements
+    - clamp_interface_and_small_fasteners
+process_abstraction:
+  original_process_family: purchased_manual_disc_valve_assembly
+  primary_process_bucket: plumbing_connector_fabrication_testing
+  supporting_processes:
+    - decomposition_required
+    - precision_machining
+    - elastomer_forming
+    - assembly
+    - cleaning
+    - leak_testing
+    - pressure_testing
+    - dimensional_inspection
+  candidate_existing_processes:
+    - process_id: valve_set_gas_handling_assembly_v0
+      fit: partial
+      reason: "Closest valve assembly anchor, but this row needs a specific DN40 disc valve with lever action, detent positions, and EPDM sealing."
+    - process_id: plumbing_and_pneumatics_v0
+      fit: supporting
+      reason: "Relevant to installation into powder and process-gas flow paths."
+    - process_id: machining_precision_v0
+      fit: supporting
+      reason: "Relevant to stainless body, flange, disc, shaft, and lever interface features after decomposition."
+    - process_id: elastomer_molding_basic_v0
+      fit: supporting
+      reason: "Relevant to EPDM seal production after the valve is decomposed."
+    - process_id: leak_testing_v0
+      fit: supporting
+      reason: "Relevant to validating valve closure and interface sealing after assembly."
+  abstraction_decision: substitute_process_family
+  rationale: "The evidence is a vendor valve assembly. Plumbing connector fabrication/testing preserves the flow-control role while deferring body, seal, lever, shaft, and detent recipes to a later decomposition pass."
+  process_guardrails:
+    tolerance: high
+    surface_finish: high
+    sealing_quality: high
+    alignment_accuracy: review
+    blocked_by_precision: true
+identity_for_merge:
+  functional_purpose: manual flow control element for process gas and powder-handling connections
+  material: stainless_316l_with_epdm_sealing
+  scale_or_capacity:
+    mass_kg: 0.35
+    bom_quantity: 1
+    row_total_mass_kg: 0.35
+    scale_class: small
+  geometry_form: levered_manual_disc_valve_for_dn40_kf_interface
+merge_pool:
+  eligible: false
+  functional_purpose_key: flow_control
+  precision_guardrails:
+    - valve_sealing_quality
+    - detent_position_function
+    - interface_size
+    - epdm_seal_compatibility
+    - valve_sub_bom_required
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - plumbing_connector_fabrication_testing
+  import_risk_factors:
+    - "Complete valve sub-BOM, EPDM seal geometry, detent mechanism, and tolerance requirements are unresolved."
+    - "Reliable flow shutoff needs precision stainless interfaces, seal compatibility, assembly quality, and leak testing."
+  post_merge_decision_notes: "Final import/local decision is deferred. Review this row together with other AMPROVED DN40 valve rows before assigning a closure item."
+kb_staging:
+  proposed_item_id: null
+  notes: "Do not assign a final item ID during row conversion; decompose and reconcile with other DN40 manual valve rows first."
+assumptions:
+  - "The row represents one complete levered DN40 manual disc valve despite the CAD filename using part_2."
+  - "Most exported volume is treated as stainless steel, with EPDM as a smaller seal contribution."
+unresolved:
+  - "Exact purchased mass, valve sub-BOM, seal profile, detent hardware, internal tolerances, and leak-test class remain unresolved."
+```

@@ -37,7 +37,7 @@ material:
   uncertainty_notes:
     - "The material family is not row-sourced; stainless, ceramic, or another bearing-ball material cannot be excluded without the bearing drawing or vendor bill of materials."
 how_to_make:
-  summary: "Procure as a standard approximately 5 mm precision bearing ball for current modeling, or manufacture locally from bearing-steel wire/slug by cold heading, flashing, heat treatment, grinding, lapping, cleaning, and inspection."
+  summary: "Prepare as a standard approximately 5 mm precision bearing ball for KB modeling, or manufacture locally from bearing-steel wire/slug by cold heading, flashing, heat treatment, grinding, lapping, cleaning, and inspection"
   manufacturing_steps:
     - "Cut bearing-steel wire or slug stock for the ball blank."
     - "Cold-head or otherwise form a near-spherical blank."
@@ -49,8 +49,8 @@ how_to_make:
     cited_fact_or_basis: "The row STEP and preview show a single about-5 mm sphere. Generic bearing-ball manufacturing references describe grinding/lapping as precision finishing steps for steel balls. targeted_web_search: tried 'ball bearing manufacturing process lapping hardened steel', 'how are bearing balls made grinding lapping', and 'precision ball manufacturing process overview'; results provided generic ball-manufacturing process context but not a row-specific reAM250 manufacturing route."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "For near-term KB modeling, procurement or reuse of a generic precision bearing ball is more appropriate than expanding this row into a dedicated machine-specific part."
-    - "The local manufacturing route is inferred from common bearing-ball production practice and the spherical CAD geometry."
+    - "Machine-specific part"
+    - "The inferred from common bearing-ball production practice and the spherical CAD geometry."
   uncertainty_notes:
     - "No row-specific grade, tolerance class, surface finish, or heat-treatment specification is available from the BOM or CAD package."
 kb_implications:
@@ -58,3 +58,89 @@ kb_implications:
 ---
 
 Research result for the leased reAM250 BOM row.
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0050_2AD7.md
+source_research_sha256: "a1fd5ec2e21141df14957182b091abf37a76ca95ede3177c705b6124a2759366"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Read function, quantity, CAD-derived mass, bearing-steel material inference, ball manufacturing route, kb implications, and preview showing a single small sphere."
+decomposition:
+  decision: simple_part
+  rationale: "The row is one spherical rolling element with no subparts. Precision grade and material are guardrails, not decomposition drivers."
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: precision_bearing_ball_forming_heat_treatment_grinding_lapping
+  primary_process_bucket: precision_component_import_decompose_later
+  supporting_processes:
+    - stock_preparation
+    - forming
+    - heat_treatment
+    - grinding_lapping
+    - cleaning
+    - dimensional_inspection
+  candidate_existing_processes:
+    - process_id: bearing_manufacturing_small_v0
+      fit: partial
+      reason: "Closest anchor for precision bearing races and balls with tight tolerances, but it models a bearing set rather than individual balls."
+    - process_id: ball_bearing_machining_v0
+      fit: supporting
+      reason: "Weak anchor for ball finishing at discrete-unit scale."
+    - process_id: precision_grinding_and_scraping_v0
+      fit: supporting
+      reason: "Relevant to precision grinding/lapping surface finish requirements."
+    - process_id: heat_treatment_basic_v0
+      fit: supporting
+      reason: "Relevant to hardening bearing steel before final finishing."
+  abstraction_decision: substitute_process_family
+  rationale: "The source route is standard precision bearing-ball manufacture. Because the canonical buckets do not include bearing-ball production, precision import/decompose-later is the correct closure handle until a rolling-element process family is staged."
+  process_guardrails:
+    tolerance: high_precision_review
+    surface_finish: bearing_ball_lapping_review
+    sealing_quality: not_applicable
+    alignment_accuracy: roundness_review
+    blocked_by_precision: true
+identity_for_merge:
+  functional_purpose: rolling element for bearing load transfer
+  material: hardened_bearing_steel_unconfirmed
+  scale_or_capacity:
+    mass_kg: 0.0005
+    bom_quantity: 1
+    row_total_mass_kg: 0.0005
+    scale_class: small
+  geometry_form: approximately_5mm_spherical_bearing_ball
+merge_pool:
+  eligible: true
+  functional_purpose_key: rolling_element
+  precision_guardrails:
+    - ball_diameter
+    - roundness
+    - surface_finish
+    - material_grade
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - precision_component_import_decompose_later
+  import_risk_factors:
+    - "Exact bearing-ball grade, roundness tolerance, surface finish, and heat treatment are unresolved."
+    - "Precision ball manufacture may be imported until rolling-element production is explicitly modeled."
+  post_merge_decision_notes: "Final import/local decision is deferred until merge review compares small rolling elements and bearing-unit decomposition."
+kb_staging:
+  proposed_item_id: null
+  notes: "Wait for merge review before assigning an item ID; likely candidate family is a small precision bearing ball."
+assumptions:
+  - "BOM quantity is 1, so row total mass equals the 0.0005 kg per-unit estimate."
+  - "The spherical CAD geometry and axis-bearing context justify bearing-ball identity."
+  - "Generic steel density is adequate for row conversion, while exact bearing grade remains unresolved."
+unresolved:
+  - "Exact alloy, hardness, grade, roundness, and surface finish."
+  - "Whether sibling rows represent other balls from the same bearing and should merge into one rolling-element set."
+```

@@ -37,9 +37,8 @@ material:
   uncertainty_notes:
     - "Exact aluminum grade, glass composition, seal elastomer, connector metal, and cable jacket material are not specified by the BOM-side evidence."
 how_to_make:
-  summary: "Best current route is procurement as a calibrated K+C M5/0500-style linear glass scale module; a plausible local route would fabricate the aluminum scale housing/profile, install the glass scale, read-head carriage, seals, cable, connector, and protective sleeve, then laser-measure/calibrate the assembly."
+  summary: "Fabricate the aluminum scale housing/profile, install the glass scale, read-head carriage, seals, cable, connector, and protective sleeve, then laser-measure/calibrate the assembly"
   manufacturing_steps:
-    - "Procure row-matched K+C M5 500 mm / 520 mm travel linear glass scale where available."
     - "For local manufacture, extrude or machine the long aluminum housing/profile and cut it to the required scale length."
     - "Install the optical glass scale, read-head carriage or interface hardware, sealing lips, cable, DIN-style connector, and protective sleeve."
     - "Perform precision alignment, laser measurement/calibration, sealing, electrical testing, and functional verification before installation."
@@ -48,11 +47,111 @@ how_to_make:
     cited_fact_or_basis: "K+C describes glass scale optical measurement, aluminum housing, sealing lips, laser measurement/calibration, read-head carriage, 3 m data cable, and connector. The row-matched distributor identifies MPN M5/0500, 500 mm nominal length, 520 mm travel, and a ready-wired scale. CAD preview shows a long narrow profiled rail/scale body. bom_url_route_check: the original BOM URL resolved product-family construction and calibration facts but not the exact MPN; the distributor page was used for the exact 520 mm product identity. targeted_web_search: tried 'K+C Glasmassstab M5 manufacturing aluminum housing glass scale' and found product/construction descriptions, not a detailed factory process."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "Local manufacturing would require precision metrology and calibration comparable to commercial linear encoder production."
+    - "Manufacturing requires precision metrology and calibration comparable to commercial linear encoder production."
     - "The CAD track profile can be produced by extrusion plus finish machining or by direct machining at low quantity."
   uncertainty_notes:
-    - "No source found gives K+C's detailed manufacturing process or calibration fixture design, so the local route is a high-level engineering plan rather than a sourced process recipe."
+    - "No source found gives K+C's detailed manufacturing process or calibration fixture design, so The manufacturing route is a high-level engineering plan rather than a sourced process recipe."
 kb_implications:
-  - "item_granularity: purchased_module - Treat as a calibrated vendor linear encoder/scale module for now; later KB work should only decompose it after modeling optical scale fabrication, read-head electronics, sealing, cabling, and calibration."
+  - "item_granularity: complex_module - Treat as a calibrated functional linear encoder/scale complex module for this pass; later KB work should only decompose it after modeling optical scale fabrication, read-head electronics, sealing, cabling, and calibration."
 ---
 
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0057_2AF1.md
+source_research_sha256: "bcfa9bbc0b17b2c75c447330226fe7127acd0d12f827f9bc4d34aa296151e6f6"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Read linear-position reference function, CAD-volume aluminum mass estimate, multi-material scale evidence, assembly/calibration route, KB implication, and preview of the long scale track."
+decomposition:
+  decision: complex_module
+  rationale: "The row is a calibrated linear encoder/scale module, not merely an aluminum rail; closure depends on optical glass scale fabrication, read-head hardware, seals, cabling, and calibration."
+  proposed_subparts:
+    - aluminum_scale_housing
+    - optical_glass_scale
+    - read_head_hardware_and_electronics
+    - elastomer_sealing_lips
+    - cable_and_connector
+    - protective_sleeve
+process_abstraction:
+  original_process_family: calibrated_linear_optical_scale_assembly
+  primary_process_bucket: precision_component_import_decompose_later
+  supporting_processes:
+    - extrusion
+    - precision_machining
+    - assembly
+    - cleaning
+    - calibration
+    - dimensional_inspection
+  candidate_existing_processes:
+    - process_id: precision_scale_fabrication_v0
+      fit: partial
+      reason: "Anchors high-accuracy encoder scale patterning and inspection, a key dependency hidden inside the commercial module."
+    - process_id: sensor_integration_v0
+      fit: supporting
+      reason: "Relevant to integrating read-head hardware, cabling, and mechanical scale body."
+    - process_id: sensor_calibration_v0
+      fit: supporting
+      reason: "Covers calibration/verification concept, though this row likely needs optical metrology beyond basic sensor calibration."
+    - process_id: electronic_component_assembly_v0
+      fit: supporting
+      reason: "Relevant to read-head electronics if the module is decomposed."
+    - process_id: metal_extrusion_process_v0
+      fit: supporting
+      reason: "Potential route for the long aluminum housing/profile before precision finishing."
+    - process_id: machining_precision_v0
+      fit: supporting
+      reason: "Relevant for mounting surfaces and scale alignment features."
+  abstraction_decision: substitute_process_family
+  rationale: "The commercial product route is a calibrated sensor module; row conversion should not collapse it into a simple machined rail, so the precision-component/decompose-later bucket is the correct closure handle."
+  process_guardrails:
+    tolerance: high
+    surface_finish: review
+    sealing_quality: review
+    alignment_accuracy: high
+    blocked_by_precision: true
+identity_for_merge:
+  functional_purpose: linear position feedback and precision reference for a machine axis
+  material: aluminum_housing_with_glass_scale_elastomer_seals_read_head_electronics_cable_and_connector
+  scale_or_capacity:
+    mass_kg: 0.99
+    bom_quantity: 1
+    row_total_mass_kg: 0.99
+    scale_class: medium
+  geometry_form: long_protected_linear_scale_track_about_520_mm_measuring_range
+merge_pool:
+  eligible: false
+  functional_purpose_key: linear_position_feedback
+  precision_guardrails:
+    - optical_scale_accuracy
+    - calibration_traceability
+    - read_head_integration
+    - seal_integrity
+    - cable_connector_interface
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - precision_component_import_decompose_later
+  import_risk_factors:
+    - "Optical glass scale patterning and read-head electronics are specialized closure dependencies."
+    - "Laser measurement/calibration infrastructure is required by the source evidence."
+    - "Internal material split is unresolved because CAD represents the track body only."
+  post_merge_decision_notes: "Final import/local manufacture decision is deferred; first decompose the module into housing, optical scale, read-head electronics, sealing, cabling, and calibration dependencies."
+kb_staging:
+  proposed_item_id: null
+  notes: "Do not assign a simple rail item ID before decomposition; merge review should not group this solely by the aluminum track geometry."
+assumptions:
+  - "Use 0.99 kg as a CAD-volume aluminum-housing dominated estimate, with missing internal component mass noted."
+  - "Treat the 520 mm measuring range and optical calibration evidence as closure-critical."
+  - "Treat this as a complex precision sensor module despite the simple track-like CAD preview."
+unresolved:
+  - "Exact glass scale material, patterning method, and accuracy class."
+  - "Read-head electronics, cable, connector, and seal material breakdown."
+  - "Calibration fixture, reference metrology, and acceptance procedure."
+```

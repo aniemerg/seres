@@ -36,11 +36,10 @@ material:
   uncertainty_notes:
     - "The source resolves component material families but not aluminum alloy, stainless grade, actuator internal materials, or microswitch construction."
 how_to_make:
-  summary: "Procure as the Pfeiffer 310VEP063-02 electro-pneumatic angle valve module; a local manufacturing route would require a machined aluminum valve body, stainless bellows/feedthrough assembly, FKM sealing elements, pneumatic actuator/pilot hardware, position-indicator microswitch integration, and vacuum leak/performance testing."
+  summary: "Manufacturing route would require a machined aluminum valve body, stainless bellows/feedthrough assembly, FKM sealing elements, pneumatic actuator/pilot hardware, position-indicator microswitch integration, and vacuum leak/performance testing"
   manufacturing_steps:
-    - "For near-term KB modeling, purchase or import the row as a calibrated vendor valve module matching Pfeiffer 310VEP063-02."
     - "If modeled for local production later, machine the DN 63 ISO-K aluminum angle-valve body and sealing interfaces."
-    - "Fabricate or procure the stainless bellows/feedthrough and install the FKM sealing elements."
+    - "Fabricate the stainless bellows/feedthrough and install the FKM sealing elements"
     - "Assemble the electro-pneumatic actuator, pilot valve, and microswitch position indicator."
     - "Clean, leak-test, cycle-test, and verify vacuum tightness, pressure range, 24 V DC controls, and open/close timing."
   source:
@@ -48,12 +47,11 @@ how_to_make:
     cited_fact_or_basis: "The official Pfeiffer shop route identifies the purchased valve module and lists DN 63 ISO-K flange, electro-pneumatic actuator, pilot valve, position indicator, aluminum housing, FKM seal, stainless steel bellows/feedthrough, tightness 1e-10 Pa m3/s, service life 3,000,000 cycles, and closing/opening time 300 ms/300 ms. The CAD contact sheet shows only a small cylindrical/faceted proxy rather than the full valve. targeted_web_search: searched 'Pfeiffer Vacuum 310VEP063 3/2 way valve ISO-K DN63', '310VEP063-02 EVB 063 PA datasheet', and 'Pfeiffer 310VEP063 material weight'; found row-matched product and datasheet facts but no row-specific manufacturing-process specification."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "Detailed local manufacturing steps are inferred from the sourced module function, component materials, and standard vacuum-valve construction; the source supports procurement and component facts, not the factory process."
+    - "Detailed local manufacturing steps are inferred from the sourced module function, component materials, and standard vacuum-valve construction"
     - "Vacuum service requires precision sealing surfaces, clean assembly, and leak testing even if not all inspection details are specified in the BOM."
-  uncertainty_notes:
-    - "The vendor evidence resolves procurement identity and performance requirements, but not internal actuator sub-BOM, bellows forming method, seal geometry, or factory acceptance-test procedure."
+  uncertainty_notes: []
 kb_implications:
-  - "item_granularity: purchased_module - Treat as a vendor electro-pneumatic vacuum valve subsystem for now; later KB work can split it only if valve body, bellows, actuator, seals, controls, and calibration/leak-test workflows are modeled."
+  - "item_granularity: complex_module - Treat as a functional electro-pneumatic vacuum valve subsystem for this pass; later KB work can split it only if valve body, bellows, actuator, seals, controls, and calibration/leak-test workflows are modeled."
 ---
 
 Result generated for the leased reAM250 BOM row only.

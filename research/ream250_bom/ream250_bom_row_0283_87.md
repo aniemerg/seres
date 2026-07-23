@@ -36,10 +36,9 @@ material:
   uncertainty_notes:
     - "The source resolves the wetted fitting material; it does not separately specify any surface finish or passivation."
 how_to_make:
-  summary: "Best modeled as a procured ISO-KF reducer tee; plausible local manufacture would form or machine stainless 304 tube/flange features, join the reduced DN16 branch to the DN40 run, finish sealing faces, and inspect for vacuum leakage."
+  summary: "Form or machine stainless 304 tube/flange features, join the reduced DN16 branch to the DN40 run, finish sealing faces, and inspect for vacuum leakage"
   manufacturing_steps:
-    - "Procurement route: buy Pfeiffer Vacuum 120RTR040-016 or an equivalent DN 40 ISO-KF to DN 16 ISO-KF stainless 304 reducing tee."
-    - "Local route: cut stainless 304 tube blanks for the DN40 run and DN16 branch."
+    - "Manufacturing route: cut stainless 304 tube blanks for the DN40 run and DN16 branch."
     - "Form or machine ISO-KF lip/flange sealing interfaces to the row dimensions."
     - "Weld or braze the reduced branch into the main tube, then clean, passivate if required, and leak-test the fitting."
   source:
@@ -47,9 +46,101 @@ how_to_make:
     cited_fact_or_basis: "The Pfeiffer BOM URL identifies a commercially supplied stainless 1.4301/304 reducing tee with DN 40 ISO-KF to DN 16 ISO-KF interfaces. The supplied STEP/contact sheet shows a tee-shaped metal tube with KF flange lips; the detailed local fabrication sequence is inferred from that geometry."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "The local manufacturing route is inferred from standard stainless vacuum fitting geometry rather than a Pfeiffer process disclosure."
+    - "The inferred from standard stainless vacuum fitting geometry rather than a Pfeiffer process disclosure."
   uncertainty_notes:
-    - "targeted_web_search: searched `Pfeiffer 120RTR040-016 manufacturing process stainless reducing tee`, `120RTR040-016 datasheet material dimensions`, and `ISO-KF stainless reducing tee fabrication`; row-matched results resolved procurement, dimensions, and material but did not provide a manufacturer process route."
+    - "Targeted_web_search: searched `Pfeiffer 120RTR040-016 manufacturing process stainless reducing tee`, `120RTR040-016 datasheet material dimensions`, and `ISO-KF stainless reducing tee fabrication`"
 kb_implications:
   - "item_granularity: simple_part - Treat as reusable standard ISO-KF stainless vacuum plumbing hardware rather than a reAM250-specific assembly or calibrated module."
 ---
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0283_87.md
+source_research_sha256: "59ec9a7abbc238ff5f7f4b6afd85584496b1f8c0f93651b64b4a6e17bbcd6880"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Read the function, CAD-derived mass basis, stainless 304 material evidence, inferred fabrication route, KB implications, and CAD preview before conversion."
+decomposition:
+  decision: simple_part
+  rationale: "The row is a single stainless reducing tee with standard ISO-KF lips and a smaller branch. It is reusable plumbing hardware rather than a machine-specific assembly."
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: stainless_vacuum_fitting_tube_cut_join_finish_test
+  primary_process_bucket: plumbing_connector_fabrication_testing
+  supporting_processes:
+    - stock_preparation
+    - cutting
+    - forming
+    - precision_machining
+    - joining
+    - cleaning
+    - leak_testing
+    - dimensional_inspection
+  candidate_existing_processes:
+    - process_id: plumbing_and_pneumatics_v0
+      fit: partial
+      reason: "Covers the gas plumbing connection context and testing workflow, but not full stainless tee fabrication."
+    - process_id: cutting_basic_v0
+      fit: supporting
+      reason: "Relevant to cutting tube blanks for the DN40 run and DN16 branch."
+    - process_id: machining_basic_v0
+      fit: supporting
+      reason: "Covers machining of ISO-KF lip, branch opening, and flange-interface features."
+    - process_id: welding_brazing_basic_v0
+      fit: supporting
+      reason: "Covers joining the reduced branch into the main tube body."
+    - process_id: leak_testing_v0
+      fit: supporting
+      reason: "Covers leak checks needed for small-flange gas plumbing fittings."
+    - process_id: inspection_basic_v0
+      fit: supporting
+      reason: "Covers dimensional checks of flange fit, branch alignment, and finished part inspection."
+  abstraction_decision: substitute_process_family
+  rationale: "The source evidence is a commercial Pfeiffer stainless reducing tee, while closure analysis can group it with reusable plumbing connector fabrication and testing plus tube cutting, joining, finish machining, cleaning, and inspection."
+  process_guardrails:
+    tolerance: review
+    surface_finish: review
+    sealing_quality: review
+    alignment_accuracy: review
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: connect a larger small-flange gas line to a reduced branch line
+  material: stainless_steel_304
+  scale_or_capacity:
+    mass_kg: 0.32
+    bom_quantity: 1
+    row_total_mass_kg: 0.32
+    scale_class: small
+  geometry_form: reducing_tee_tube_with_kf_lipped_interfaces
+merge_pool:
+  eligible: true
+  functional_purpose_key: plumbing_connection
+  precision_guardrails:
+    - flange_fit
+    - branch_alignment
+    - sealing_surface_finish
+    - leak_tightness
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - plumbing_connector_fabrication_testing
+  import_risk_factors:
+    - "Commercial ISO-KF fittings may remain imports if standardized flange geometry, passivation, and leak-tight finish exceed near-term local process capability."
+  post_merge_decision_notes: "Final import/local decision is deferred until merge review compares this tee against other plumbing connection hardware."
+kb_staging:
+  proposed_item_id: null
+  notes: "Wait for merge review; likely reusable stainless plumbing connection hardware rather than a row-specific Pfeiffer item."
+assumptions:
+  - "Stainless steel 1.4301/AISI 304 maps to the closure material identity stainless_steel_304."
+  - "The CAD-derived 0.32 kg mass is sufficient for Phase 2 scale grouping."
+  - "Vacuum evidence is preserved as sealing-quality and leak-tightness guardrails rather than encoded in the functional key."
+unresolved:
+  - "Exact factory process, passivation requirement, sealing-face tolerance, and leak-rate acceptance are not specified by the source evidence."
+```

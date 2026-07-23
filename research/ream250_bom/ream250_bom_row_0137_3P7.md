@@ -35,7 +35,7 @@ material:
   uncertainty_notes:
     - "The local assembly STEP material extractor returned only placeholder Generic material at density 1000.0, so the material value is taken from the row-matched Pfeiffer product route rather than STEP metadata."
 how_to_make:
-  summary: "Model as a stainless vacuum flange reducer: procure as standard Pfeiffer ISO-K/KF hardware, or locally fabricate by forming/machining a conical stainless adapter body with ISO-K and KF flange features, then clean and inspect for vacuum service."
+  summary: "Model as a stainless vacuum flange reducer: prepare as standard Pfeiffer ISO-K/KF hardware, or locally fabricate by forming/machining a conical stainless adapter body with ISO-K and KF flange features, then clean and inspect for vacuum service"
   manufacturing_steps:
     - "Start from stainless steel 1.4301/304 tube, forged blank, or machined billet sized for the DN 63 ISO-K outer flange and DN 40 ISO-KF end."
     - "Turn or form the conical reducer body and machine the sealing and clamp-interface flange faces."
@@ -46,7 +46,7 @@ how_to_make:
     cited_fact_or_basis: "The rendered CAD contact sheet shows a one-piece conical reducer with two circular vacuum-flange ends. FreeCAD measured one solid with bounding box 63.00 x 105.13 x 105.13 mm. The Pfeiffer Vacuum Online Shop page identifies the row-matched product as a stainless ISO-K/KF conical adapter. targeted_web_search: tried 'Pfeiffer Vacuum 320RRK063-040-63 reduction ISO-K DN 63 KF DN 40 material weight' and reviewed the row-matched Pfeiffer product route; found material and interface facts, but no row-specific manufacturing process specification."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "The local manufacturing route is inferred from the stainless material, vacuum-flange function, and one-piece conical CAD geometry."
+    - "The inferred from the stainless material, vacuum-flange function, and one-piece conical CAD geometry."
     - "Vacuum service requires clean, burr-free, leak-tight sealing and clamp-interface surfaces."
   uncertainty_notes:
     - "The row evidence does not state Pfeiffer's actual production route, surface finish, or leak-test specification."

@@ -39,7 +39,7 @@ material:
   uncertainty_notes:
     - "The exact grade, heat treatment, surface finish, and corrosion-resistance requirement are not resolved by the BOM, CAD material metadata, or web search."
 how_to_make:
-  summary: "Fabricate as a one-piece formed spring-steel plate, or procure as a custom cut and formed spring plate if local heat treatment and forming controls are not available."
+  summary: "Fabricate as a one-piece formed spring-steel plate"
   manufacturing_steps:
     - "Cut the square frame blank and central opening from spring-steel sheet or plate stock by laser, waterjet, or CNC profiling."
     - "Form the diagonal ribs, lips, and shallow offsets visible in the CAD geometry using a press brake, forming die, or matched tooling."

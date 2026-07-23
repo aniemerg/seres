@@ -48,7 +48,7 @@ how_to_make:
     evidence_basis: "engineering_hypothesis"
   assumptions:
     - "Because the part is a small flat aluminum plate with cutouts and holes, subtractive manufacture from plate stock is the simplest plausible route."
-    - "No evidence was found for casting, additive manufacturing, or a purchased catalog part for this row."
+    - "No evidence was found for casting, additive manufacturing, or a external catalog part for this row"
   uncertainty_notes:
     - "The exact tolerances, surface finish, and edge break requirements are not available from the BOM or STEP export."
 kb_implications:

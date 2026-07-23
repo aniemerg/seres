@@ -46,7 +46,7 @@ how_to_make:
     - "Inspect diameter, roundness, surface finish, and visible defects before assembly into the bearing."
   source:
     url_or_path: "design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/2AD2_part_2.step; research/ream250_bom/ream250_bom_row_0045_2AD2__views_2x2.png"
-    cited_fact_or_basis: "The STEP is one solid with a measured 4.95 x 4.95 x 4.95 mm bounding box; the contact-sheet preview shows a near-spherical part. targeted_web_search: searched \"2AD2_part_2 axis bearing top material\", \"2AD2 axis bearing top reAM250 material\", \"axis bearing top reAM250\", and \"2AD2_part_2\"; found duplicate BOM text but no row-specific manufacturing source."
+    cited_fact_or_basis: "The STEP is one solid with a measured 4.95 x 4.95 x 4.95 mm bounding box; the contact-sheet preview shows a near-spherical part. targeted_web_search: searched \"2AD2_part_2 axis bearing top material\", \"2AD2 axis bearing top reAM250 material\", \"axis bearing top reAM250\", and \"2AD2_part_2\" found duplicate BOM text but no row-specific manufacturing source."
     evidence_basis: "engineering_hypothesis"
   assumptions:
     - "The manufacturing route is chosen from the inferred bearing-ball function and spherical geometry, not from a row-specific drawing or process note."

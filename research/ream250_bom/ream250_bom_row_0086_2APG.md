@@ -36,7 +36,7 @@ material:
   uncertainty_notes:
     - No source distinguishes steel, stainless steel, or aluminum for this row; downstream KB modeling should avoid assigning a specific grade until a drawing, material list, or fabrication note is found.
 how_to_make:
-  summary: Make as a custom flat metal plate from sheet or thin plate stock, with profile cutting, corner-hole drilling, light machining or forming of the relieved/stiffened geometry, deburring, and inspection; procurement would be as a custom-fabricated machine plate rather than a catalog module.
+  summary: "Make as a custom flat metal plate from sheet or thin plate stock, with profile cutting, corner-hole drilling, light machining or forming of the relieved/stiffened geometry, deburring, and inspection; As a custom-fabricated machine plate rather than a catalog module"
   manufacturing_steps:
     - Cut a 225 mm square blank from sheet or thin plate stock.
     - Cut or machine the relieved/stiffened central geometry and outer profile features visible in CAD.
@@ -44,7 +44,7 @@ how_to_make:
     - Deburr, flatten if needed, and inspect hole positions and overall thickness.
   source:
     url_or_path: design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/2APG_pressing_plate.step; research/ream250_bom/ream250_bom_row_0086_2APG__views_2x2.png
-    cited_fact_or_basis: "CAD/preview show a single thin 225.00 x 225.00 x 3.80 mm plate with corner holes and cut/machined geometry. targeted_web_search: tried \"2APG_pressing_plate\", \"2APG pressing plate reAM250\", \"2APG 2APG_pressing_plate\", and \"reAM250 pressing plate\"; no vendor route or fabrication note was found."
+    cited_fact_or_basis: "CAD/preview show a single thin 225.00 x 225.00 x 3.80 mm plate with corner holes and cut/machined geometry. targeted_web_search: tried \"2APG_pressing_plate\", \"2APG pressing plate reAM250\", \"2APG 2APG_pressing_plate\", and \"reAM250 pressing plate\" no vendor route or fabrication note was found."
     evidence_basis: engineering_hypothesis
   assumptions:
     - Sheet/plate cutting plus drilling/machining is selected as the simplest plausible route for the observed single-plate geometry.

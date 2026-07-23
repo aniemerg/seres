@@ -38,7 +38,7 @@ material:
   uncertainty_notes:
     - "No BOM field, vendor link, standard designation, or non-placeholder STEP material resolves the exact alloy or heat treatment."
 how_to_make:
-  summary: "Procure as small bearing-retention hardware if it matches a standard ring; otherwise manufacture locally by cutting or machining the annular profile from steel sheet/plate or flat stock, deburring, heat treating if spring action is required, and inspecting fit in the bearing stack."
+  summary: "Prepare as small bearing-retention hardware if it matches a standard ring; otherwise manufacture locally by cutting or machining the annular profile from steel sheet/plate or flat stock, deburring, heat treating if spring action is required, and inspecting fit in the bearing stack"
   manufacturing_steps:
     - "Start from steel sheet, plate, or flat wire stock near the required thickness."
     - "Blank, laser/waterjet cut, wire-EDM, or mill the outside diameter, central bore, and four relief/cutout features."
@@ -50,10 +50,101 @@ how_to_make:
     cited_fact_or_basis: "The local STEP/contact sheet shows a thin annular part with a central bore and radial reliefs. ISC describes retaining rings as stamped from sheet or coiled from wire and installed to create a shoulder that retains an assembly. Smalley describes retaining-ring families made from flat wire by edgewinding, with carbon and stainless steel material options. targeted_web_search: searched '2AD9_part_9 axis bearing top manufacturing', 'slotted bearing retaining ring manufacturing stamped sheet steel', and 'retaining ring bearing material spring steel stainless'; found generic retaining-ring manufacturing sources, but no row-specific production drawing."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "The local manufacturing route is inferred from the CAD profile and common retaining-ring practice because the row has no vendor process or drawing notes."
+    - "The inferred from the CAD profile and common retaining-ring practice because the row has no vendor process or drawing notes."
     - "For KB planning, this should be modeled as simple precision metal hardware unless later evidence shows it is part of a calibrated bearing cartridge."
   uncertainty_notes:
-    - "Required tolerances, surface finish, spring properties, and whether the ring is a purchased standard or custom-machined part are not specified by the BOM or CAD export."
+    - "Required tolerances, surface finish, spring properties, and whether the ring is a external standard or custom-machined part are not specified by the BOM or CAD export"
 kb_implications:
   - "item_granularity: simple_part - model as reusable small bearing retaining/spacer ring hardware rather than a unique reAM250-only item; capture approximate 24 mm OD, 6.27 mm thickness, steel-family material, and top-axis bearing context in later KB notes."
 ---
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0052_2AD9.md
+source_research_sha256: "a514bc7e53a3142b0b69faf170c6f2e1abe258be88704064e5ff05d2b8a786dc"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Reviewed the top-axis bearing retaining/spacer function, 0.00597 kg steel-family mass estimate, unresolved metal retaining-ring material evidence, cutting/machining route, KB implication, and CAD preview showing a small annular ring with relief cutouts."
+decomposition:
+  decision: simple_part
+  rationale: "The row is one small annular hardware part with no internal assemblies; it should stay a simple reusable retaining/spacer ring unless later evidence places it inside a calibrated bearing cartridge."
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: cut_machined_bearing_retaining_ring
+  primary_process_bucket: sheet_plate_cutting_drilling
+  supporting_processes:
+    - stock_preparation
+    - cutting
+    - precision_machining
+    - deburring
+    - heat_treatment
+    - surface_finishing
+    - dimensional_inspection
+  candidate_existing_processes:
+    - process_id: sheet_metal_cutting_v0
+      fit: partial
+      reason: "Covers cutting a flat ring blank from sheet/plate stock, but small bearing-fit features may need tighter control."
+    - process_id: machining_precision_v0
+      fit: supporting
+      reason: "Relevant to bore, outer diameter, relief features, and thickness control if the ring is custom machined."
+    - process_id: heat_treatment_hardening_v0
+      fit: supporting
+      reason: "Relevant only if the final design needs spring-tempered retaining-ring behavior."
+    - process_id: finishing_deburring_v0
+      fit: supporting
+      reason: "Covers edge cleanup so the ring does not damage bearing-adjacent surfaces."
+    - process_id: inspection_basic_v0
+      fit: supporting
+      reason: "Covers checks of diameter, thickness, flatness, and cutout clearance."
+  abstraction_decision: substitute_process_family
+  rationale: "The source route is unresolved retaining-ring practice, but the geometry is shallow annular sheet/plate hardware; primary closure can use sheet/plate cutting with precision machining and heat treatment as conditional support."
+  process_guardrails:
+    tolerance: review
+    surface_finish: review
+    sealing_quality: not_applicable
+    alignment_accuracy: moderate
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: "bearing stack axial retaining and spacing hardware"
+  material: unresolved_steel_retaining_ring_family
+  scale_or_capacity:
+    mass_kg: 0.00597
+    bom_quantity: 1
+    row_total_mass_kg: 0.00597
+    scale_class: small
+  geometry_form: small_annular_ring_with_radial_relief_cutouts
+merge_pool:
+  eligible: true
+  functional_purpose_key: mechanical_retention
+  precision_guardrails:
+    - bore_diameter
+    - outer_diameter
+    - flatness
+    - spring_temper_requirement
+    - bearing_stack_context
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - sheet_plate_cutting_drilling
+  import_risk_factors:
+    - "Exact material, spring property, heat treatment, and bearing-stack tolerance are unresolved."
+    - "If this is a standard precision retaining ring, importing a standard hardware family may be simpler than custom local manufacture."
+  post_merge_decision_notes: "Final import/local decision is deferred until merge review compares this with other retaining rings, spacers, and small bearing hardware."
+kb_staging:
+  proposed_item_id: null
+  notes: "Wait for merge review; likely reusable as a generic small steel retaining/spacer ring if precision requirements remain modest."
+assumptions:
+  - "BOM quantity is 1 and row total mass is treated as 0.00597 kg from the steel-density CAD estimate."
+  - "The part is modeled as steel-family retaining hardware based on geometry and bearing context."
+  - "Heat treatment is conditional; simple spacer use may not need spring-tempered behavior."
+unresolved:
+  - "Exact alloy, heat treatment, standard designation, tolerance, surface finish, and role as retainer versus spacer remain unknown."
+  - "Whether the ring is standard hardware versus a custom-machined bearing-adjacent part is unresolved."
+```

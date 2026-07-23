@@ -37,7 +37,7 @@ material:
   uncertainty_notes:
     - "Exact stainless grade, heat treatment, and surface finish are unspecified."
 how_to_make:
-  summary: "Procure or fabricate as a simple stainless-steel bracket/link: cut or laser/waterjet the bracket blank from stainless stock, machine or drill the mounting holes and locating faces, deburr, finish, and inspect against the motor-mount assembly."
+  summary: "Fabricate as a simple stainless-steel bracket/link: cut or laser/waterjet the bracket blank from stainless stock, machine or drill the mounting holes and locating faces, deburr, finish, and inspect against the motor-mount assembly"
   manufacturing_steps:
     - "Cut the angled bracket profile from stainless-steel plate or near-net stock sized for the roughly 59 x 40 x 55 mm envelope."
     - "Machine or drill mounting holes, slots, and mating faces to match the motor-mount and adjacent guide/belt hardware."
@@ -47,10 +47,102 @@ how_to_make:
     cited_fact_or_basis: "CAD geometry shows a compact stainless bracket/link with flat faces, angled web geometry, and mounting holes. The detailed fabrication sequence is inferred from the geometry and material, not directly stated by a vendor or drawing. targeted_web_search: queries tried included '\"6V_connection_motor_mount\"', '\"reAM250\" \"6V\" \"connection motor mount\"', and '\"connection motor mount\" stainless steel 59 40 55'; results found mirrored BOM listings or non-matching generic motor mounts, not a row-specific manufacturing source."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "The geometry is practical as a machined or cut stainless bracket rather than a calibrated purchased module."
+    - "The geometry is practical as a machined or cut stainless bracket rather than a calibrated module"
     - "Fasteners are handled elsewhere in the motor-mount assembly and are not part of this row's per-unit item."
   uncertainty_notes:
     - "The fabrication route does not resolve tolerances, exact stock form, or whether the original part was welded, bent, or machined from solid."
 kb_implications:
   - "item_granularity: simple_part - Model 6V as a reusable stainless motor-mount connection bracket; do not create a purchased module unless later evidence shows it is a vendor subsystem."
 ---
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0202_6V.md
+source_research_sha256: "4f5e19bc123e5e08546e6d82a24fda58807dbdf070ce28c4b29a913426265eea"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Read motor-mount connection function, CAD/STEP material mass basis, stainless material evidence, bracket fabrication route, KB implication, and preview of the angled bracket/link with holes."
+decomposition:
+  decision: simple_part
+  rationale: "The row is one stainless bracket/link with no hidden purchased subsystem content; fasteners are separate assembly hardware."
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: cut_drilled_formed_stainless_bracket
+  primary_process_bucket: sheet_plate_cutting_drilling
+  supporting_processes:
+    - stock_preparation
+    - cutting
+    - drilling
+    - forming
+    - precision_machining
+    - deburring
+    - surface_finishing
+    - dimensional_inspection
+  candidate_existing_processes:
+    - process_id: sheet_metal_fabrication_v0
+      fit: partial
+      reason: "Covers cutting, forming, and hole-making for sheet/plate bracket parts."
+    - process_id: metal_forming_basic_v0
+      fit: supporting
+      reason: "Relevant if the angled geometry is made by bending/forming stainless stock."
+    - process_id: machining_basic_v0
+      fit: supporting
+      reason: "Covers local hole cleanup, slots, and mating-face finish."
+    - process_id: machining_precision_v0
+      fit: supporting
+      reason: "Relevant if motor mount alignment needs tighter hole and face control."
+    - process_id: inspection_basic_v0
+      fit: supporting
+      reason: "Covers checks of hole spacing, flatness, and assembly fit."
+  abstraction_decision: keep_original_family
+  rationale: "The source route is simple stainless bracket fabrication from stock with hole-making and finish work, matching the sheet/plate cutting-drilling closure bucket."
+  process_guardrails:
+    tolerance: review
+    surface_finish: review
+    sealing_quality: not_applicable
+    alignment_accuracy: review
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: connection bracket linking motor mount support to adjacent motion hardware
+  material: stainless_steel
+  scale_or_capacity:
+    mass_kg: 0.101
+    bom_quantity: 3
+    row_total_mass_kg: 0.303
+    scale_class: small
+  geometry_form: compact_angled_plate_bracket_with_mounting_holes
+merge_pool:
+  eligible: true
+  functional_purpose_key: mounting_support
+  precision_guardrails:
+    - hole_spacing
+    - bracket_angle
+    - motor_mount_alignment
+    - stainless_grade
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - sheet_plate_cutting_drilling
+  import_risk_factors:
+    - "Exact stainless grade, stock form, and surface finish are unresolved."
+    - "Motor/guide alignment may require tighter inspection than a generic bracket."
+  post_merge_decision_notes: "Final import/local manufacture decision is deferred until after merge review with other motor-mount and mounting-support brackets."
+kb_staging:
+  proposed_item_id: null
+  notes: "Leave final closure item ID open for merge review across stainless mounting brackets."
+assumptions:
+  - "Use 0.101 kg per unit from CAD volume and stainless density."
+  - "Treat fasteners as separate rows and not part of this bracket."
+  - "Treat forming plus drilling as the primary closure route unless later evidence shows billet machining."
+unresolved:
+  - "Exact stainless alloy, finish, and tolerance class."
+  - "Whether geometry is formed from sheet/plate versus machined from solid stock."
+  - "Exact mating motor-mount and motion-guide interfaces."
+```

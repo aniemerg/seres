@@ -36,7 +36,7 @@ material:
   uncertainty_notes:
     - "The STEP metadata gives a steel family but not a property class, heat treatment, coating, or exact alloy grade for the DIN 912 screw."
 how_to_make:
-  summary: "Procure as a standard DIN 912 / ISO 4762 M5 x 8 socket-head cap screw, or locally make as small steel fastener hardware by forming or machining the head and shank, creating the hex socket, threading the shank, heat treating or finishing as required, and inspecting thread/socket fit."
+  summary: "Locally make as small steel fastener hardware by forming or machining the head and shank, creating the hex socket, threading the shank, heat treating or finishing as required, and inspecting thread/socket fit"
   manufacturing_steps:
     - "Select steel wire, rod, or screw blank stock sized for an M5 socket-head cap screw."
     - "Form or machine the cylindrical head and short shank geometry."

@@ -66,9 +66,9 @@ material:
 how_to_make:
   summary: >
     Plausible route is sheet-metal fabrication: cut a flat blank from
-    corrosion-resistant metal sheet, form the lips/creases with a press brake or
-    simple forming fixture, deburr, clean, and inspect fit in the gas outlet
-    assembly. Procurement as a custom sheet-metal part is also plausible.
+    Corrosion-resistant metal sheet, form the lips/creases with a press brake or
+    Simple forming fixture, deburr, clean, and inspect fit in the gas outlet
+    Assembly.
   manufacturing_steps:
     - Cut the blank profile from thin corrosion-resistant sheet stock by laser, waterjet, shear, or CNC routing.
     - Form the long lip and angled crease features with a press brake or matched fixture.
@@ -78,18 +78,106 @@ how_to_make:
     url_or_path: design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/3S47_part_7.step; research/ream250_bom/ream250_bom_row_0158_3S47__views_2x2.png; https://github.com/DavidWenzler/reAM250
     cited_fact_or_basis: >
       CAD and preview show a thin folded panel with simple planar faces and no
-      complex machined pockets. The reAM250 repository identifies the platform
-      as a metal laser powder-bed-fusion research machine. targeted_web_search:
-      queries tried "reAM250 gas outlet part 3S47 material", "Renishaw reAM250
-      gas outlet material", and "reAM250 additive manufacturing machine gas
-      outlet stainless steel"; no row-specific manufacturing drawing or vendor
-      process note was found.
+      Complex machined pockets. The reAM250 repository identifies the platform
+      As a metal laser powder-bed-fusion research machine. targeted_web_search:
+      Queries tried "reAM250 gas outlet part 3S47 material", "Renishaw reAM250
+      Gas outlet material", and "reAM250 additive manufacturing machine gas
+      Outlet stainless steel" no row-specific manufacturing drawing or vendor
+      Process note was found.
     evidence_basis: engineering_hypothesis
   assumptions:
     - The visible folds are intentional formed sheet features rather than a thick machined solid.
-    - Local manufacturing would prioritize common sheet-metal operations over machining from billet.
+    - Prioritize common sheet-metal operations over machining from billet.
   uncertainty_notes:
     - Without an assembly drawing, bend sequence, bend radii, and tolerances are unknown.
 kb_implications:
   - "item_granularity: simple_part - Model later as a reusable formed sheet-metal baffle/panel for gas-flow ducting rather than as a purchased calibrated module."
 ---
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0158_3S47.md
+source_research_sha256: "017eba88d9e40d4f11dee687da81eeed7dc0f0cee9790b4080b96a2d9c8b4b36"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Reviewed gas-outlet panel function, stainless-density planning mass, unresolved corrosion-resistant sheet-metal evidence, cut/form/deburr route, and preview showing a folded panel with lips and creases."
+decomposition:
+  decision: simple_part
+  rationale: "The row is one formed sheet panel in a multi-part gas outlet group; neighboring 3S41 through 3S48 rows define the larger outlet assembly."
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: formed_sheet_metal_gas_outlet_panel
+  primary_process_bucket: sheet_plate_cutting_drilling
+  supporting_processes:
+    - stock_preparation
+    - cutting
+    - forming
+    - deburring
+    - cleaning
+    - joining
+    - dimensional_inspection
+  candidate_existing_processes:
+    - process_id: sheet_metal_cutting_v0
+      fit: partial
+      reason: "Covers cutting the flat blank for the thin gas outlet panel."
+    - process_id: sheet_metal_bending_and_forming_v0
+      fit: direct
+      reason: "Covers the lips and crease features visible in the CAD preview."
+    - process_id: finishing_deburring_v0
+      fit: supporting
+      reason: "Covers edge cleanup before installation into the gas outlet assembly."
+    - process_id: welding_brazing_basic_v0
+      fit: supporting
+      reason: "Relevant if this panel is joined into a sealed metal outlet assembly."
+    - process_id: inspection_basic_v0
+      fit: supporting
+      reason: "Covers bend geometry, envelope, and fit checks against neighboring outlet parts."
+  abstraction_decision: keep_original_family
+  rationale: "The source route is sheet-metal cutting and forming, matching the sheet/plate bucket with assembly-level joining support."
+  process_guardrails:
+    tolerance: review
+    surface_finish: review
+    sealing_quality: review
+    alignment_accuracy: review
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: shape gas flow as a segment of the outlet assembly
+  material: unresolved_corrosion_resistant_metal
+  scale_or_capacity:
+    mass_kg: 0.0359
+    bom_quantity: 1
+    row_total_mass_kg: 0.0359
+    scale_class: small
+  geometry_form: thin_formed_sheet_baffle_panel_with_lips_and_creases
+merge_pool:
+  eligible: true
+  functional_purpose_key: gas_flow_routing
+  precision_guardrails:
+    - bend_geometry
+    - mating_edge_fit
+    - gas_path_cleanliness
+    - assembly_sealing
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - sheet_plate_cutting_drilling
+  import_risk_factors:
+    - "Material grade is unresolved and may affect corrosion, heat, spatter, and cleaning compatibility."
+    - "Fit and sealing requirements depend on the complete gas outlet assembly."
+  post_merge_decision_notes: "Final import/local decision is deferred until merge review groups gas outlet sheet segments and resolves material plus assembly joining."
+kb_staging:
+  proposed_item_id: null
+  notes: "Wait for merge review; likely candidate for a generic formed gas-routing panel if adjacent outlet rows converge."
+assumptions:
+  - "Stainless-density mass is retained as a conservative planning estimate while material remains unresolved corrosion-resistant metal."
+  - "The visible folds are treated as intentional formed sheet features."
+unresolved:
+  - "Specific alloy, bend radius, bend sequence, tolerances, and installed orientation are not specified."
+  - "The complete gas outlet assembly sealing and joining strategy remains unresolved."
+```

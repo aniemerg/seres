@@ -37,11 +37,10 @@ material:
   uncertainty_notes:
     - "The row does not identify which subfeatures are stainless versus EPDM, and the local STEP material metadata is only placeholder Generic, so downstream modeling should preserve the combined material set rather than assign a detailed material split."
 how_to_make:
-  summary: "Near-term KB modeling should procure this as an AMPROVED DN40 valve subcomponent or as part of the complete ISO-KF DN40 disc valve; a plausible local route is precision stainless machining for the shaft/disc/lever hardware, EPDM seal fabrication or procurement, cleaning/passivation, assembly, and leak/function testing."
+  summary: "Precision stainless machining for the shaft/disc/lever hardware, EPDM seal fabrication, cleaning/passivation, assembly, and leak/function testing"
   manufacturing_steps:
-    - "Procure the complete AMPROVED ISO-KF DN40 disc valve or the matching replacement subcomponent when available."
-    - "For local production, machine the stainless shaft, lever hub, handle, and disc-like closure geometry from 316L/1.4404 stock."
-    - "Mold, cut, or procure the EPDM sealing element compatible with the DN40 valve geometry."
+    - "Machine the stainless shaft, lever hub, handle, and disc-like closure geometry from 316L/1.4404 stock."
+    - "Mold, cut"
     - "Deburr, clean, and passivate stainless surfaces for powder/vacuum-adjacent service."
     - "Assemble the lever and closure element with the seal, then verify the three-position manual action and closure/leak performance in the valve body."
   source:
@@ -54,7 +53,7 @@ how_to_make:
   uncertainty_notes:
     - "The vendor page does not state the actual production process, tolerances, surface finish, or seal installation details for this subpart."
 kb_implications:
-  - "item_granularity: assembly - model 3X2 as a valve subassembly or purchased valve subcomponent for now; split into stainless simple parts plus an EPDM seal only if the DN40 valve becomes a detailed local-manufacturing target."
+  - "item_granularity: complex_module - model 3X2 as a valve subassembly or purchased valve subcomponent for now; split into stainless simple parts plus an EPDM seal only if the DN40 valve becomes a detailed local-manufacturing target."
 ---
 
 # reAM250 BOM Row 165 - 3X2

@@ -47,7 +47,7 @@ how_to_make:
     - "Install two mounts in the end-switch assembly and align them with the neighboring Balluff M12 inductive sensors and sensor nuts."
   source:
     url_or_path: "design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/2AQ_inductive_sensor_mount.step; research/ream250_bom/ream250_bom_row_0093_2AQ__views_2x2.png; https://www.damencnc.com/en/m12-inductive-sensor-mount-2-detection-plates/a3555"
-    cited_fact_or_basis: "The row STEP measures one 30.00 x 30.00 x 25.00 mm solid, and the rendered contact sheet shows an L-shaped bracket with two vertical slots and a rounded slot/opening. A generic M12 inductive sensor mount vendor page describes a steel mount set used for mounting cylindrical M12 sensors, but it is not row-specific to 2AQ. targeted_web_search: searched \"2AQ_inductive_sensor_mount material\", \"2AQ inductive_sensor_mount reAM250\", and \"inductive sensor mount material bracket\"; found no row-specific manufacturing-process source."
+    cited_fact_or_basis: "The row STEP measures one 30.00 x 30.00 x 25.00 mm solid, and the rendered contact sheet shows an L-shaped bracket with two vertical slots and a rounded slot/opening. A generic M12 inductive sensor mount vendor page describes a steel mount set used for mounting cylindrical M12 sensors, but it is not row-specific to 2AQ. targeted_web_search: searched \"2AQ_inductive_sensor_mount material\", \"2AQ inductive_sensor_mount reAM250\", and \"inductive sensor mount material bracket\" found no row-specific manufacturing-process source."
     evidence_basis: "engineering_hypothesis"
   assumptions:
     - "The manufacturing route is inferred from the compact bracket envelope, slotted mounting features, and simple one-solid CAD geometry."

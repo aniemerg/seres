@@ -46,10 +46,10 @@ how_to_make:
     - "Clean and passivate, anodize, or otherwise finish only after the final material and gas/vacuum compatibility requirements are resolved."
   source:
     url_or_path: "design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/3S1_flange.step; research/ream250_bom/ream250_bom_row_0145_3S1__views_2x2.png"
-    cited_fact_or_basis: "CAD and preview show one 130.00 x 8.00 x 130.00 mm solid with a thin flange/interface plate, central square aperture, radial webbing, and small perimeter mounting holes. targeted_web_search: searched \"3S1_flange\", \"reAM250 3S1 flange\", \"3S1 flange reAM250\", and \"reAM250 gas outlet flange material\"; no row-specific manufacturing drawing, material callout, or process note was found."
+    cited_fact_or_basis: "CAD and preview show one 130.00 x 8.00 x 130.00 mm solid with a thin flange/interface plate, central square aperture, radial webbing, and small perimeter mounting holes. targeted_web_search: searched \"3S1_flange\", \"reAM250 3S1 flange\", \"3S1 flange reAM250\", and \"reAM250 gas outlet flange material\" no row-specific manufacturing drawing, material callout, or process note was found."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "The part is treated as a custom simple part rather than a purchased module because the BOM row has no manufacturer/product ID and the CAD file is a custom-named flange."
+    - "The part is treated as a custom simple part because the BOM row has no manufacturer/product ID and the CAD file is a custom-named flange"
     - "Subtractive machining or plate profile-cutting is assumed from the thin plate geometry and need for controlled aperture, hole placement, and mating-face flatness."
   uncertainty_notes:
     - "The CAD/BOM evidence does not specify tolerances, surface finish, sealing features, or whether post-machining vacuum cleaning/passivation is required."
@@ -58,3 +58,90 @@ kb_implications:
 ---
 
 Research result for reAM250 BOM row 145.
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0145_3S1.md
+source_research_sha256: "9c22bd6eaa29352edea65a3edcd997b61d8f263c16e94103cd0758577969e8db"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Read the function, mass basis, unresolved structural metal material evidence, manufacturing route, KB implication, and CAD preview showing a shallow 130 x 8 x 130 mm flange plate."
+decomposition:
+  decision: simple_part
+  rationale: "The row describes one custom solid flange/interface plate with no vendor subassembly and no internal dependencies; closure can model it as one reusable simple part after material resolution."
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: profile_cutting_and_cnc_machined_metal_plate
+  primary_process_bucket: sheet_plate_cutting_drilling
+  supporting_processes:
+    - stock_preparation
+    - cutting
+    - drilling
+    - precision_machining
+    - deburring
+    - surface_finishing
+    - cleaning
+    - dimensional_inspection
+  candidate_existing_processes:
+    - process_id: sheet_metal_fabrication_v0
+      fit: partial
+      reason: "Covers cutting and punching/drilling of sheet/plate-like stock; the 8 mm flange still needs controlled aperture and mating-face finishing."
+    - process_id: machining_basic_v0
+      fit: supporting
+      reason: "Covers secondary milling of the central aperture, radial webs, counterbores, plus local features if profile cutting is insufficient."
+    - process_id: machining_precision_v0
+      fit: supporting
+      reason: "Relevant if gas-outlet mating faces, hole positions, and sealing flatness require tighter control than basic fabrication."
+    - process_id: inspection_basic_v0
+      fit: supporting
+      reason: "Covers dimensional and interface checks before merge/staging decides the exact recipe."
+  abstraction_decision: substitute_process_family
+  rationale: "Although the source route allows CNC machining, the geometry is a thin flange plate with cutouts and holes; the closure handle should be plate cutting/drilling with local finish machining, not a fully general subtractive block-machining route."
+  process_guardrails:
+    tolerance: review
+    surface_finish: review
+    sealing_quality: review
+    alignment_accuracy: review
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: gas-outlet flange/interface plate joining a local outlet assembly to adjacent hardware
+  material: unknown_structural_metal_alloy
+  scale_or_capacity:
+    mass_kg: 0.48
+    bom_quantity: 1
+    row_total_mass_kg: 0.48
+    scale_class: small
+  geometry_form: shallow_round_square_flange_plate_with_central_square_aperture_radial_webs_and_mounting_holes
+merge_pool:
+  eligible: true
+  functional_purpose_key: plumbing_connection
+  precision_guardrails:
+    - sealing_flatness
+    - hole_pattern_alignment
+    - material_compatibility
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - sheet_plate_cutting_drilling
+  import_risk_factors:
+    - "Material and gas/vacuum compatibility are unresolved; stainless steel is plausible but not sourced."
+    - "Sealing-face flatness and cleanliness/passivation requirements may tighten the local finishing process."
+  post_merge_decision_notes: "Final import/local manufacture decision is deferred until after merge review; keep gas-outlet interface and sealing evidence as guardrails."
+kb_staging:
+  proposed_item_id: null
+  notes: "Leave the final closure item ID open for merge review with other gas/fluid flange/interface plates."
+assumptions:
+  - "Treat the 0.48 kg value as the stainless/steel scenario from CAD volume; material resolution may lower mass if aluminum is confirmed."
+  - "Plate cutting plus drilled holes can create the primary geometry, with finish machining reserved for mating faces and local precision features."
+unresolved:
+  - "Exact alloy/material grade."
+  - "Mating seal type, fastener standard, and required gas/vacuum cleanliness."
+  - "Whether the radial web geometry is function-critical versus closure-insignificant lightening/detailing."
+```

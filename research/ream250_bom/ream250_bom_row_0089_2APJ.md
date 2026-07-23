@@ -68,12 +68,11 @@ how_to_make:
     url_or_path: design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/2APJ_inner_seal_guide.step; research/ream250_bom/ream250_bom_row_0089_2APJ__views_2x2.png
     cited_fact_or_basis: >-
       CAD and rendered views show one 4 mm thick square frame/plate with a large
-      central opening, corner holes, and local corner relief features; no source
-      file states the manufacturing route. targeted_web_search: tried
+      Central opening, corner holes, and local corner relief features; no source
+      File states the manufacturing route. targeted_web_search: tried
       "2APJ_inner_seal_guide manufacturing", "2APJ inner seal guide reAM250",
-      "reAM250 inner seal guide drawing", and "inner seal guide plate material";
-      no row-specific fabrication drawing, vendor page, or process note was
-      found.
+      "ReAM250 inner seal guide drawing", and "inner seal guide plate material" no row-specific fabrication drawing, vendor page, or process note was
+      Found.
     evidence_basis: engineering_hypothesis
   assumptions:
     - Conventional sheet/plate cutting plus drilling or light CNC machining is the simplest plausible route for the observed one-piece geometry.

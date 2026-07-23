@@ -36,7 +36,7 @@ material:
   uncertainty_notes:
     - "The STEP metadata identifies the alloy family/grade but does not state temper, surface treatment, or whether any inserts or pads are installed separately from this plate row."
 how_to_make:
-  summary: "Make as a small CNC-machined or profile-cut 6061 aluminum clamping plate, or procure as a custom machined replacement matched to the reAM250 drawing."
+  summary: "Make as a small CNC-machined or profile-cut 6061 aluminum clamping plate"
   manufacturing_steps:
     - "Start from 6061 aluminum sheet or plate stock slightly thicker/larger than the 80 x 42 x 4 mm finished envelope."
     - "Waterjet, laser, router, or CNC mill the outer profile, large central rounded slot, and visible clearance/lightening cutouts."
@@ -47,10 +47,95 @@ how_to_make:
     cited_fact_or_basis: "CAD evidence shows a one-piece 80.00 x 42.00 x 4.00 mm Aluminum 6061 plate with a large rounded slot and small mounting holes. targeted_web_search: queries tried '\"6I_clamping_plate_front\"', '\"reAM250\" \"clamping_plate_front\"', and '\"reAM250\" \"6I\" \"clamping plate\"'; results found mirrored reAM250 BOM listings but no row-specific vendor drawing, drawing note, or manufacturing process for 6I_clamping_plate_front."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "The visible CAD geometry is a single custom flat aluminum plate rather than a casting, printed part, or purchased catalog clamp."
+    - "The visible CAD geometry is a single custom flat aluminum plate rather than a casting, printed part, or external catalog clamp"
     - "Low-volume KB planning favors cutting/machining from plate stock because the part is thin, flat, and contains 2D profile features plus drilled holes."
   uncertainty_notes:
     - "Exact tolerances, fastener hole callouts, surface finish, edge break, and surface-treatment requirements are not present in the row-level evidence."
 kb_implications:
   - "item_granularity: simple_part - Model 6I as one custom thin Aluminum 6061 clamping plate; keep mating fasteners, seals, bearings, and front/back assembly context as separate BOM rows or later reusable hardware items."
 ---
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0185_6I.md
+source_research_sha256: "bf0b87dc880b24489ef8697655f0db4324e7e4b919aec8ccc850cbaabe640b99"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Reviewed row function, CAD-derived mass and envelope, Aluminum 6061 material evidence, profile-cut/CNC route, and CAD preview description before conversion."
+decomposition:
+  decision: simple_part
+  rationale: "The row is a single 80 x 42 x 4 mm aluminum clamping plate with slots and mounting holes; no internal module, electronics, fasteners, seals, nor other subparts are included in this row."
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: profile_cut_plate_with_secondary_machining
+  primary_process_bucket: sheet_plate_cutting_drilling
+  supporting_processes:
+    - stock_preparation
+    - cutting
+    - drilling
+    - precision_machining
+    - deburring
+    - surface_finishing
+    - dimensional_inspection
+  candidate_existing_processes:
+    - process_id: cutting_basic_v0
+      fit: partial
+      reason: "Covers cutting sheet and plate stock into profiles and openings; row-specific rounded slot and thin aluminum material need recipe-level binding."
+    - process_id: drilling_basic_v0
+      fit: supporting
+      reason: "Covers the small mounting holes after the plate profile is cut."
+    - process_id: machining_basic_v0
+      fit: supporting
+      reason: "Useful for local milled features such as countersinks, spotfaces, and edge cleanup if the final drawing requires them."
+    - process_id: inspection_basic_v0
+      fit: supporting
+      reason: "Covers dimensional checks of plate thickness, slot position, and hole locations."
+  abstraction_decision: substitute_process_family
+  rationale: "Although the source route allows CNC machining, the geometry is a shallow plate with mostly 2D cutouts and drilled holes, so the closure handle should be sheet/plate cutting and drilling with secondary machining only where tolerances plus counterbores require it."
+  process_guardrails:
+    tolerance: review
+    surface_finish: review
+    sealing_quality: not_applicable
+    alignment_accuracy: review
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: front clamping and retaining plate for adjacent powder-handling and carriage hardware
+  material: aluminum_alloy_6061
+  scale_or_capacity:
+    mass_kg: 0.0258
+    bom_quantity: 1
+    row_total_mass_kg: 0.0258
+    scale_class: small
+  geometry_form: thin_flat_plate_with_rounded_central_slot_and_mounting_holes
+merge_pool:
+  eligible: true
+  functional_purpose_key: interface_clamping
+  precision_guardrails:
+    - hole_position
+    - slot_position
+    - plate_thickness
+    - mating_clearance
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - sheet_plate_cutting_drilling
+  import_risk_factors: []
+  post_merge_decision_notes: "Final import/local decision is deferred until merge review; this row appears compatible with local plate cutting and secondary drilling unless later mating-context tolerances are tighter than the current evidence shows."
+kb_staging:
+  proposed_item_id: null
+  notes: "Leave item identity open for merge review with other small aluminum clamping plates and retaining plates."
+assumptions:
+  - "The row contains only the machined/cut aluminum plate; fasteners and mating clamped hardware are represented by other BOM rows."
+  - "The large central rounded opening is a clearance and powder/carriage passage feature rather than a precision bearing surface."
+  - "Anodizing plus conversion coating, if required, is a finishing detail and does not change closure identity in this pass."
+unresolved:
+  - "Exact fastener hole callouts, countersink/spotface details, edge break, and surface finish are not available in the row evidence."
+  - "The mating front/back clamping context is inferred from neighboring BOM rows and should be checked during merge review."
+```

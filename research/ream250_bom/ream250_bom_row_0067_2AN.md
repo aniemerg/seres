@@ -47,7 +47,7 @@ how_to_make:
     - "Deburr, clean, apply any required protective finish, and inspect hole spacing, face flatness, and motor/shaft clearance before assembly."
   source:
     url_or_path: "design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/2AN_motor_mount.step; research/ream250_bom/ream250_bom_row_0067_2AN__views_2x2.png; web targeted search"
-    cited_fact_or_basis: "The STEP is one solid with a 27.00 x 67.00 x 86.00 mm bounding box. The rendered contact sheet shows a one-piece rectangular motor mount with a large central circular opening, four small holes, and planar/ribbed faces. targeted_web_search: searched \"2AN_motor_mount reAM250 manufacturing\", \"2AN motor mount drawing reAM250\", \"reAM250 2AN_motor_mount\", and \"2AN_motor_mount\"; results found duplicate BOM text but no row-specific fabrication drawing or process specification."
+    cited_fact_or_basis: "The STEP is one solid with a 27.00 x 67.00 x 86.00 mm bounding box. The rendered contact sheet shows a one-piece rectangular motor mount with a large central circular opening, four small holes, and planar/ribbed faces. targeted_web_search: searched \"2AN_motor_mount reAM250 manufacturing\", \"2AN motor mount drawing reAM250\", \"reAM250 2AN_motor_mount\", and \"2AN_motor_mount\" results found duplicate BOM text but no row-specific fabrication drawing or process specification."
     evidence_basis: "engineering_hypothesis"
   assumptions:
     - "Subtractive machining is chosen because the row is a one-piece prismatic bracket with accurate-looking motor register/clearance and fastener features."
@@ -57,3 +57,91 @@ how_to_make:
 kb_implications:
   - "item_granularity: simple_part - Model as one reusable custom machined metal motor-mount bracket; keep the motor, gearbox, coupling, and fasteners as separate BOM items."
 ---
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0067_2AN.md
+source_research_sha256: "583455d87e2a4adc6102bc3bbbcbe2f78a2445223aabfccfc0869075a3587374"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Reviewed the motor-mount function, CAD-derived steel-assumption mass, unresolved metal material evidence, machining route, and central-register geometry before conversion."
+decomposition:
+  decision: simple_part
+  rationale: "The row is one custom mount body; motor, gearbox, coupling, fasteners, dowels, and adjacent motion components are separate BOM rows."
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: machined_metal_motor_mount
+  primary_process_bucket: general_subtractive_machining
+  supporting_processes:
+    - stock_preparation
+    - cutting
+    - precision_machining
+    - drilling
+    - deburring
+    - surface_finishing
+    - dimensional_inspection
+  candidate_existing_processes:
+    - process_id: machining_basic_v0
+      fit: partial
+      reason: "Covers machining the mount body from metal stock."
+    - process_id: machining_precision_v0
+      fit: supporting
+      reason: "Relevant to central register geometry, face flatness, and motor/shaft alignment."
+    - process_id: drilling_basic_v0
+      fit: supporting
+      reason: "Covers the four mounting-hole features before any final reaming, tapping, countersinking, and counterboring."
+    - process_id: inspection_basic_v0
+      fit: supporting
+      reason: "Covers hole spacing, face flatness, and clearance checks before assembly."
+  abstraction_decision: keep_original_family
+  rationale: "The source route is a custom machined metal mount, and the central opening plus fastener pattern make subtractive machining the clearest closure handle."
+  process_guardrails:
+    tolerance: high
+    surface_finish: review
+    sealing_quality: not_applicable
+    alignment_accuracy: high
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: motor and gearbox mounting interface for motion assembly
+  material: structural_metal_unknown_steel_assumed_for_mass
+  scale_or_capacity:
+    mass_kg: 0.915
+    bom_quantity: 1
+    row_total_mass_kg: 0.915
+    scale_class: small
+  geometry_form: compact_machined_mount_with_large_circular_register_and_four_holes
+merge_pool:
+  eligible: true
+  functional_purpose_key: motor_mounting
+  precision_guardrails:
+    - material_family
+    - register_diameter
+    - hole_spacing
+    - face_flatness
+    - shaft_alignment
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - general_subtractive_machining
+  import_risk_factors:
+    - "Material uncertainty changes mass and stiffness."
+    - "Motor and gearbox alignment may require precision machining and inspection."
+  post_merge_decision_notes: "Final import/local decision is deferred until merge review; compare with other motor mount and adapter rows before assigning closure identity."
+kb_staging:
+  proposed_item_id: null
+  notes: "Wait for merge review before deciding whether this can share a generic motor mounting interface item."
+assumptions:
+  - "The large circular feature is a motor/shaft clearance feature and locating register."
+  - "Steel density is a conservative planning assumption until material evidence improves."
+  - "Fasteners and dowels are not included in this row."
+unresolved:
+  - "Exact material, hole callouts, thread state, datum scheme, and surface finish are not specified."
+  - "Mating motor and gearbox alignment requirements need review with neighboring motion rows."
+```

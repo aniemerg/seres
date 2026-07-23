@@ -36,7 +36,7 @@ material:
   uncertainty_notes:
     - "The local STEP metadata does not independently confirm the material, so material relies on catalog/product-number matching."
 how_to_make:
-  summary: "Procure as Pfeiffer 172ZRG050 or manufacture as a small vacuum fitting by machining/molding a PTFE centering ring profile and fitting an FKM O-ring to the KF DN50 geometry."
+  summary: "Prepare as Pfeiffer 172ZRG050 or manufacture as a small vacuum fitting by machining/molding a PTFE centering ring profile and fitting an FKM O-ring to the KF DN50 geometry"
   manufacturing_steps:
     - "Cut or mold PTFE ring blank for the DN50 KF centering geometry."
     - "Machine the annular centering profile and O-ring groove/features to the catalog/CAD dimensions."
@@ -46,9 +46,9 @@ how_to_make:
     cited_fact_or_basis: "CAD preview shows a shallow annular profile; the catalog identifies the component as a PTFE plastic ISO-KF centering ring with FKM O-ring; the distributor page identifies 172ZRG050 as a purchasable Pfeiffer DN50 ISO-KF centering ring. targeted_web_search: queries tried included '172ZRG050 Pfeiffer Vacuum seal ISO-KF DN 50 material weight' and '\"172ZRG050\"'; searches resolved product identity/material but did not find a source that states the manufacturing process."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "Local manufacturing route is inferred from the simple annular CAD geometry and PTFE/FKM component materials rather than stated by the vendor."
+    - "Inferred from the simple annular CAD geometry and PTFE/FKM component materials rather than stated by the vendor."
   uncertainty_notes:
     - "Actual commercial production may use molded PTFE, machined PTFE, or another supplier-specific process."
 kb_implications:
-  - "item_granularity: consumable - Model as a replaceable ISO-KF DN50 seal/centering-ring consumable rather than a unique machine subsystem."
+  - "item_granularity: simple_part - Model as a replaceable ISO-KF DN50 seal/centering-ring replaceable or applied part rather than a unique machine subsystem."
 ---

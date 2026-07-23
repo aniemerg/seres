@@ -45,10 +45,10 @@ how_to_make:
     - "Apply protective finish or cleaning if required by the final enclosure/hood environment."
   source:
     url_or_path: "design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/17AK_sheet_top.step; research/ream250_bom/ream250_bom_row_0239_17AK__views_2x2.png; web search"
-    cited_fact_or_basis: "The STEP geometry measures a simple 2.00 mm thick rectangular sheet with no visible holes, bends, or attached features in the rendered preview. targeted_web_search: searched \"reAM250 17AK sheet_top material\", \"17AK_sheet_top\", and \"reAM250 sheet_top material\"; found no row-specific fabrication drawing or manufacturing source."
+    cited_fact_or_basis: "The STEP geometry measures a simple 2.00 mm thick rectangular sheet with no visible holes, bends, or attached features in the rendered preview. targeted_web_search: searched \"reAM250 17AK sheet_top material\", \"17AK_sheet_top\", and \"reAM250 sheet_top material\" found no row-specific fabrication drawing or manufacturing source."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "A plain 2 mm rectangular sheet is best modeled as a cut sheet-metal part rather than a machined block or purchased calibrated module."
+    - "A plain 2 mm rectangular sheet is best modeled as a cut sheet-metal part rather than a machined block or external calibrated module"
     - "Finishing is included as a conditional step because the unresolved material and enclosure location may require corrosion or powder-contact surface protection."
   uncertainty_notes:
     - "No row-specific drawing was found, so tolerances, finish, and whether any hidden post-CAD operations are required remain unresolved."

@@ -37,9 +37,8 @@ material:
   uncertainty_notes:
     - "No row-specific material metadata, drawing, or supplier line item confirms the alloy or whether this exact subpart is a cage, spacer, shield, or ring."
 how_to_make:
-  summary: "Near-term route is to procure the complete SLA10/6200-2RS bearing unit or the bearing subcomponent; a plausible local route is stamped or machined thin steel ring/cage fabrication followed by deburring, heat treatment or finishing if required, and assembly into the bearing."
+  summary: "Stamped or machined thin steel ring/cage fabrication followed by deburring, heat treatment or finishing if required, and assembly into the bearing"
   manufacturing_steps:
-    - "For current modeling, procure as part of a standard SLA10 supported bearing or 6200-2RS replacement bearing."
     - "For local manufacture, blank or turn the annular ring from steel-family stock to the measured outer diameter, bore, and width."
     - "Machine, punch, or broach the side openings/pockets, then deburr and finish contact edges."
     - "Clean, inspect concentricity and pocket geometry, then assemble with balls/races/seals and grease in the bottom-axis bearing."
@@ -56,3 +55,88 @@ kb_implications:
 ---
 
 # reAM250 BOM Row 41 - 2AC7
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0041_2AC7.md
+source_research_sha256: "0f54f35fa91b41f92bbe7a80ee2989f51b038b732edbb82c6eab7c642d7fce33"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Read the bearing-internal function hypothesis, CAD-volume mass estimate, probable steel retainer material, inferred bearing subpart route, KB implication, and CAD preview showing a small annular ring with side openings."
+decomposition:
+  decision: simple_part
+  rationale: "The row is one precision bearing-internal part with unresolved exact role; it should be considered with the complete bearing supply chain before becoming a standalone local closure item."
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: precision_bearing_retainer_fabrication
+  primary_process_bucket: precision_component_import_decompose_later
+  supporting_processes:
+    - precision_machining
+    - forming
+    - deburring
+    - cleaning
+    - dimensional_inspection
+    - assembly
+  candidate_existing_processes:
+    - process_id: bearing_set_fabrication_v0
+      fit: partial
+      reason: "Relevant to bearing-level fabrication, but this row is one internal retainer-like component."
+    - process_id: bearing_manufacturing_small_v0
+      fit: partial
+      reason: "Provides a small bearing manufacturing anchor; final staging should decide whether this part remains internal to a bearing item."
+    - process_id: machining_precision_v0
+      fit: supporting
+      reason: "Applies if the ring openings, bore, and concentricity are machined rather than stamped."
+    - process_id: inspection_basic_v0
+      fit: supporting
+      reason: "Covers coarse inspection, while bearing-grade dimensional checks may need stricter metrology."
+  abstraction_decision: substitute_process_family
+  rationale: "The source evidence is too uncertain for a normal ring fabrication bucket; precision bearing context dominates the closure risk."
+  process_guardrails:
+    tolerance: high
+    surface_finish: review
+    sealing_quality: not_applicable
+    alignment_accuracy: high
+    blocked_by_precision: true
+identity_for_merge:
+  functional_purpose: bearing internal rolling-element retainer and spacer function
+  material: probable_steel_bearing_retainer_material
+  scale_or_capacity:
+    mass_kg: 0.00669
+    bom_quantity: 1
+    row_total_mass_kg: 0.00669
+    scale_class: tiny
+  geometry_form: small_annular_ring_with_side_openings
+merge_pool:
+  eligible: false
+  functional_purpose_key: bearing_retention
+  precision_guardrails:
+    - concentricity
+    - bearing_internal_clearance
+    - pocket_geometry
+    - material_hardness
+    - surface_finish
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - precision_component_import_decompose_later
+  import_risk_factors:
+    - "Exact role is unresolved among cage, spacer, shield, and ring interpretations."
+    - "Bearing-internal tolerances, material state, cleanliness, and assembly quality may exceed ordinary local fabrication."
+  post_merge_decision_notes: "Final import/local decision is deferred until bearing assembly rows are reviewed together."
+kb_staging:
+  proposed_item_id: null
+  notes: "Do not stage a final item ID until the SLA10/6200 bearing decomposition strategy is reviewed."
+assumptions:
+  - "The annular ring with side openings is treated as a bearing retainer-style component based on neighboring SLA10 evidence."
+  - "Steel density is a planning proxy because row-specific material metadata is placeholder quality."
+unresolved:
+  - "Exact bearing subpart role, material, heat treatment, cage production method, tolerance class, and relation to the complete bearing assembly remain unresolved."
+```

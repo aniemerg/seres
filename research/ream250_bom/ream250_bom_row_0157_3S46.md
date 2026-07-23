@@ -45,7 +45,7 @@ how_to_make:
     - "Attach or retain it in the larger gas outlet assembly by the assembly method used for the neighboring outlet parts."
   source:
     url_or_path: "design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/3S46_part_6.step; research/ream250_bom/ream250_bom_row_0157_3S46__views_2x2.png; web search"
-    cited_fact_or_basis: "CAD preview and dimensions show a thin bent panel/vane with sheet-like proportions and no visible complex machined bores or standard hardware features. targeted_web_search: queries tried: \"3S46\" \"gas outlet\" reAM250; \"3S46_part_6\"; \"Renishaw AM250\" \"gas outlet\" material; \"reAM250\" \"gas outlet\". Result: no row-specific manufacturing drawing or process note was found."
+    cited_fact_or_basis: "CAD preview and dimensions show a thin bent panel/vane with sheet-like proportions and no visible complex machined bores or standard hardware features. targeted_web_search: queries tried: \"3S46\" \"gas outlet\" reAM250; \"3S46_part_6\" \"Renishaw AM250\" \"gas outlet\" material; \"reAM250\" \"gas outlet\". Result: no row-specific manufacturing drawing or process note was found."
     evidence_basis: "engineering_hypothesis"
   assumptions:
     - "Sheet cutting plus bending is selected because it matches the thin folded geometry more closely than billet machining or additive manufacture."
@@ -57,3 +57,86 @@ kb_implications:
 ---
 
 Research result for reAM250 BOM row 157.
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0157_3S46.md
+source_research_sha256: "1588f7da6fb96e1fbebab7b18b5ca6d49f7c11c51db8e65ffc8740026f8dc608"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Read the gas-outlet function, mass estimate and basis, unresolved sheet-metal evidence, forming route, KB implications, and CAD preview showing a thin bent panel/vane."
+decomposition:
+  decision: simple_part
+  rationale: "The row is a single formed sheet-metal outlet component with no separable subparts visible in the evidence."
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: sheet_cutting_bending
+  primary_process_bucket: sheet_plate_cutting_drilling
+  supporting_processes:
+    - stock_preparation
+    - cutting
+    - forming
+    - deburring
+    - cleaning
+    - dimensional_inspection
+  candidate_existing_processes:
+    - process_id: cutting_basic_v0
+      fit: direct
+      reason: "Covers cutting the thin metal blank from sheet stock."
+    - process_id: metal_forming_basic_v0
+      fit: supporting
+      reason: "Covers bending and flange forming for the outlet-panel geometry."
+    - process_id: inspection_basic_v0
+      fit: supporting
+      reason: "Covers checks of formed profile, dimensions, edge quality, and fit in the outlet assembly."
+    - process_id: cleaning_basic_v0
+      fit: supporting
+      reason: "Relevant because the row functions in a gas-flow path and should be clean before installation."
+  abstraction_decision: keep_original_family
+  rationale: "The source route is a thin sheet cutting and forming path. The primary closure bucket should remain sheet and plate cutting, with forming as a supporting step."
+  process_guardrails:
+    tolerance: review
+    surface_finish: review
+    sealing_quality: not_applicable
+    alignment_accuracy: review
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: "guide and shield element for a gas outlet flow passage"
+  material: unknown_sheet_metal_alloy
+  scale_or_capacity:
+    mass_kg: 0.0362
+    bom_quantity: 1
+    row_total_mass_kg: 0.0362
+    scale_class: small
+  geometry_form: formed_thin_sheet_vane_panel
+merge_pool:
+  eligible: true
+  functional_purpose_key: gas_flow_guidance
+  precision_guardrails:
+    - formed_profile
+    - edge_quality
+    - outlet_fit
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - sheet_plate_cutting_drilling
+  import_risk_factors:
+    - "Material is unresolved; steel and aluminum variants change mass and closure inputs."
+    - "Attachment method and final outlet assembly fit are unresolved."
+  post_merge_decision_notes: "Final import/local decision is deferred until merge review compares the numbered gas-outlet sheet components."
+kb_staging:
+  proposed_item_id: null
+  notes: "Wait for merge review with sibling gas outlet parts before assigning a closure item."
+assumptions:
+  - "Steel-density planning mass is retained from the research row while material remains unresolved."
+  - "The part is treated as formed sheet metal because the preview shows a thin bent panel with sheet-like proportions."
+unresolved:
+  - "Exact alloy, thickness callout, coating, attachment method, fit tolerance, and role within the full gas outlet assembly are not specified."
+```

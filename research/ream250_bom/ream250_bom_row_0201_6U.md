@@ -37,10 +37,9 @@ material:
   uncertainty_notes:
     - "The vendor page gives only aluminum alloy; the more specific Aluminum 6061 grade comes from local STEP material metadata rather than the public product page."
 how_to_make:
-  summary: "Procure as a standard 3VBELT GT2 20-tooth, 6 mm belt-width, 6.35 mm bore timing pulley; a plausible local route is to machine an Aluminum 6061 pulley blank, cut the GT2 tooth profile and flanges/hub, drill/bore the 6.35 mm shaft hole and set-screw hole, then deburr and inspect belt/shaft fit."
+  summary: "Prepare as a standard 3VBELT GT2 20-tooth, 6 mm belt-width, 6.35 mm bore timing pulley; machine an Aluminum 6061 pulley blank, cut the GT2 tooth profile and flanges/hub, drill/bore the 6.35 mm shaft hole and set-screw hole, then deburr and inspect belt/shaft fit"
   manufacturing_steps:
-    - "Procurement route: buy the row-matched 3VBELT GT2-6mm-20T pulley variant with 6.35 mm bore."
-    - "Local route: start from aluminum alloy bar or a near-net pulley blank sized for about 15 mm outside diameter and 18 mm length."
+    - "Manufacturing route: start from aluminum alloy bar or a near-net pulley blank sized for about 15 mm outside diameter and 18 mm length."
     - "Turn the OD, hub, bore, and flanges; cut or hob the 20-tooth GT2 belt profile; drill and tap the radial set-screw hole visible in the CAD preview."
     - "Deburr/anodize or finish if required, then inspect tooth count, 6 mm belt-width interface, 6.35 mm bore fit, and pulley runout."
   source:
@@ -48,10 +47,98 @@ how_to_make:
     cited_fact_or_basis: "The 3VBELT product route establishes the standard purchased product identity, tooth count, belt width, material family, and bore variants. The rendered CAD contact sheet shows a flanged toothed pulley with central bore and side set-screw hole. targeted_web_search: queries tried included 'GT2 6mm timing belt pulley 20 teeth aluminum alloy 6.35mm bore manufacturing machined hobbing' and 'GT2 20 tooth timing pulley aluminum set screw hobbing machining'; results found matching aluminum GT2 pulley product/spec listings but no row-specific supplier manufacturing process, so detailed local operations are inferred from geometry and standard pulley fabrication practice."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "For current KB planning, procurement as a commodity timing pulley is the preferred route unless local small-pulley machining becomes a modeled capability."
     - "The local manufacturing path assumes a one-piece aluminum pulley body with a set-screw hole, consistent with the CAD preview."
   uncertainty_notes:
     - "Exact factory process, surface treatment, tooth-profile tolerance, and whether a separate set screw is included are not specified by the row evidence."
 kb_implications:
   - "item_granularity: simple_part - model as reusable standard GT2 aluminum timing pulley hardware with bore/tooth/belt-width parameters, not as a reAM250-specific purchased module."
 ---
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0201_6U.md
+source_research_sha256: "2553e5affbc6be32e4479b61ce4314872c0860295017b28cec90041c8657d334"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Read function, quantity, CAD-derived mass, Aluminum 6061 material evidence, timing pulley manufacturing route, kb implications, and preview showing a flanged toothed pulley with bore and set-screw hole."
+decomposition:
+  decision: simple_part
+  rationale: "The row is one machined pulley body with integral teeth, flanges, bore, and set-screw feature. Any separate set screw is not represented in the row CAD evidence."
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: aluminum_timing_pulley_turning_tooth_cutting_and_bore_machining
+  primary_process_bucket: general_subtractive_machining
+  supporting_processes:
+    - stock_preparation
+    - cutting
+    - precision_machining
+    - gear_tooth_machining
+    - drilling
+    - thread_forming
+    - deburring
+    - surface_finishing
+    - dimensional_inspection
+  candidate_existing_processes:
+    - process_id: machining_basic_v0
+      fit: partial
+      reason: "Covers turning, boring, and drilled set-screw features at coarse closure level."
+    - process_id: gear_cutting_basic_v0
+      fit: supporting
+      reason: "Closest anchor for cutting the GT2 tooth profile, although pulley teeth differ from ordinary gears."
+    - process_id: surface_treatment_anodizing_v0
+      fit: supporting
+      reason: "Relevant if the aluminum pulley receives an anodized/protective finish."
+    - process_id: inspection_basic_v0
+      fit: supporting
+      reason: "Relevant for bore fit, tooth count/profile, belt width, and runout checks."
+  abstraction_decision: keep_original_family
+  rationale: "The source route is standard subtractive machining of a small aluminum power-transmission part with specialized tooth cutting and bore inspection."
+  process_guardrails:
+    tolerance: bore_and_tooth_profile_review
+    surface_finish: belt_contact_surface_review
+    sealing_quality: not_applicable
+    alignment_accuracy: pulley_runout_review
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: synchronous belt torque transmission between motor shaft and belt
+  material: aluminum_6061
+  scale_or_capacity:
+    mass_kg: 0.00426
+    bom_quantity: 1
+    row_total_mass_kg: 0.00426
+    scale_class: small
+  geometry_form: gt2_20_tooth_6mm_belt_pulley_6_35mm_bore
+merge_pool:
+  eligible: true
+  functional_purpose_key: power_transmission
+  precision_guardrails:
+    - gt2_tooth_profile
+    - bore_6_35mm
+    - belt_width_6mm
+    - pulley_runout
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - general_subtractive_machining
+  import_risk_factors:
+    - "Tooth-profile tolerance, surface treatment, runout requirement, and separate set-screw inclusion are unresolved."
+    - "Very small pulley hardware may be cheaper to import unless standardized with other belt-drive components."
+  post_merge_decision_notes: "Final import/local decision is deferred until merge review groups timing pulleys by belt interface, bore, material, and size."
+kb_staging:
+  proposed_item_id: null
+  notes: "Wait for merge review before assigning an item ID; likely candidate family is a small aluminum timing pulley."
+assumptions:
+  - "BOM quantity is 1, so row total mass equals the 0.00426 kg per-unit estimate."
+  - "The Aluminum 6061 STEP metadata is accepted as material evidence for row conversion."
+  - "Bore, belt width, and tooth profile are the critical merge guardrails."
+unresolved:
+  - "Exact tooth-profile tolerance, finish/anodizing, pulley runout, and set-screw inclusion."
+  - "Whether timing pulleys should merge into one parameterized power-transmission hardware family."
+```

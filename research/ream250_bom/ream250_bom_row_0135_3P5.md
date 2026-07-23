@@ -35,7 +35,7 @@ material:
   uncertainty_notes:
     - "Material is resolved for the reducer body/media-contact component; any separately purchased seals or clamps are outside this BOM row."
 how_to_make:
-  summary: "Procure as Pfeiffer Vacuum 320RRK100-063-63, or model local production as a stainless 304 vacuum reducer made from ISO-K flange stock and a conical reducer shell with vacuum-clean finishing and leak checking."
+  summary: "Prepare as Pfeiffer Vacuum 320RRK100-063-63, or model local production as a stainless 304 vacuum reducer made from ISO-K flange stock and a conical reducer shell with vacuum-clean finishing and leak checking"
   manufacturing_steps:
     - "Prepare stainless 304/1.4301 ISO-K DN100 and DN63 flange ends and conical reducer shell stock."
     - "Form or machine the conical transition and machine flange sealing and clamp-interface features to ISO-K geometry."
@@ -46,7 +46,7 @@ how_to_make:
     cited_fact_or_basis: "The row-matched shop page identifies a stainless 304/1.4301 ISO-K conical reducer. Pfeiffer vacuum-technology guidance says stainless steel is preferred for vacuum chambers/components and can be welded vacuum-tight. CAD preview shows a conical reducer with two flange ends. targeted_web_search: queries tried: 'Pfeiffer 320RRK100-063-63 manufacturing welded', 'Pfeiffer ISO-K conical reducer stainless 304 manufacturing', and 'vacuum conical reducer stainless steel welded'; no row-specific source stated the exact factory process, so detailed forming, machining, welding, finishing, and leak-test steps are inferred from the sourced geometry/material and vacuum-component practice."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "Local production would be treated as fabrication of a simple vacuum piping component, not as a calibrated purchased subsystem."
+    - "Be treated as fabrication of a simple vacuum piping component, not as a calibrated external subsystem"
     - "ISO-K sealing surfaces and flange interfaces require machining/inspection precise enough for vacuum service."
   uncertainty_notes:
     - "The exact Pfeiffer factory route is not sourced; local manufacturing steps are plausible process planning for KB modeling, not a vendor manufacturing specification."

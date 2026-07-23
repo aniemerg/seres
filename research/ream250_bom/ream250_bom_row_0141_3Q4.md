@@ -35,7 +35,7 @@ material:
   uncertainty_notes:
     - "The vendor page distinguishes the title material 1.4401/316 from the media-contact material 1.4404/316L; downstream KB modeling can usually use the stainless steel/316-family unless grade-specific corrosion behavior matters."
 how_to_make:
-  summary: "Model as a small stainless ISO-K vacuum fastening clamp/bracket screw: procure as standard Pfeiffer vacuum hardware, or locally manufacture from stainless stock by machining the claw block, forming/threading the M10 screw feature, deburring/passivating, and inspecting torque-bearing and flange-contact surfaces."
+  summary: "Model as a small stainless ISO-K vacuum fastening clamp/bracket screw: prepare as standard Pfeiffer vacuum hardware, or locally manufacture from stainless stock by machining the claw block, forming/threading the M10 screw feature, deburring/passivating, and inspecting torque-bearing and flange-contact surfaces"
   manufacturing_steps:
     - "Cut stainless steel bar or near-net stock for the clamp body and screw-form geometry."
     - "CNC mill the claw faces, shoulders, and stepped clamp block visible in the CAD preview."
@@ -47,11 +47,11 @@ how_to_make:
     cited_fact_or_basis: "The rendered CAD contact sheet shows a compact claw-like clamp block with a cylindrical screw/shaft feature. FreeCAD measured bounding box 61.50 x 23.06 x 14.95 mm. The Pfeiffer Vacuum Online Shop page lists M10, torque 12-16 Nm, DN 63-DN 250 ISO-K use, and stainless steel material. official_alternate_route_check: original BOM URL https://www.pfeiffer-vacuum.com/global/de/shop/products/320BKL250 returned a Pfeiffer wrapper page; the used vacuum-shop.com page is branded as Pfeiffer Vacuum Online Shop, links the same 320BKL250 data sheet and STEP file, and matches the row manufacturer and product ID."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "The local manufacturing route is inferred from stainless material, the vendor-listed M10 fastening interface, and the visible machined clamp geometry."
+    - "The inferred from stainless material, the vendor-listed M10 fastening interface, and the visible machined clamp geometry."
     - "Vacuum service requires clean, burr-free stainless bearing and threaded surfaces."
   uncertainty_notes:
     - "The row evidence resolves product identity, geometry, material, and interface, but not Pfeiffer's actual production process, heat treatment, or surface finish specification."
-    - "targeted_web_search: checked the BOM-provided Pfeiffer URL, the row-matched Pfeiffer Vacuum Online Shop page for 320BKL250, and searched local/page text for 320BKL250 manufacturing, datasheet, material, M10, and ISO-K clamp facts; found row-matched product/material/interface facts but no row-specific manufacturing process specification."
+    - "Targeted_web_search: checked the BOM-provided Pfeiffer URL, the row-matched Pfeiffer Vacuum Online Shop page for 320BKL250, and searched local/page text for 320BKL250 manufacturing, datasheet, material, M10, and ISO-K clamp facts; found row-matched product/material/interface facts but no row-specific manufacturing process specification."
 kb_implications:
   - "item_granularity: simple_part - standard ISO-K stainless vacuum fastening hardware with one main clamp/screw geometry; later KB modeling should map it to reusable stainless ISO-K clamp/fastener hardware rather than a machine-specific purchased module."
 ---

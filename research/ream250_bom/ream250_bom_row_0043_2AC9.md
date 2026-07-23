@@ -37,7 +37,7 @@ material:
   uncertainty_notes:
     - "The evidence supports only a broad metal/alloy family; downstream KB modeling should not assign a specific grade without a drawing, material callout, or related assembly note."
 how_to_make:
-  summary: "Fabricate as a one-piece machined bearing support bracket from metal billet or plate stock, or procure as part of the reAM250 lower-axis bearing fabrication package."
+  summary: "Fabricate as a one-piece machined bearing support bracket from metal billet or plate stock"
   manufacturing_steps:
     - "Cut a metal billet or thick plate blank large enough for the 86 x 24 x 58 mm envelope."
     - "CNC mill the external block, feet, and angled relief faces."
@@ -57,3 +57,95 @@ kb_implications:
 ---
 
 Research result for the leased reAM250 BOM row only.
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0043_2AC9.md
+source_research_sha256: "d51e81f6e2dc513b17184b2e790ef28d2f9fe87664524cdf54e4dc239ba734a7"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Read the axis-bearing function, steel-density mass assumption, unknown metal material evidence, machined-block route, KB implications, and CAD preview before conversion."
+decomposition:
+  decision: simple_part
+  rationale: "The row is a one-piece bearing support block with a central bore and mounting features. It is not a module and should remain a simple machined part for merge review."
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: cnc_machined_bearing_support_block
+  primary_process_bucket: general_subtractive_machining
+  supporting_processes:
+    - stock_preparation
+    - cutting
+    - drilling
+    - precision_machining
+    - deburring
+    - surface_finishing
+    - dimensional_inspection
+  candidate_existing_processes:
+    - process_id: machining_basic_v0
+      fit: partial
+      reason: "Covers general stock removal for the block, feet, and planar faces."
+    - process_id: machining_precision_v0
+      fit: supporting
+      reason: "Relevant if the bearing bore, mounting faces, and axis alignment need tighter control."
+    - process_id: machining_process_boring_v0
+      fit: supporting
+      reason: "Anchors the central bearing and shaft bore operation."
+    - process_id: drilling_basic_v0
+      fit: supporting
+      reason: "Covers smaller side mounting holes."
+    - process_id: finishing_deburring_v0
+      fit: supporting
+      reason: "Covers cleanup of machined edges and bore edges."
+    - process_id: inspection_basic_v0
+      fit: supporting
+      reason: "Covers bore diameter, hole location, flatness, and mounting-face checks."
+  abstraction_decision: keep_original_family
+  rationale: "The inferred source route is machining from metal stock, matching the selected general subtractive machining bucket. Precision boring and inspection are retained as support tags."
+  process_guardrails:
+    tolerance: review
+    surface_finish: review
+    sealing_quality: not_applicable
+    alignment_accuracy: review
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: support and locate a lower-axis bearing around a shaft bore
+  material: unknown_metal
+  scale_or_capacity:
+    mass_kg: 0.49
+    bom_quantity: 1
+    row_total_mass_kg: 0.49
+    scale_class: small
+  geometry_form: compact_machined_bearing_block_with_central_bore_and_mounting_feet
+merge_pool:
+  eligible: true
+  functional_purpose_key: bearing_support
+  precision_guardrails:
+    - bore_diameter
+    - bore_alignment
+    - mounting_face_flatness
+    - hole_pattern
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - general_subtractive_machining
+  import_risk_factors:
+    - "Material is unresolved and the steel-density mass is a conservative planning assumption."
+    - "Bearing bore and shaft alignment may require precision machining beyond a rough block recipe."
+  post_merge_decision_notes: "Final import/local decision is deferred until merge review compares this row with adjacent lower-axis bearing support parts."
+kb_staging:
+  proposed_item_id: null
+  notes: "Wait for merge review; likely a reusable bearing support block family with material-specific variants if evidence diverges."
+assumptions:
+  - "Steel-like density is retained for conservative scale grouping because the material is unresolved."
+  - "The CAD solid is treated as one physical support block."
+  - "A generic machined bearing-support closure item may cover this row if bore and mounting interfaces remain guardrails."
+unresolved:
+  - "Exact alloy, bearing insert relationship, bore tolerance, heat treatment, and surface finish are not available from the row evidence."
+```

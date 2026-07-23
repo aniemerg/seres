@@ -47,7 +47,7 @@ how_to_make:
     - "Deburr, inspect hole locations and flatness, then anodize or otherwise finish if the machine environment requires corrosion/wear protection."
   source:
     url_or_path: "design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/2A6_left_plate.step; research/ream250_bom/ream250_bom_row_0029_2A6__views_2x2.png; web_search"
-    cited_fact_or_basis: "The row-specific STEP/contact sheet shows one custom plate-like solid with a triangular outline, milled-looking ribs/pockets, edge features, and mounting holes. targeted_web_search: searched \"2A6_left_plate reAM250 material\", \"2A6 2A6_left_plate\", \"reAM250 left_plate 2A6\", and \"reAM250 2A6_left_plate manufacturing\"; no row-specific manufacturing drawing, vendor page, or process note was found."
+    cited_fact_or_basis: "The row-specific STEP/contact sheet shows one custom plate-like solid with a triangular outline, milled-looking ribs/pockets, edge features, and mounting holes. targeted_web_search: searched \"2A6_left_plate reAM250 material\", \"2A6 2A6_left_plate\", \"reAM250 left_plate 2A6\", and \"reAM250 2A6_left_plate manufacturing\" no row-specific manufacturing drawing, vendor page, or process note was found."
     evidence_basis: "engineering_hypothesis"
   assumptions:
     - "The ribbed geometry is treated as machined or plate-fabricated geometry, not a cast part, because the CAD shows planar pockets and regular hole features."
@@ -60,3 +60,91 @@ kb_implications:
 # reAM250 BOM Row 29 - 2A6
 
 Research result for the leased reAM250 BOM row.
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0029_2A6.md
+source_research_sha256: "12750fd4314f43b8e7e17dcc23ae634a25328a9e5551358bfd8b4dc553ba4523"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Read the row function, CAD-derived mass basis, inferred aluminum material, CNC plate manufacturing route, KB implications, and preview evidence showing a triangular ribbed support plate with mounting holes."
+decomposition:
+  decision: simple_part
+  rationale: "The evidence describes one monolithic structural side plate for the Z-axis assembly; no internal module decomposition is needed before merge review."
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: cnc_machined_aluminum_plate
+  primary_process_bucket: general_subtractive_machining
+  supporting_processes:
+    - stock_preparation
+    - cutting
+    - drilling
+    - precision_machining
+    - deburring
+    - surface_finishing
+    - dimensional_inspection
+  candidate_existing_processes:
+    - process_id: machining_basic_v0
+      fit: partial
+      reason: "Covers generic stock removal for a machined metal part, but does not capture the ribbed pocket geometry and motion-axis alignment guardrails."
+    - process_id: machining_precision_v0
+      fit: supporting
+      reason: "Relevant for flatness, hole location, and mating-edge tolerances in the Z-axis support structure."
+    - process_id: sheet_metal_cutting_v0
+      fit: supporting
+      reason: "Useful for rough blank/profile preparation from plate stock before machining."
+    - process_id: drilling_basic_v0
+      fit: supporting
+      reason: "Matches the mounting-hole pattern step, with final tolerances deferred to precision machining and inspection."
+    - process_id: inspection_basic_v0
+      fit: supporting
+      reason: "Covers dimensional checks of flatness, hole positions, and interface edges before assembly."
+  abstraction_decision: keep_original_family
+  rationale: "The original inferred route is CNC machining from thick aluminum plate, and the ribbed pockets plus motion-axis mounting function make general subtractive machining the main closure handle."
+  process_guardrails:
+    tolerance: review
+    surface_finish: standard
+    sealing_quality: not_applicable
+    alignment_accuracy: review
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: structural side support for Z-axis linear motion assembly
+  material: aluminum_alloy
+  scale_or_capacity:
+    mass_kg: 3.5
+    bom_quantity: 1
+    row_total_mass_kg: 3.5
+    scale_class: medium
+  geometry_form: triangular_ribbed_machined_plate_with_mounting_hole_edge
+merge_pool:
+  eligible: true
+  functional_purpose_key: structural_frame_member
+  precision_guardrails:
+    - flatness
+    - hole_position_accuracy
+    - linear_axis_alignment
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - general_subtractive_machining
+  import_risk_factors:
+    - "Actual material could be steel, which would change mass and machining requirements."
+    - "Motion-axis alignment may require tighter inspection than ordinary structural plates."
+  post_merge_decision_notes: "Final import/local decision is deferred until merge review compares this plate with other Z-axis support and frame-member rows."
+kb_staging:
+  proposed_item_id: null
+  notes: "Wait for merge review with mirrored and similar structural support plates before assigning a final closure item."
+assumptions:
+  - "Aluminum alloy is retained as the planning material because the row research selected it from geometry and lightweight motion-axis context."
+  - "The CAD volume is accepted as finished-part volume including ribs, pockets, holes, and edge features."
+unresolved:
+  - "Exact alloy, temper, surface treatment, and production drawing tolerances remain unknown."
+  - "Whether a later lunar design can simplify ribbed pockets without losing Z-axis stiffness needs merge-stage review."
+```

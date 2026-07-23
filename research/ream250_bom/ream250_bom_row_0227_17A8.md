@@ -38,7 +38,7 @@ material:
   uncertainty_notes:
     - "bom_url_route_check: The BOM-provided Bosch Rexroth store URL returned a Salesforce Commerce Cloud file-not-found page and did not expose row-specific material or finish data; the independent ESD listing was used as a same-manufacturer, same-profile-family cross-check for anodized aluminum finish."
 how_to_make:
-  summary: "Procure or extrude Bosch/Rexroth-compatible 20 x 20 mm aluminum T-slot/strut profile, anodize if required, saw cut to about 70.4 mm, deburr, and install with compatible connectors or fasteners."
+  summary: "Extrude Bosch/Rexroth-compatible 20 x 20 mm aluminum T-slot/strut profile, anodize if required, saw cut to about 70.4 mm, deburr, and install with compatible connectors or fasteners"
   manufacturing_steps:
     - "Extrude 6061 or compatible aluminum alloy through a 20 x 20 mm slotted profile die."
     - "Anodize or otherwise finish the profile for corrosion and wear resistance."
@@ -49,9 +49,9 @@ how_to_make:
     cited_fact_or_basis: "Independent listing describes Bosch Rexroth 20x20 strut profile as anodized aluminum, 4 open 6 mm slots, variable cut length 50-3000 mm, profile area 1.6 cm^2, mass 0.4 kg/m. CAD preview shows a cut short slotted extrusion."
     evidence_basis: "independent_vendor_spec"
   assumptions:
-    - "A standard cut-to-length Rexroth profile procurement route is acceptable for this BOM row; local manufacture would follow ordinary aluminum extrusion plus cut/deburr steps."
+    - "Follow ordinary aluminum extrusion plus cut/deburr steps for the Rexroth-style cut-to-length profile"
   uncertainty_notes:
-    - "bom_url_route_check: The original BOM Link URL was checked directly and returned a file-not-found page, so it did not resolve manufacturing or cut-length details; the independent same-manufacturer product listing was used for route details."
+    - "Bom_url_route_check: The original BOM Link URL was checked directly and returned a file-not-found page, so it did not resolve manufacturing or cut-length details; the independent same-manufacturer product listing was used for route details."
 kb_implications:
-  - "item_granularity: raw_material_or_stock - Model as a cut length of reusable aluminum T-slot/strut profile stock rather than a bespoke machined part; BOM/recipe can carry the 70.4 mm cut length."
+  - "item_granularity: simple_part - Model as a cut length of reusable aluminum T-slot/strut profile stock rather than a bespoke machined part; BOM/recipe can carry the 70.4 mm cut length."
 ---

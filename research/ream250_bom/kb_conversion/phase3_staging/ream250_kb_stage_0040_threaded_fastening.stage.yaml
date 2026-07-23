@@ -1,0 +1,196 @@
+stage_id: ream250_kb_stage_0040_threaded_fastening
+stage_status: ready_for_review
+source_merge_review: research/ream250_bom/kb_conversion/merge_reviews/ream250_kb_merge_0040_threaded_fastening.md
+source_phase2_decision: merge
+purpose: Stage the Phase 2 threaded-fastening merge as reuse of the existing small fastener kit while preserving M4 DIN 912 variants.
+
+evidence_inputs:
+  merge_review_read: true
+  original_rows_read:
+    - research/ream250_bom/ream250_bom_row_0349_613.md
+    - research/ream250_bom/ream250_bom_row_0348_612.md
+    - research/ream250_bom/ream250_bom_row_0109_2AVA.md
+  existing_kb_checked:
+    items:
+      - kb/items/parts/fastener_kit_small.yaml
+      - kb/items/parts/general_purpose_fastener_v0.yaml
+      - kb/items/parts/bolt_and_nut_steel_v0.yaml
+      - kb/items/parts/fastener_kit_medium.yaml
+      - kb/items/parts/bolt_hex_medium_steel.yaml
+      - kb/items/parts/nut_hex_medium_steel.yaml
+    boms:
+      - kb/boms/bom_fastener_kit_small_v0.yaml
+    recipes:
+      - kb/recipes/recipe_fastener_kit_small_v0.yaml
+    processes:
+      - kb/processes/fastener_kit_small_fabrication_v0.yaml
+      - kb/processes/fastener_kit_medium_production_v0.yaml
+      - kb/processes/machining_basic_v0.yaml
+      - kb/processes/inspection_basic_v0.yaml
+    search_terms:
+      - fastener_kit_small
+      - socket head
+      - cap screw
+      - M4
+      - DIN 912
+      - threaded fastening
+  notes: "The existing small fastener kit explicitly covers M3-M8 small hardware and its BOM notes include M3-M5 socket head cap screws. Broader generic fastener and medium fastener items are less precise for these M4 DIN 912 rows, so Conservative Mode favors reuse of fastener_kit_small."
+
+proposed_items:
+  - action: reuse_existing
+    proposed_item_id: fastener_kit_small
+    phase2_item_id: fastener_kit_small
+    existing_kb_path: kb/items/parts/fastener_kit_small.yaml
+    reason_for_action: "Rows 349, 348, and 109 are all mild-steel DIN 912 M4 socket-head cap screws. The existing fastener_kit_small item is a grouped small-hardware abstraction that already covers M3-M8 fasteners and socket head cap screws, so creating individual M4 screw items would add unnecessary KB proliferation."
+    kb_like_item:
+      id: fastener_kit_small
+      name: Fastener kit (small)
+      kind: part
+      unit: unit
+      unit_kind: discrete
+      material_class: steel
+      mass_kg_existing_field_note: "Existing KB file uses `mass: 1.3`; current schema reference prefers `mass_kg` for discrete parts."
+      notes: "Existing grouped hardware item includes bolts, nuts, screws, and washers for light assemblies."
+    closure_identity:
+      functional_purpose: small removable threaded fastening for machine assemblies
+      material: mild_steel
+      scale_or_capacity:
+        per_unit_mass_range_kg:
+          - 0.00184
+          - 0.00302
+        bom_quantity_range:
+          - 1
+          - 20
+        row_total_mass_range_kg:
+          - 0.00184
+          - 0.0604
+        nominal_thread: M4x0.7
+        length_variants_mm:
+          - 8
+          - 16
+          - 20
+        scale_class: small
+      geometry_form: din_912_m4_socket_head_cap_screw_variants
+    process_assumptions:
+      primary_process_bucket: fastener_forming_thread_rolling
+      local_path_summary: "Reuse the existing aggregate small fastener kit fabrication and kitting path. Preserve DIN 912 M4 thread, length, socket, coating, and property-class details as BOM mapping guardrails rather than new item IDs."
+      candidate_existing_processes:
+        - process_id: fastener_kit_small_fabrication_v0
+          fit: direct
+          reason: "Existing aggregate process produces fastener_kit_small and is the closest local closure handle for these small M4 screws."
+        - process_id: fastener_kit_medium_production_v0
+          fit: poor_fit
+          reason: "Documents integrated fastener operations but targets larger mixed kits rather than M4 socket-head screws."
+        - process_id: machining_basic_v0
+          fit: supporting
+          reason: "Relevant to fallback machining of small screw features where heading and thread rolling are not separately modeled."
+        - process_id: inspection_basic_v0
+          fit: supporting
+          reason: "Relevant for thread size, pitch, length, head, and socket-fit checks."
+    import_local_decision:
+      decision: reuse_existing_local_recipe
+      is_import: false
+      rationale: "The selected existing KB item is not marked import and has both a recipe and an aggregate fabrication process. These low-mass standard M4 screws should remain local via the kit abstraction unless later property-class, coating, or joint-duty evidence requires a specialty imported fastener."
+      local_path_summary: "Use existing small fastener kit fabrication, then consume row-specific M4 DIN 912 variants from the kit in reAM250 BOM mapping."
+      existing_kb_pattern_used:
+        - "kb/items/parts/fastener_kit_small.yaml: existing non-import small fastener kit for light assemblies."
+        - "kb/boms/bom_fastener_kit_small_v0.yaml: kit BOM notes M3-M5 socket head cap screws and M3-M8 hardware coverage."
+        - "kb/recipes/recipe_fastener_kit_small_v0.yaml: existing local recipe for producing a small fastener kit."
+        - "kb/processes/fastener_kit_small_fabrication_v0.yaml: aggregate local fabrication process for the kit."
+      import_risk_factors:
+        - "Fastener property class, coating, exact steel grade, heat treatment, thread tolerance, and socket tolerance are unresolved."
+        - "Existing aggregate recipe does not specifically validate DIN 912 M4 socket-head screw production."
+      local_manufacture_blockers:
+        - "Need decide whether kit-level abstraction is sufficient for installed joint duty."
+        - "Need decide whether row-level BOM consumption should be recorded as unit count, mass drawdown from a kit, or nested kit composition."
+        - "Need resolve schema drift around `mass` versus `mass_kg` before promotion if this item is touched."
+    promotion_blockers:
+      - "Decide whether exact M4 socket-head variants remain permanent BOM mapping notes or become nested kit composition entries."
+      - "Existing item uses `mass` instead of current-schema `mass_kg`; promotion may need schema migration."
+      - "Existing local recipe is aggregate and does not preserve DIN 912 length, socket, coating, or property-class variants."
+      - "Fastener property class, coating, exact grade, heat treatment, and tolerance requirements remain unresolved."
+
+proposed_bom_mappings:
+  - source_row: 349
+    source_item: "613"
+    closure_item_id: fastener_kit_small
+    action: reuse_existing
+    quantity: 1
+    unit: unit
+    row_total_mass_kg: 0.00184
+    per_unit_mass_kg: 0.00184
+    variant_guardrails:
+      nominal_thread: M4x0.7
+      length_mm: 8
+      standard: DIN 912
+      head_style: socket_head_cap_screw
+      material: mild_steel
+    preserved_guardrails:
+      - source_quantity
+      - per_unit_mass
+      - thread_size
+      - thread_pitch
+      - screw_length
+      - head_style
+      - socket_fit
+    notes: "Treat as one M4x8 DIN 912 screw drawn from the small fastener kit, not as a separate KB part."
+  - source_row: 348
+    source_item: "612"
+    closure_item_id: fastener_kit_small
+    action: reuse_existing
+    quantity: 1
+    unit: unit
+    row_total_mass_kg: 0.00263
+    per_unit_mass_kg: 0.00263
+    variant_guardrails:
+      nominal_thread: M4x0.7
+      length_mm: 16
+      standard: DIN 912
+      head_style: socket_head_cap_screw
+      material: mild_steel
+    preserved_guardrails:
+      - source_quantity
+      - per_unit_mass
+      - thread_size
+      - thread_pitch
+      - screw_length
+      - head_style
+      - socket_fit
+    notes: "Preserve the 16 mm length and source quantity while reusing the shared kit-level closure item."
+  - source_row: 109
+    source_item: "2AVA"
+    closure_item_id: fastener_kit_small
+    action: reuse_existing
+    quantity: 20
+    unit: unit
+    row_total_mass_kg: 0.0604
+    per_unit_mass_kg: 0.00302
+    variant_guardrails:
+      nominal_thread: M4x0.7
+      length_mm: 20
+      standard: DIN 912
+      head_style: socket_head_cap_screw
+      material: mild_steel
+    preserved_guardrails:
+      - source_quantity
+      - per_unit_mass
+      - row_total_mass
+      - thread_size
+      - thread_pitch
+      - screw_length
+      - head_style
+      - socket_fit
+    notes: "Preserve quantity 20 and 0.0604 kg row total while mapping to the existing small fastener kit."
+
+stage_findings:
+  - "Phase 3 can directly reuse an existing KB item for this merge group; no new reAM250-specific screw item is warranted under the 5x reuse policy."
+  - "The existing fastener_kit_small BOM already calls out M3-M5 socket head cap screws, making it a closer fit than generic fastener bulk items or the medium kit."
+  - "BOM mappings must carry exact M4x0.7 thread, DIN 912 form, length variants, quantities, and row masses because the kit item intentionally abstracts over many hardware sizes."
+  - "The import/local decision is local through the existing recipe and process, with unresolved specialty fastener attributes recorded as import risks rather than immediate blockers."
+  - "Existing KB schema drift remains visible because fastener_kit_small uses `mass` while the current schema reference calls for `mass_kg` on discrete parts."
+
+unresolved:
+  - "Whether promoted reAM250 BOMs should consume fastener_kit_small by kit unit, by row-specific screw count, or by mass allocation from a kit."
+  - "Whether exact M4 DIN 912 socket-head screws should ever become nested kit members if later simulation needs per-size inventory."
+  - "Property class, coating, exact mild-steel grade, heat treatment, thread tolerance, socket tolerance, and installed joint duty are not specified by the source rows."
+  - "Whether to open a separate schema cleanup task for fastener_kit_small mass versus mass_kg."

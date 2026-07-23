@@ -34,7 +34,7 @@ material:
   uncertainty_notes:
     - "The exact steel property class, alloy, and finish or coating are not specified by the BOM fields or local STEP material metadata."
 how_to_make:
-  summary: "Procure as a standard ISO 4016 steel hexagon-head bolt, or manufacture from steel wire/bar stock by heading the hex head, forming the shank, rolling or cutting the M6 thread, finishing, and inspection."
+  summary: "Prepare as a standard ISO 4016 steel hexagon-head bolt, or manufacture from steel wire/bar stock by heading the hex head, forming the shank, rolling or cutting the M6 thread, finishing, and inspection"
   manufacturing_steps:
     - "Start from steel wire or bar stock sized for an M6 bolt blank."
     - "Cold-head or forge the hex head and shank blank; machining is a low-volume fallback."

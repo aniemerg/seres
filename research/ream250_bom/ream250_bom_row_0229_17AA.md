@@ -38,9 +38,9 @@ material:
   uncertainty_notes:
     - "No specific aluminum alloy temper was found in the BOM row, CAD metadata, or checked datasheet, so the material is kept at family/finish precision."
 how_to_make:
-  summary: "Procure or specify a Bosch Rexroth 20x20 anodized aluminum strut profile cut to the 271 mm CAD length; for local manufacture, extrude an aluminum 20x20 T-slot profile, anodize or otherwise protect the surface, cut to length, and deburr/inspect the ends."
+  summary: "Prepare or specify a Bosch Rexroth 20x20 anodized aluminum strut profile cut to the 271 mm CAD length; for local manufacture, extrude an aluminum 20x20 T-slot profile, anodize or otherwise protect the surface, cut to length, and deburr/inspect the ends"
   manufacturing_steps:
-    - "Procurement route: order the Bosch Rexroth 20x20 strut-profile family in a specified length or standard stock, then cut to 271 mm if supplied oversize."
+    - "Cut to 271 mm if supplied oversize"
     - "Local fabrication route: extrude an aluminum billet through a die for the 20x20 four-slot profile with central bore."
     - "Apply anodized or equivalent protective finish, then saw-cut to 271 mm and deburr open ends."
     - "Inspect length, straightness, slot geometry, and end condition before assembly with standard slot hardware."
@@ -49,9 +49,95 @@ how_to_make:
     cited_fact_or_basis: "The Bosch 20x20 datasheet lists specified-length order options from 50 to 3000 mm for the 20x20 strut profile; a distributor page for genuine Bosch Rexroth 20 x 20 mm aluminum strut profile states it can be cut to required size; the CAD preview confirms the row is a straight slotted extrusion. bom_url_route_check: original Bosch store URL was checked as the BOM route; because parseable manufacturing/procurement details were limited there, the route uses the Bosch-branded datasheet copy and a distributor page matching the same genuine Bosch Rexroth 20x20 strut-profile family."
     evidence_basis: "independent_vendor_spec"
   assumptions:
-    - "The local manufacturing route uses standard aluminum extrusion practice for T-slot framing; the cited sources support product identity and cut-to-length procurement, not every extrusion process parameter."
+    - "The manufacturing route uses standard aluminum extrusion practice for T-slot framing, not every extrusion process parameter"
   uncertainty_notes:
-    - "The exact Bosch alloy, anodizing specification, and end-finish option for this row are not stated; model as a simple structural aluminum profile unless later KB work requires the specific commercial order code."
+    - "The exact Bosch alloy, anodizing specification, and end-finish option for this row are not stated"
 kb_implications:
   - "item_granularity: simple_part - Model as a reusable cut-to-length 20x20 aluminum T-slot profile/simple structural extrusion, not as a unique machine assembly."
 ---
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0229_17AA.md
+source_research_sha256: "0732372e2e09f62ca74a4a5c4562f0ef0c8cd927603f6218b13a5d3fe86b58a9"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Read function, quantity, CAD-derived mass with catalog cross-check, anodized aluminum evidence, extrusion/cut route, kb implications, and preview showing a 271 mm long 20x20 T-slot profile."
+decomposition:
+  decision: simple_part
+  rationale: "The row is a single cut length of structural extrusion with no internal module structure. Slot geometry is part of the profile identity."
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: aluminum_t_slot_profile_extrusion_cut_to_length
+  primary_process_bucket: structural_profile_stock_fabrication_cutting
+  supporting_processes:
+    - extrusion
+    - cutting
+    - deburring
+    - coating
+    - dimensional_inspection
+  candidate_existing_processes:
+    - process_id: metal_extrusion_process_v0
+      fit: partial
+      reason: "Covers aluminum extrusion at coarse level, though the existing process is parameterized around heat-sink fins rather than T-slot framing."
+    - process_id: cutting_basic_v0
+      fit: supporting
+      reason: "Covers cutting profile stock to the 271 mm finished length."
+    - process_id: surface_treatment_anodizing_v0
+      fit: supporting
+      reason: "Relevant to anodized aluminum profile finish if local production includes surface treatment."
+    - process_id: inspection_basic_v0
+      fit: supporting
+      reason: "Relevant for length, slot geometry, straightness, and end-condition checks."
+  abstraction_decision: keep_original_family
+  rationale: "The original route already belongs to structural extrusion stock cut to length. This should merge with other aluminum frame profiles rather than become a unique machine-specific part."
+  process_guardrails:
+    tolerance: standard_profile_review
+    surface_finish: anodized_finish_review
+    sealing_quality: not_applicable
+    alignment_accuracy: frame_straightness_review
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: light structural rail member for frame and fixture assembly
+  material: anodized_aluminum
+  scale_or_capacity:
+    mass_kg: 0.121
+    bom_quantity: 2
+    row_total_mass_kg: 0.242
+    scale_class: small
+  geometry_form: cut_length_20x20_t_slot_extrusion_271mm
+merge_pool:
+  eligible: true
+  functional_purpose_key: structural_frame_member
+  precision_guardrails:
+    - t_slot_interface
+    - profile_straightness
+    - cut_length
+    - anodized_finish
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - structural_profile_stock_fabrication_cutting
+  import_risk_factors:
+    - "Exact alloy, anodizing specification, and profile die availability are unresolved."
+    - "If T-slot compatibility is not required, later design substitution may use simpler structural profiles."
+  post_merge_decision_notes: "Final import/local decision is deferred until merge review compares short aluminum frame profiles and decides profile standardization."
+kb_staging:
+  proposed_item_id: null
+  notes: "Wait for merge review before assigning an item ID; likely candidate family is a small aluminum structural profile."
+assumptions:
+  - "BOM quantity is 2, so row total mass is about 0.242 kg from the 0.121 kg per-unit estimate."
+  - "The 20x20 T-slot interface should be preserved for merge review even if later lunarized design simplifies the profile."
+  - "Anodized aluminum is recorded as material/finish evidence, but exact alloy remains unresolved."
+unresolved:
+  - "Specific aluminum alloy and anodizing specification."
+  - "Whether T-slot modular compatibility is closure-critical in the final KB abstraction."
+  - "Whether multiple short Bosch profile rows should merge into one cut-to-length structural profile family."
+```

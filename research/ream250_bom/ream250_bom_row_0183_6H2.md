@@ -37,7 +37,7 @@ material:
   uncertainty_notes:
     - The material metadata gives the family but not durometer, cure system, filler package, color, or exact silicone grade.
 how_to_make:
-  summary: Procure as a Lisema/vendor silicone seal or manufacture locally as a flat silicone gasket cut from sheet stock, with waterjet/digital knife/die cutting suitable for the rectangular window profile; molded silicone is a fallback if the seal has controlled edge features not captured in the simplified route.
+  summary: "Prepare as a Lisema/vendor silicone seal or manufacture locally as a flat silicone gasket cut from sheet stock, with waterjet/digital knife/die cutting suitable for the rectangular window profile; molded silicone is a fallback if the seal has controlled edge features not captured in the simplified route"
   manufacturing_steps:
     - Select silicone rubber sheet around 2 mm thick with compatible temperature, vacuum, and compression-set requirements.
     - Cut the outer rectangle and inner window profile from sheet using waterjet, digital knife, or steel-rule die tooling.
@@ -52,5 +52,5 @@ how_to_make:
   uncertainty_notes:
     - Without Lisema's drawing, the exact durometer, surface finish, and acceptance criteria remain unspecified.
 kb_implications:
-  - "item_granularity: consumable - Model as a replaceable silicone seal/gasket rather than a machine-specific assembly; later KB work can reuse a generic flat silicone gasket process with row-specific dimensions."
+  - "item_granularity: simple_part - Model as a replaceable silicone seal/gasket rather than a machine-specific assembly; later KB work can reuse a generic flat silicone gasket process with row-specific dimensions."
 ---

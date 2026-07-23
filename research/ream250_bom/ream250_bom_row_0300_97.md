@@ -38,9 +38,9 @@ material:
   uncertainty_notes:
     - "The exact alloy, temper, and surface finish are not encoded in the row fields or local STEP material metadata."
 how_to_make:
-  summary: "Procure as a Bosch Rexroth standard aluminum strut profile cut to 1020 mm, or locally make by aluminum extrusion of the 60 x 60 mm slotted cross-section, straightening/aging as required, cutting to length, deburring, and applying the required protective finish."
+  summary: "Prepare as a Bosch Rexroth standard aluminum strut profile cut to 1020 mm, or locally make by aluminum extrusion of the 60 x 60 mm slotted cross-section, straightening/aging as required, cutting to length, deburring, and applying the required protective finish"
   manufacturing_steps:
-    - "Produce or procure aluminum billet suitable for structural extrusion."
+    - "Produce"
     - "Extrude the 60 x 60 mm slotted profile through a matched die."
     - "Straighten and age or heat-treat according to the selected aluminum profile alloy."
     - "Cut the extrusion to 1020 mm length."
@@ -51,9 +51,97 @@ how_to_make:
     cited_fact_or_basis: "CAD geometry and preview show a constant-section 1020 mm long 60 x 60 mm slotted profile. Bosch Rexroth identifies the product family as aluminum profiles in a modular profile construction kit. targeted_web_search: queries tried were `Bosch Rexroth strut profile 60x60 aluminum weight kg m` and `site:boschrexroth.com Strebenprofil 60x60 Bosch Rexroth Aluminium weight`; results confirmed the aluminum-profile family but did not provide a row-specific manufacturing process for this exact cut length."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "The local manufacturing route is inferred from the constant cross-section CAD shape and common aluminum profile practice; the Bosch source supports product identity, not detailed process steps."
+    - "The inferred from the constant cross-section CAD shape and common aluminum profile practice; the Bosch source supports product identity, not detailed process steps."
   uncertainty_notes:
     - "A self-manufacturing KB entry would need a specific alloy, extrusion die design, temper, and finish specification before detailed process modeling."
 kb_implications:
   - "item_granularity: simple_part - Model as a reusable cut-to-length structural aluminum extrusion/profile, not as a calibrated purchased module; quantity variants can share one profile family with length-specific BOM notes."
 ---
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0300_97.md
+source_research_sha256: "848359d695a1db73f774b2adb9a36f02f91851c507234ed1b53d0db13d3158a0"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Read the machine-frame strut function, CAD-derived per-unit and row-total mass basis, Bosch Rexroth aluminum-profile evidence, extrusion/cut-to-length route, and preview showing a long 60 x 60 mm slotted extrusion."
+decomposition:
+  decision: simple_part
+  rationale: "The row is a cut length of structural aluminum profile; connectors and fasteners are separate hardware."
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: aluminum_profile_extrusion_cut_to_length
+  primary_process_bucket: structural_profile_stock_fabrication_cutting
+  supporting_processes:
+    - extrusion
+    - heat_treatment
+    - cutting
+    - deburring
+    - surface_finishing
+    - dimensional_inspection
+  candidate_existing_processes:
+    - process_id: metal_extrusion_process_v0
+      fit: partial
+      reason: "Covers aluminum extrusion, but is currently specific to heat-sink fin extrusion rather than generic structural profiles."
+    - process_id: extrusion_basic_v0
+      fit: poor_fit
+      reason: "General extrusion template exists, but its inputs and outputs are polymer-focused and need adaptation for aluminum profile stock."
+    - process_id: metal_cutting_basic_v0
+      fit: direct
+      reason: "Matches cut-to-length preparation of the 1020 mm profile."
+    - process_id: surface_treatment_anodizing_v0
+      fit: supporting
+      reason: "Relevant if the Bosch-style protective finish is modeled as anodizing."
+    - process_id: inspection_basic_v0
+      fit: supporting
+      reason: "Covers length, straightness, slot geometry, and connector-fit checks."
+  abstraction_decision: keep_original_family
+  rationale: "The source route is aluminum profile extrusion followed by cutting and finishing, directly matching the structural-profile stock bucket."
+  process_guardrails:
+    tolerance: standard
+    surface_finish: review
+    sealing_quality: not_applicable
+    alignment_accuracy: standard
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: modular slotted framing member for machine-frame structure
+  material: aluminum_profile_family
+  scale_or_capacity:
+    mass_kg: 3.982
+    bom_quantity: 2
+    row_total_mass_kg: 7.963
+    scale_class: medium
+  geometry_form: cut_length_60x60_slotted_square_extrusion
+merge_pool:
+  eligible: true
+  functional_purpose_key: structural_frame_member
+  precision_guardrails:
+    - profile_slot_geometry
+    - cut_length
+    - straightness
+    - connector_fit
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - structural_profile_stock_fabrication_cutting
+  import_risk_factors:
+    - "Extrusion die and profile finish are reusable tooling/process dependencies."
+    - "Exact alloy, temper, and finish are unresolved."
+  post_merge_decision_notes: "Final import/local decision is deferred until merge review compares this with other structural profile rows."
+kb_staging:
+  proposed_item_id: null
+  notes: "Hold final item identity for merge review across structural aluminum profile segments; length and 60 x 60 profile size are guardrails."
+assumptions:
+  - "The 1020 mm CAD length is per profile, with BOM quantity two."
+  - "Standard Bosch-style aluminum profile material family is used for planning mass."
+unresolved:
+  - "Exact alloy, temper, finish, cut tolerance, and extrusion die details are not specified."
+  - "Whether length-specific profiles become separate closure items depends on merge review."
+```

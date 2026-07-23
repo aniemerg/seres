@@ -39,9 +39,8 @@ material:
   uncertainty_notes:
     - "The row does not split the stainless and EPDM material fractions across valve parts 1, 2, and 3."
 how_to_make:
-  summary: "Current KB modeling should treat this as a procured AMproved ISO-KF DN40 manual disc-valve subpart or valve-family component; a later local route would machine the stainless valve body/ring features from 316L/1.4404 stock, finish sealing and clamp interfaces, and assemble with the EPDM sealing element and the other valve parts."
+  summary: "Manufacturing route would machine the stainless valve body/ring features from 316L/1.4404 stock, finish sealing and clamp interfaces, and assemble with the EPDM sealing element and the other valve parts"
   manufacturing_steps:
-    - "Procure the AMproved ISO-KF DN40 disc valve or matched replacement valve-family component for near-term modeling."
     - "For local manufacture, start from 316L/1.4404 stainless bar or near-net stock sized for the about 38 x 45.5 x 38 mm envelope."
     - "Turn and mill the cylindrical bore, outer surfaces, side lugs, and engagement features indicated by the CAD preview."
     - "Deburr, passivate or clean for vacuum/powder service, and verify ISO-KF DN40 fit and sealing surfaces."
@@ -51,9 +50,9 @@ how_to_make:
     cited_fact_or_basis: "AMproved supplies the row-matched ISO-KF DN40 disc valve as a purchasable product; CAD geometry and preview show a small cylindrical machined-looking valve subpart. targeted_web_search: tried 'SV04_DIN_CC_DN40 AISI 316L EPDM', 'valve sv04_din_cc_dn40', and 'SV04 DIN DN40 EPDM 316L'; results did not provide a row-specific manufacturing process for this AMproved split CAD part."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "Machining from stainless stock is a plausible local manufacturing route for the visible geometry because no source provided the actual supplier manufacturing route for the split subpart."
+    - "Machining from stainless stock is a plausible Manufacturing route for the visible geometry because no source provided the actual supplier manufacturing route for the split subpart."
   uncertainty_notes:
     - "The exact production process, tolerance stack, and sealing-surface finish requirements are not specified by the BOM or vendor page."
 kb_implications:
-  - "item_granularity: purchased_module - Model the complete ISO-KF DN40 manual disc valve as a vendor functional module for now; this row is one CAD-split valve subpart and should not become a separate reusable KB item unless the valve is later decomposed into a sub-BOM."
+  - "item_granularity: complex_module - Model the complete ISO-KF DN40 manual disc valve as a functional functional complex module for this pass; this row is one CAD-split valve subpart and should not become a separate reusable KB item unless the valve is later decomposed into a sub-BOM."
 ---

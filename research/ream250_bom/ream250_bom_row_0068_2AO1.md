@@ -46,10 +46,10 @@ how_to_make:
     - "Apply anodizing, passivation, blackening, or cleaning only if later design evidence specifies the alloy and environment."
   source:
     url_or_path: "design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/2AO1_flange.step; research/ream250_bom/ream250_bom_row_0068_2AO1__views_2x2.png"
-    cited_fact_or_basis: "CAD and preview show one 368.00 x 368.00 x 28.00 mm solid with a square open-frame flange, perimeter/corner holes, and diagonal relief or stiffening features. targeted_web_search: searched \"2AO1_flange\", \"2AO1 reAM250 flange\", \"reAM250 2AO1\", and \"reAM250 additive manufacturing machine flange 2AO1\"; no row-specific manufacturing drawing, material callout, or process note was found."
+    cited_fact_or_basis: "CAD and preview show one 368.00 x 368.00 x 28.00 mm solid with a square open-frame flange, perimeter/corner holes, and diagonal relief or stiffening features. targeted_web_search: searched \"2AO1_flange\", \"2AO1 reAM250 flange\", \"reAM250 2AO1\", and \"reAM250 additive manufacturing machine flange 2AO1\" no row-specific manufacturing drawing, material callout, or process note was found."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "The part is treated as a custom simple part rather than a purchased module because the BOM row has no manufacturer, product ID, or link URL and the CAD name is a machine-specific flange."
+    - "The part is treated as a custom simple part because the BOM row has no manufacturer, product ID, or link URL and the CAD name is a machine-specific flange"
     - "Subtractive machining from plate stock is assumed from the large flat flange geometry and expected need for accurate mounting faces and hole positions."
   uncertainty_notes:
     - "The CAD/BOM evidence does not specify tolerances, surface finish, coating, or whether this flange has thermal, vacuum, or sealing requirements."

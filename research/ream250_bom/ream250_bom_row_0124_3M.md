@@ -38,7 +38,7 @@ material:
   uncertainty_notes:
     - "Assembly STEP material metadata for this CAD object is only 'Generic' at density 1000, so the usable material evidence comes from the row-matched Pfeiffer product route rather than embedded CAD material metadata."
 how_to_make:
-  summary: "Procure as a Pfeiffer ISO-K DN 63 stainless full nipple / pipe spool in the 320RZS063 family, or manufacture locally as a stainless 304/1.4301 vacuum tube with ISO-K DN 63 flange ends, then clean and leak-test for high-vacuum service."
+  summary: "Prepare as a Pfeiffer ISO-K DN 63 stainless full nipple / pipe spool in the 320RZS063 family, or manufacture locally as a stainless 304/1.4301 vacuum tube with ISO-K DN 63 flange ends, then clean and leak-test for high-vacuum service"
   manufacturing_steps:
     - "Cut stainless 304/1.4301 tube stock or tube-plus-flange blanks to the row-specific 218 mm overall length envelope."
     - "Form or machine the ISO-K DN 63 flange lips and sealing-end features; join separate flange rings to the tube if the blank is not one-piece."
@@ -49,7 +49,7 @@ how_to_make:
     cited_fact_or_basis: "Pfeiffer identifies the product family as a stainless 1.4301/304 full nipple with DN 63 ISO-K connection, and the CAD preview shows a straight hollow cylindrical spool with flanged ends and an about 218 mm envelope. targeted_web_search: searched 'Pfeiffer 320RZS063 manufacturing full nipple stainless steel 1.4301', '320RZS063 datasheet manufacturing', and 'ISO-K full nipple stainless steel manufacturing weld tube flange'; found row-matched product and dimension/material facts but no row-specific factory process description."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "The local route follows common vacuum hardware fabrication practice inferred from the product geometry and material, not a Pfeiffer-published process sheet."
+    - "The manufacturing route follows common vacuum hardware fabrication practice inferred from the product geometry and material, not a Pfeiffer-published process sheet."
     - "The row-specific length is manufactured as a longer straight spool within the same ISO-K DN 63 interface family."
   uncertainty_notes:
     - "Exact factory process details such as one-piece forming versus machined flange rings welded to tube are not resolved."

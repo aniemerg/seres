@@ -37,24 +37,117 @@ material:
   uncertainty_notes:
     - "The local assembly STEP material extractor returned only placeholder Generic density 1000 for this product, so it does not confirm the exact vendor, cage variant, seal elastomer, or grease type used in the reAM250 assembly."
 how_to_make:
-  summary: "For current KB modeling, procure as a standard 6200-2RS sealed deep-groove ball bearing. A local production route would require bearing-grade steel ring turning/grinding, ball and raceway finishing, cage forming, rubber seal production, lubrication, assembly, and precision inspection."
+  summary: "Manufacture by bearing-grade steel ring turning/grinding, ball and raceway finishing, cage forming, rubber seal production, lubrication, assembly, and precision inspection"
   manufacturing_steps:
-    - "Procure/catalog route: buy a standard 6200-2RS sealed deep-groove ball bearing matching 10 mm bore, 30 mm outside diameter, and 9 mm width."
-    - "Local route: make inner and outer bearing rings from SAE 52100 or equivalent bearing steel, then harden, grind raceways, and finish bearing seats."
-    - "Produce or procure precision balls, form a pressed steel cage, mold or cut rubber contact seals, add suitable grease, assemble, and verify running clearance, noise, and dimensional tolerances."
+    - "Manufacturing route: make inner and outer bearing rings from SAE 52100 or equivalent bearing steel, then harden, grind raceways, and finish bearing seats."
+    - "Produce"
   source:
     url_or_path: "research/ream250_bom/ream250_bom_row_0042_2AC8__views_2x2.png; design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/2AC8_part_8.step; https://www.smbbearings.com/firebrick/ckeditor/plugins/upload/Uploads/Documents/bearingpdfs/6200-2RS-bearing-10x32x9mm.pdf; https://www.hiwin.de/en/Products/Bearings/Bearings-SFA-SLA/SLA/SLA10/p/18-000127"
-    cited_fact_or_basis: "The CAD preview shows a compact sealed-bearing ring, and HIWIN's SLA10 page identifies the matched bearing as 6200.2RS. The SMB datasheet identifies material stack and closures/lubrication for a 6200-2RS bearing. The detailed local manufacturing route is inferred from the standard bearing geometry and material stack rather than directly stated by those sources. targeted_web_search: searched '2AC8 axis bearing bottom reAM250', '2AC8_part_8', 'axis bearing bottom SLA10 bearing', '6200.2RS bearing dimensions 10 30 9 mass material', and '6200-2RS bearing weight 10x30x9 material bearing steel'; results resolved the row's standard bearing identity, material, dimensions, and mass but did not provide a row-specific manufacturing process for the reAM250 bearing."
+    cited_fact_or_basis: "The CAD preview shows a compact sealed-bearing ring, and HIWIN's SLA10 page identifies the matched bearing as 6200.2RS. The SMB datasheet identifies material stack and closures/lubrication for a 6200-2RS bearing. The detailed inferred from the standard bearing geometry and material stack rather than directly stated by those sources. targeted_web_search: searched '2AC8 axis bearing bottom reAM250', '2AC8_part_8', 'axis bearing bottom SLA10 bearing', '6200.2RS bearing dimensions 10 30 9 mass material', and '6200-2RS bearing weight 10x30x9 material bearing steel'; results resolved the row's standard bearing identity, material, dimensions, and mass but did not provide a row-specific manufacturing process for the reAM250 bearing."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "The near-term practical manufacturing route is procurement because precision bearing production has tighter metallurgy, heat-treatment, grinding, cleanliness, and inspection requirements than ordinary turned hardware."
     - "A self-manufacturing route would model this as a bearing subsystem only after the KB has processes for bearing steel heat treatment, precision race grinding, ball production, seal production, and clean assembly."
   uncertainty_notes:
     - "No row-specific drawing, fit tolerance, bearing clearance class, seal compound, grease specification, or original bearing manufacturer was found."
 kb_implications:
-  - "item_granularity: consumable - Treat as a standard replaceable 6200-2RS sealed ball bearing wear item, not a machine-specific custom part; defer sub-BOM modeling until precision bearing manufacture is in scope."
+  - "item_granularity: simple_part - Treat as a standard replaceable 6200-2RS sealed ball bearing wear item, not a machine-specific custom part; defer sub-BOM modeling until precision bearing manufacture is in scope."
 ---
 
 # reAM250 BOM Row 42 - 2AC8
 
 Research result for the leased reAM250 BOM row.
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0042_2AC8.md
+source_research_sha256: "977e9e0251805ddc958e9afb1809bb17b9032f48a8e4fa1658491a5b13b159b2"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Reviewed the SLA10 lower axis bearing context, 6200-2RS identity, vendor mass proxy, bearing steel and rubber seal material stack, CAD bearing-ring preview, and KB implication to treat it as a standard replaceable precision bearing."
+decomposition:
+  decision: decompose_into_parts
+  rationale: "The row is a standard replaceable sealed ball bearing at BOM granularity, but local manufacture would require precision rings, balls, heat treatment, race grinding, seals, grease, and clean assembly. That internal chain should be decomposed when precision bearing manufacture is in scope."
+  proposed_subparts:
+    - inner_and_outer_bearing_rings
+    - precision_bearing_balls
+    - pressed_steel_cage
+    - rubber_contact_seals
+    - bearing_grease
+process_abstraction:
+  original_process_family: precision_sealed_ball_bearing_manufacture
+  primary_process_bucket: precision_component_import_decompose_later
+  supporting_processes:
+    - import_assumption
+    - decomposition_required
+    - precision_machining
+    - grinding_lapping
+    - heat_treatment
+    - elastomer_forming
+    - assembly
+    - dimensional_inspection
+  candidate_existing_processes:
+    - process_id: bearing_set_fabrication_v0
+      fit: partial
+      reason: "Closest bearing fabrication anchor, but this row needs a sealed 6200-2RS bearing with race grinding, seals, grease, and precision quality control."
+    - process_id: bearing_ball_precision_fabrication_v0
+      fit: supporting
+      reason: "Relevant to the precision ball subpart if the bearing is decomposed later."
+    - process_id: grinding_process_precision_v0
+      fit: supporting
+      reason: "Relevant to raceway and bearing-seat finishing requirements."
+    - process_id: elastomer_molding_basic_v0
+      fit: supporting
+      reason: "Relevant to rubber contact seals after decomposition."
+    - process_id: assembly_process_bearing_v0
+      fit: supporting
+      reason: "Relevant to clean bearing assembly after rings, balls, cage, seals, and grease are available."
+  abstraction_decision: substitute_process_family
+  rationale: "The source row resolves to a commercial sealed bearing. A direct local recipe would overstate current closure maturity, so Phase 1 should stage it as a precision component pending bearing-specific decomposition."
+  process_guardrails:
+    tolerance: high
+    surface_finish: high
+    sealing_quality: high
+    alignment_accuracy: high
+    blocked_by_precision: true
+identity_for_merge:
+  functional_purpose: sealed radial ball bearing for supporting a 10 mm shaft in an axis bearing pocket
+  material: bearing_steel_with_pressed_steel_cage_rubber_seals_and_grease
+  scale_or_capacity:
+    mass_kg: 0.0318
+    bom_quantity: 1
+    row_total_mass_kg: 0.0318
+    scale_class: small
+  geometry_form: sealed_deep_groove_ball_bearing_10mm_bore_30mm_outer_diameter_9mm_width
+merge_pool:
+  eligible: true
+  functional_purpose_key: rotary_bearing
+  precision_guardrails:
+    - bearing_clearance_class
+    - raceway_surface_finish
+    - seal_material
+    - lubrication_specification
+    - shaft_and_pocket_dimensions
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - precision_component_import_decompose_later
+  import_risk_factors:
+    - "Precision race grinding, bearing steel heat treatment, ball production, rubber seals, grease, and clean assembly are unresolved closure dependencies."
+    - "Bearing clearance class, seal compound, grease type, and original manufacturer are unknown."
+  post_merge_decision_notes: "Final import/local decision is deferred until bearing merge review groups similar rotary bearings and decides whether sealed bearing manufacture is in scope."
+kb_staging:
+  proposed_item_id: null
+  notes: "Wait for merge review; likely candidate for a reusable small sealed radial bearing closure item rather than a row-specific axis-bearing part."
+assumptions:
+  - "Standard 6200-2RS vendor material and mass data are acceptable proxies because the row identity resolves to that bearing type."
+  - "The CAD ring is a simplified representation and not a full material-volume basis for balls, cage, seals, grease, and voids."
+unresolved:
+  - "Original bearing manufacturer, clearance class, seal elastomer, grease specification, and reAM250 fit tolerance remain unresolved."
+```

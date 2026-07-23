@@ -47,9 +47,95 @@ how_to_make:
     cited_fact_or_basis: "The STEP file contains one solid with a long 22.00 x 205.00 x 15.00 mm bounding box; the rendered preview shows a simple elongated block with planar faces, small end features, and a lengthwise relieved or tapered feature. targeted_web_search: searched '2APB_spring_block_back material', '2APB spring_block_back reAM250', 'reAM250 spring_block_back', and '2APB_spring_block_back manufacturing'; no row-specific vendor or manufacturing route was found."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "The part is custom fabricated rather than purchased as a catalog module because the BOM provides no vendor or standard designation and the CAD is a simple single-solid block."
+    - "The part is custom fabricated rather than external as a catalog module because the BOM provides no vendor or standard designation and the CAD is a simple single-solid block"
   uncertainty_notes:
     - "The exact tolerances, heat treatment, and surface finish are not available from the BOM-side evidence."
 kb_implications:
   - "item_granularity: simple_part - Treat as a custom machined metal block; consolidate with the other spring-block rows if later KB modeling can represent orientation variants with one reusable spring_block part."
 ---
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0081_2APB.md
+source_research_sha256: "ca22c34df6e2f5f48fb82bfd21c902aacfacbf267c3e342fd7ba10aaf2c3bc7e"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Reviewed the spring-block support function, CAD-derived steel-assumption mass, unresolved metal material evidence, machining route, and long narrow block geometry before conversion."
+decomposition:
+  decision: simple_part
+  rationale: "The row is one custom block solid with no internal parts, fasteners, springs, electronics, nor module evidence."
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: machined_metal_spring_block
+  primary_process_bucket: general_subtractive_machining
+  supporting_processes:
+    - stock_preparation
+    - cutting
+    - precision_machining
+    - deburring
+    - surface_finishing
+    - dimensional_inspection
+  candidate_existing_processes:
+    - process_id: metal_cutting_basic_v0
+      fit: supporting
+      reason: "Covers cutting bar and plate stock to rough block length."
+    - process_id: machining_basic_v0
+      fit: partial
+      reason: "Covers general machining of the long block, end features, and relieved face."
+    - process_id: machining_precision_v0
+      fit: supporting
+      reason: "Relevant if spring preload faces require tighter flatness and parallelism."
+    - process_id: inspection_basic_v0
+      fit: supporting
+      reason: "Covers length, width, thickness, flatness, and fit checks."
+  abstraction_decision: keep_original_family
+  rationale: "The source route is machining from rectangular metal stock, which directly matches the general subtractive machining bucket."
+  process_guardrails:
+    tolerance: review
+    surface_finish: review
+    sealing_quality: not_applicable
+    alignment_accuracy: review
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: mechanical support and preload block for spring plate assembly
+  material: structural_metal_unknown_steel_assumed_for_mass
+  scale_or_capacity:
+    mass_kg: 0.422
+    bom_quantity: 1
+    row_total_mass_kg: 0.422
+    scale_class: small
+  geometry_form: long_narrow_machined_block_with_relief_feature
+merge_pool:
+  eligible: true
+  functional_purpose_key: preload_support
+  precision_guardrails:
+    - material_family
+    - length
+    - flatness
+    - preload_face_geometry
+    - orientation_variant
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - general_subtractive_machining
+  import_risk_factors:
+    - "Material uncertainty changes mass and may affect spring preload stiffness."
+  post_merge_decision_notes: "Final import/local decision is deferred until merge review; compare with front, right, and left spring-block rows before choosing a shared closure item."
+kb_staging:
+  proposed_item_id: null
+  notes: "Wait for merge review with the spring-block set before assigning a closure item ID."
+assumptions:
+  - "The block is load-bearing metal stock."
+  - "Steel density is a conservative planning assumption until material evidence improves."
+  - "Back, front, right, and left spring blocks may be orientation variants of one closure item."
+unresolved:
+  - "Exact alloy, heat treatment, finish, and preload tolerance are not specified."
+  - "The load path within the spring plate and heating plate assembly needs group-level review."
+```

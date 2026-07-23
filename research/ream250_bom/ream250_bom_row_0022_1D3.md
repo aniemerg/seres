@@ -38,9 +38,8 @@ material:
     - "The cited Pfeiffer chamber pages support the surrounding vacuum-chamber material context, not a row-specific hinge alloy."
     - "The exact grade is unresolved; do not encode this as a sourced 304 stainless part without better evidence."
 how_to_make:
-  summary: "Best near-term route is procurement as a Pfeiffer/vacuum-chamber hinge component. A local manufacturing fallback is to machine or fabricate the hinge leaf from corrosion-resistant steel stock, form/machine the two hinge knuckles, drill/ream the pin bores, deburr and passivate or clean for vacuum-compatible service, then assemble with the mating hinge leaves and pin."
+  summary: "Local manufacturing fallback is to machine or fabricate the hinge leaf from corrosion-resistant steel stock, form/machine the two hinge knuckles, drill/ream the pin bores, deburr and passivate or clean for vacuum-compatible service, then assemble with the mating hinge leaves and pin"
   manufacturing_steps:
-    - "Procure as a matched Pfeiffer Vacuum door-hinge component when vendor replacement parts are available."
     - "Fallback: cut stainless or corrosion-resistant steel bar/plate stock to the hinge-leaf blank and rough profile."
     - "Mill the tapered strap/leaf features and machine the two cylindrical knuckle barrels or fabricate them as welded/brazed-on barrels."
     - "Drill and ream coaxial pin bores through the barrels, then deburr bearing edges."
