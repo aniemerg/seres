@@ -4,7 +4,10 @@ name: EBF3 power electronics cooling duct or line set
 mass: 0.7
 unit: unit
 unit_kind: discrete
-material_class: composite
-notes: Child of ebf3_power_electronics_thermal_management. Cooling duct or line set
-  for EBF3 power-electronics thermal management hardware. Exact specification and
-  local manufacturing route remain unresolved.
+material: composite
+notes: |
+  Source-first child split for the power electronics cooling line set. Lunar-vacuum baseline uses conduction/cold-plate heat transfer, not air duct cooling, unless a future pressurized electronics enclosure is explicitly modeled. Exact heat load, coolant or radiator interface, material selection, seals, and local manufacturing route remain unresolved. See research/ebf3_bom_sources/organized/split_before_route_leaf_decomposition_plan.md.
+bom: bom_ebf3_power_electronics_cooling_duct_or_line_set
+recipe: recipe_ebf3_power_electronics_cooling_duct_or_line_set_assembly_v0
+trust_tags:
+- trusted_ebf3_unreplaced

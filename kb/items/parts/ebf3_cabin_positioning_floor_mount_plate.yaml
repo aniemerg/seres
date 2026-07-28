@@ -4,8 +4,36 @@ name: EBF3 cabin positioning floor mount plate
 mass: 12.0
 unit: unit
 unit_kind: discrete
-material_class: metal
-notes: >
-  Child of MC-8. Chamber-floor plate or reinforced interface for the four-axis
-  positioning system. Positioning hardware and build-platform tooling remain in
-  the positioning subsystem.
+material: steel
+notes: 'Child of MC-8. Chamber-floor plate or reinforced interface for the four-axis positioning system.
+  Positioning hardware and build-platform tooling remain in the positioning subsystem.
+
+  '
+recipe: recipe_ebf3_cabin_positioning_floor_mount_plate
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Replace validation-scaled generic stock inputs with explicit EBF material lower/upper bounds and
+  material-specific recipe inputs.
+- 'Encode or verify performance requirements outside prose notes: flatness; hole pattern tolerance;
+  stiffness under positioning loads; vacuum compatible surface.'
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_cabin_positioning_floor_mount_plate
+  source_recipe_path: kb/recipes/recipe_ebf3_cabin_positioning_floor_mount_plate.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: lunar_candidate
+  simulation_import_mass_policy: local_nominal
+  mass_nominal_kg: 12.0
+  availability_class: local_derived
+  primary_process_id: machining_basic_v0
+  executable_process_id: machining_basic_v0
+  secondary_process_ids:
+  - mounting_bracket_steel_forming_v1
+  ready_machine_ids:
+  - multi_axis_cnc_machining_center
+  - labor_bot_general_v0
+  confidence: medium
+  reasoning_brief: Plate flatness datum holes and mounting faces are CNC and probing scope.
+route_decision: lunar_candidate
+simulation_import_mass_policy: local_nominal

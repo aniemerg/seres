@@ -173,8 +173,9 @@ def _collect_nulls(kind: str, data: dict) -> List[dict]:
     elif kind in ("part", "machine", "material"):
         # Check if item should have mass (skip non-physical items)
         material_class = data.get("material_class", "")
+        material = data.get("material", material_class)
         # Skip software, abstract, and information items
-        if material_class not in ("software", "abstract", "information"):
+        if material not in ("software", "abstract", "information"):
             if data.get("mass") is None:
                 nulls.append({"field": "mass"})
     elif kind == "bom":
@@ -200,8 +201,8 @@ def _collect_missing_fields(kind: str, data: dict) -> List[dict]:
         if not data.get("time_model"):
             missing.append({"field": "time_model", "severity": "soft"})
     elif kind == "part":
-        if not data.get("material_class"):
-            missing.append({"field": "material_class", "severity": "soft"})
+        if not data.get("material"):
+            missing.append({"field": "material", "severity": "soft"})
     elif kind == "machine":
         if is_deprecated:
             return missing
@@ -1191,7 +1192,7 @@ def _update_work_queue(
             }
         )
 
-    # Missing required fields (energy_model, time_model, material_class, etc.)
+    # Missing required fields (energy_model, time_model, material, etc.)
     for mf in missing_fields:
         gap_items.append(
             {

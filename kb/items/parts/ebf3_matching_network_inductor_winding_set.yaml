@@ -1,0 +1,43 @@
+id: ebf3_matching_network_inductor_winding_set
+kind: part
+name: EBF3 matching network inductor winding set
+mass: 0.45
+unit: unit
+unit_kind: discrete
+material: copper
+notes: 'Conductor winding set for the EBF3 matching network inductor set. Child of `ebf3_matching_network_inductor_set`
+  from research/ebf3_bom_sources/organized/split_before_route_leaf_decomposition_plan.md. This is
+  not local-ready and has no manufacturing recipe.
+
+  '
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Replace first-pass nominal import mass with sourced lower/upper mass bounds if this item dominates
+  imported mass.
+- 'Resolve local-route blocker before claiming local manufacturing closure: coil winding process for
+  controlled geometry would need non-Ready coil_winding_machine and copper is scarce trace.'
+- 'Encode or verify performance requirements outside prose notes: RF current rating; skin effect heating;
+  inductance tolerance; insulation class; mechanical restraint.'
+- 'Review route sensitivity flags before treating the route as nominally closed: copper;coil;earth_import.'
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_matching_network_inductor_winding_set
+  source_recipe_path: kb/recipes/recipe_ebf3_matching_network_inductor_winding_set.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: earth_import
+  simulation_import_mass_policy: import_nominal
+  mass_nominal_kg: 0.45
+  availability_class: scarce_trace
+  primary_process_id: import_receiving_basic_v0
+  executable_process_id: import_receiving_basic_v0
+  secondary_process_ids:
+  - wire_copper_magnet_production_v0
+  ready_machine_ids:
+  - labor_bot_general_v0
+  confidence: medium
+  reasoning_brief: The winding is a copper RF coil and should be imported in first simulation despite
+    basic wire processes
+route_decision: earth_import
+simulation_import_mass_policy: import_nominal
+is_import: true

@@ -4,11 +4,41 @@ name: EBF3 gun X-axis deflection coil pair
 mass: 0.3
 unit: unit
 unit_kind: discrete
-material_class: composite
-notes: >
-  FG-8 child item adopted from
-  research/ebf3_bom_sources/organized/magnetic_steering_decomposition_plan.md.
-  Coil-level review keeps this unresolved as a coil-pair assembly; winding
-  pattern, conductor, insulation, former, leads, vacuum compatibility,
-  inductance, and current-driver matching remain deferred. See
-  research/ebf3_bom_sources/organized/coil_level_decomposition_plan.md.
+material: copper
+notes: 'FG-8 child item adopted from research/ebf3_bom_sources/organized/magnetic_steering_decomposition_plan.md.
+  Coil leaf review treats this as a terminal BOM leaf; winding pattern, conductor grade, insulation,
+  vacuum compatibility, inductance/current limits, and current-driver interface remain material/process
+  readiness work. See research/ebf3_bom_sources/organized/coil_level_decomposition_plan.md.
+
+  '
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- 'Encode or verify performance requirements outside prose notes: Deflection coil must meet ampere-turns,
+  symmetry, bandwidth, insulation, vacuum outgassing, heat rejection, and beam steering calibration.'
+- 'Review route sensitivity flags before treating the route as nominally closed: deflection_coil;electron_beam;blocked_winding;semantic_audit:deflection_coil_gap.'
+- Keep local flagged until conductor source, insulation class, vacuum outgassing, thermal rise, and
+  magnetic field acceptance are verified.
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_gun_deflection_x_coil_pair
+  source_recipe_path: kb/recipes/recipe_ebf3_gun_deflection_x_coil_pair.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: lunar_candidate_flagged
+  simulation_import_mass_policy: sensitivity_flag
+  mass_nominal_kg: 0.3
+  availability_class: import_or_recycle
+  primary_process_id: coil_winding_basic_v0
+  executable_process_id: coil_winding_basic_v0
+  secondary_process_ids:
+  - coil_insulation_production_v0
+  - electrical_wire_and_connectors_production_v0
+  ready_machine_ids:
+  - labor_bot_general_v0
+  - coil_winding_machine
+  confidence: medium
+  reasoning_brief: Deflection coil winding geometry is within coil_winding_machine scope for first-pass
+    simulation; keep flags for vacuum insulation, heat, conductor import/recycle, field mapping, and
+    beam steering acceptance.
+route_decision: lunar_candidate_flagged
+simulation_import_mass_policy: sensitivity_flag

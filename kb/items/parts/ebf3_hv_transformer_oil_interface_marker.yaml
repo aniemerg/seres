@@ -1,0 +1,39 @@
+id: ebf3_hv_transformer_oil_interface_marker
+kind: part
+name: EBF3 HV transformer oil interface marker
+mass: 0.5
+unit: unit
+unit_kind: discrete
+material: composite
+notes: 'Boundary marker for transformer oil/interface features in the EBF3 sectioned HV step-up transformer.
+  Child of `ebf3_sectioned_hv_step_up_transformer` from research/ebf3_bom_sources/organized/split_before_route_leaf_decomposition_plan.md.
+  This is not local-ready and has no manufacturing recipe.
+
+  '
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Replace first-pass nominal import mass with sourced lower/upper mass bounds if this item dominates
+  imported mass.
+- 'Resolve local-route blocker before claiming local manufacturing closure: Transformer oil or oil-compatible
+  composite depends on imported refined organics and HV aging data.'
+- 'Encode or verify performance requirements outside prose notes: dielectric strength; oil compatibility;
+  partial-discharge behavior; thermal aging.'
+- 'Review route sensitivity flags before treating the route as nominally closed: HV_transformer;organic_material;implemented_split_child.'
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_hv_transformer_oil_interface_marker
+  source_recipe_path: kb/recipes/recipe_ebf3_hv_transformer_oil_interface_marker.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: earth_import
+  simulation_import_mass_policy: import_nominal
+  mass_nominal_kg: 0.5
+  availability_class: import_or_recycle
+  primary_process_id: none
+  executable_process_id: import_receiving_basic_v0
+  confidence: low
+  reasoning_brief: The marker represents specialty HV oil/interface material and should be Earth import
+    in first simulation
+route_decision: earth_import
+simulation_import_mass_policy: import_nominal
+is_import: true

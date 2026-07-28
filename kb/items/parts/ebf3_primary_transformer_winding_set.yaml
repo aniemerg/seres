@@ -4,6 +4,46 @@ name: EBF3 primary transformer winding set
 mass: 1.3
 unit: unit
 unit_kind: discrete
-material_class: metal
-notes: Child of ebf3_primary_isolation_transformer. Winding set for EBF3 primary isolation
-  transformer. Exact specification and local manufacturing route remain unresolved.
+material: aluminum
+notes: Child of ebf3_primary_isolation_transformer. Winding set for EBF3 primary isolation transformer.
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Replace coarse item specification with explicit material, geometry/interface requirements, and lower/upper
+  mass bounds.
+- Replace first-pass nominal import mass with sourced lower/upper mass bounds if this item dominates
+  imported mass.
+- 'Resolve local-route blocker before claiming local manufacturing closure: Transformer winding needs
+  wire drawing, turn insulation, dielectric withstand, coupling, and thermal-rise validation beyond
+  current route.'
+- 'Encode or verify performance requirements outside prose notes: turn insulation; dielectric withstand;
+  current density; thermal rise; transformer coupling.'
+- 'Review route sensitivity flags before treating the route as nominally closed: HV_transformer;aluminum_substitution;winding_performance;blocked_nonready_machine;sem
+  antic_audit:transformer_winding_gap.'
+- Add winding-specific process chain and QA; keep import fallback until chain is executable.
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_primary_transformer_winding_set
+  source_recipe_path: kb/recipes/recipe_ebf3_primary_transformer_winding_set.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: route_gap
+  simulation_import_mass_policy: import_until_gap_resolved
+  mass_nominal_kg: 1.3
+  availability_class: local_derived
+  primary_process_id: spool_winding_basic_v0
+  executable_process_id: import_receiving_basic_v0
+  secondary_process_ids:
+  - spiral_winding_basic_v0
+  ready_machine_ids:
+  - labor_bot_general_v0
+  - winding_drums
+  confidence: low
+  reasoning_brief: Existing coil_winding_basic_v0 has a concrete winding machine, so this is not a
+    labor-only gap; the missing piece is insulation, termination, impregnation/spacing policy, and
+    electrical acceptance.
+  blocked_machine_or_process_reason: Existing coil_winding_basic_v0 has a concrete winding machine,
+    so this is not a labor-only gap; the missing piece is insulation, termination, impregnation/spacing
+    policy, and electrical acceptance.
+route_decision: route_gap
+simulation_import_mass_policy: import_until_gap_resolved
+is_import: true

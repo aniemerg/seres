@@ -4,12 +4,10 @@ name: EBF3 gun cathode radiation shield
 mass: 0.1
 unit: unit
 unit_kind: discrete
-material_class: refractory_metal
-notes: >
-  FG-16. Cathode-side thermal radiation shield candidate near the direct-heated
-  cathode. External electron-gun and thermionic-gun sources support cathode
-  heat-shield package class, but EBF3-specific shield geometry, material,
-  layer count, and support method remain unresolved. See
-  research/ebf3_bom_sources/organized/cathode_variant_review.md.
-  This assembly is split by `bom_ebf3_gun_cathode_radiation_shield`. Child items
-  preserve decomposition fidelity only; no local recipe is attached yet.
+material: refractory_metal
+notes: |
+  FG-16. Cathode-side thermal radiation shield candidate near the direct-heated cathode. External electron-gun and thermionic-gun sources support cathode heat-shield package class, but EBF3-specific shield geometry, material, layer count, and support method remain unresolved. See research/ebf3_bom_sources/organized/cathode_variant_review.md. This assembly is split by `bom_ebf3_gun_cathode_radiation_shield`. Child items preserve decomposition fidelity only; assembly recipe now only joins visible child items; child material and manufacturing readiness remain unresolved.
+bom: bom_ebf3_gun_cathode_radiation_shield
+recipe: recipe_ebf3_gun_cathode_radiation_shield_assembly_v0
+trust_tags:
+- trusted_ebf3_unreplaced

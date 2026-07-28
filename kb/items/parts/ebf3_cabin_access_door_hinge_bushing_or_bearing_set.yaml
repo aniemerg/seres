@@ -1,0 +1,46 @@
+id: ebf3_cabin_access_door_hinge_bushing_or_bearing_set
+kind: part
+name: EBF3 cabin access door hinge bushing or bearing set
+mass: 0.5
+unit: unit
+unit_kind: discrete
+material: bearing_steel
+notes: 'Bushing/bearing or sliding-contact hardware for the EBF3 cabin access door hinge set. Child
+  of `ebf3_cabin_access_door_hinge_set` from research/ebf3_bom_sources/organized/split_before_route_leaf_decomposition_plan.md.
+  This is not local-ready and has no manufacturing recipe.
+
+  '
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Replace validation-scaled generic stock inputs with explicit EBF material lower/upper bounds and
+  material-specific recipe inputs.
+- 'Encode or verify performance requirements outside prose notes: hinge load; wear clearance; galling
+  control; dry or vacuum compatible lubrication.'
+- 'Review route sensitivity flags before treating the route as nominally closed: performance_flag:motion;implemented_split_child.'
+- Split plain machined bushing from rolling or sealed bearing interpretation.
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_cabin_access_door_hinge_bushing_or_bearing_set
+  source_recipe_path: kb/recipes/recipe_ebf3_cabin_access_door_hinge_bushing_or_bearing_set.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: route_gap
+  simulation_import_mass_policy: import_until_gap_resolved
+  mass_nominal_kg: 0.5
+  availability_class: local_derived
+  primary_process_id: machining_basic_v0
+  executable_process_id: import_receiving_basic_v0
+  secondary_process_ids:
+  - assembly_basic_v0
+  ready_machine_ids:
+  - multi_axis_cnc_machining_center
+  - labor_bot_general_v0
+  - assembly_tools_basic
+  confidence: medium
+  reasoning_brief: Part definition mixes a plain bushing that CNC can make with a rolling or sealed
+    bearing that CNC does not close.
+  blocked_machine_or_process_reason: Part definition mixes a plain bushing that CNC can make with
+    a rolling or sealed bearing that CNC does not close.
+route_decision: route_gap
+simulation_import_mass_policy: import_until_gap_resolved
+is_import: true

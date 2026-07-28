@@ -50,6 +50,30 @@ Current whole-machine Level-2 status is summarized in
 `organized/ebf3_machine_level_2_status.md`.
 Current cross-subsystem interface ownership is summarized in
 `organized/ebf3_interface_architecture.md`.
+Current whole-machine leaf material/process readiness is tracked in
+`derived/ebf3_leaf_material_process_readiness.csv`.
+Approved existing-item substitutions and their retained modeling issues are
+tracked in `derived/ebf3_existing_item_replacement_register.md`.
+Source-first review for leaves marked `split_before_route` is tracked in
+`organized/split_before_route_leaf_decomposition_plan.md`.
+
+## Trust Tag Policy
+
+For this EBF3 fitting pass, the existing global KB is treated as dirty evidence
+rather than trusted design ground truth. Item trust is explicit:
+
+- `trust_tags: [trusted_ebf3_unreplaced]` means the item is a newly introduced
+  EBF3 item and has not been replaced by an existing KB item.
+- `trust_tags: [untrusted_global_kb]` means the item is not trusted as
+  high-fidelity EBF3 evidence. This includes all pre-existing non-EBF3 KB items
+  and EBF3 leaf items that were replaced by an approved existing-item reuse.
+
+Do not infer trust from an empty tag list while doing EBF3 fitting. EBF3 fitting
+outputs should treat empty or absent trust tags as unknown/untrusted unless a
+local review explicitly says otherwise. This policy is not a request to migrate
+every existing KB item immediately. Approved EBF3 replacements remain useful for
+BOM simplification, but the replacement item itself is still treated as
+`untrusted_global_kb` for high-fidelity EBF3 evidence.
 
 ## Standard Work Packet
 
@@ -79,8 +103,72 @@ Preferred order for completing the EBF3 machine scaffold:
    positioning, controls, power supplies, and high-voltage tank.
 3. Return to electron-gun Level-3 items only where a selected source or design
    decision unlocks them.
-4. Material/process readiness reviews for selected leaves.
-5. Local recipes only for leaves that pass readiness review.
+4. Fit leaf items into the existing KB using the leaf fitting gate below and
+   record whole-machine review categories in the generated readiness matrix
+   under `derived/`.
+5. Material/process readiness reviews for selected leaves.
+6. Local recipes only for leaves that pass readiness review.
+
+## Leaf Item KB Fitting Gate
+
+Use this gate after decomposition and before adding manufacturing recipes. The
+goal is to fit EBF3 leaves into the existing KB without losing the fidelity that
+the EBF3 work added.
+
+| Case | Decision | Action |
+| --- | --- | --- |
+| Existing item, sufficient resolution | `reuse_existing` | Link the EBF3 leaf to the existing item. Record why the existing resolution is enough. |
+| Existing item, insufficient resolution | `reuse_with_accuracy_risk` | Existing KB item may replace the EBF3 leaf as a coarse structural fit, but record `not enough accuracy` and do not use the replacement as local-closure evidence until the hidden material/process assumptions are upgraded. |
+| No existing item, no further decomposition needed | `create_leaf` | Create a high-fidelity leaf. Select material from source evidence, lunar material guidance, and existing KB material classes. Recipe is optional. |
+| No existing item, further decomposition needed | `needs_decomposition` | Keep unresolved and handle after simpler leaf fitting is complete. |
+
+Core rule: a lower-resolution existing item can simplify the BOM graph only if
+the accuracy risk remains visible. If the replacement hides lunar resource
+assumptions or manufacturing process assumptions, mark it `not enough accuracy`
+and treat it as an import/deferred closure path until the missing detail is
+upgraded.
+
+Direct replacement must also pass a performance and scale check: same functional
+role, compatible material/process assumptions, compatible unit kind or explicit
+quantity normalization, and enough performance detail for the EBF3 role. Check
+tolerance, stiffness, voltage/current rating, thermal load, vacuum/leak
+requirements, surface finish, lubrication, and environmental compatibility where
+they matter. Record precision-sensitive item requirements under
+`performance_requirements` using the fields that apply:
+`tolerance`, `surface_finish`, `sealing_quality`, and
+`alignment_accuracy`. Mass must be reviewed as a range, not a single equality
+test: estimate low/nominal/high mass when possible and compare any candidate
+replacement against that range. If scale, performance, or manufacturing
+assumptions are unknown, mark it `not enough accuracy`.
+
+If no existing item is suitable and the leaf does not need further
+decomposition, select the material first. Do not attach a generic existing
+process only to make closure look better; EBF-based or EBF-assisted
+manufacturing routes can replace many provisional existing processes later.
+
+Use the generated material/process readiness matrix as the working review
+surface before editing YAML:
+
+```bash
+python scripts/analysis/ebf3_leaf_readiness_matrix.py
+```
+
+Outputs:
+
+- `derived/ebf3_leaf_material_process_readiness.csv`
+
+The matrix records current mass, low/high mass brackets, readable performance
+checks, explicit `performance_requirements` review fields, one default material
+candidate with optional alternates, existing-KB candidates, and a suggested
+review decision. Treat the decision as a review prompt, not an automatic
+replacement instruction.
+
+For EBF3, this means common low-risk hardware may reuse existing items when the
+material and process path remain equivalent. High-voltage feedthroughs,
+vacuum-compatible motors, precision electron-gun electrodes, cathodes,
+electronics, sensors, and ceramic-to-metal interfaces should remain separate
+unless the existing item already exposes the relevant material, precision,
+vacuum, electrical, and manufacturing constraints.
 
 ## When To Resolve Unresolved Rows
 

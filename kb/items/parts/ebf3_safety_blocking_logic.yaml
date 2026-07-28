@@ -4,12 +4,10 @@ name: EBF3 safety and blocking logic
 mass: 1.5
 unit: unit
 unit_kind: discrete
-material_class: electronic
-notes: >
-  CTL-12. Safety logic, alarm, and blocking/interlock module. This owns central
-  interlock decisions and blocking logic; physical HV-tank service switches or
-  grounding terminals remain with their hardware package until sourced. See
-  research/ebf3_bom_sources/organized/hv_electrical_interface_review.md and
-  research/ebf3_bom_sources/organized/hv_grounding_return_review.md. No local
-  recipe is attached yet.
-  This assembly is split by `bom_ebf3_safety_blocking_logic`. Child items are package-level placeholders for decomposition fidelity only; no local recipe is attached yet.
+material: electronic
+notes: |
+  CTL-12. Safety logic, alarm, and blocking/interlock module. This owns central interlock decisions and blocking logic; physical HV-tank service switches or grounding terminals remain with their hardware package until sourced. See research/ebf3_bom_sources/organized/hv_electrical_interface_review.md and research/ebf3_bom_sources/organized/hv_grounding_return_review.md. No local recipe is attached yet. This assembly is split by `bom_ebf3_safety_blocking_logic`. Child items are package-level placeholders for decomposition fidelity only; assembly recipe now only joins visible child items; child material and manufacturing readiness remain unresolved.
+bom: bom_ebf3_safety_blocking_logic
+recipe: recipe_ebf3_safety_blocking_logic_assembly_v0
+trust_tags:
+- trusted_ebf3_unreplaced

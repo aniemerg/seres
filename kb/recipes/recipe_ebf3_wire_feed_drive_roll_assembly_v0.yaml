@@ -1,0 +1,30 @@
+id: recipe_ebf3_wire_feed_drive_roll_assembly_v0
+kind: recipe
+variant_id: assembly_v0
+target_item_id: ebf3_wire_feed_drive_roll
+inputs: &id001
+- item_id: ebf3_wire_feed_drive_roll_body
+  qty: 1.0
+  unit: unit
+- item_id: ebf3_wire_feed_drive_roll_groove_profile
+  qty: 1.0
+  unit: unit
+- item_id: ebf3_wire_feed_drive_roll_set_screw_or_key
+  qty: 1.0
+  unit: unit
+outputs:
+- item_id: ebf3_wire_feed_drive_roll
+  qty: 1.0
+  unit: unit
+steps:
+- process_id: assembly_basic_v0
+  inputs: *id001
+  outputs:
+  - item_id: ebf3_wire_feed_drive_roll
+    qty: 1.0
+    unit: unit
+  notes: Assemble EBF3 wire feed drive roll from its reviewed EBF3 child items;
+    child material and manufacturing readiness remain on the children.
+notes: BOM assembly recipe for EBF3 wire feed drive roll. This recipe only assembles
+  already-modeled EBF3 child items and does not claim local fabrication of unresolved
+  children.

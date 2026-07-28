@@ -4,7 +4,38 @@ name: EBF3 axis limit switch actuator set
 mass: 0.05
 unit: unit
 unit_kind: discrete
-material_class: metal
-notes: Child of ebf3_axis_travel_limit_switches. Limit switch actuator set for EBF3
-  axis travel limit switches. Exact specification and local manufacturing route remain
-  unresolved.
+material: steel
+notes: Child of ebf3_axis_travel_limit_switches. Limit switch actuator set for EBF3 axis travel limit
+  switches.
+recipe: recipe_ebf3_axis_limit_switch_actuator_set
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Replace coarse item specification with explicit material, geometry/interface requirements, and lower/upper
+  mass bounds.
+- Replace validation-scaled generic stock inputs with explicit EBF material lower/upper bounds and
+  material-specific recipe inputs.
+- 'Encode or verify performance requirements outside prose notes: Limit switch actuator must hold
+  switch trip position, survive repeated contact, and maintain travel-limit geometry under vibration.'
+- 'Review route sensitivity flags before treating the route as nominally closed: motion_interface.'
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_axis_limit_switch_actuator_set
+  source_recipe_path: kb/recipes/recipe_ebf3_axis_limit_switch_actuator_set.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: lunar_candidate
+  simulation_import_mass_policy: local_nominal
+  mass_nominal_kg: 0.05
+  availability_class: local_derived
+  primary_process_id: machining_basic_v0
+  executable_process_id: machining_basic_v0
+  secondary_process_ids:
+  - inspection_basic_v0
+  ready_machine_ids:
+  - multi_axis_cnc_machining_center
+  - labor_bot_general_v0
+  confidence: medium
+  reasoning_brief: Small steel actuator hardware can be approximated by Ready CNC machining and inspection;
+    performance is ordinary mechanical contact rather than high precision
+route_decision: lunar_candidate
+simulation_import_mass_policy: local_nominal

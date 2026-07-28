@@ -4,12 +4,36 @@ name: EBF3 gun control electrode
 mass: 0.08
 unit: unit
 unit_kind: discrete
-material_class: refractory_metal
-notes: >
-  FG-3. Wehnelt/control-grid style precision electrode for beam-current control,
-  cut-off behavior, and initial beam shaping near the cathode. Intentional
-  Level-2 leaf: current evidence supports a distinct precision electrode, not a
-  confirmed separable aperture/contact assembly. Aperture inserts, bias-contact
-  details, and material selection are deferred. See
-  research/ebf3_bom_sources/organized/electrode_family_decomposition_plan.md
-  and research/ebf3_bom_sources/organized/electrical_signal_boundary_review.md.
+material: refractory_metal
+notes: 'FG-3. Wehnelt/control-grid style precision electrode for beam-current control, cut-off behavior,
+  and initial beam shaping near the cathode. Intentional Level-2 leaf: current evidence supports a
+  distinct precision electrode. See research/ebf3_bom_sources/organized/electrode_family_decomposition_plan.md
+  and research/ebf3_bom_sources/organized/electrical_signal_boundary_review.md.'
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Resolve deferred Aperture inserts, bias-contact details, and material selection.
+- Replace first-pass nominal import mass with sourced lower/upper mass bounds if this item dominates
+  imported mass.
+- 'Resolve local-route blocker before claiming local manufacturing closure: No Ready local molybdenum
+  or tungsten electrode route closes trace feedstock plus precision electron-gun geometry.'
+- 'Encode or verify performance requirements outside prose notes: emission-adjacent geometry; thermal
+  stability; HV bias insulation; low contamination.'
+- 'Review route sensitivity flags before treating the route as nominally closed: refractory_trace;electron_gun_precision.'
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_gun_control_electrode
+  source_recipe_path: kb/recipes/recipe_ebf3_gun_control_electrode.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: earth_import
+  simulation_import_mass_policy: import_nominal
+  mass_nominal_kg: 0.08
+  availability_class: scarce_trace
+  primary_process_id: none
+  executable_process_id: import_receiving_basic_v0
+  confidence: low
+  reasoning_brief: Control electrode is low mass but performance-critical refractory hardware and
+    should be direct Earth import for the first simulation
+route_decision: earth_import
+simulation_import_mass_policy: import_nominal
+is_import: true

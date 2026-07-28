@@ -4,7 +4,45 @@ name: EBF3 hv bleeder chain insulating support
 mass: 0.16
 unit: unit
 unit_kind: discrete
-material_class: insulator
-notes: Child of ebf3_hv_discharge_bleeder_resistor_chain. Insulating support for EBF3
-  HV discharge bleeder resistor chain. Exact specification and local manufacturing
-  route remain unresolved.
+material: alumina_ceramic
+notes: Child of ebf3_hv_discharge_bleeder_resistor_chain. Insulating support for EBF3 HV discharge
+  bleeder resistor chain.
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Replace coarse item specification with explicit material, geometry/interface requirements, and lower/upper
+  mass bounds.
+- Replace first-pass nominal import mass with sourced lower/upper mass bounds if this item dominates
+  imported mass.
+- 'Resolve local-route blocker before claiming local manufacturing closure: HV ceramic/glass support
+  has plausible feedstock but non- Ready forming/firing route and unverified tracking/creepage performance.'
+- 'Encode or verify performance requirements outside prose notes: Bleeder support must meet HV creepage/clearance,
+  dielectric strength, tracking resistance, thermal stability, and low outgassing.'
+- 'Review route sensitivity flags before treating the route as nominally closed: hv_insulator;ceramic_glass_blocked;semantic_audit:hv_insulating_support_gap.'
+- Define ceramic forming/sintering, metallization or glass/ceramic sealing, cleaning, dielectric test,
+  and leak/outgassing acceptance before claiming local closure.
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_hv_bleeder_chain_insulating_support
+  source_recipe_path: kb/recipes/recipe_ebf3_hv_bleeder_chain_insulating_support.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: route_gap
+  simulation_import_mass_policy: import_until_gap_resolved
+  mass_nominal_kg: 0.16
+  availability_class: local_derived
+  primary_process_id: ceramic_sintering_process_v0
+  executable_process_id: import_receiving_basic_v0
+  secondary_process_ids:
+  - aluminosilicate_glass_production_v0
+  ready_machine_ids:
+  - labor_bot_general_v0
+  confidence: medium
+  reasoning_brief: Material route is lunar-plausible, but this part is an HV/electron-gun/feedthrough
+    dielectric boundary requiring creepage, leakage, partial-discharge or hermetic QA; labor-bot capability
+    is irrelevant.
+  blocked_machine_or_process_reason: Material route is lunar-plausible, but this part is an HV/electron-gun/feedthrough
+    dielectric boundary requiring creepage, leakage, partial-discharge or hermetic QA; labor-bot capability
+    is irrelevant.
+route_decision: route_gap
+simulation_import_mass_policy: import_until_gap_resolved
+is_import: true

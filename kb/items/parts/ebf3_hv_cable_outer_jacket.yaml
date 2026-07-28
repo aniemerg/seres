@@ -4,8 +4,35 @@ name: EBF3 HV cable outer jacket
 mass: 0.16
 unit: unit
 unit_kind: discrete
-material_class: polymer
-notes: >
-  Level-3 child of HV-9. Outer protective jacket for the HV cable assembly.
-  Adopted as a cable construction layer; material, bend radius, outgassing,
-  oil exposure, and service environment remain deferred.
+material: vacuum_rated_polymer
+notes: Level-3 child of HV-9. Outer protective jacket for the HV cable assembly.
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Resolve deferred Adopted as a cable construction layer; material, bend radius, outgassing, oil exposure,
+  and service environment.
+- Replace first-pass nominal import mass with sourced lower/upper mass bounds if this item dominates
+  imported mass.
+- 'Resolve local-route blocker before claiming local manufacturing closure: polymer HV cable jacket
+  route lacks local volatile closure and vacuum rated insulation qualification.'
+- 'Encode or verify performance requirements outside prose notes: HV insulation margin; bend radius;
+  vacuum outgassing; oil and radiation compatibility.'
+- 'Review route sensitivity flags before treating the route as nominally closed: HV_cable;polymer;earth_import.'
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_hv_cable_outer_jacket
+  source_recipe_path: kb/recipes/recipe_ebf3_hv_cable_outer_jacket.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: earth_import
+  simulation_import_mass_policy: import_nominal
+  mass_nominal_kg: 0.16
+  availability_class: import_or_recycle
+  primary_process_id: import_receiving_basic_v0
+  executable_process_id: import_receiving_basic_v0
+  ready_machine_ids:
+  - labor_bot_general_v0
+  confidence: high
+  reasoning_brief: The cable jacket is small but mission-critical polymer HV insulation
+route_decision: earth_import
+simulation_import_mass_policy: import_nominal
+is_import: true

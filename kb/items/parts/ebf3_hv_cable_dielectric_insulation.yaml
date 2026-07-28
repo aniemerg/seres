@@ -4,9 +4,40 @@ name: EBF3 HV cable dielectric insulation
 mass: 0.36
 unit: unit
 unit_kind: discrete
-material_class: polymer_dielectric
-notes: >
-  Level-3 child of HV-9. Bulk high-voltage dielectric insulation around the
-  central conductor. External cable sources support EPR or silicone dielectric
-  classes for e-beam/x-ray HV cables, but final material, thickness, voltage
-  rating, and oil/vacuum compatibility remain deferred.
+material: polymer_dielectric
+notes: Level-3 child of HV-9. Bulk high-voltage dielectric insulation around the central conductor.
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Resolve deferred External cable sources support EPR or silicone dielectric classes for e-beam/x-ray
+  HV cables, but final material, thickness, voltage rating, and oil/vacuum compatibility.
+- Replace first-pass nominal import mass with sourced lower/upper mass bounds if this item dominates
+  imported mass.
+- 'Resolve local-route blocker before claiming local manufacturing closure: HV polymer dielectric
+  depends on scarce C/H chemistry and cable assembly needs crimping_tool_set and wire_stripper_set
+  not Ready.'
+- 'Encode or verify performance requirements outside prose notes: dielectric strength; partial discharge
+  margin; bend radius; vacuum outgassing; radiation aging.'
+- 'Review route sensitivity flags before treating the route as nominally closed: performance_flag:HV;performance_flag:polymer_dielectric;candidate_fit:accuracy_risk.'
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_hv_cable_dielectric_insulation
+  source_recipe_path: kb/recipes/recipe_ebf3_hv_cable_dielectric_insulation.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: earth_import
+  simulation_import_mass_policy: import_nominal
+  mass_nominal_kg: 0.36
+  availability_class: import_or_recycle
+  primary_process_id: power_cable_assembly_v0
+  executable_process_id: import_receiving_basic_v0
+  secondary_process_ids:
+  - coil_insulation_production_v0
+  ready_machine_ids:
+  - labor_bot_general_v0
+  - chemical_reactor_basic
+  confidence: high
+  reasoning_brief: HV cable insulation is a qualified polymer dielectric item and should be imported
+    in the first model
+route_decision: earth_import
+simulation_import_mass_policy: import_nominal
+is_import: true

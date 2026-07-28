@@ -4,11 +4,38 @@ name: EBF3 gun control electrode insulator
 mass: 0.12
 unit: unit
 unit_kind: discrete
-material_class: ceramic
-notes: >
-  FG-4. Ceramic standoff/sleeve candidate that supports and electrically
-  isolates the control electrode from adjacent gun structures. Intentional
-  Level-2 ceramic leaf until source evidence shows a multi-part insulator or
-  ceramic-to-metal assembly. Metallized ends, washers, collars, and final
-  ceramic selection are deferred. See
-  research/ebf3_bom_sources/organized/electrode_family_decomposition_plan.md.
+material: ceramic
+notes: FG-4. Ceramic standoff/sleeve candidate that supports and electrically isolates the control
+  electrode from adjacent gun structures. Intentional Level-2 ceramic leaf until source evidence shows
+  a multi-part insulator or ceramic-to-metal assembly. See research/ebf3_bom_sources/organized/electrode_family_decomposition_plan.md.
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Resolve deferred Metallized ends, washers, collars, and final ceramic selection.
+- Replace first-pass nominal import mass with sourced lower/upper mass bounds if this item dominates
+  imported mass.
+- 'Resolve local-route blocker before claiming local manufacturing closure: Item boundary/material
+  conflict is open; either HV ceramic insulator or refractory electrode interpretation is import-first.'
+- 'Encode or verify performance requirements outside prose notes: Gun control electrode/insulator
+  must meet HV standoff, field grading geometry, thermal stability, vacuum cleanliness, and electron-beam
+  alignment.'
+- 'Review route sensitivity flags before treating the route as nominally closed: source_conflict;hv;refractory_metal;electron_gun;semantic_audit:material_boundary_conflict.'
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_gun_control_electrode_insulator
+  source_recipe_path: kb/recipes/recipe_ebf3_gun_control_electrode_insulator.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: earth_import
+  simulation_import_mass_policy: import_nominal
+  mass_nominal_kg: 0.12
+  availability_class: scarce_trace
+  primary_process_id: import_receiving_basic_v0
+  executable_process_id: import_receiving_basic_v0
+  ready_machine_ids:
+  - labor_bot_general_v0
+  confidence: low
+  reasoning_brief: 'Name/material conflict retained as import-first unresolved boundary: this leaf
+    must be clarified before any local route claim'
+route_decision: earth_import
+simulation_import_mass_policy: import_nominal
+is_import: true

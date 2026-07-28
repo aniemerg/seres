@@ -1,0 +1,55 @@
+id: ebf3_matching_network_inductor_bobbin_or_insulation_set
+kind: part
+name: EBF3 matching network inductor bobbin or insulation set
+mass: 0.18
+unit: unit
+unit_kind: discrete
+material: alumina_ceramic
+notes: 'Bobbin/insulation support for the EBF3 matching network inductor set. Child of `ebf3_matching_network_inductor_set`
+  from research/ebf3_bom_sources/organized/split_before_route_leaf_decomposition_plan.md. This is
+  not local-ready and has no manufacturing recipe.
+
+  '
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Replace first-pass nominal import mass with sourced lower/upper mass bounds if this item dominates
+  imported mass.
+- 'Resolve local-route blocker before claiming local manufacturing closure: RF/HV coil insulation
+  performance is not closed by generic ceramic fabrication, and polymer insulation chemistry remains
+  weak.'
+- 'Encode or verify performance requirements outside prose notes: RF dielectric loss; voltage standoff;
+  thermal class; winding support geometry; vacuum outgassing.'
+- 'Review route sensitivity flags before treating the route as nominally closed: HV_dielectric;coil;thermal;semantic_audit:rf_hv_insulation_gap.'
+- Define ceramic forming/sintering, metallization or glass/ceramic sealing, cleaning, dielectric test,
+  and leak/outgassing acceptance before claiming local closure.
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_matching_network_inductor_bobbin_or_insulation_set
+  source_recipe_path: kb/recipes/recipe_ebf3_matching_network_inductor_bobbin_or_insulation_set.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: route_gap
+  simulation_import_mass_policy: import_until_gap_resolved
+  mass_nominal_kg: 0.18
+  availability_class: local_derived
+  primary_process_id: ceramic_forming_basic_v0
+  executable_process_id: import_receiving_basic_v0
+  secondary_process_ids:
+  - coil_insulation_production_v0
+  - ceramic_sintering_process_v0
+  ready_machine_ids:
+  - labor_bot_general_v0
+  - chemical_reactor_basic
+  - pressing_mold_set
+  - hydraulic_press
+  - kiln_ceramic
+  confidence: medium
+  reasoning_brief: Material route is lunar-plausible, but this part is an HV/electron-gun/feedthrough
+    dielectric boundary requiring creepage, leakage, partial-discharge or hermetic QA; labor-bot capability
+    is irrelevant.
+  blocked_machine_or_process_reason: Material route is lunar-plausible, but this part is an HV/electron-gun/feedthrough
+    dielectric boundary requiring creepage, leakage, partial-discharge or hermetic QA; labor-bot capability
+    is irrelevant.
+route_decision: route_gap
+simulation_import_mass_policy: import_until_gap_resolved
+is_import: true

@@ -4,11 +4,10 @@ name: EBF3 full-bridge inverter
 mass: 6.0
 unit: unit
 unit_kind: discrete
-material_class: electronic
-notes: >
-  PS-7. Full-bridge inverter power stage for high-frequency transformer drive.
-  Kept as an unresolved Level-2 leaf from the source-table aligned power-supply
-  audit. No local recipe is attached yet; leave manufacturing closure open until
-  lower-level materials and fabrication routes are source-supported. See
-  research/ebf3_bom_sources/organized/power_supplies_level_2_audit.md.
-  This assembly is split by `bom_ebf3_full_bridge_inverter`. Child items are package-level placeholders for decomposition fidelity only; no local recipe is attached yet.
+material: electronic
+notes: |
+  PS-7. Full-bridge inverter power stage for high-frequency transformer drive. Kept as an unresolved Level-2 leaf from the source-table aligned power-supply audit. Assembly recipe now only joins visible child items; semiconductor, rating, and lower-level manufacturing readiness remain unresolved. See research/ebf3_bom_sources/organized/power_supplies_level_2_audit.md. This assembly is split by `bom_ebf3_full_bridge_inverter`. Child items are package-level placeholders for decomposition fidelity only; assembly recipe now only joins visible child items; child material and manufacturing readiness remain unresolved.
+bom: bom_ebf3_full_bridge_inverter
+recipe: recipe_ebf3_full_bridge_inverter_assembly_v0
+trust_tags:
+- trusted_ebf3_unreplaced

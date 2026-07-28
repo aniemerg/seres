@@ -1,0 +1,36 @@
+id: recipe_ebf3_anti_wear_guide_insert
+kind: recipe
+variant_id: ebf3_route_review_v0
+target_item_id: ebf3_anti_wear_guide_insert
+inputs:
+- item_id: ceramic_powder_mixture
+  qty: 0.0735
+  unit: kg
+outputs:
+- item_id: ebf3_anti_wear_guide_insert
+  qty: 1.0
+  unit: unit
+steps:
+- process_id: ceramic_forming_basic_v0
+  inputs:
+  - item_id: ceramic_powder_mixture
+    qty: 0.0735
+    unit: kg
+  outputs:
+  - item_id: green_ceramic_part
+    qty: 0.0735
+    unit: kg
+  notes: Form EBF3 ceramic green body using press/mold tooling; labor bot is handling/fixturing only.
+- process_id: ceramic_sintering_process_v0
+  inputs:
+  - item_id: green_ceramic_part
+    qty: 0.0735
+    unit: kg
+  outputs:
+  - item_id: ebf3_anti_wear_guide_insert
+    qty: 1.0
+    unit: unit
+  notes: Fire/sinter ceramic body in kiln; EBF3-specific dielectric, wear, thermal shock, cleanliness,
+    and dimensional checks remain flagged as applicable.
+notes: EBF3 route-review recipe using explicit ceramic forming plus sintering/firing equipment instead
+  of a labor-only ceramic placeholder.

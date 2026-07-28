@@ -4,6 +4,36 @@ name: EBF3 spool brake adjuster knob
 mass: 0.07
 unit: unit
 unit_kind: discrete
-material_class: metal
+material: steel
 notes: Child of ebf3_spool_brake_adjuster. Adjuster knob for EBF3 spool brake adjuster.
-  Exact specification and local manufacturing route remain unresolved.
+recipe: recipe_ebf3_spool_brake_adjuster_knob
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Replace coarse item specification with explicit material, geometry/interface requirements, and lower/upper
+  mass bounds.
+- Replace validation-scaled generic stock inputs with explicit EBF material lower/upper bounds and
+  material-specific recipe inputs.
+- 'Encode or verify performance requirements outside prose notes: Thread fit; manual adjustment torque;
+  no vacuum-sensitive polymer.'
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_spool_brake_adjuster_knob
+  source_recipe_path: kb/recipes/recipe_ebf3_spool_brake_adjuster_knob.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: lunar_candidate
+  simulation_import_mass_policy: local_nominal
+  mass_nominal_kg: 0.07
+  availability_class: local_derived
+  primary_process_id: machining_basic_v0
+  executable_process_id: machining_basic_v0
+  secondary_process_ids:
+  - assembly_basic_v0
+  ready_machine_ids:
+  - labor_bot_general_v0
+  - multi_axis_cnc_machining_center
+  - assembly_tools_basic
+  confidence: high
+  reasoning_brief: This is a small knob and steel substitution is adequate for simulation
+route_decision: lunar_candidate
+simulation_import_mass_policy: local_nominal

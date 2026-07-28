@@ -4,11 +4,56 @@ name: EBF3 wire feeder feedthrough insulator body
 mass: 0.18
 unit: unit
 unit_kind: discrete
-material_class: ceramic
-notes: >
-  Child of ebf3_wire_feeder_feedthrough_connector. Ceramic or insulating body
-  for the wire-feeder-specific feedthrough insert. It isolates motor-power and
-  signal pins through the chamber boundary while the cabin owns only the passive
-  port/flange opening. Ceramic grade, pin sealing, creepage/clearance, vacuum
-  compatibility, and local manufacturing route remain unresolved; see
-  research/ebf3_bom_sources/organized/wire_feeder_level_2_audit.md.
+material: ceramic
+notes: 'Child of ebf3_wire_feeder_feedthrough_connector. Ceramic or insulating body for the wire-feeder-specific
+  feedthrough insert. It isolates motor-power and signal pins through the chamber boundary while the
+  cabin owns only the passive port/flange opening. Ceramic grade, pin sealing, creepage/clearance,
+  vacuum compatibility, and first-pass manufacturing/import route is recorded in the linked EBF3 route-review
+  recipe; see research/ebf3_bom_sources/organized/wire_feeder_level_2_audit.md.
+
+  '
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Replace first-pass nominal import mass with sourced lower/upper mass bounds if this item dominates
+  imported mass.
+- 'Resolve local-route blocker before claiming local manufacturing closure: Feedthrough insulation
+  couples ceramic dielectric performance, metallized/sealed interfaces, leak-rate qualification, and
+  pin alignment.'
+- 'Encode or verify performance requirements outside prose notes: pin isolation; vacuum leak boundary;
+  creepage and clearance; metallized seal interface.'
+- 'Review route sensitivity flags before treating the route as nominally closed: HV_feedthrough;vacuum_seal;ceramic_precision;semantic_audit:feedthrough_insulator_gap.'
+- Define ceramic forming/sintering, metallization or glass/ceramic sealing, cleaning, dielectric test,
+  and leak/outgassing acceptance before claiming local closure.
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_wire_feeder_feedthrough_insulator_body
+  source_recipe_path: kb/recipes/recipe_ebf3_wire_feeder_feedthrough_insulator_body.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: route_gap
+  simulation_import_mass_policy: import_until_gap_resolved
+  mass_nominal_kg: 0.18
+  availability_class: local_derived
+  primary_process_id: ceramic_forming_basic_v0
+  executable_process_id: import_receiving_basic_v0
+  secondary_process_ids:
+  - alumina_extraction_from_highlands_v0
+  - ceramic_base_fabrication_ v0
+  - electrical_feedthrough_vacuum_fabrication_v0
+  - ceramic_sintering_process_v0
+  ready_machine_ids:
+  - labor_bot_general_v0
+  - chemical_reactor_basic
+  - pressing_mold_set
+  - hydraulic_press
+  - kiln_ceramic
+  confidence: low
+  reasoning_brief: Material route is lunar-plausible, but this part is an HV/electron-gun/feedthrough
+    dielectric boundary requiring creepage, leakage, partial-discharge or hermetic QA; labor-bot capability
+    is irrelevant.
+  blocked_machine_or_process_reason: Material route is lunar-plausible, but this part is an HV/electron-gun/feedthrough
+    dielectric boundary requiring creepage, leakage, partial-discharge or hermetic QA; labor-bot capability
+    is irrelevant.
+route_decision: route_gap
+simulation_import_mass_policy: import_until_gap_resolved
+is_import: true

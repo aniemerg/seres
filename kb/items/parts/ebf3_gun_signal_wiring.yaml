@@ -4,18 +4,10 @@ name: EBF3 gun sensing and signal wiring
 mass: 0.2
 unit: unit
 unit_kind: discrete
-material_class: composite
-notes: >
-  FG-19. Gun-side sensing and signal wiring assembly for temperature, current,
-  beam diagnostic, and interlock signals. This item is limited to local gun-side
-  pickups and internal wiring; minimal child BOM:
-  bom_ebf3_gun_signal_wiring. It now includes local diagnostic leads, a
-  gun-diagnostic signal feedthrough insert/interface marker, and a local shield
-  termination interface marker. External DAQ, processing, cabinet-side harness,
-  and control logic belong to the controls subsystem. Pinout, connector family,
-  coax-versus-multipin choice, and shield-ground policy remain deferred. See
-  research/ebf3_bom_sources/organized/feedthrough_interface_review.md and
-  research/ebf3_bom_sources/organized/beam_diagnostics_decomposition_plan.md
-  and research/ebf3_bom_sources/organized/electrical_signal_boundary_review.md.
-  Current interface architecture is summarized in
-  research/ebf3_bom_sources/organized/ebf3_interface_architecture.md.
+material: composite
+notes: |
+  FG-19. Gun-side sensing and signal wiring assembly for temperature, current, beam diagnostic, and interlock signals. This item is limited to local gun-side pickups and internal wiring; minimal child BOM: bom_ebf3_gun_signal_wiring. It now includes local diagnostic leads, a gun-diagnostic signal feedthrough insert/interface marker, and a local shield termination interface marker. External DAQ, processing, cabinet-side harness, and control logic belong to the controls subsystem. Pinout, connector family, coax-versus-multipin choice, and shield-ground policy remain deferred. See research/ebf3_bom_sources/organized/feedthrough_interface_review.md and research/ebf3_bom_sources/organized/beam_diagnostics_decomposition_plan.md and research/ebf3_bom_sources/organized/electrical_signal_boundary_review.md. Current interface architecture is summarized in research/ebf3_bom_sources/organized/ebf3_interface_architecture.md.
+bom: bom_ebf3_gun_signal_wiring
+recipe: recipe_ebf3_gun_signal_wiring_assembly_v0
+trust_tags:
+- trusted_ebf3_unreplaced

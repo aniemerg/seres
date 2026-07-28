@@ -1,0 +1,37 @@
+id: recipe_ebf3_sensor_interface_shield
+kind: recipe
+variant_id: ebf3_route_review_v0
+target_item_id: ebf3_sensor_interface_shield
+inputs:
+- item_id: sheet_metal_or_structural_steel
+  qty: 0.0735
+  unit: kg
+outputs:
+- item_id: ebf3_sensor_interface_shield
+  qty: 1.0
+  unit: unit
+steps:
+- process_id: sheet_metal_fabrication_v0
+  inputs:
+  - item_id: sheet_metal_or_structural_steel
+    qty: 0.0735
+    unit: kg
+  outputs:
+  - item_id: ebf3_sensor_interface_shield
+    qty: 1.0
+    unit: unit
+  notes: 'First-pass local route after targeted material/process recheck. Decision: reroute_existing_process.
+    Aluminum sensor shield can use existing sheet-metal fabrication; grounding/noise performance remains
+    verification requirements.'
+notes: 'EBF3 route-review recipe for Simviewer inspection and first-pass simulation routing.
+
+  Route decision: lunar_candidate.
+
+  Simulation import mass policy: local_nominal.
+
+  Executable first-pass process: sheet_metal_fabrication_v0.
+
+  Targeted material/process recheck: reroute_existing_process.
+
+  Reasoning: Aluminum sensor shield can use existing sheet-metal fabrication; grounding/noise performance
+  remains verification requirements.'

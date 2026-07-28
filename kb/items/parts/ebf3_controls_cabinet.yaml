@@ -4,12 +4,10 @@ name: EBF3 controls cabinet
 mass: 5.49
 unit: unit
 unit_kind: discrete
-material_class: composite
-notes: >
-  CTL-13. Controls cabinet assembly housing the control computer, I/O modules,
-  communication hardware, power terminals, safety logic, back panel, DIN rails,
-  cable ducts, grounding bar, terminal blocks, and cabinet hardware. Detailed
-  harnessing remains deferred below this cabinet-level item. See
-  research/ebf3_bom_sources/organized/controls_level_2_audit.md. No local
-  recipe is attached yet.
-  This assembly is split by `bom_ebf3_controls_cabinet`. Child items are package-level placeholders for decomposition fidelity only; no local recipe is attached yet.
+material: composite
+notes: |
+  CTL-13. Controls cabinet assembly housing the control computer, I/O modules, communication hardware, power terminals, safety logic, back panel, DIN rails, cable ducts, grounding bar, terminal blocks, and cabinet hardware. Detailed harnessing remains deferred below this cabinet-level item. See research/ebf3_bom_sources/organized/controls_level_2_audit.md. No local recipe is attached yet. This assembly is split by `bom_ebf3_controls_cabinet`. Child items are package-level placeholders for decomposition fidelity only; assembly recipe now only joins visible child items; child material and manufacturing readiness remain unresolved.
+bom: bom_ebf3_controls_cabinet
+recipe: recipe_ebf3_controls_cabinet_assembly_v0
+trust_tags:
+- trusted_ebf3_unreplaced

@@ -4,10 +4,31 @@ name: EBF3 gun HV input receiving terminal
 mass: 0.14
 unit: unit
 unit_kind: discrete
-material_class: composite
-notes: >
-  Level-3 child of FG-12. Gun-side receiving terminal or socket interface for
-  the main HV cable from the high-voltage tank. Adopted to make the gun-side
-  termination visible while keeping the main cable and tank-side termination in
-  the HV tank subsystem. Connector geometry, shield termination, oil/vacuum
-  sealing, and service method remain deferred.
+material: composite
+notes: Level-3 child of FG-12. Gun-side receiving terminal or socket interface for the main HV cable
+  from the high-voltage tank. Adopted to make the gun-side termination visible while keeping the main
+  cable and tank-side termination in the HV tank subsystem.
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Resolve deferred Connector geometry, shield termination, oil/vacuum sealing, and service method.
+- Replace first-pass nominal import mass with sourced lower/upper mass bounds if this item dominates
+  imported mass.
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_gun_hv_input_receiving_terminal
+  source_recipe_path: kb/recipes/recipe_ebf3_gun_hv_input_receiving_terminal.yaml
+  source_queue_type: leaf_decomposition_review_kb_recipe
+  route_decision: import_as_leaf
+  simulation_import_mass_policy: import_nominal
+  mass_nominal_kg: 0.14
+  availability_class: keep_ebf3_leaf
+  primary_process_id: import_receiving_basic_v0
+  executable_process_id: import_receiving_basic_v0
+  reasoning_brief: Complex electronic/optical/electron-gun item with low-confidence local capability;
+    splitting now would be a large research task for limited first-sim value
+  recommended_edit: Count as Earth import in first simulation; split only if this import mass dominates
+    the result
+route_decision: import_as_leaf
+simulation_import_mass_policy: import_nominal
+is_import: true

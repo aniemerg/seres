@@ -4,6 +4,10 @@ name: EBF3 emi filter choke set
 mass: 0.8
 unit: unit
 unit_kind: discrete
-material_class: electronic
-notes: Child of ebf3_emi_filter. Filter choke set for EBF3 EMI filter. Exact specification
-  and local manufacturing route remain unresolved.
+material: electronic
+notes: |
+  Source-first child split for the EMI filter choke set. The child BOM exposes magnetic core, winding, insulation/support, terminals, and mounting base, but ratings, ferrite/alloy choice, winding geometry, insulation system, thermal behavior, and local manufacturing route remain unresolved. See research/ebf3_bom_sources/organized/split_before_route_leaf_decomposition_plan.md.
+bom: bom_ebf3_emi_filter_choke_set
+recipe: recipe_ebf3_emi_filter_choke_set_assembly_v0
+trust_tags:
+- trusted_ebf3_unreplaced

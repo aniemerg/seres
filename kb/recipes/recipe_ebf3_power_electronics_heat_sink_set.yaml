@@ -1,0 +1,26 @@
+id: recipe_ebf3_power_electronics_heat_sink_set
+kind: recipe
+variant_id: ebf3_route_review_v0
+target_item_id: ebf3_power_electronics_heat_sink_set
+inputs:
+- item_id: machined_part_raw
+  qty: 3.15
+  unit: kg
+outputs:
+- item_id: ebf3_power_electronics_heat_sink_set
+  qty: 1.0
+  unit: unit
+steps:
+- process_id: aluminum_housing_machining_v1
+  inputs:
+  - item_id: machined_part_raw
+    qty: 3.15
+    unit: kg
+  outputs:
+  - item_id: ebf3_power_electronics_heat_sink_set
+    qty: 1.0
+    unit: unit
+  notes: First-pass EBF3 local route candidate using CNC-machined aluminum heat-sink geometry; thermal
+    margin remains flagged.
+notes: EBF3 route-review recipe for a CNC-machined aluminum power-electronics heat-sink set. Extrusion
+  can replace this later if an extrusion route is closed.

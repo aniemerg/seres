@@ -4,7 +4,39 @@ name: EBF3 power electronics cooling plate set
 mass: 2.0
 unit: unit
 unit_kind: discrete
-material_class: metal
-notes: Child of ebf3_power_electronics_thermal_management. Cooling plate set for EBF3
-  power-electronics thermal management hardware. Exact specification and local manufacturing
-  route remain unresolved.
+material: aluminum
+notes: Child of ebf3_power_electronics_thermal_management. Cooling plate set for EBF3 power-electronics
+  thermal management hardware.
+recipe: recipe_ebf3_power_electronics_cooling_plate_set
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Replace coarse item specification with explicit material, geometry/interface requirements, and lower/upper
+  mass bounds.
+- Replace validation-scaled generic stock inputs with explicit EBF material lower/upper bounds and
+  material-specific recipe inputs.
+- 'Encode or verify performance requirements outside prose notes: thermal spreading resistance; flatness;
+  mounting pattern; electrical isolation if needed.'
+- 'Review route sensitivity flags before treating the route as nominally closed: performance_flag:thermal;performance_flag:interface_tolerance;candidate_fit:accuracy_risk.'
+- Retain until cooling-plate thermal and flatness acceptance are represented.
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_power_electronics_cooling_plate_set
+  source_recipe_path: kb/recipes/recipe_ebf3_power_electronics_cooling_plate_set.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: lunar_candidate_flagged
+  simulation_import_mass_policy: sensitivity_flag
+  mass_nominal_kg: 2.0
+  availability_class: local_derived
+  primary_process_id: machining_basic_v0
+  executable_process_id: machining_basic_v0
+  secondary_process_ids:
+  - heat_sink_extrusion_v0
+  ready_machine_ids:
+  - multi_axis_cnc_machining_center
+  - labor_bot_general_v0
+  confidence: medium
+  reasoning_brief: Aluminum plate machining is local but spreading resistance and flatness affect
+    electronics thermal output.
+route_decision: lunar_candidate_flagged
+simulation_import_mass_policy: sensitivity_flag

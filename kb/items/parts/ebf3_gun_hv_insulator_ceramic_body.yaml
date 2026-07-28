@@ -4,11 +4,56 @@ name: EBF3 gun HV insulator ceramic body
 mass: 0.45
 unit: unit
 unit_kind: discrete
-material_class: ceramic
-notes: >
-  Level-3 child of FG-13. Standalone ceramic insulating body for the gun
-  high-voltage insulator. This is intentionally separate from the FG-12 gun HV
-  input conductor/feedthrough path. Alumina-class HV insulators are supported by
-  external feedthrough/electron-gun sources, but final ceramic grade, shape,
-  creepage, dielectric rating, and local manufacturing route remain unresolved;
-  see research/ebf3_bom_sources/organized/hv_gun_side_insulation_decomposition_plan.md.
+material: ceramic
+notes: 'Level-3 child of FG-13. Standalone ceramic insulating body for the gun high-voltage insulator.
+  This is intentionally separate from the FG-12 gun HV input conductor/feedthrough path. Alumina-class
+  HV insulators are supported by external feedthrough/electron-gun sources, but final ceramic grade,
+  shape, creepage, dielectric rating, and first-pass manufacturing/import route is recorded in the
+  linked EBF3 route-review recipe; see research/ebf3_bom_sources/organized/hv_gun_side_insulation_decomposition_plan.md.
+
+  '
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Replace first-pass nominal import mass with sourced lower/upper mass bounds if this item dominates
+  imported mass.
+- 'Resolve local-route blocker before claiming local manufacturing closure: Local alumina does not
+  close gun HV insulator creepage geometry, dielectric strength, vacuum cleanliness, and geometry
+  inspection.'
+- 'Encode or verify performance requirements outside prose notes: HV creepage and clearance; dielectric
+  strength; vacuum cleanliness; geometry tolerance.'
+- 'Review route sensitivity flags before treating the route as nominally closed: HV_insulation;electron_gun_precision;semantic_audit:gun_hv_ceramic_gap.'
+- Define ceramic forming/sintering, metallization or glass/ceramic sealing, cleaning, dielectric test,
+  and leak/outgassing acceptance before claiming local closure.
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_gun_hv_insulator_ceramic_body
+  source_recipe_path: kb/recipes/recipe_ebf3_gun_hv_insulator_ceramic_body.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: route_gap
+  simulation_import_mass_policy: import_until_gap_resolved
+  mass_nominal_kg: 0.45
+  availability_class: local_derived
+  primary_process_id: ceramic_forming_basic_v0
+  executable_process_id: import_receiving_basic_v0
+  secondary_process_ids:
+  - alumina_extraction_from_highlands_v0
+  - ceramic_base_fabrication_ v0
+  - electrical_feedthrough_vacuum_fabrication_v0
+  - ceramic_sintering_process_v0
+  ready_machine_ids:
+  - labor_bot_general_v0
+  - chemical_reactor_basic
+  - pressing_mold_set
+  - hydraulic_press
+  - kiln_ceramic
+  confidence: medium
+  reasoning_brief: Material route is lunar-plausible, but this part is an HV/electron-gun/feedthrough
+    dielectric boundary requiring creepage, leakage, partial-discharge or hermetic QA; labor-bot capability
+    is irrelevant.
+  blocked_machine_or_process_reason: Material route is lunar-plausible, but this part is an HV/electron-gun/feedthrough
+    dielectric boundary requiring creepage, leakage, partial-discharge or hermetic QA; labor-bot capability
+    is irrelevant.
+route_decision: route_gap
+simulation_import_mass_policy: import_until_gap_resolved
+is_import: true

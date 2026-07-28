@@ -4,7 +4,39 @@ name: EBF3 power electronics thermal interface set
 mass: 0.8
 unit: unit
 unit_kind: discrete
-material_class: composite
-notes: Child of ebf3_power_electronics_thermal_management. Thermal interface set for
-  EBF3 power-electronics thermal management hardware. Exact specification and local
-  manufacturing route remain unresolved.
+material: thermal_interface_composite
+notes: Child of ebf3_power_electronics_thermal_management. Thermal interface set for EBF3 power-electronics
+  thermal management hardware.
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Replace first-pass nominal import mass with sourced lower/upper mass bounds if this item dominates
+  imported mass.
+- 'Resolve local-route blocker before claiming local manufacturing closure: Ready synthesis is placeholder-level
+  and does not close filler chemistry binder scarcity dielectric isolation or long-life thermal cycling.'
+- 'Encode or verify performance requirements outside prose notes: thermal impedance; dielectric isolation;
+  pump-out resistance; vacuum outgassing; thermal cycling.'
+- 'Review route sensitivity flags before treating the route as nominally closed: thermal_electronics;polymer_or_composite_scarcity.'
+- Keep imported until TIM material route and acceptance tests are explicit.
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_power_electronics_thermal_interface_set
+  source_recipe_path: kb/recipes/recipe_ebf3_power_electronics_thermal_interface_set.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: route_gap
+  simulation_import_mass_policy: import_until_gap_resolved
+  mass_nominal_kg: 0.8
+  availability_class: import_or_recycle
+  primary_process_id: thermal_interface_material_synthesis_v0
+  executable_process_id: import_receiving_basic_v0
+  ready_machine_ids:
+  - labor_bot_general_v0
+  confidence: low
+  reasoning_brief: Thermal interface composite depends on scarce polymer chemistry, filler control,
+    pump-out/outgassing, dielectric isolation, and cycling QA; not a obsolete audit issue.
+  blocked_machine_or_process_reason: Thermal interface composite depends on scarce polymer chemistry,
+    filler control, pump-out/outgassing, dielectric isolation, and cycling QA; not a obsolete audit
+    issue.
+route_decision: route_gap
+simulation_import_mass_policy: import_until_gap_resolved
+is_import: true

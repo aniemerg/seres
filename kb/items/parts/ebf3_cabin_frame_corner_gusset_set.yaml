@@ -4,7 +4,39 @@ name: EBF3 cabin frame corner gusset set
 mass: 7.0
 unit: unit
 unit_kind: discrete
-material_class: metal
-notes: >
-  Child of MC-1. Corner gussets or local reinforcement pieces for the cabin
-  frame. Exact geometry and fastening method remain unresolved.
+material: steel
+notes: Child of MC-1. Corner gussets or local reinforcement pieces for the cabin frame.
+recipe: recipe_ebf3_cabin_frame_corner_gusset_set
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Resolve exact geometry and fastening method.
+- Replace validation-scaled generic stock inputs with explicit EBF material lower/upper bounds and
+  material-specific recipe inputs.
+- 'Encode or verify performance requirements outside prose notes: Cabin frame stiffness; bolt pattern
+  accuracy; vacuum- clean finish; no hidden seal function.'
+- 'Review route sensitivity flags before treating the route as nominally closed: vacuum_structure;stiffness.'
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_cabin_frame_corner_gusset_set
+  source_recipe_path: kb/recipes/recipe_ebf3_cabin_frame_corner_gusset_set.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: lunar_candidate_flagged
+  simulation_import_mass_policy: sensitivity_flag
+  mass_nominal_kg: 7.0
+  availability_class: local_derived
+  primary_process_id: sheet_metal_fabrication_v0
+  executable_process_id: sheet_metal_fabrication_v0
+  secondary_process_ids:
+  - machining_basic_v0
+  - inspection_basic_v0
+  ready_machine_ids:
+  - labor_bot_general_v0
+  - metal_shear_or_saw
+  - rolling_mill_v0
+  - drill_press
+  confidence: medium
+  reasoning_brief: Corner gussets are sheet-metal/plate fabrication with hole and edge finishing;
+    cabin stiffness and datum accuracy remain sensitivity flags.
+route_decision: lunar_candidate_flagged
+simulation_import_mass_policy: sensitivity_flag

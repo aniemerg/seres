@@ -4,6 +4,42 @@ name: EBF3 wire feeder base standoff set
 mass: 0.7
 unit: unit
 unit_kind: discrete
-material_class: metal
+material: alumina_ceramic
 notes: Child of ebf3_wire_feeder_base. Base standoff set for EBF3 wire feeder base.
-  Exact specification and local manufacturing route remain unresolved.
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Replace coarse item specification with explicit material, geometry/interface requirements, and lower/upper
+  mass bounds.
+- Replace first-pass nominal import mass with sourced lower/upper mass bounds if this item dominates
+  imported mass.
+- 'Resolve local-route blocker before claiming local manufacturing closure: Ceramic forming and sintering
+  need hydraulic_press pressing_mold_set and kiln_ceramic not Ready.'
+- 'Encode or verify performance requirements outside prose notes: compressive strength; dielectric
+  isolation if required; mounting tolerance; thermal stability.'
+- 'Review route sensitivity flags before treating the route as nominally closed: performance_flag:ceramic;candidate_fit:none.'
+- Drop the obsolete audit blocker; add surface finish/inspection if needed.
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_wire_feeder_base_standoff_set
+  source_recipe_path: kb/recipes/recipe_ebf3_wire_feeder_base_standoff_set.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: lunar_candidate_flagged
+  simulation_import_mass_policy: sensitivity_flag
+  mass_nominal_kg: 0.7
+  availability_class: local_derived
+  primary_process_id: ceramic_forming_basic_v0
+  executable_process_id: ceramic_forming_basic_v0
+  secondary_process_ids:
+  - ceramic_sintering_process_v0
+  ready_machine_ids:
+  - labor_bot_general_v0
+  - pressing_mold_set
+  - hydraulic_press
+  - kiln_ceramic
+  confidence: medium
+  reasoning_brief: 'The old kiln/press audit rationale is obsolete: press/mold/kiln machines are usable_unreviewed
+    and semantically match. Keep only wear, thermal, chipping, and dimensional flags.'
+route_decision: lunar_candidate_flagged
+simulation_import_mass_policy: sensitivity_flag
+recipe: recipe_ebf3_wire_feeder_base_standoff_set

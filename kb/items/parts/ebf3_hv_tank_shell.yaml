@@ -4,8 +4,44 @@ name: EBF3 HV tank shell
 mass: 8.0
 unit: unit
 unit_kind: discrete
-material_class: metal
-notes: >
-  Child of HV-1. Main oil-containing tank shell for high-voltage components.
-  Exact alloy, wall thickness, weld/seam route, and pressure/vacuum test method
-  remain unresolved.
+material: steel
+notes: Child of HV-1. Main oil-containing tank shell for high-voltage components.
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Resolve exact alloy, wall thickness, weld/seam route, and pressure/vacuum test method.
+- Replace first-pass nominal import mass with sourced lower/upper mass bounds if this item dominates
+  imported mass.
+- 'Resolve local-route blocker before claiming local manufacturing closure: Steel shell fabrication
+  is plausible, but oil/vacuum containment, leak-tight seams, HV clearance, and cleanliness qualification
+  are not closed.'
+- 'Encode or verify performance requirements outside prose notes: oil or vacuum containment; HV clearance;
+  leak tight seams; structural stiffness; thermal expansion.'
+- 'Review route sensitivity flags before treating the route as nominally closed: performance_flag:HV;performance_flag:vacuum;candidate_fit:none;route_gap:hv_oil_tank_
+  shell_qualification.'
+- Define shell forming welding sealing and HV/oil qualification before localizing.
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_hv_tank_shell
+  source_recipe_path: kb/recipes/recipe_ebf3_hv_tank_shell.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: route_gap
+  simulation_import_mass_policy: import_until_gap_resolved
+  mass_nominal_kg: 8.0
+  availability_class: local_derived
+  primary_process_id: machining_basic_v0
+  executable_process_id: import_receiving_basic_v0
+  secondary_process_ids:
+  - metal_fabrication_basic_v0
+  ready_machine_ids:
+  - multi_axis_cnc_machining_center
+  - labor_bot_general_v0
+  - assembly_tools_basic
+  confidence: medium
+  reasoning_brief: A tank shell is not closed by CNC machining because shell forming joining containment
+    and HV service qualification are missing.
+  blocked_machine_or_process_reason: A tank shell is not closed by CNC machining because shell forming
+    joining containment and HV service qualification are missing.
+route_decision: route_gap
+simulation_import_mass_policy: import_until_gap_resolved
+is_import: true

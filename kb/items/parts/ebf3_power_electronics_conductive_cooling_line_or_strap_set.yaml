@@ -1,0 +1,41 @@
+id: ebf3_power_electronics_conductive_cooling_line_or_strap_set
+kind: part
+name: EBF3 power electronics conductive cooling line or strap set
+mass: 0.3
+unit: unit
+unit_kind: discrete
+material: aluminum
+notes: 'Conductive cooling line or strap hardware for the EBF3 power electronics thermal path. Child
+  of `ebf3_power_electronics_cooling_duct_or_line_set` from research/ebf3_bom_sources/organized/split_before_route_leaf_decomposition_plan.md.
+
+  '
+recipe: recipe_ebf3_power_electronics_conductive_cooling_line_or_strap_set
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Replace validation-scaled generic stock inputs with explicit EBF material lower/upper bounds and
+  material-specific recipe inputs.
+- 'Encode or verify performance requirements outside prose notes: Thermal conductance; contact pressure;
+  electrical isolation if needed; vacuum conduction path.'
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_power_electronics_conductive_cooling_line_or_strap_set
+  source_recipe_path: kb/recipes/recipe_ebf3_power_electronics_conductive_cooling_line_or_strap_set.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: lunar_candidate
+  simulation_import_mass_policy: local_nominal
+  mass_nominal_kg: 0.3
+  availability_class: local_derived
+  primary_process_id: machining_basic_v0
+  executable_process_id: machining_basic_v0
+  secondary_process_ids:
+  - assembly_basic_v0
+  ready_machine_ids:
+  - multi_axis_cnc_machining_center
+  - labor_bot_general_v0
+  - assembly_tools_basic
+  confidence: medium
+  reasoning_brief: Under the conduction-strap baseline this is simple aluminum machining or forming
+    and CNC is adequate.
+route_decision: lunar_candidate
+simulation_import_mass_policy: local_nominal

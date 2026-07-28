@@ -4,10 +4,40 @@ name: EBF3 gun secondary-electron ring collector
 mass: 0.1
 unit: unit
 unit_kind: discrete
-material_class: conductive_metal
-notes: >
-  Level-3 child of FG-10. Ring-style collector for secondary or reflected
-  electron/current pickup near the beam/work region. Adopted as the current
-  preferred geometry because electron-beam-welding secondary-current sources
-  support ring collectors. Exact diameter, placement, biasing, and material
-  remain deferred.
+material: steel
+notes: Level-3 child of FG-10. Ring-style collector for secondary or reflected electron/current pickup
+  near the beam/work region. Adopted as the current preferred geometry because electron-beam-welding
+  secondary-current sources support ring collectors.
+recipe: recipe_ebf3_gun_secondary_electron_ring_collector
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Resolve deferred Exact diameter, placement, biasing, and material.
+- Replace validation-scaled generic stock inputs with explicit EBF material lower/upper bounds and
+  material-specific recipe inputs.
+- 'Encode or verify performance requirements outside prose notes: Collector bias compatibility; low
+  outgassing; beam interception geometry; thermal load.'
+- 'Review route sensitivity flags before treating the route as nominally closed: electron_beam;conductive_collector.'
+- Keep until electron-gun diagnostic acceptance is represented.
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_gun_secondary_electron_ring_collector
+  source_recipe_path: kb/recipes/recipe_ebf3_gun_secondary_electron_ring_collector.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: lunar_candidate_flagged
+  simulation_import_mass_policy: sensitivity_flag
+  mass_nominal_kg: 0.1
+  availability_class: local_derived
+  primary_process_id: machining_basic_v0
+  executable_process_id: machining_basic_v0
+  secondary_process_ids:
+  - electrical_assembly_basic_v0
+  ready_machine_ids:
+  - labor_bot_general_v0
+  - multi_axis_cnc_machining_center
+  - assembly_tools_basic
+  confidence: medium
+  reasoning_brief: Conductive ring machining is local but bias placement outgassing and thermal load
+    affect beam diagnostics.
+route_decision: lunar_candidate_flagged
+simulation_import_mass_policy: sensitivity_flag

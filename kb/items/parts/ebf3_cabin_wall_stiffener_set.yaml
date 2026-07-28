@@ -4,7 +4,36 @@ name: EBF3 cabin wall stiffener set
 mass: 8.0
 unit: unit
 unit_kind: discrete
-material_class: metal
-notes: >
-  Child of MC-2. Stiffeners for cabin wall panels. Layout, fastening/welding,
-  and effect on vacuum sealing remain unresolved.
+material: steel
+notes: Child of MC-2. Stiffeners for cabin wall panels.
+recipe: recipe_ebf3_cabin_wall_stiffener_set
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Resolve layout, fastening/welding, and effect on vacuum sealing.
+- Replace validation-scaled generic stock inputs with explicit EBF material lower/upper bounds and
+  material-specific recipe inputs.
+- 'Encode or verify performance requirements outside prose notes: Wall stiffeners must provide panel
+  stiffness, fastener alignment, and vacuum-compatible exposed surfaces.'
+- 'Review route sensitivity flags before treating the route as nominally closed: structural;performance_flag:vacuum_cabin_structure.'
+- Keep sensitivity flag but drop the obsolete audit blocker.
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_cabin_wall_stiffener_set
+  source_recipe_path: kb/recipes/recipe_ebf3_cabin_wall_stiffener_set.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: lunar_candidate_flagged
+  simulation_import_mass_policy: sensitivity_flag
+  mass_nominal_kg: 8.0
+  availability_class: local_derived
+  primary_process_id: sheet_metal_cutting_v0
+  executable_process_id: sheet_metal_cutting_v0
+  secondary_process_ids: []
+  ready_machine_ids:
+  - labor_bot_general_v0
+  - assembly_tools_basic
+  confidence: medium
+  reasoning_brief: Existing sheet-metal route is adequate for first-pass local fabrication, with labor_bot
+    limited to handling/fixturing; exposure, stiffness, fit, EMI, or grounding remain flags.
+route_decision: lunar_candidate_flagged
+simulation_import_mass_policy: sensitivity_flag

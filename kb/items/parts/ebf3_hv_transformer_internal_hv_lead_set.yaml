@@ -1,0 +1,49 @@
+id: ebf3_hv_transformer_internal_hv_lead_set
+kind: part
+name: EBF3 HV transformer internal HV lead set
+mass: 0.6
+unit: unit
+unit_kind: discrete
+material: aluminum
+notes: 'Internal high-voltage lead set for the EBF3 sectioned HV step-up transformer. Child of `ebf3_sectioned_hv_step_up_transformer`
+  from research/ebf3_bom_sources/organized/split_before_route_leaf_decomposition_plan.md. This is
+  not local-ready and has no manufacturing recipe.
+
+  '
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Replace first-pass nominal import mass with sourced lower/upper mass bounds if this item dominates
+  imported mass.
+- 'Resolve local-route blocker before claiming local manufacturing closure: HV leads need conductor
+  forming/drawing, insulation, termination, bend radius, and voltage-standoff qualification beyond
+  current route.'
+- 'Encode or verify performance requirements outside prose notes: Internal HV lead must meet voltage
+  standoff, corona-free routing, thermal rise, insulation compatibility with transformer oil/potting,
+  and termination smoothness.'
+- 'Review route sensitivity flags before treating the route as nominally closed: hv_lead;wire_drawing_blocked;insulation_gap;semantic_audit:hv_lead_gap.'
+- Close an HV conductor process chain before replacing import fallback.
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_hv_transformer_internal_hv_lead_set
+  source_recipe_path: kb/recipes/recipe_ebf3_hv_transformer_internal_hv_lead_set.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: route_gap
+  simulation_import_mass_policy: import_until_gap_resolved
+  mass_nominal_kg: 0.6
+  availability_class: local_derived
+  primary_process_id: wire_drawing_aluminum_v0
+  executable_process_id: import_receiving_basic_v0
+  secondary_process_ids:
+  - electrical_wire_and_connectors_production_v0
+  - insulated_wire_formation_v0
+  ready_machine_ids:
+  - labor_bot_general_v0
+  confidence: medium
+  reasoning_brief: 'Wire drawing is not the only issue: HV leads require insulation class, clearances,
+    terminations, oil/vacuum compatibility, and hipot/partial-discharge acceptance.'
+  blocked_machine_or_process_reason: 'Wire drawing is not the only issue: HV leads require insulation
+    class, clearances, terminations, oil/vacuum compatibility, and hipot/partial-discharge acceptance.'
+route_decision: route_gap
+simulation_import_mass_policy: import_until_gap_resolved
+is_import: true

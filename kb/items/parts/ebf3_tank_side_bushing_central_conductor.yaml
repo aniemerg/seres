@@ -4,10 +4,39 @@ name: EBF3 tank-side bushing central conductor
 mass: 0.25
 unit: unit
 unit_kind: discrete
-material_class: metal
-notes: >
-  Child of HV-8. Central conductor for the tank-side high-voltage output
-  bushing. This is a tank-side package marker, not the cable conductor or
-  gun-side input conductor. Material, surface finish, rating, and termination
-  geometry remain unresolved; see
-  research/ebf3_bom_sources/organized/hv_tank_interface_hardware_plan.md.
+material: aluminum
+notes: Child of HV-8. Central conductor for the tank-side high-voltage output bushing. This is a tank-side
+  package marker, not the cable conductor or gun-side input conductor.
+recipe: recipe_ebf3_tank_side_bushing_central_conductor
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Resolve material, surface finish, rating, and termination geometry; see research/ebf3_bom_sources/organized/hv_tank_interface_hardware_plan.md.
+- Replace validation-scaled generic stock inputs with explicit EBF material lower/upper bounds and
+  material-specific recipe inputs.
+- 'Encode or verify performance requirements outside prose notes: HV field grading radius; contact
+  resistance; bushing seal interface; vacuum or oil cleanliness.'
+- 'Review route sensitivity flags before treating the route as nominally closed: performance_flag:HV;performance_flag:vacuum;candidate_fit:accuracy_risk.'
+- Close HV withstand surface cleanliness and seal-interface acceptance.
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_tank_side_bushing_central_conductor
+  source_recipe_path: kb/recipes/recipe_ebf3_tank_side_bushing_central_conductor.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: lunar_candidate_flagged
+  simulation_import_mass_policy: sensitivity_flag
+  mass_nominal_kg: 0.25
+  availability_class: local_derived
+  primary_process_id: machining_basic_v0
+  executable_process_id: machining_basic_v0
+  secondary_process_ids:
+  - assembly_basic_v0
+  ready_machine_ids:
+  - multi_axis_cnc_machining_center
+  - labor_bot_general_v0
+  - assembly_tools_basic
+  confidence: medium
+  reasoning_brief: Field-radius conductor geometry is CNC scope but HV withstand cleanliness and seal-interface
+    behavior remain core gaps.
+route_decision: lunar_candidate_flagged
+simulation_import_mass_policy: sensitivity_flag

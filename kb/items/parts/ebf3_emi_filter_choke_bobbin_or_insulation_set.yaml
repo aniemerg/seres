@@ -1,0 +1,48 @@
+id: ebf3_emi_filter_choke_bobbin_or_insulation_set
+kind: part
+name: EBF3 EMI filter choke bobbin or insulation set
+mass: 0.12
+unit: unit
+unit_kind: discrete
+material: alumina_ceramic
+notes: 'Bobbin/insulation support for the EBF3 EMI filter choke set. Child of `ebf3_emi_filter_choke_set`
+  from research/ebf3_bom_sources/organized/split_before_route_leaf_decomposition_plan.md. This is
+  not local-ready and has no manufacturing recipe.
+
+  '
+recipe: recipe_ebf3_emi_filter_choke_bobbin_or_insulation_set
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Replace validation-scaled generic stock inputs with explicit EBF material lower/upper bounds and
+  material-specific recipe inputs.
+- 'Encode or verify performance requirements outside prose notes: dielectric strength; winding support
+  geometry; thermal cycling; low outgassing.'
+- 'Review route sensitivity flags before treating the route as nominally closed: HV_insulation;magnetic_component;implemented_split_child.'
+- 'Keep out of CNC: alumina/insulator part needs explicit ceramic pressing/sintering route.'
+- Reroute recipe away from ceramic_block_small/ceramic_base labor placeholder and add inspection/finish
+  notes appropriate to the EBF3 leaf.
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_emi_filter_choke_bobbin_or_insulation_set
+  source_recipe_path: kb/recipes/recipe_ebf3_emi_filter_choke_bobbin_or_insulation_set.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: lunar_candidate_flagged
+  simulation_import_mass_policy: sensitivity_flag
+  mass_nominal_kg: 0.12
+  availability_class: local_derived
+  primary_process_id: ceramic_forming_basic_v0
+  executable_process_id: ceramic_forming_basic_v0
+  secondary_process_ids:
+  - ceramic_sintering_process_v0
+  ready_machine_ids:
+  - labor_bot_general_v0
+  - pressing_mold_set
+  - hydraulic_press
+  - kiln_ceramic
+  confidence: medium
+  reasoning_brief: Existing ceramic forming/sintering route has concrete press/mold/kiln machines
+    now usable_unreviewed; keep only part-specific dielectric, wear, thermal shock, dimensional, or
+    cleanliness flags.
+route_decision: lunar_candidate_flagged
+simulation_import_mass_policy: sensitivity_flag

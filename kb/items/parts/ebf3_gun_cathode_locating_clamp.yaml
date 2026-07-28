@@ -4,10 +4,36 @@ name: EBF3 gun cathode locating clamp
 mass: 0.04
 unit: unit
 unit_kind: discrete
-material_class: metal
-notes: >
-  Level-3 child of FG-15. Clamp or locating-retention hardware for holding the
-  replaceable cathode cartridge package against its alignment datum. Adopted as
-  a minimal physical child because cartridge replacement and mounted cathode
-  assemblies need retention, but the actual clamp geometry and fastener details
-  remain deferred.
+material: refractory_metal
+notes: Level-3 child of FG-15. Clamp or locating-retention hardware for holding the replaceable cathode
+  cartridge package against its alignment datum.
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Resolve deferred Adopted as a minimal physical child because cartridge replacement and mounted cathode
+  assemblies need retention, but the actual clamp geometry and fastener details.
+- Replace first-pass nominal import mass with sourced lower/upper mass bounds if this item dominates
+  imported mass.
+- 'Resolve local-route blocker before claiming local manufacturing closure: Tungsten, tantalum, and
+  lanthanum hexaboride are scarce/advanced specialty materials; no Ready local cathode-grade route
+  is present.'
+- 'Encode or verify performance requirements outside prose notes: Cathode clamp must keep cathode
+  geometry, survive high temperature, avoid contamination/outgassing, and maintain electron-beam alignment.'
+- 'Review route sensitivity flags before treating the route as nominally closed: cathode;refractory_metal;electron_gun.'
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_gun_cathode_locating_clamp
+  source_recipe_path: kb/recipes/recipe_ebf3_gun_cathode_locating_clamp.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: earth_import
+  simulation_import_mass_policy: import_nominal
+  mass_nominal_kg: 0.04
+  availability_class: scarce_trace
+  primary_process_id: none
+  executable_process_id: import_receiving_basic_v0
+  confidence: high
+  reasoning_brief: Low mass but mission-critical cathode-region refractory hardware should be counted
+    as Earth import in the first simulation
+route_decision: earth_import
+simulation_import_mass_policy: import_nominal
+is_import: true

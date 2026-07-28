@@ -1,0 +1,49 @@
+id: recipe_ebf3_gun_column_internal_support_frame
+kind: recipe
+variant_id: ebf3_route_review_v0
+target_item_id: ebf3_gun_column_internal_support_frame
+inputs:
+- item_id: steel_stock
+  qty: 0.7875
+  unit: kg
+outputs:
+- item_id: ebf3_gun_column_internal_support_frame
+  qty: 1.0
+  unit: unit
+steps:
+- process_id: machining_basic_v0
+  inputs:
+  - item_id: steel_stock
+    qty: 0.7875
+    unit: kg
+  outputs:
+  - item_id: ebf3_gun_column_internal_support_frame
+    qty: 1.0
+    unit: unit
+  notes: 'First-pass local route: CNC-machined steel support frame; beamline alignment, stiffness,
+    and vacuum-clean surfaces remain sensitivity flags.'
+notes: 'EBF3 route-review recipe for Simviewer inspection and first-pass simulation routing. Generated
+  from research/ebf3_bom_sources/derived/ebf3_process_route_review.csv after semantic audit integration.
+  This recipe records a routing judgement.
+
+  Route decision: lunar_candidate_flagged.
+
+  Simulation import mass policy: sensitivity_flag.
+
+  Executable first-pass process: machining_basic_v0.
+
+  Material: steel.
+
+  Lunar availability class: local_derived.
+
+  Mass used for first-pass accounting: 0.75 kg nominal.
+
+  Primary local process candidate: machining_basic_v0.
+
+  Secondary process candidates: metal_fabrication_basic_v0;assembly_basic_v0.
+
+  Ready machine ids considered: labor_bot_general_v0;assembly_tools_basic;multi_axis_cnc_machining_center.
+
+  Confidence: medium.
+
+  Reasoning: Local machining is plausible but this frame locates beamline hardware.'

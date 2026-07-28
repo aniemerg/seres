@@ -29,13 +29,13 @@ decisions belong in organized planning files.
 ## LOCAL-EBF3-CONTROLS-MAPPING
 
 - Title: EBF3 controls mapping
-- Local file: `research/ebf3_bom_sources/derived/ebf3_controls_mapping.md`
+- Local file: `research/ebf3_bom_sources/derived/ebf3_source_table_mappings.md`
 - Authority: first-pass scaffold mapping; candidate-only for detailed decomposition
 
 ## LOCAL-EBF3-POWER-SUPPLIES-MAPPING
 
 - Title: EBF3 power supplies mapping
-- Local file: `research/ebf3_bom_sources/derived/ebf3_power_supplies_mapping.md`
+- Local file: `research/ebf3_bom_sources/derived/ebf3_source_table_mappings.md`
 - Authority: first-pass scaffold mapping; candidate-only for detailed decomposition
 
 ## WEB-TT-HIGH-VOLTAGE-RESISTORS

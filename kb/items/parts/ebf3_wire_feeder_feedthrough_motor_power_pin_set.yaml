@@ -4,12 +4,41 @@ name: EBF3 wire feeder feedthrough motor power pin set
 mass: 0.08
 unit: unit
 unit_kind: discrete
-material_class: conductive_metal
-notes: >
-  Child of ebf3_wire_feeder_feedthrough_connector. Motor-power pin set for
-  passing wire-feeder motor current through the vacuum boundary. Power driver
-  electronics remain in power supplies, and chamber passive ports remain in the
-  cabin. Pin count, current rating, conductor material, insulation spacing, and
-  local manufacturing route remain unresolved; see
-  research/ebf3_bom_sources/organized/wire_feeder_level_2_audit.md and
-  research/ebf3_bom_sources/organized/ebf3_interface_architecture.md.
+material: kovar_or_copper_alloy
+notes: 'Child of ebf3_wire_feeder_feedthrough_connector. Motor-power pin set for passing wire-feeder
+  motor current through the vacuum boundary. Power driver electronics remain in power supplies, and
+  chamber passive ports remain in the cabin. Pin count, current rating, conductor material, insulation
+  spacing, and first-pass manufacturing/import route is recorded in the linked EBF3 route-review recipe;
+  see research/ebf3_bom_sources/organized/wire_feeder_level_2_audit.md and research/ebf3_bom_sources/organized/ebf3_interface_architecture.md.
+
+  '
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Replace first-pass nominal import mass with sourced lower/upper mass bounds if this item dominates
+  imported mass.
+- 'Resolve local-route blocker before claiming local manufacturing closure: Hermetic power pins rely
+  on specialty conductor/seal materials, dielectric standoff, current capacity, and leak-rate qualification.'
+- 'Encode or verify performance requirements outside prose notes: Motor power pins must meet current
+  capacity, dielectric standoff, hermeticity, contact resistance, thermal expansion match, and vibration
+  survival.'
+- 'Review route sensitivity flags before treating the route as nominally closed: feedthrough_pin;vacuum;power;special_alloy;semantic_audit:hermetic_power_pin_import.'
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_wire_feeder_feedthrough_motor_power_pin_set
+  source_recipe_path: kb/recipes/recipe_ebf3_wire_feeder_feedthrough_motor_power_pin_set.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: earth_import
+  simulation_import_mass_policy: import_nominal
+  mass_nominal_kg: 0.08
+  availability_class: import_or_recycle
+  primary_process_id: import_receiving_basic_v0
+  executable_process_id: import_receiving_basic_v0
+  ready_machine_ids:
+  - labor_bot_general_v0
+  confidence: low
+  reasoning_brief: Wire-feeder feedthrough motor-power pin set is specialty hermetic hardware; count
+    Earth import in first simulation
+route_decision: earth_import
+simulation_import_mass_policy: import_nominal
+is_import: true

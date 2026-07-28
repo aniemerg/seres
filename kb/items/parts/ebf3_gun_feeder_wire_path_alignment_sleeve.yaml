@@ -4,9 +4,36 @@ name: EBF3 gun-feeder wire-path alignment sleeve
 mass: 0.12
 unit: unit
 unit_kind: discrete
-material_class: metal
-notes: >
-  Level-3 child of WF-22. Alignment sleeve or short guide feature that keeps the
-  feeder outlet aligned to the downstream gun-side wire path. It does not define
-  the final guide tip or melt-pool nozzle geometry. Bore, material, thermal
-  exposure, and service tolerance remain deferred.
+material: steel
+notes: Level-3 child of WF-22. Alignment sleeve or short guide feature that keeps the feeder outlet
+  aligned to the downstream gun-side wire path. It does not define the final guide tip or melt-pool
+  nozzle geometry.
+recipe: recipe_ebf3_gun_feeder_wire_path_alignment_sleeve
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Resolve deferred Bore, material, thermal exposure, and service tolerance.
+- Replace validation-scaled generic stock inputs with explicit EBF material lower/upper bounds and
+  material-specific recipe inputs.
+- 'Encode or verify performance requirements outside prose notes: Sleeve must maintain wire path concentricity,
+  low burr/contact wear, thermal stability, and beam-adjacent alignment.'
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_gun_feeder_wire_path_alignment_sleeve
+  source_recipe_path: kb/recipes/recipe_ebf3_gun_feeder_wire_path_alignment_sleeve.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: lunar_candidate
+  simulation_import_mass_policy: local_nominal
+  mass_nominal_kg: 0.12
+  availability_class: local_derived
+  primary_process_id: machining_basic_v0
+  executable_process_id: machining_basic_v0
+  secondary_process_ids:
+  - inspection_basic_v0
+  ready_machine_ids:
+  - multi_axis_cnc_machining_center
+  - labor_bot_general_v0
+  confidence: medium
+  reasoning_brief: Sleeve bore and outside geometry are CNC-local and do not need a new process.
+route_decision: lunar_candidate
+simulation_import_mass_policy: local_nominal

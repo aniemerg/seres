@@ -4,8 +4,40 @@ name: EBF3 HV tank lid
 mass: 2.0
 unit: unit
 unit_kind: discrete
-material_class: metal
-notes: >
-  Child of HV-1. Removable or sealed lid for the HV tank enclosure. Fastening,
-  service access, gasket groove, and oil-tight sealing details remain
-  unresolved.
+material: steel
+notes: Child of HV-1. Removable or sealed lid for the HV tank enclosure.
+recipe: recipe_ebf3_hv_tank_lid
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Resolve fastening, service access, gasket groove, and oil-tight sealing details.
+- Replace validation-scaled generic stock inputs with explicit EBF material lower/upper bounds and
+  material-specific recipe inputs.
+- 'Encode or verify performance requirements outside prose notes: oil-tight seal face; HV clearance;
+  service fastener preload; low outgassing.'
+- 'Review route sensitivity flags before treating the route as nominally closed: HV_tank;vacuum_or_oil_seal.'
+- Reroute to sheet cutting plus seal-face finish/inspection; keep HV/oil cleanliness flag.
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_hv_tank_lid
+  source_recipe_path: kb/recipes/recipe_ebf3_hv_tank_lid.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: lunar_candidate_flagged
+  simulation_import_mass_policy: sensitivity_flag
+  mass_nominal_kg: 2.0
+  availability_class: local_derived
+  primary_process_id: sheet_metal_cutting_v0
+  executable_process_id: sheet_metal_cutting_v0
+  secondary_process_ids:
+  - machining_finish_basic_v0
+  - inspection_basic_v0
+  ready_machine_ids:
+  - labor_bot_general_v0
+  - assembly_tools_basic
+  - multi_axis_cnc_machining_center
+  - cutting_tools_general
+  confidence: medium
+  reasoning_brief: Steel lid blank is locally fabricable, but oil-tight seal face and HV clearance
+    need machining and inspection beyond sheet cutting/labor handling.
+route_decision: lunar_candidate_flagged
+simulation_import_mass_policy: sensitivity_flag

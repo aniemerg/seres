@@ -1,0 +1,44 @@
+id: ebf3_hv_transformer_secondary_winding_set
+kind: part
+name: EBF3 HV transformer secondary winding set
+mass: 2.2
+unit: unit
+unit_kind: discrete
+material: copper
+notes: 'Secondary winding set for the EBF3 sectioned HV step-up transformer. Child of `ebf3_sectioned_hv_step_up_transformer`
+  from research/ebf3_bom_sources/organized/split_before_route_leaf_decomposition_plan.md. This is
+  not local-ready and has no manufacturing recipe.
+
+  '
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Replace first-pass nominal import mass with sourced lower/upper mass bounds if this item dominates
+  imported mass.
+- 'Resolve local-route blocker before claiming local manufacturing closure: Copper is low abundance
+  and import-heavy per lunar material guide; coil_winding_basic_v0 also needs coil_winding_machine
+  not Ready.'
+- 'Encode or verify performance requirements outside prose notes: current density; insulation build;
+  HV layer spacing; thermal rise; winding geometry.'
+- 'Review route sensitivity flags before treating the route as nominally closed: performance_flag:HV;performance_flag:coil;implemented_split_child.'
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_hv_transformer_secondary_winding_set
+  source_recipe_path: kb/recipes/recipe_ebf3_hv_transformer_secondary_winding_set.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: earth_import
+  simulation_import_mass_policy: import_nominal
+  mass_nominal_kg: 2.2
+  availability_class: import_or_recycle
+  primary_process_id: copper_wire_drawing_and_insulation_v0
+  executable_process_id: import_receiving_basic_v0
+  secondary_process_ids:
+  - coil_winding_basic_v0
+  ready_machine_ids:
+  - labor_bot_general_v0
+  confidence: high
+  reasoning_brief: Copper secondary winding is both material-scarce and performance-critical; use
+    Earth import mass
+route_decision: earth_import
+simulation_import_mass_policy: import_nominal
+is_import: true

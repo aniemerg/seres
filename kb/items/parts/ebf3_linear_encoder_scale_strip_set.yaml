@@ -4,6 +4,39 @@ name: EBF3 linear encoder scale strip set
 mass: 0.75
 unit: unit
 unit_kind: discrete
-material_class: glass
-notes: Child of ebf3_linear_encoder_scales. Encoder scale strip set for EBF3 linear
-  encoder scales. Exact specification and local manufacturing route remain unresolved.
+material: glass
+notes: Child of ebf3_linear_encoder_scales. Encoder scale strip set for EBF3 linear encoder scales.
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Replace coarse item specification with explicit material, geometry/interface requirements, and lower/upper
+  mass bounds.
+- Replace first-pass nominal import mass with sourced lower/upper mass bounds if this item dominates
+  imported mass.
+- 'Resolve local-route blocker before claiming local manufacturing closure: glass_melting_and_forming_v0
+  needs glass_furnace_v0 and optical_pyrometer_temperature_sensor_v0 not Ready; no Ready grating or
+  precision encoder- scale process exists.'
+- 'Encode or verify performance requirements outside prose notes: scale pitch accuracy; thermal expansion
+  calibration; optical surface quality; read-head compatibility.'
+- 'Review route sensitivity flags before treating the route as nominally closed: performance_flag:precision_motion;performance_flag:optical_scale;candidate_fit:accura
+  cy_risk.'
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_linear_encoder_scale_strip_set
+  source_recipe_path: kb/recipes/recipe_ebf3_linear_encoder_scale_strip_set.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: earth_import
+  simulation_import_mass_policy: import_nominal
+  mass_nominal_kg: 0.75
+  availability_class: local_derived
+  primary_process_id: glass_melting_and_forming_v0
+  executable_process_id: import_receiving_basic_v0
+  ready_machine_ids:
+  - labor_bot_general_v0
+  - casting_mold_set
+  confidence: high
+  reasoning_brief: Glass as a material is lunar-derived but a linear encoder scale is precision metrology
+    hardware and should be imported
+route_decision: earth_import
+simulation_import_mass_policy: import_nominal
+is_import: true

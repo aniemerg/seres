@@ -4,12 +4,10 @@ name: EBF3 auxiliary low-voltage DC supply
 mass: 5.0
 unit: unit
 unit_kind: discrete
-material_class: electronic
-notes: >
-  PS-12. Auxiliary low-voltage DC supply for sensors, control interfaces,
-  motors, valves, coil drivers, wire-feeder electronics, and positioning
-  electronics, excluding separately modeled cathode heater and control-electrode
-  bias supplies. Source-table aligned item from
-  research/ebf3_bom_sources/organized/power_supplies_level_2_audit.md. No local
-  recipe is attached yet.
-  This assembly is split by `bom_ebf3_auxiliary_low_voltage_dc_supply`. Child items are package-level placeholders for decomposition fidelity only; no local recipe is attached yet.
+material: electronic
+notes: |
+  PS-12. Auxiliary low-voltage DC supply for sensors, control interfaces, motors, valves, coil drivers, wire-feeder electronics, and positioning electronics, excluding separately modeled cathode heater and control-electrode bias supplies. Source-table aligned item from research/ebf3_bom_sources/organized/power_supplies_level_2_audit.md. No local recipe is attached yet. This assembly is split by `bom_ebf3_auxiliary_low_voltage_dc_supply`. Child items are package-level placeholders for decomposition fidelity only; assembly recipe now only joins visible child items; child material and manufacturing readiness remain unresolved.
+bom: bom_ebf3_auxiliary_low_voltage_dc_supply
+recipe: recipe_ebf3_auxiliary_low_voltage_dc_supply_assembly_v0
+trust_tags:
+- trusted_ebf3_unreplaced

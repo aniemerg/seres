@@ -4,10 +4,42 @@ name: EBF3 positioning feedthrough flange
 mass: 0.2
 unit: unit
 unit_kind: discrete
-material_class: metal
-notes: >
-  Child of ebf3_positioning_electrical_feedthrough. Local flange or body mount
-  for the positioning-specific feedthrough insert. It is not the generic cabin
-  wall port or a shared chamber feedthrough plate. Seal geometry, bolt pattern,
-  material choice, and local manufacturing route remain unresolved; see
-  research/ebf3_bom_sources/organized/four_axis_positioning_level_2_audit.md.
+material: steel
+notes: 'Child of ebf3_positioning_electrical_feedthrough. Local flange or body mount for the positioning-specific
+  feedthrough insert. It is not the generic cabin wall port or a shared chamber feedthrough plate.
+  Seal geometry, bolt pattern, material choice, and first-pass manufacturing/import route is recorded
+  in the linked EBF3 route-review recipe; see research/ebf3_bom_sources/organized/four_axis_positioning_level_2_audit.md.
+
+  '
+recipe: recipe_ebf3_positioning_feedthrough_flange
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Replace validation-scaled generic stock inputs with explicit EBF material lower/upper bounds and
+  material-specific recipe inputs.
+- 'Encode or verify performance requirements outside prose notes: Feedthrough flange must meet sealing
+  face flatness, bolt pattern tolerance, HV creepage/clearance, vacuum leak rate, and grounding continuity.'
+- 'Review route sensitivity flags before treating the route as nominally closed: feedthrough;vacuum_seal_interface;hv.'
+- Retain until feedthrough sealing and voltage acceptance are explicit.
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_positioning_feedthrough_flange
+  source_recipe_path: kb/recipes/recipe_ebf3_positioning_feedthrough_flange.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: lunar_candidate_flagged
+  simulation_import_mass_policy: sensitivity_flag
+  mass_nominal_kg: 0.2
+  availability_class: local_derived
+  primary_process_id: machining_basic_v0
+  executable_process_id: machining_basic_v0
+  secondary_process_ids:
+  - electrical_feedthrough_vacuum_fabrication_v0
+  - leak_test_v0
+  ready_machine_ids:
+  - multi_axis_cnc_machining_center
+  - labor_bot_general_v0
+  confidence: medium
+  reasoning_brief: The flange leaf is machined locally but hermetic feedthrough seal and HV rating
+    are separate unresolved gaps.
+route_decision: lunar_candidate_flagged
+simulation_import_mass_policy: sensitivity_flag

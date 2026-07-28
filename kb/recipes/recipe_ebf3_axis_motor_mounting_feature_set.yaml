@@ -1,0 +1,51 @@
+id: recipe_ebf3_axis_motor_mounting_feature_set
+kind: recipe
+variant_id: ebf3_route_review_v0
+target_item_id: ebf3_axis_motor_mounting_feature_set
+inputs:
+- item_id: raw_metal_block
+  qty: 1.05
+  unit: kg
+outputs:
+- item_id: ebf3_axis_motor_mounting_feature_set
+  qty: 1.0
+  unit: unit
+steps:
+- process_id: machining_basic_v0
+  inputs:
+  - item_id: raw_metal_block
+    qty: 1.05
+    unit: kg
+  outputs:
+  - item_id: ebf3_axis_motor_mounting_feature_set
+    qty: 1.0
+    unit: unit
+  notes: First-pass EBF3 local route candidate using machining_basic_v0. Inputs use validation-scaled
+    generic stock. CNC proxy for machined/located metal mounting features; keep motion precision sensitivity
+    flag.
+notes: 'EBF3 route-review recipe for Simviewer inspection and first-pass simulation routing. Generated
+  from research/ebf3_bom_sources/derived/ebf3_process_route_review.csv after semantic audit integration.
+  This recipe records a routing judgement.
+
+  Route decision: lunar_candidate_flagged.
+
+  Simulation import mass policy: sensitivity_flag.
+
+  Executable first-pass process: machining_basic_v0.
+
+  Material: steel.
+
+  Lunar availability class: local_derived.
+
+  Mass used for first-pass accounting: 1 kg nominal.
+
+  Primary local process candidate: machining_basic_v0.
+
+  Secondary process candidates: steel_shaft_machining_v0;machining_basic_v0.
+
+  Ready machine ids considered: multi_axis_cnc_machining_center;labor_bot_general_v0.
+
+  Confidence: medium.
+
+  Reasoning: Steel mounting features fit local forming and machining but motor alignment and preload
+  interfaces must be tracked in simulation.'

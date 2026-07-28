@@ -50,7 +50,7 @@ The list below reflects the converged set from iterative simulation and optimiza
 - `anvil_or_die_set` — impact forming
 
 **Machining and Fabrication**
-- `cnc_mill` — precision milling
+- `multi_axis_cnc_machining_center` — precision machining
 - `drill_press` — hole drilling
 - `grinder_cylindrical_v0` — cylindrical grinding
 - `grinding_wheels` — abrasive machining consumables

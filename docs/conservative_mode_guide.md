@@ -103,7 +103,7 @@ Result: Recipe updated to use existing 'water' item with transformation
    └─ YES → Continue to #2
 
 2. Does an equivalent item with a recipe already exist?
-   (5× magnitude, same material_class, same function)
+   (5× magnitude, same material or reviewed substitution group, same function)
    ├─ YES → Replace references to this item with equivalent
    │         Delete this item (consolidation)
    └─ NO → Continue to #3
@@ -132,7 +132,7 @@ Result: Recipe updated to use existing 'water' item with transformation
 
 ### For `missing_field` (Required Fields Not Populated)
 
-**Context:** An item is missing required fields like `material_class`, `energy_model`, etc.
+**Context:** An item is missing required fields like `material`, `energy_model`, etc.
 
 **Decision Tree:**
 

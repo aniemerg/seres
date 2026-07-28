@@ -1,0 +1,42 @@
+id: recipe_ebf3_thermal_isolation_standoff_body_set
+kind: recipe
+variant_id: ebf3_route_review_v0
+target_item_id: ebf3_thermal_isolation_standoff_body_set
+inputs:
+- item_id: ceramic_powder
+  qty: 0.2205
+  unit: kg
+- item_id: ceramic_binder
+  qty: 0.0945
+  unit: kg
+outputs:
+- item_id: ebf3_thermal_isolation_standoff_body_set
+  qty: 1.0
+  unit: unit
+steps:
+- process_id: ceramic_forming_basic_v0
+  inputs:
+  - item_id: ceramic_powder
+    qty: 0.2205
+    unit: kg
+  - item_id: ceramic_binder
+    qty: 0.0945
+    unit: kg
+  outputs:
+  - item_id: green_ceramic_part
+    qty: 0.315
+    unit: kg
+  notes: Form EBF3 ceramic green body using press/mold tooling; labor bot is handling/fixturing only.
+- process_id: ceramic_sintering_process_v0
+  inputs:
+  - item_id: green_ceramic_part
+    qty: 0.315
+    unit: kg
+  outputs:
+  - item_id: ebf3_thermal_isolation_standoff_body_set
+    qty: 1.0
+    unit: unit
+  notes: Fire/sinter ceramic body in kiln; EBF3-specific dielectric, wear, thermal shock, cleanliness,
+    and dimensional checks remain flagged as applicable.
+notes: EBF3 route-review recipe using explicit ceramic forming plus sintering/firing equipment instead
+  of a labor-only ceramic placeholder.

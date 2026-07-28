@@ -4,16 +4,37 @@ name: EBF3 gun cathode
 mass: 0.02
 unit: unit
 unit_kind: discrete
-material_class: scarce_trace_refractory_metal
-notes: >
-  FG-1. Thermionic electron emitter for the EBF3 fixed electron beam gun.
-  Active package direction is a direct-heated tungsten hairpin/filament for
-  lunar closure. Intentional Level-2 leaf: in this package direction, the
-  emitter and heater are the same hot tungsten conductor, while base, contacts,
-  leads, and cartridge support are modeled by neighboring cathode package items.
-  EBF3 source LaB6 is retained as original-machine reference evidence, and
-  comparable BINP tantalum foil is not the local-closure baseline. Do not attach
-  a local recipe or reuse lower-resolution tungsten cathode items until
-  filament geometry, material form, and fabrication route are sourced or
-  selected. See
+material: scarce_trace_refractory_metal
+notes: 'FG-1. Thermionic electron emitter for the EBF3 fixed electron beam gun. Active package direction
+  is a direct-heated tungsten hairpin/filament for lunar closure. Intentional Level-2 leaf: in this
+  package direction, the emitter and heater are the same hot tungsten conductor, while base, contacts,
+  leads, and cartridge support are modeled by neighboring cathode package items. EBF3 source LaB6
+  is retained as original-machine reference evidence, and comparable BINP tantalum foil is not the
+  local-closure baseline. Do not attach a local recipe or reuse lower-resolution tungsten cathode
+  items until filament geometry, material form, and fabrication route are sourced or selected. See
   research/ebf3_bom_sources/organized/cathode_variant_review.md.
+
+  '
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Replace first-pass nominal import mass with sourced lower/upper mass bounds if this item dominates
+  imported mass.
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_gun_cathode
+  source_recipe_path: kb/recipes/recipe_ebf3_gun_cathode.yaml
+  source_queue_type: leaf_decomposition_review_kb_recipe
+  route_decision: import_as_leaf
+  simulation_import_mass_policy: import_nominal
+  mass_nominal_kg: 0.02
+  availability_class: keep_ebf3_leaf
+  primary_process_id: import_receiving_basic_v0
+  executable_process_id: import_receiving_basic_v0
+  reasoning_brief: Complex electronic/optical/electron-gun item with low-confidence local capability;
+    splitting now would be a large research task for limited first-sim value
+  recommended_edit: Count as Earth import in first simulation; split only if this import mass dominates
+    the result
+route_decision: import_as_leaf
+simulation_import_mass_policy: import_nominal
+is_import: true

@@ -4,6 +4,37 @@ name: EBF3 hv tank temperature sensor mount
 mass: 0.02
 unit: unit
 unit_kind: discrete
-material_class: metal
-notes: Child of ebf3_hv_tank_temperature_sensor. Sensor mount for EBF3 HV tank temperature
-  sensor. Exact specification and local manufacturing route remain unresolved.
+material: steel
+notes: Child of ebf3_hv_tank_temperature_sensor. Sensor mount for EBF3 HV tank temperature sensor.
+recipe: recipe_ebf3_hv_tank_temperature_sensor_mount
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Replace coarse item specification with explicit material, geometry/interface requirements, and lower/upper
+  mass bounds.
+- Replace validation-scaled generic stock inputs with explicit EBF material lower/upper bounds and
+  material-specific recipe inputs.
+- 'Encode or verify performance requirements outside prose notes: sensor thermal contact; electrical
+  isolation clearance; oil/vacuum cleanliness.'
+- 'Review route sensitivity flags before treating the route as nominally closed: sensor_interface;HV_tank.'
+- Do not block on the old audit label; add finish/inspection detail only if this leaf dominates simulation
+  sensitivity.
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_hv_tank_temperature_sensor_mount
+  source_recipe_path: kb/recipes/recipe_ebf3_hv_tank_temperature_sensor_mount.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: lunar_candidate_flagged
+  simulation_import_mass_policy: sensitivity_flag
+  mass_nominal_kg: 0.02
+  availability_class: local_derived
+  primary_process_id: machining_basic_v0
+  executable_process_id: machining_basic_v0
+  secondary_process_ids: []
+  ready_machine_ids:
+  - multi_axis_cnc_machining_center
+  confidence: medium
+  reasoning_brief: Sensor mount geometry is a small machined bracket/interface, not a shaft; thermal/HV
+    interface requirements remain flagged.
+route_decision: lunar_candidate_flagged
+simulation_import_mass_policy: sensitivity_flag

@@ -4,7 +4,37 @@ name: EBF3 rotary axis table plate
 mass: 3.0
 unit: unit
 unit_kind: discrete
-material_class: precision_metal
-notes: >
-  Level-3 child of FS-17. Rotary build-table plate. Diameter, thickness, flatness,
-  bolt pattern, and thermal distortion remain deferred.
+material: steel
+notes: Level-3 child of FS-17. Rotary build-table plate.
+recipe: recipe_ebf3_rotary_axis_table_plate
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Resolve deferred Diameter, thickness, flatness, bolt pattern, and thermal distortion.
+- Replace validation-scaled generic stock inputs with explicit EBF material lower/upper bounds and
+  material-specific recipe inputs.
+- 'Encode or verify performance requirements outside prose notes: Rotary table flatness; balance;
+  bolt pattern; thermal distortion; runout.'
+- 'Review route sensitivity flags before treating the route as nominally closed: motion_precision;thermal.'
+- Retain until rotary build-table acceptance is represented.
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_rotary_axis_table_plate
+  source_recipe_path: kb/recipes/recipe_ebf3_rotary_axis_table_plate.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: lunar_candidate_flagged
+  simulation_import_mass_policy: sensitivity_flag
+  mass_nominal_kg: 3.0
+  availability_class: local_derived
+  primary_process_id: machining_basic_v0
+  executable_process_id: machining_basic_v0
+  secondary_process_ids:
+  - inspection_basic_v0
+  ready_machine_ids:
+  - labor_bot_general_v0
+  - multi_axis_cnc_machining_center
+  confidence: medium
+  reasoning_brief: The table plate is machinable but balance runout flatness and heat exposure directly
+    affect build output.
+route_decision: lunar_candidate_flagged
+simulation_import_mass_policy: sensitivity_flag

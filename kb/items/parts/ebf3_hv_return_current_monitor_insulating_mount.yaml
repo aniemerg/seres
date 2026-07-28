@@ -4,10 +4,49 @@ name: EBF3 hv return current monitor insulating mount
 mass: 0.12
 unit: unit
 unit_kind: discrete
-material_class: insulator
-notes: >
-  Child of ebf3_hv_output_return_current_monitor. Insulating mount for the
-  HV-side current monitor package. It keeps sensor isolation visible without
-  deciding monitor topology, creepage/clearance, ceramic/polymer material,
-  mechanical geometry, or local manufacturing route. See
-  research/ebf3_bom_sources/organized/hv_grounding_return_review.md.
+material: alumina_ceramic
+notes: 'Child of ebf3_hv_output_return_current_monitor. Insulating mount for the HV-side current monitor
+  package. It keeps sensor isolation visible without deciding monitor topology, creepage/clearance,
+  ceramic/polymer material, or mechanical geometry. First-pass manufacturing/import route is recorded
+  in the linked EBF3 route-review recipe. See research/ebf3_bom_sources/organized/hv_grounding_return_review.md.
+
+  '
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Replace first-pass nominal import mass with sourced lower/upper mass bounds if this item dominates
+  imported mass.
+- 'Resolve local-route blocker before claiming local manufacturing closure: Shaped HV ceramic insulating
+  mount needs creepage, leakage, alignment, ceramic forming/sintering, and dielectric QA beyond current
+  Ready machines.'
+- 'Encode or verify performance requirements outside prose notes: dielectric withstand; creepage distance;
+  monitor alignment; low leakage current.'
+- 'Review route sensitivity flags before treating the route as nominally closed: performance_flag:HV;performance_flag:interface_tolerance;candidate_fit:none;semantic_
+  audit:hv_monitor_insulator_gap.'
+- Define ceramic forming/sintering, metallization or glass/ceramic sealing, cleaning, dielectric test,
+  and leak/outgassing acceptance before claiming local closure.
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_hv_return_current_monitor_insulating_mount
+  source_recipe_path: kb/recipes/recipe_ebf3_hv_return_current_monitor_insulating_mount.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: route_gap
+  simulation_import_mass_policy: import_until_gap_resolved
+  mass_nominal_kg: 0.12
+  availability_class: local_derived
+  primary_process_id: ceramic_forming_basic_v0
+  executable_process_id: import_receiving_basic_v0
+  secondary_process_ids:
+  - ceramic_sintering_high_temp_v0
+  ready_machine_ids:
+  - labor_bot_general_v0
+  confidence: medium
+  reasoning_brief: Material route is lunar-plausible, but this part is an HV/electron-gun/feedthrough
+    dielectric boundary requiring creepage, leakage, partial-discharge or hermetic QA; labor-bot capability
+    is irrelevant.
+  blocked_machine_or_process_reason: Material route is lunar-plausible, but this part is an HV/electron-gun/feedthrough
+    dielectric boundary requiring creepage, leakage, partial-discharge or hermetic QA; labor-bot capability
+    is irrelevant.
+route_decision: route_gap
+simulation_import_mass_policy: import_until_gap_resolved
+is_import: true

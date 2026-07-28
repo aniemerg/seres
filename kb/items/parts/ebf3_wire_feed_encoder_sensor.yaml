@@ -4,11 +4,10 @@ name: EBF3 wire feed encoder sensor
 mass: 0.3
 unit: unit
 unit_kind: discrete
-material_class: electronic
-notes: >
-  WF-23. Digital tachometer, encoder, or feed-rate sensor for wire feed
-  feedback. Controls owns acquisition and command logic; this item represents
-  feeder-local sensing hardware. See
-  research/ebf3_bom_sources/organized/wire_feeder_level_2_audit.md. No local
-  recipe is attached yet.
-  This assembly is split by `bom_ebf3_wire_feed_encoder_sensor`. Child items are structural placeholders for decomposition fidelity only; no local recipe is attached yet.
+material: electronic
+notes: |
+  WF-23. Digital tachometer, encoder, or feed-rate sensor for wire feed feedback. Controls owns acquisition and command logic; this item represents feeder-local sensing hardware. See research/ebf3_bom_sources/organized/wire_feeder_level_2_audit.md. No local recipe is attached yet. This assembly is split by `bom_ebf3_wire_feed_encoder_sensor`. Child items are structural placeholders for decomposition fidelity only; assembly recipe now only joins visible child items; child material and manufacturing readiness remain unresolved.
+bom: bom_ebf3_wire_feed_encoder_sensor
+recipe: recipe_ebf3_wire_feed_encoder_sensor_assembly_v0
+trust_tags:
+- trusted_ebf3_unreplaced

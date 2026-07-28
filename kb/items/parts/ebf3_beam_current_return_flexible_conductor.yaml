@@ -4,10 +4,49 @@ name: EBF3 beam current return flexible conductor
 mass: 0.32
 unit: unit
 unit_kind: discrete
-material_class: metal
-notes: >
-  Child of ebf3_beam_current_return_strap. Flexible conductor for
-  platform/substrate beam-current continuity in the positioning package. This is
-  not the complete system-level HV return conductor. Conductor sizing, material,
-  routing, surface treatment, and local manufacturing route remain unresolved;
-  see research/ebf3_bom_sources/organized/hv_grounding_return_review.md.
+material: aluminum
+notes: 'Child of ebf3_beam_current_return_strap. Flexible conductor for platform/substrate beam-current
+  continuity in the positioning package. This is not the complete system-level HV return conductor.
+  Conductor sizing, material, routing, surface treatment, and first-pass manufacturing/import route
+  is recorded in the linked EBF3 route-review recipe; see research/ebf3_bom_sources/organized/hv_grounding_return_review.md.
+
+  '
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Replace first-pass nominal import mass with sourced lower/upper mass bounds if this item dominates
+  imported mass.
+- 'Resolve local-route blocker before claiming local manufacturing closure: Flexible high-current
+  conductor needs wire/braid fabrication, terminations, contact resistance, thermal cycling, and vacuum
+  clearance qualification.'
+- 'Encode or verify performance requirements outside prose notes: current capacity; flexibility after
+  thermal cycling; low contact resistance; vacuum compatible insulation or bare braid clearance.'
+- 'Review route sensitivity flags before treating the route as nominally closed: performance_flag:HV;performance_flag:thermal;candidate_fit:accuracy_risk;semantic_aud
+  it:flexible_current_return_gap.'
+- Define conductor drawing, insulation or bare-clearance policy, termination crimp/bond, electrical
+  test, and vacuum compatibility checks.
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_beam_current_return_flexible_conductor
+  source_recipe_path: kb/recipes/recipe_ebf3_beam_current_return_flexible_conductor.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: route_gap
+  simulation_import_mass_policy: import_until_gap_resolved
+  mass_nominal_kg: 0.32
+  availability_class: local_derived
+  primary_process_id: metal_wire_drawing_process_v0
+  executable_process_id: import_receiving_basic_v0
+  secondary_process_ids:
+  - power_cable_assembly_v0
+  ready_machine_ids:
+  - labor_bot_general_v0
+  confidence: medium
+  reasoning_brief: Aluminum conductor stock is plausible and drawing equipment exists, but vacuum
+    cable insulation, termination, flex, and continuity QA are not modeled by the current labor-heavy
+    route.
+  blocked_machine_or_process_reason: Aluminum conductor stock is plausible and drawing equipment exists,
+    but vacuum cable insulation, termination, flex, and continuity QA are not modeled by the current
+    labor-heavy route.
+route_decision: route_gap
+simulation_import_mass_policy: import_until_gap_resolved
+is_import: true

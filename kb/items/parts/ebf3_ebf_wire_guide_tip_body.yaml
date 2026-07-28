@@ -4,6 +4,43 @@ name: EBF3 ebf wire guide tip body
 mass: 0.12
 unit: unit
 unit_kind: discrete
-material_class: metal
+material: hardened_steel
 notes: Child of ebf3_ebf_wire_guide_tip. Guide tip body for EBF3 EBF wire guide tip.
-  Exact specification and local manufacturing route remain unresolved.
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Replace coarse item specification with explicit material, geometry/interface requirements, and lower/upper
+  mass bounds.
+- Replace validation-scaled generic stock inputs with explicit EBF material lower/upper bounds and
+  material-specific recipe inputs.
+- 'Encode or verify performance requirements outside prose notes: wire path tolerance; wear face finish;
+  vacuum-compatible contact behavior.'
+- 'Review route sensitivity flags before treating the route as nominally closed: wire_feed_wear.'
+- Define heat treat, grinding/lapping, groove/orifice inspection, and wear acceptance.
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_ebf_wire_guide_tip_body
+  source_recipe_path: kb/recipes/recipe_ebf3_ebf_wire_guide_tip_body.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: route_gap
+  simulation_import_mass_policy: import_until_gap_resolved
+  mass_nominal_kg: 0.12
+  availability_class: local_derived
+  primary_process_id: steel_shaft_machining_v0
+  executable_process_id: import_receiving_basic_v0
+  secondary_process_ids:
+  - surface_finishing_am_parts_v0
+  - assembly_basic_v0
+  ready_machine_ids:
+  - labor_bot_general_v0
+  - multi_axis_cnc_machining_center
+  - assembly_tools_basic
+  confidence: medium
+  reasoning_brief: Base CNC machining is available, but the working surface needs hardness, groove/orifice
+    geometry, wear finish, and vacuum cleanliness that are not closed by shaft machining alone.
+  blocked_machine_or_process_reason: Base CNC machining is available, but the working surface needs
+    hardness, groove/orifice geometry, wear finish, and vacuum cleanliness that are not closed by
+    shaft machining alone.
+route_decision: route_gap
+simulation_import_mass_policy: import_until_gap_resolved
+is_import: true

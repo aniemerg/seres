@@ -4,6 +4,37 @@ name: EBF3 lv distribution panel plate
 mass: 0.8
 unit: unit
 unit_kind: discrete
-material_class: metal
-notes: Child of ebf3_low_voltage_distribution_panel. Panel plate for EBF3 low-voltage
-  distribution panel. Exact specification and local manufacturing route remain unresolved.
+material: steel
+notes: Child of ebf3_low_voltage_distribution_panel. Panel plate for EBF3 low-voltage distribution
+  panel.
+recipe: recipe_ebf3_lv_distribution_panel_plate
+trust_tags:
+- untrusted_global_kb
+future_improvements:
+- Replace coarse item specification with explicit material, geometry/interface requirements, and lower/upper
+  mass bounds.
+- Replace validation-scaled generic stock inputs with explicit EBF material lower/upper bounds and
+  material-specific recipe inputs.
+- 'Encode or verify performance requirements outside prose notes: mounting hole pattern; electrical
+  clearance; cabinet fit; grounding continuity.'
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_lv_distribution_panel_plate
+  source_recipe_path: kb/recipes/recipe_ebf3_lv_distribution_panel_plate.yaml
+  source_queue_type: reachable_leaf_backfill_kb_recipe
+  route_decision: lunar_candidate
+  simulation_import_mass_policy: local_nominal
+  mass_nominal_kg: 0.8
+  availability_class: local_derived
+  primary_process_id: sheet_metal_cutting_v0
+  executable_process_id: sheet_metal_cutting_v0
+  secondary_process_ids:
+  - machining_basic_v0
+  ready_machine_ids:
+  - labor_bot_general_v0
+  - multi_axis_cnc_machining_center
+  confidence: medium
+  reasoning_brief: Low-risk steel panel plate can be represented by existing sheet cutting/machining
+    route; remaining electrical clearance is design-level, not a labor-only manufacturing gap.
+route_decision: lunar_candidate
+simulation_import_mass_policy: local_nominal

@@ -4,6 +4,44 @@ name: EBF3 ebf wire guide tip wear orifice
 mass: 0.05
 unit: unit
 unit_kind: discrete
-material_class: ceramic
+material: ceramic
 notes: Child of ebf3_ebf_wire_guide_tip. Wear orifice for EBF3 EBF wire guide tip.
-  Exact specification and local manufacturing route remain unresolved.
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Replace coarse item specification with explicit material, geometry/interface requirements, and lower/upper
+  mass bounds.
+- Replace first-pass nominal import mass with sourced lower/upper mass bounds if this item dominates
+  imported mass.
+- 'Resolve local-route blocker before claiming local manufacturing closure: ceramic_forming_basic_v0
+  needs hydraulic_press and pressing_mold_set not Ready; ceramic_sintering_high_temp_v0 needs kiln_ceramic
+  not Ready.'
+- 'Encode or verify performance requirements outside prose notes: wear orifice diameter; dielectric
+  strength; thermal shock resistance; wire sliding wear.'
+- 'Review route sensitivity flags before treating the route as nominally closed: performance_flag:precision_wear;candidate_fit:none;policy_fix:route_gap_import_until_
+  resolved.'
+- Add ceramic precision-finishing chain before local closure.
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_ebf_wire_guide_tip_wear_orifice
+  source_recipe_path: kb/recipes/recipe_ebf3_ebf_wire_guide_tip_wear_orifice.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: route_gap
+  simulation_import_mass_policy: import_until_gap_resolved
+  mass_nominal_kg: 0.05
+  availability_class: local_derived
+  primary_process_id: ceramic_forming_basic_v0
+  executable_process_id: import_receiving_basic_v0
+  secondary_process_ids:
+  - ceramic_sintering_high_temp_v0
+  ready_machine_ids:
+  - labor_bot_general_v0
+  confidence: medium
+  reasoning_brief: Existing ceramic press/kiln route removes the old obsolete audit blocker, but a
+    precision wear orifice needs bore finishing, chipping control, dimensional inspection, and cleanliness.
+  blocked_machine_or_process_reason: Existing ceramic press/kiln route removes the old obsolete audit
+    blocker, but a precision wear orifice needs bore finishing, chipping control, dimensional inspection,
+    and cleanliness.
+route_decision: route_gap
+simulation_import_mass_policy: import_until_gap_resolved
+is_import: true

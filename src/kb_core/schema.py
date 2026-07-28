@@ -10,7 +10,7 @@ and ADR-013 (Recipe Overrides).
 """
 from __future__ import annotations
 
-from typing import List, Optional, Literal
+from typing import Any, List, Optional, Literal
 from pydantic import BaseModel, Field, ConfigDict
 
 
@@ -206,17 +206,22 @@ class RawItem(BaseModel):
     unit_kind: Optional[str] = None  # "discrete" or "bulk"
     mass: Optional[float] = None  # Item mass (for count → mass conversion)
     mass_kg: Optional[float] = None  # Explicit mass_kg field
+    mass_low_kg: Optional[float] = None
+    mass_high_kg: Optional[float] = None
     unit: Optional[str] = None
 
     bom: Optional[str] = None
     recipe: Optional[str] = None
 
+    material: Optional[str] = None
     material_class: Optional[str] = None
     density: Optional[float] = None  # kg/m³ (for mass ↔ volume conversion)
+    performance_requirements: Optional[dict[str, Any]] = None
 
     alternatives: List[str] = Field(default_factory=list)
     dedupe_candidate: Optional[bool] = None
     preferred_variant: Optional[str] = None
+    trust_tags: List[str] = Field(default_factory=list)
 
     # Machine-specific fields
     capabilities: List[str] = Field(default_factory=list)
@@ -437,17 +442,22 @@ class Item(BaseModel):
     unit_kind: Optional[Literal["discrete", "bulk"]] = None
     mass: Optional[float] = None
     mass_kg: Optional[float] = None
+    mass_low_kg: Optional[float] = None
+    mass_high_kg: Optional[float] = None
     unit: Optional[str] = None
 
     bom: Optional[str] = None
     recipe: Optional[str] = None
 
+    material: Optional[str] = None
     material_class: Optional[str] = None
     density: Optional[float] = None
+    performance_requirements: Optional[dict[str, Any]] = None
 
     alternatives: List[str] = Field(default_factory=list)
     dedupe_candidate: Optional[bool] = None
     preferred_variant: Optional[str] = None
+    trust_tags: List[str] = Field(default_factory=list)
 
     capabilities: List[str] = Field(default_factory=list)
     processes_supported: List[str] = Field(default_factory=list)

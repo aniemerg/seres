@@ -1,0 +1,27 @@
+id: recipe_ebf3_hv_tank_pressure_relief_assembly_v0
+kind: recipe
+variant_id: assembly_v0
+target_item_id: ebf3_hv_tank_pressure_relief
+inputs: &id001
+- item_id: ebf3_hv_pressure_relief_valve_body
+  qty: 1.0
+  unit: unit
+- item_id: ebf3_hv_pressure_relief_seal
+  qty: 1.0
+  unit: unit
+outputs:
+- item_id: ebf3_hv_tank_pressure_relief
+  qty: 1.0
+  unit: unit
+steps:
+- process_id: assembly_basic_v0
+  inputs: *id001
+  outputs:
+  - item_id: ebf3_hv_tank_pressure_relief
+    qty: 1.0
+    unit: unit
+  notes: Assemble EBF3 HV tank pressure relief from its source-aligned EBF3 child
+    items; child material and manufacturing readiness remain on the children.
+notes: BOM assembly recipe for EBF3 HV tank pressure relief. This recipe only assembles
+  already-modeled EBF3 child items and does not claim local fabrication of unresolved
+  children.

@@ -1,0 +1,50 @@
+id: recipe_ebf3_cabin_access_door_latch_pivot_axle_set
+kind: recipe
+variant_id: ebf3_route_review_v0
+target_item_id: ebf3_cabin_access_door_latch_pivot_axle_set
+inputs:
+- item_id: steel_bar_raw
+  qty: 0.42
+  unit: kg
+outputs:
+- item_id: ebf3_cabin_access_door_latch_pivot_axle_set
+  qty: 1.0
+  unit: unit
+steps:
+- process_id: steel_shaft_machining_v0
+  inputs:
+  - item_id: steel_bar_raw
+    qty: 0.42
+    unit: kg
+  outputs:
+  - item_id: ebf3_cabin_access_door_latch_pivot_axle_set
+    qty: 1.0
+    unit: unit
+  notes: 'First-pass local route candidate from EBF3 semantic route review. Inputs use validation-scaled
+    generic stock. Decision: lunar_candidate_flagged; policy: sensitivity_flag; flags: vacuum_motion;implemented_split_child'
+notes: 'EBF3 route-review recipe for Simviewer inspection and first-pass simulation routing. Generated
+  from research/ebf3_bom_sources/derived/ebf3_process_route_review.csv after semantic audit integration.
+  This recipe records a routing judgement.
+
+  Route decision: lunar_candidate_flagged.
+
+  Simulation import mass policy: sensitivity_flag.
+
+  Executable first-pass process: steel_shaft_machining_v0.
+
+  Material: steel.
+
+  Lunar availability class: local_derived.
+
+  Mass used for first-pass accounting: 0.4 kg nominal.
+
+  Primary local process candidate: steel_shaft_machining_v0.
+
+  Secondary process candidates: machining_basic_v0;assembly_basic_v0;surface_finishing_am_parts_v0.
+
+  Ready machine ids considered: labor_bot_general_v0;multi_axis_cnc_machining_center;assembly_tools_basic.
+
+  Confidence: medium.
+
+  Reasoning: Pivot and axle hardware can use steel machining but latch preload and dry wear should
+  stay flagged.'

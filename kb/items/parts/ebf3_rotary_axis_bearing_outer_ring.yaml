@@ -4,6 +4,46 @@ name: EBF3 rotary axis bearing outer ring
 mass: 1.3
 unit: unit
 unit_kind: discrete
-material_class: metal
-notes: Child of ebf3_rotary_axis_bearing. Bearing outer ring for EBF3 rotary axis
-  bearing. Exact specification and local manufacturing route remain unresolved.
+material: bearing_steel
+notes: Child of ebf3_rotary_axis_bearing. Bearing outer ring for EBF3 rotary axis bearing.
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Replace coarse item specification with explicit material, geometry/interface requirements, and lower/upper
+  mass bounds.
+- Replace first-pass nominal import mass with sourced lower/upper mass bounds if this item dominates
+  imported mass.
+- 'Resolve local-route blocker before claiming local manufacturing closure: Bearing outer ring needs
+  bearing-grade hardening, roundness, race finish, runout control, grinding, inspection, and lubricant
+  compatibility.'
+- 'Encode or verify performance requirements outside prose notes: raceway hardness; roundness; surface
+  finish; runout; vacuum lubrication compatibility.'
+- 'Review route sensitivity flags before treating the route as nominally closed: performance_flag:precision_motion;candidate_fit:accuracy_risk;semantic_audit:bearing_
+  ring_route_gap.'
+- Define bearing/ball-screw route with heat treat, precision grinding, lapping, inspection, lubrication,
+  and acceptance tests before local credit.
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_rotary_axis_bearing_outer_ring
+  source_recipe_path: kb/recipes/recipe_ebf3_rotary_axis_bearing_outer_ring.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: route_gap
+  simulation_import_mass_policy: import_until_gap_resolved
+  mass_nominal_kg: 1.3
+  availability_class: local_derived
+  primary_process_id: bearing_set_heavy_production_v0
+  executable_process_id: import_receiving_basic_v0
+  secondary_process_ids:
+  - precision_grinding_basic_v0
+  ready_machine_ids:
+  - labor_bot_general_v0
+  confidence: medium
+  reasoning_brief: Material and some machines exist, but bearing/ball-screw/linear-guide geometry
+    needs hardened races, precision grinding/lapping, preload/runout control, lubrication, metrology,
+    and life QA; this is a performance chain gap.
+  blocked_machine_or_process_reason: Material and some machines exist, but bearing/ball-screw/linear-guide
+    geometry needs hardened races, precision grinding/lapping, preload/runout control, lubrication,
+    metrology, and life QA; this is a performance chain gap.
+route_decision: route_gap
+simulation_import_mass_policy: import_until_gap_resolved
+is_import: true

@@ -44,6 +44,16 @@ Current execution result:
   the current evidence set after source-row cleanup and KB leaf-note hardening.
 - Assembly-like Level-2 rows have received Level-3 package child BOMs where the
   sources and boundary rules justify them.
+- Leaf fitting has started. The current review matrix classifies active leaf
+  items into the KB-fitting categories requested for human review; see
+  `derived/ebf3_leaf_material_process_readiness.csv`.
+- Four low-voltage/control enclosure leaves have been accepted as sufficiently
+  accurate replacements and are now represented by `enclosure_electrical_medium`
+  in the active BOM graph.
+- The 15 leaves marked `split_before_route` now have a source-first planning
+  review in `organized/split_before_route_leaf_decomposition_plan.md`. Seven
+  rows that passed the source-first gate have been converted into child BOMs;
+  the remaining rows are deferred or routed as a single leaf.
 - Remaining Level-2 leaves are intentional leaves, unresolved boundary markers,
   or items that need architecture/material/process decisions before deeper
   splitting.
@@ -121,20 +131,26 @@ conclude "do not split yet".
 1. Use `organized/ebf3_interface_architecture.md` as the current interface
    entry point for cabin, gun, wire feeder, positioning, controls, power
    supplies, and HV tank boundaries.
-2. Update affected item notes when deeper child decomposition touches:
+2. Continue fitting EBF3 leaf items into existing KB items using the leaf fitting gate in
+   `research/ebf3_bom_sources/README.md` and the whole-machine audit in
+   `derived/ebf3_leaf_material_process_readiness.csv`. Existing KB items may replace
+   EBF3 leaves as coarse graph fits, but any `not enough accuracy` replacement
+   must keep the risk visible and must not be used as local-closure evidence.
+3. Update affected item notes when deeper child decomposition touches:
    `ebf3_cabin_feedthroughs_and_wiring_ports`,
    `ebf3_wire_feeder_feedthrough_connector`,
    `ebf3_positioning_electrical_feedthrough`,
    `ebf3_gun_signal_wiring`, and `ebf3_gun_hv_input`.
-3. Fixed-gun cathode child BOMs now follow the direct-heated tungsten
+4. Fixed-gun cathode child BOMs now follow the direct-heated tungsten
    hairpin/filament package direction. Next cathode work should refine material,
    dimensions, contact/joint method, ceramic geometry, and whether a separate
    shield exists; do not add local recipes yet.
-4. HV/cable geometry now has minimal package markers under HV-8, HV-9, FG-12,
+5. HV/cable geometry now has minimal package markers under HV-8, HV-9, FG-12,
    and FG-13. Exact connector geometry, ceramic/feedthrough integration,
    field-grading geometry, and HV ratings still need source or design selection.
-5. Material/process readiness reviews come after ownership and decomposition are
-   stable. Do not use generic lower-resolution local parts to close EBF leaves.
+6. Material/process readiness reviews come after ownership, decomposition, and
+   leaf fitting are stable. Do not use generic lower-resolution local parts to
+   close EBF leaves.
 
 ## Remaining Intentional Leaves
 

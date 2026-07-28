@@ -4,11 +4,10 @@ name: EBF3 power-electronics thermal management hardware
 mass: 8.0
 unit: unit
 unit_kind: discrete
-material_class: composite
-notes: >
-  PS-15. Thermal management hardware for IGBTs, rectifiers, inductors, and
-  DC-link components. This is the source-table aligned thermal item; broader
-  cabinet busbar and internal wiring details remain deferred. See
-  research/ebf3_bom_sources/organized/power_supplies_level_2_audit.md. No local
-  recipe is attached yet.
-  This assembly is split by `bom_ebf3_power_electronics_thermal_management`. Child items are package-level placeholders for decomposition fidelity only; no local recipe is attached yet.
+material: composite
+notes: |
+  PS-15. Thermal management hardware for IGBTs, rectifiers, inductors, and DC-link components. This is the source-table aligned thermal item; broader cabinet busbar and internal wiring details remain deferred. See research/ebf3_bom_sources/organized/power_supplies_level_2_audit.md. No local recipe is attached yet. This assembly is split by `bom_ebf3_power_electronics_thermal_management`. Child items are package-level placeholders for decomposition fidelity only; assembly recipe now only joins visible child items; child material and manufacturing readiness remain unresolved.
+bom: bom_ebf3_power_electronics_thermal_management
+recipe: recipe_ebf3_power_electronics_thermal_management_assembly_v0
+trust_tags:
+- trusted_ebf3_unreplaced

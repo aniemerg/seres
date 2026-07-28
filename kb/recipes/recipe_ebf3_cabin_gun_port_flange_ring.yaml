@@ -1,0 +1,50 @@
+id: recipe_ebf3_cabin_gun_port_flange_ring
+kind: recipe
+variant_id: ebf3_route_review_v0
+target_item_id: ebf3_cabin_gun_port_flange_ring
+inputs:
+- item_id: raw_metal_block
+  qty: 5.25
+  unit: kg
+outputs:
+- item_id: ebf3_cabin_gun_port_flange_ring
+  qty: 1.0
+  unit: unit
+steps:
+- process_id: machining_basic_v0
+  inputs:
+  - item_id: raw_metal_block
+    qty: 5.25
+    unit: kg
+  outputs:
+  - item_id: ebf3_cabin_gun_port_flange_ring
+    qty: 1.0
+    unit: unit
+  notes: 'First-pass local route candidate from EBF3 semantic route review. Inputs use validation-scaled
+    generic stock. Decision: lunar_candidate_flagged; policy: sensitivity_flag; flags: performance_flag:vacuum;performance_flag:electron_beam;candidate_fit:none'
+notes: 'EBF3 route-review recipe for Simviewer inspection and first-pass simulation routing. Generated
+  from research/ebf3_bom_sources/derived/ebf3_process_route_review.csv after semantic audit integration.
+  This recipe records a routing judgement.
+
+  Route decision: lunar_candidate_flagged.
+
+  Simulation import mass policy: sensitivity_flag.
+
+  Executable first-pass process: machining_basic_v0.
+
+  Material: steel.
+
+  Lunar availability class: local_derived.
+
+  Mass used for first-pass accounting: 5 kg nominal.
+
+  Primary local process candidate: machining_basic_v0.
+
+  Secondary process candidates: component_to_seal_from_raw_material_v0.
+
+  Ready machine ids considered: multi_axis_cnc_machining_center;labor_bot_general_v0.
+
+  Confidence: medium.
+
+  Reasoning: Steel flange stock can be machined locally with Ready CNC but vacuum leak performance
+  and gun alignment need simulation flags.'

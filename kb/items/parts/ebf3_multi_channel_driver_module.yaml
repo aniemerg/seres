@@ -4,15 +4,10 @@ name: EBF3 multi-channel driver module
 mass: 6.0
 unit: unit
 unit_kind: discrete
-material_class: electronic
-notes: >
-  PS-14. Multi-channel driver module for magnetic lens, corrector,
-  deflection/scanning, wire-feeder motor, and four-axis positioning loads.
-  Loads remain with their owning subsystems; this item represents the
-  power-supply-side driver outputs only. See
-  research/ebf3_bom_sources/organized/power_supplies_level_2_audit.md and
-  research/ebf3_bom_sources/organized/electrical_signal_boundary_review.md.
-  Current interface architecture is summarized in
-  research/ebf3_bom_sources/organized/ebf3_interface_architecture.md. No local
-  recipe is attached yet.
-  This assembly is split by `bom_ebf3_multi_channel_driver_module`. Child items are package-level placeholders for decomposition fidelity only; no local recipe is attached yet.
+material: electronic
+notes: |
+  PS-14. Multi-channel driver module for magnetic lens, corrector, deflection/scanning, wire-feeder motor, and four-axis positioning loads. Loads remain with their owning subsystems; this item represents the power-supply-side driver outputs only. See research/ebf3_bom_sources/organized/power_supplies_level_2_audit.md and research/ebf3_bom_sources/organized/electrical_signal_boundary_review.md. Current interface architecture is summarized in research/ebf3_bom_sources/organized/ebf3_interface_architecture.md. No local recipe is attached yet. This assembly is split by `bom_ebf3_multi_channel_driver_module`. Child items are package-level placeholders for decomposition fidelity only; assembly recipe now only joins visible child items; child material and manufacturing readiness remain unresolved.
+bom: bom_ebf3_multi_channel_driver_module
+recipe: recipe_ebf3_multi_channel_driver_module_assembly_v0
+trust_tags:
+- trusted_ebf3_unreplaced

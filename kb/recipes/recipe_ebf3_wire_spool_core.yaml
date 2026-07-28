@@ -1,0 +1,49 @@
+id: recipe_ebf3_wire_spool_core
+kind: recipe
+variant_id: ebf3_route_review_v0
+target_item_id: ebf3_wire_spool_core
+inputs:
+- item_id: raw_metal_block
+  qty: 0.3675
+  unit: kg
+outputs:
+- item_id: ebf3_wire_spool_core
+  qty: 1.0
+  unit: unit
+steps:
+- process_id: machining_basic_v0
+  inputs:
+  - item_id: raw_metal_block
+    qty: 0.3675
+    unit: kg
+  outputs:
+  - item_id: ebf3_wire_spool_core
+    qty: 1.0
+    unit: unit
+  notes: 'First-pass local route candidate from EBF3 semantic route review. Inputs use validation-scaled
+    generic stock. Decision: lunar_candidate; policy: local_nominal; flags: ordinary_metalwork'
+notes: 'EBF3 route-review recipe for Simviewer inspection and first-pass simulation routing. Generated
+  from research/ebf3_bom_sources/derived/ebf3_process_route_review.csv after semantic audit integration.
+  This recipe records a routing judgement.
+
+  Route decision: lunar_candidate.
+
+  Simulation import mass policy: local_nominal.
+
+  Executable first-pass process: machining_basic_v0.
+
+  Material: steel.
+
+  Lunar availability class: local_derived.
+
+  Mass used for first-pass accounting: 0.35 kg nominal.
+
+  Primary local process candidate: machining_basic_v0.
+
+  Secondary process candidates: assembly_basic_v0.
+
+  Ready machine ids considered: labor_bot_general_v0;multi_axis_cnc_machining_center;assembly_tools_basic.
+
+  Confidence: medium.
+
+  Reasoning: The spool core is an ordinary machined metal part.'

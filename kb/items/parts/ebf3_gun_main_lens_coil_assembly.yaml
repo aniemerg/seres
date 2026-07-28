@@ -4,9 +4,38 @@ name: EBF3 gun main lens coil assembly
 mass: 0.9
 unit: unit
 unit_kind: discrete
-material_class: composite
-notes: >
-  FG-7 lens focusing coil assembly. Coil-level review keeps this unresolved as
-  an assembly; conductor, insulation, sealing, potting, lead termination, vacuum
-  compatibility, and thermal details remain deferred. See
-  research/ebf3_bom_sources/organized/coil_level_decomposition_plan.md.
+material: copper
+notes: 'FG-7 lens focusing coil. Coil leaf review treats this as a terminal BOM leaf; conductor grade,
+  insulation, winding method, vacuum compatibility, electrical interface, and thermal checks remain
+  material/process readiness work. See research/ebf3_bom_sources/organized/coil_level_decomposition_plan.md.
+
+  '
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Replace first-pass nominal import mass with sourced lower/upper mass bounds if this item dominates
+  imported mass.
+- 'Resolve local-route blocker before claiming local manufacturing closure: Copper magnet-wire beam-focus
+  coil is import-first; local wire/winding routes are rejected for this first simulation.'
+- 'Encode or verify performance requirements outside prose notes: magnetic field uniformity; winding
+  insulation; thermal rejection; vacuum outgassing; beam focus stability.'
+- 'Review route sensitivity flags before treating the route as nominally closed: copper_scarcity;magnetic_component;electron_gun_precision;process_cleanup:import_route_only.'
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_gun_main_lens_coil_assembly
+  source_recipe_path: kb/recipes/recipe_ebf3_gun_main_lens_coil_assembly.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: earth_import
+  simulation_import_mass_policy: import_nominal
+  mass_nominal_kg: 0.9
+  availability_class: scarce_trace
+  primary_process_id: import_receiving_basic_v0
+  executable_process_id: import_receiving_basic_v0
+  ready_machine_ids:
+  - labor_bot_general_v0
+  confidence: low
+  reasoning_brief: The main lens coil remains Earth import; local wire/winding process fields were
+    cleared to avoid implying closure
+route_decision: earth_import
+simulation_import_mass_policy: import_nominal
+is_import: true

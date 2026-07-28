@@ -4,10 +4,48 @@ name: EBF3 wire outlet guide tube
 mass: 0.25
 unit: unit
 unit_kind: discrete
-material_class: metal
-notes: >
-  WF-18. Outlet wire guide directing wire from the drive-roll assembly toward
-  the liner or downstream guide. Intentional Level-2 single-part tube/guide leaf;
-  internal bore, wear insert, and final material remain deferred. See
-  research/ebf3_bom_sources/organized/wire_feeder_level_2_audit.md. No local
-  recipe is attached yet.
+material: steel
+notes: WF-18. Outlet wire guide directing wire from the drive-roll assembly toward the liner or downstream
+  guide. See research/ebf3_bom_sources/organized/wire_feeder_level_2_audit.md. First-pass manufacturing/import
+  route is recorded in the linked EBF3 route-review recipe.
+recipe: recipe_ebf3_wire_outlet_guide_tube
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Resolve deferred Intentional Level-2 single-part tube/guide leaf; internal bore, wear insert, and
+  final material.
+- Replace validation-scaled generic stock inputs with explicit EBF material lower/upper bounds and
+  material-specific recipe inputs.
+- 'Encode or verify performance requirements outside prose notes: Internal bore finish; wear resistance;
+  wire alignment; vacuum debris control.'
+- 'Review route sensitivity flags before treating the route as nominally closed: wire_feed;wear.'
+- Use tube-stock route with CNC for end and bore finishing.
+- Keep wire-path wear and cleanliness flags; route recipe through tube finishing and inspection.
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_wire_outlet_guide_tube
+  source_recipe_path: kb/recipes/recipe_ebf3_wire_outlet_guide_tube.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: lunar_candidate_flagged
+  simulation_import_mass_policy: sensitivity_flag
+  mass_nominal_kg: 0.25
+  availability_class: local_derived
+  primary_process_id: tube_bending_and_cutting_v0
+  executable_process_id: tube_bending_and_cutting_v0
+  secondary_process_ids:
+  - machining_finish_basic_v0
+  - inspection_basic_v0
+  - cleaning_basic_v0
+  ready_machine_ids:
+  - labor_bot_general_v0
+  - tube_bender
+  - metal_shear_or_saw
+  - multi_axis_cnc_machining_center
+  - cutting_tools_general
+  - cleaning_station_basic_v0
+  confidence: medium
+  reasoning_brief: The current multi-step route is semantically close, but it should emphasize tube
+    stock, end-facing, reaming/polishing, inspection, and cleaning rather than solid-block labor/CNC
+    proxy.
+route_decision: lunar_candidate_flagged
+simulation_import_mass_policy: sensitivity_flag

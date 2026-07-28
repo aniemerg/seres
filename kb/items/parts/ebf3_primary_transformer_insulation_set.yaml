@@ -4,7 +4,40 @@ name: EBF3 primary transformer insulation set
 mass: 0.6
 unit: unit
 unit_kind: discrete
-material_class: insulator
-notes: Child of ebf3_primary_isolation_transformer. Insulation set for EBF3 primary
-  isolation transformer. Exact specification and local manufacturing route remain
-  unresolved.
+material: polymer_dielectric
+notes: Child of ebf3_primary_isolation_transformer. Insulation set for EBF3 primary isolation transformer.
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Replace coarse item specification with explicit material, geometry/interface requirements, and lower/upper
+  mass bounds.
+- Replace first-pass nominal import mass with sourced lower/upper mass bounds if this item dominates
+  imported mass.
+- 'Resolve local-route blocker before claiming local manufacturing closure: Local KB has only generic
+  coil insulation and not transformer-grade layered HV insulation with qualification.'
+- 'Encode or verify performance requirements outside prose notes: dielectric strength; thermal class;
+  partial discharge margin; creepage; lifetime under switching stress.'
+- 'Review route sensitivity flags before treating the route as nominally closed: performance_flag:HV;performance_flag:electronics;candidate_fit:accuracy_risk.'
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_primary_transformer_insulation_set
+  source_recipe_path: kb/recipes/recipe_ebf3_primary_transformer_insulation_set.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: earth_import
+  simulation_import_mass_policy: import_nominal
+  mass_nominal_kg: 0.6
+  availability_class: import_or_recycle
+  primary_process_id: coil_insulation_production_v0
+  executable_process_id: import_receiving_basic_v0
+  secondary_process_ids:
+  - assembly_basic_v0
+  ready_machine_ids:
+  - chemical_reactor_basic
+  - labor_bot_general_v0
+  - assembly_tools_basic
+  confidence: high
+  reasoning_brief: Transformer insulation is performance-critical and likely polymer or specialty
+    composite; import in first simulation
+route_decision: earth_import
+simulation_import_mass_policy: import_nominal
+is_import: true

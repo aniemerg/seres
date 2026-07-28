@@ -20,15 +20,42 @@ type Route =
   | { view: 'gantt' }
   | { view: 'recipes' }
   | { view: 'machines' }
+  | { view: 'ebfissues' }
   | { view: 'wiki'; id?: string }
   | { view: 'kbsearch' }
 
 const BAR_MIN_PX = 3
 const ROW_HEIGHT = 28
 const WIKI_HOME_ID = 'about_seres'
+const EMPTY_EBF_ROUTE_AUDIT: EbfRouteAuditPayload = {
+  summary: {
+    total: 0,
+    route_groups: {},
+    route_decisions: {},
+    simulation_import_mass_policy: {},
+    availability_class: {},
+    confidence: {},
+    audit_verdict: {},
+    severity: {},
+    issue_type: {},
+  },
+  rows: [],
+}
+const EMPTY_EBF_PROCESS_ISSUES: EbfProcessIssuesPayload = {
+  summary: {
+    total: 0,
+    worker_decision: {},
+    policy: {},
+    queue_reason: {},
+    route_decision: {},
+  },
+  rows: [],
+  sources: {},
+}
 type ColorMode = 'status' | 'process' | 'recipe' | 'goal'
-type MachineCatalogFilter = 'all' | 'target' | 'used' | 'seeded' | 'produced' | 'unused'
+type MachineCatalogFilter = 'all' | 'ready' | 'audit' | 'target' | 'used' | 'seeded' | 'produced' | 'unused'
 type MachineCatalogSort = 'usage' | 'name'
+type KBSearchTypeFilter = 'all' | 'process' | 'machine' | 'recipe' | 'bom' | 'item' | 'article'
 
 type MachineCatalogRow = {
   id: string
@@ -36,6 +63,7 @@ type MachineCatalogRow = {
   path: string
   family: string
   capabilities: string[]
+  auditTags: string[]
   recipeId: string | null
   bomId: string | null
   massLabel: string
@@ -55,6 +83,94 @@ type MachineCatalogRow = {
 }
 
 type SupportedProcessRow = { id: string; name: string; relation: string }
+type KBSearchRow = {
+  id: string
+  label: string
+  type: string
+  path: string
+  searchableText: string
+}
+type EbfRouteAuditRow = {
+  batch_id: string
+  item_id: string
+  parent_ids: string[]
+  source_queue_type: string
+  mass_nominal_kg: number | null
+  material: string
+  availability_class: string
+  route_group: string
+  route_decision: string
+  primary_process_id: string
+  secondary_process_ids: string[]
+  ready_machine_ids: string[]
+  blocked_machine_or_process_reason: string
+  critical_performance_requirements: string
+  simulation_import_mass_policy: string
+  confidence: string
+  flags: string[]
+  reasoning_brief: string
+  item_path: string
+  audit_verdict: string
+  proposed_decision: string
+  proposed_policy: string
+  severity: string
+  issue_type: string
+  semantic_reasoning: string
+  recommended_edit: string
+  integration_decision: string
+  integration_note: string
+}
+type EbfRouteAuditPayload = {
+  summary: {
+    total: number
+    route_groups: Record<string, number>
+    route_decisions: Record<string, number>
+    simulation_import_mass_policy: Record<string, number>
+    availability_class: Record<string, number>
+    confidence: Record<string, number>
+    audit_verdict: Record<string, number>
+    severity: Record<string, number>
+    issue_type: Record<string, number>
+    sources?: Record<string, string>
+  }
+  rows: EbfRouteAuditRow[]
+}
+type EbfProcessIssueRow = {
+  priority: number | null
+  queue_reason: string
+  item_id: string
+  policy: string
+  route_decision: string
+  mass_nominal_kg: number | null
+  material: string
+  availability_class: string
+  confidence: string
+  active_recipe_id: string
+  recipe_exists: boolean
+  current_process_ids: string[]
+  process_paths: string
+  current_machine_ids: string[]
+  decision_machine_ids: string[]
+  machine_selection_statuses: string[]
+  machine_risk_flags: string[]
+  machine_evidence_sources: string[]
+  reasoning_brief: string
+  item_path: string
+  worker_task: string
+  worker_decision: string
+  worker_notes: string
+}
+type EbfProcessIssuesPayload = {
+  summary: {
+    total: number
+    worker_decision: Record<string, number>
+    policy: Record<string, number>
+    queue_reason: Record<string, number>
+    route_decision: Record<string, number>
+  }
+  rows: EbfProcessIssueRow[]
+  sources: Record<string, string>
+}
 type BomTreeNode = {
   itemId: string
   name: string
@@ -62,6 +178,7 @@ type BomTreeNode = {
   qty: number | null
   unit: string | null
   depth: number
+  recipeId: string | null
   bomId: string | null
   childCount: number
   missingEntity: boolean
@@ -110,6 +227,7 @@ function parseRoute(hash: string): Route {
   if (parts[0] === 'gantt') return { view: 'gantt' }
   if (parts[0] === 'recipes') return { view: 'recipes' }
   if (parts[0] === 'machines') return { view: 'machines' }
+  if (parts[0] === 'ebf3-process-issues') return { view: 'ebfissues' }
   if (parts[0] === 'wiki') return { view: 'wiki', id: parts[1] }
   if (parts[0] === 'kb-search') return { view: 'kbsearch' }
   if (parts[0] === 'home') return { view: 'home' }
@@ -120,6 +238,7 @@ function hashTo(route: Route): string {
   if (route.view === 'gantt') return '#/gantt'
   if (route.view === 'recipes') return '#/recipes'
   if (route.view === 'machines') return '#/machines'
+  if (route.view === 'ebfissues') return '#/ebf3-process-issues'
   if (route.view === 'wiki') return route.id ? `#/wiki/${route.id}` : `#/wiki/${WIKI_HOME_ID}`
   if (route.view === 'kbsearch') return '#/kb-search'
   return '#/home'
@@ -672,6 +791,14 @@ function stringListFromField(obj: Record<string, unknown> | undefined, key: stri
   return []
 }
 
+function getMachineAuditTags(raw: Record<string, unknown> | undefined): string[] {
+  return stringListFromField(raw, 'trust_tags').filter((tag) => tag.startsWith('machine_audit_'))
+}
+
+function formatMachineAuditTag(tag: string): string {
+  return tag.replace(/^machine_audit_/, '').replace(/_/g, ' ')
+}
+
 function tableById(rows: Array<Record<string, unknown>> | undefined): Map<string, Record<string, unknown>> {
   const out = new Map<string, Record<string, unknown>>()
   for (const row of rows ?? []) {
@@ -789,6 +916,34 @@ function formatBomTreeQty(qty: number | null): string {
   return String(Number(qty.toFixed(4)))
 }
 
+function formatEntryMass(raw: Record<string, unknown> | null): string | null {
+  if (!raw) return null
+  const mass = raw.mass_kg ?? raw.mass
+  if (typeof mass === 'number' && Number.isFinite(mass)) return `${formatBomTreeQty(mass)} kg`
+  if (typeof mass === 'string' && mass.trim()) return mass.trim()
+  return null
+}
+
+function formatEntryMaterial(raw: Record<string, unknown> | null): string | null {
+  if (!raw) return null
+  const value = raw.material ?? raw.material_class
+  if (typeof value === 'string' && value.trim()) return value.trim()
+  if (Array.isArray(value)) {
+    const entries = value.map((entry) => String(entry).trim()).filter(Boolean)
+    return entries.length > 0 ? entries.join(', ') : null
+  }
+  return null
+}
+
+function formatEntryImportStatus(entity: KBEntity | undefined, raw: Record<string, unknown> | null): string {
+  if (!entity || !raw) return 'not listed'
+  const policy = typeof raw.simulation_import_mass_policy === 'string' ? raw.simulation_import_mass_policy.trim() : ''
+  if (policy === 'import_nominal') return 'yes (import nominal)'
+  if (policy === 'import_until_gap_resolved') return 'yes (import until gap resolved)'
+  if (raw.is_import === true || entity.path.startsWith('kb/imports/')) return 'yes'
+  return 'no'
+}
+
 function buildBomTree(rootItemId: string, allEntities: KBEntity[], entitiesById: Record<string, KBEntity>): BomTreeBuildResult | null {
   const bomByOwner = buildBomOwnerIndex(allEntities)
   if (!bomByOwner.has(rootItemId)) return null
@@ -813,6 +968,7 @@ function buildBomTree(rootItemId: string, allEntities: KBEntity[], entitiesById:
     ancestors: string[],
   ): BomTreeNode => {
     const entity = entitiesById[itemId]
+    const entityRaw = asObject(entity?.raw)
     const isCycle = ancestors.includes(itemId)
     const bom = bomByOwner.get(itemId)
     const bomRaw = asObject(bom?.raw)
@@ -846,6 +1002,7 @@ function buildBomTree(rootItemId: string, allEntities: KBEntity[], entitiesById:
       qty,
       unit,
       depth,
+      recipeId: typeof entityRaw?.recipe === 'string' ? entityRaw.recipe : null,
       bomId: bom?.id ?? null,
       childCount: children.length,
       missingEntity: !entity,
@@ -902,12 +1059,74 @@ function collectRefIds(node: unknown, out: Set<string>): void {
   }
 }
 
+function stringifyForSearch(value: unknown, omittedKeys = new Set<string>()): string {
+  if (value === null || value === undefined) return ''
+  if (typeof value === 'string' || typeof value === 'number' || typeof value === 'boolean') return String(value)
+  if (Array.isArray(value)) return value.map((entry) => stringifyForSearch(entry, omittedKeys)).join(' ')
+  if (typeof value === 'object') {
+    return Object.entries(value as Record<string, unknown>)
+      .filter(([key]) => !omittedKeys.has(key))
+      .map(([key, entry]) => `${key} ${stringifyForSearch(entry, omittedKeys)}`)
+      .join(' ')
+  }
+  return ''
+}
+
+function normalizeKbSearchType(kind: string): KBSearchTypeFilter | 'material' | 'part' | 'resource' {
+  if (kind === 'process' || kind === 'machine' || kind === 'recipe' || kind === 'bom' || kind === 'article') return kind
+  if (kind === 'part' || kind === 'material' || kind === 'resource') return kind
+  return 'item'
+}
+
+function matchesKbTypeFilter(row: KBSearchRow, filter: KBSearchTypeFilter): boolean {
+  if (filter === 'all') return true
+  const normalized = normalizeKbSearchType(row.type)
+  if (filter === 'item') return normalized === 'item' || normalized === 'part' || normalized === 'material' || normalized === 'resource'
+  return normalized === filter
+}
+
+function kbTypeSortWeight(kind: string): number {
+  const normalized = normalizeKbSearchType(kind)
+  if (normalized === 'process') return 0
+  if (normalized === 'machine') return 1
+  if (normalized === 'recipe') return 2
+  if (normalized === 'part' || normalized === 'material' || normalized === 'resource' || normalized === 'item') return 3
+  if (normalized === 'bom') return 4
+  if (normalized === 'article') return 5
+  return 9
+}
+
+function scoreKbSearchRow(row: KBSearchRow, terms: string[]): number {
+  const id = row.id.toLowerCase()
+  const label = row.label.toLowerCase()
+  const path = row.path.toLowerCase()
+  const text = row.searchableText.toLowerCase()
+  let score = 0
+  for (const term of terms) {
+    if (id === term) score += 1200
+    else if (id.startsWith(term)) score += 700
+    else if (id.includes(term)) score += 360
+
+    if (label === term) score += 900
+    else if (label.startsWith(term)) score += 600
+    else if (label.includes(term)) score += 420
+
+    if (row.type.toLowerCase().includes(term)) score += 180
+    if (path.includes(term)) score += 90
+    if (text.includes(term)) score += 60
+  }
+  score -= kbTypeSortWeight(row.type) * 8
+  return score
+}
+
 export function App() {
   const [route, setRoute] = useState<Route>(() => parseRoute(window.location.hash || `#/wiki/${WIKI_HOME_ID}`))
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
   const [simData, setSimData] = useState<SimData | null>(null)
   const [simQuery, setSimQuery] = useState<SimQueryData | null>(null)
   const [machineSets, setMachineSets] = useState<MachineSetsPayload>({ sets: [] })
+  const [ebfRouteAudit, setEbfRouteAudit] = useState<EbfRouteAuditPayload>(EMPTY_EBF_ROUTE_AUDIT)
+  const [ebfProcessIssues, setEbfProcessIssues] = useState<EbfProcessIssuesPayload>(EMPTY_EBF_PROCESS_ISSUES)
   const [entities, setEntities] = useState<KBEntity[]>([])
   const [articles, setArticles] = useState<Article[]>([])
   const [warnings, setWarnings] = useState<Warnings | null>(null)
@@ -932,14 +1151,18 @@ export function App() {
       fetch('./data/warnings.json').then((r) => r.json() as Promise<Warnings>),
       fetch('./data/simquery.json').then((r) => r.json() as Promise<SimQueryData>).catch(() => null),
       fetch('./data/machine_sets.json').then((r) => r.json() as Promise<MachineSetsPayload>).catch(() => ({ sets: [] })),
+      fetch('./data/ebf3_route_audit.json').then((r) => r.json() as Promise<EbfRouteAuditPayload>).catch(() => EMPTY_EBF_ROUTE_AUDIT),
+      fetch('./data/ebf3_process_issue_review.json').then((r) => r.json() as Promise<EbfProcessIssuesPayload>).catch(() => EMPTY_EBF_PROCESS_ISSUES),
     ])
-      .then(([sim, kb, art, warn, query, sets]) => {
+      .then(([sim, kb, art, warn, query, sets, routeAudit, processIssues]) => {
         setSimData(sim)
         setEntities(kb.entities)
         setArticles(art.articles)
         setWarnings(warn)
         setSimQuery(query)
         setMachineSets(sets)
+        setEbfRouteAudit(routeAudit)
+        setEbfProcessIssues(processIssues)
       })
       .catch((err) => {
         console.error(err)
@@ -1182,11 +1405,46 @@ export function App() {
     window.location.hash = hashTo(next)
   }
 
-  const openWiki = (id: string) => navigate({ view: 'wiki', id })
+  const openWiki = (id: string) => {
+    const next: Route = { view: 'wiki', id }
+    if (route.view === 'wiki') {
+      navigate(next)
+      return
+    }
+    const url = new URL(window.location.href)
+    url.hash = hashTo(next)
+    window.open(url.toString(), '_blank', 'noopener,noreferrer')
+  }
 
-  const kbIndex = useMemo(() => {
-    const kbRows = entities.map((e) => ({ id: e.id, label: e.name || e.id, type: e.kind }))
-    const articleRows = articles.map((a) => ({ id: a.id, label: a.title, type: 'article' }))
+  const kbIndex = useMemo<KBSearchRow[]>(() => {
+    const kbRows = entities.map((e) => ({
+      id: e.id,
+      label: e.name || e.id,
+      type: e.kind,
+      path: e.path,
+      searchableText: [
+        e.id,
+        e.name || '',
+        e.kind,
+        e.category || '',
+        e.path,
+        e.kind === 'process' ? '' : stringifyForSearch(e.raw, new Set(['inputs'])),
+      ].join(' '),
+    }))
+    const articleRows = articles.map((a) => ({
+      id: a.id,
+      label: a.title,
+      type: 'article',
+      path: a.path,
+      searchableText: [
+        a.id,
+        a.title,
+        a.path,
+        stringifyForSearch(a.frontmatter),
+        a.content,
+        (a.wiki_links ?? []).join(' '),
+      ].join(' '),
+    }))
     return [...kbRows, ...articleRows]
   }, [entities, articles])
 
@@ -1277,6 +1535,7 @@ export function App() {
           path: entity.path,
           family: entity.category || inferMachineFamily(entity),
           capabilities: stringArrayField(raw, 'capabilities'),
+          auditTags: getMachineAuditTags(raw),
           recipeId: stringField(raw, 'recipe'),
           bomId: stringField(raw, 'bom'),
           massLabel: formatMachineMass(raw),
@@ -1319,7 +1578,10 @@ export function App() {
         <button className={route.view === 'machines' ? 'nav active' : 'nav'} onClick={() => navigate({ view: 'machines' })}>
           {sidebarCollapsed ? '⚙' : '⚙ Machines'}
         </button>
-        <button className={route.view === 'wiki' ? 'nav active' : 'nav'} onClick={() => navigate({ view: 'wiki', id: WIKI_HOME_ID })}>
+        <button className={route.view === 'ebfissues' ? 'nav active' : 'nav'} onClick={() => navigate({ view: 'ebfissues' })}>
+          {sidebarCollapsed ? 'EBF' : 'EBF3 Issue Review'}
+        </button>
+        <button className={route.view === 'wiki' ? 'nav active' : 'nav'} onClick={() => openWiki(WIKI_HOME_ID)}>
           {sidebarCollapsed ? '📚' : '📚 Wiki'}
         </button>
         <button className={route.view === 'kbsearch' ? 'nav active' : 'nav'} onClick={() => navigate({ view: 'kbsearch' })}>
@@ -1394,7 +1656,15 @@ export function App() {
         {route.view === 'machines' && (
           <MachineCatalogView
             rows={machineCatalogRows}
-            onSelect={(id) => navigate({ view: 'wiki', id })}
+            onSelect={openWiki}
+          />
+        )}
+
+        {route.view === 'ebfissues' && (
+          <EbfProcessIssuesView
+            payload={ebfProcessIssues}
+            entitiesById={entitiesById}
+            onSelect={openWiki}
           />
         )}
 
@@ -1408,7 +1678,8 @@ export function App() {
             kbBacklinks={kbBacklinks}
             simItemUsage={simItemUsage}
             machineProcessUsage={machineProcessUsage}
-            onWikiJump={(id) => navigate({ view: 'wiki', id })}
+            ebfRouteAudit={ebfRouteAudit}
+            onWikiJump={openWiki}
             allEntities={entities}
           />
         )}
@@ -1421,7 +1692,7 @@ export function App() {
             topMachines={topMachineRows}
             topProcesses={topProcessRows}
             topRecipes={topRecipeRows}
-            onSelect={(id) => navigate({ view: 'wiki', id })}
+            onSelect={openWiki}
           />
         )}
       </main>
@@ -1918,15 +2189,19 @@ function RecipeTimelineView({
 function BomTreeSection({
   result,
   selectedItemId,
+  routeRows,
   onWikiJump,
 }: {
   result: BomTreeBuildResult
   selectedItemId: string | null
+  routeRows: EbfRouteAuditRow[]
   onWikiJump: (id: string) => void
 }) {
   const summary = result.summary
   const [visualZoom, setVisualZoom] = useState(1)
-  const [visualBranchId, setVisualBranchId] = useState<string>('auto')
+  const [visualBranchId, setVisualBranchId] = useState<string>('__all__')
+  const [auditPolicyFilter, setAuditPolicyFilter] = useState('all')
+  const routeByItemId = useMemo(() => new Map(routeRows.map((row) => [row.item_id, row])), [routeRows])
   const l1Branches = result.root.children
   const selectedL1BranchId = findBomTreeL1ForItem(result.root, selectedItemId) ?? l1Branches[0]?.itemId ?? '__all__'
   const activeBranchId = visualBranchId === 'auto' ? selectedL1BranchId : visualBranchId
@@ -1934,6 +2209,23 @@ function BomTreeSection({
   const visualRoot = activeBranchId === '__all__' || !activeBranch
     ? result.root
     : { ...result.root, children: [activeBranch] }
+  const fullTreePolicyCounts = useMemo(() => countBomRoutePolicies(result.root, routeByItemId), [result.root, routeByItemId])
+  const fullTreePolicyItemCount = useMemo(
+    () => Object.values(fullTreePolicyCounts).reduce((sum, count) => sum + count, 0),
+    [fullTreePolicyCounts],
+  )
+  const routeRowsOutsideTreeCount = Math.max(0, routeRows.length - fullTreePolicyItemCount)
+  const visiblePolicyCounts = useMemo(() => countBomRoutePolicies(visualRoot, routeByItemId), [visualRoot, routeByItemId])
+  const visibleNodeCount = useMemo(
+    () => countVisibleBomTreeRows(visualRoot, routeByItemId, auditPolicyFilter),
+    [auditPolicyFilter, routeByItemId, visualRoot],
+  )
+  const visiblePolicyItemCount = useMemo(
+    () => auditPolicyFilter === 'all'
+      ? Object.values(visiblePolicyCounts).reduce((sum, count) => sum + count, 0)
+      : visiblePolicyCounts[auditPolicyFilter] ?? 0,
+    [auditPolicyFilter, visiblePolicyCounts],
+  )
   const visualScaleStyle = { zoom: visualZoom } as CSSProperties
   return (
     <div className="kb-block bom-tree-block">
@@ -1952,12 +2244,12 @@ function BomTreeSection({
           <div><label>Depth</label><strong>{summary.maxDepth}</strong></div>
         </div>
       </div>
-      <div className="bom-visual-toolbar">
+      <div className="bom-audit-toolbar">
         <span>L1 branch</span>
         <select
           value={visualBranchId}
           onChange={(event) => setVisualBranchId(event.target.value)}
-          aria-label="BOM visual tree L1 branch"
+          aria-label="BOM audit L1 branch"
         >
           <option value="auto">Auto selected L1</option>
           <option value="__all__">All L1 branches</option>
@@ -1967,51 +2259,108 @@ function BomTreeSection({
             </option>
           ))}
         </select>
-        <span>Visual zoom</span>
-        <button type="button" onClick={() => setVisualZoom((z) => Math.max(0.25, Number((z - 0.1).toFixed(2))))} title="Zoom out">−</button>
-        <input
-          type="range"
-          min="0.25"
-          max="1.2"
-          step="0.05"
-          value={visualZoom}
-          onChange={(event) => setVisualZoom(Number(event.target.value))}
-          aria-label="BOM visual tree zoom"
-        />
-        <button type="button" onClick={() => setVisualZoom((z) => Math.min(1.2, Number((z + 0.1).toFixed(2))))} title="Zoom in">+</button>
-        <button type="button" onClick={() => setVisualZoom(1)} title="Reset zoom">Reset</button>
-        <strong>{Math.round(visualZoom * 100)}%</strong>
+        <span>Policy</span>
+        <select value={auditPolicyFilter} onChange={(event) => setAuditPolicyFilter(event.target.value)}>
+          <option value="all">All policies</option>
+          <option value="local_nominal">local_nominal</option>
+          <option value="sensitivity_flag">sensitivity_flag</option>
+          <option value="import_nominal">import_nominal</option>
+          <option value="import_until_gap_resolved">import_until_gap_resolved</option>
+        </select>
+        <strong>
+          {visiblePolicyItemCount.toLocaleString()} policy items / {visibleNodeCount.toLocaleString()} tree nodes
+          {routeRows.length > 0 && (
+            <> · all tree {fullTreePolicyItemCount.toLocaleString()} / outside tree {routeRowsOutsideTreeCount.toLocaleString()} / route rows {routeRows.length.toLocaleString()}</>
+          )}
+        </strong>
       </div>
+      {routeRows.length > 0 && (
+        <div className="bom-policy-summary" aria-label="BOM route policy summary">
+          {['local_nominal', 'sensitivity_flag', 'import_nominal', 'import_until_gap_resolved'].map((policy) => (
+            <span key={policy} className={`route-badge policy-${policy}`}>
+              {formatRouteLabel(policy)} {visiblePolicyCounts[policy] ?? 0}
+            </span>
+          ))}
+        </div>
+      )}
       {(summary.missingEntities > 0 || summary.cycles > 0) && (
         <p className="bom-tree-alert">
           {summary.missingEntities > 0 ? `${summary.missingEntities} missing item definitions. ` : ''}
           {summary.cycles > 0 ? `${summary.cycles} cyclic references stopped.` : ''}
         </p>
       )}
-      <div className="bom-visual-wrap" aria-label="BOM visual hierarchy">
-        <div className="bom-visual-scale" style={visualScaleStyle}>
-          <ul className="bom-visual-tree">
-            <BomVisualTreeNode node={visualRoot} selectedItemId={selectedItemId} onWikiJump={onWikiJump} />
-          </ul>
-        </div>
-      </div>
       <h4 className="bom-audit-title">Audit List</h4>
       <div className="bom-tree">
-        <BomTreeNodeView node={result.root} selectedItemId={selectedItemId} onWikiJump={onWikiJump} />
+        <BomTreeNodeView
+          node={visualRoot}
+          selectedItemId={selectedItemId}
+          routeByItemId={routeByItemId}
+          policyFilter={auditPolicyFilter}
+          onWikiJump={onWikiJump}
+        />
       </div>
+      <details className="bom-visual-details">
+        <summary>Recursive visual tree</summary>
+        <div className="bom-visual-toolbar">
+          <span>Visual zoom</span>
+          <button type="button" onClick={() => setVisualZoom((z) => Math.max(0.25, Number((z - 0.1).toFixed(2))))} title="Zoom out">−</button>
+          <input
+            type="range"
+            min="0.25"
+            max="1.2"
+            step="0.05"
+            value={visualZoom}
+            onChange={(event) => setVisualZoom(Number(event.target.value))}
+            aria-label="BOM visual tree zoom"
+          />
+          <button type="button" onClick={() => setVisualZoom((z) => Math.min(1.2, Number((z + 0.1).toFixed(2))))} title="Zoom in">+</button>
+          <button type="button" onClick={() => setVisualZoom(1)} title="Reset zoom">Reset</button>
+          <strong>{Math.round(visualZoom * 100)}%</strong>
+        </div>
+        <div className="bom-visual-wrap" aria-label="BOM visual hierarchy">
+          <div className="bom-visual-scale" style={visualScaleStyle}>
+            <ul className="bom-visual-tree">
+              <BomVisualTreeNode node={visualRoot} selectedItemId={selectedItemId} routeByItemId={routeByItemId} onWikiJump={onWikiJump} />
+            </ul>
+          </div>
+        </div>
+      </details>
     </div>
   )
+}
+
+function countVisibleBomTreeRows(node: BomTreeNode, routeByItemId: Map<string, EbfRouteAuditRow>, policyFilter: string): number {
+  const route = routeByItemId.get(node.itemId)
+  const selfVisible = policyFilter === 'all' || route?.simulation_import_mass_policy === policyFilter
+  return (selfVisible ? 1 : 0) + node.children.reduce((sum, child) => sum + countVisibleBomTreeRows(child, routeByItemId, policyFilter), 0)
+}
+
+function countBomRoutePolicies(node: BomTreeNode, routeByItemId: Map<string, EbfRouteAuditRow>): Record<string, number> {
+  const counts: Record<string, number> = {}
+  const visit = (current: BomTreeNode) => {
+    const route = routeByItemId.get(current.itemId)
+    if (route?.simulation_import_mass_policy) {
+      counts[route.simulation_import_mass_policy] = (counts[route.simulation_import_mass_policy] ?? 0) + 1
+    }
+    for (const child of current.children) visit(child)
+  }
+  visit(node)
+  return counts
 }
 
 function BomVisualTreeNode({
   node,
   selectedItemId,
+  routeByItemId,
   onWikiJump,
 }: {
   node: BomTreeNode
   selectedItemId: string | null
+  routeByItemId: Map<string, EbfRouteAuditRow>
   onWikiJump: (id: string) => void
 }) {
+  const route = routeByItemId.get(node.itemId)
+  const policy = route?.simulation_import_mass_policy ?? ''
   return (
     <li>
       <button
@@ -2023,15 +2372,16 @@ function BomVisualTreeNode({
           node.cycle ? 'is-cycle' : '',
         ].filter(Boolean).join(' ')}
         onClick={() => onWikiJump(node.itemId)}
-        title={`${node.itemId}${node.childCount > 0 ? `, ${node.childCount} components` : ''}`}
+        title={`${node.itemId}${node.childCount > 0 ? `, ${node.childCount} components` : ''}${policy ? `\nPolicy: ${policy}\nDecision: ${route?.route_decision ?? ''}` : ''}`}
       >
         <span>{formatBomVisualLabel(node.itemId)}</span>
         <small>{node.qty === null ? 'root' : `${formatBomTreeQty(node.qty)} ${node.unit ?? 'unit'}`}</small>
+        {policy && <small className={`bom-visual-policy policy-${policy}`}>{formatRouteLabel(policy)}</small>}
       </button>
       {node.children.length > 0 && (
         <ul>
           {node.children.map((child, i) => (
-            <BomVisualTreeNode key={`${child.itemId}:${child.depth}:${i}`} node={child} selectedItemId={selectedItemId} onWikiJump={onWikiJump} />
+            <BomVisualTreeNode key={`${child.itemId}:${child.depth}:${i}`} node={child} selectedItemId={selectedItemId} routeByItemId={routeByItemId} onWikiJump={onWikiJump} />
           ))}
         </ul>
       )}
@@ -2042,47 +2392,103 @@ function BomVisualTreeNode({
 function BomTreeNodeView({
   node,
   selectedItemId,
+  routeByItemId,
+  policyFilter,
   onWikiJump,
 }: {
   node: BomTreeNode
   selectedItemId: string | null
+  routeByItemId: Map<string, EbfRouteAuditRow>
+  policyFilter: string
   onWikiJump: (id: string) => void
 }) {
+  const route = routeByItemId.get(node.itemId)
+  const policy = route?.simulation_import_mass_policy ?? ''
+  const isVisible = policyFilter === 'all' || policy === policyFilter
+  const visibleChildren = node.children.filter((child) => hasVisibleBomTreeRow(child, routeByItemId, policyFilter))
+  if (!isVisible && visibleChildren.length === 0) return null
+  const isContextOnly = !isVisible && visibleChildren.length > 0
+
   const style = { '--depth': node.depth } as CSSProperties
   const qtyLabel = node.qty === null ? 'root' : `${formatBomTreeQty(node.qty)} ${node.unit ?? 'unit'}`
 
   return (
     <div className="bom-tree-node">
-      <div
-        className={[
-          'bom-tree-row',
-          node.childCount > 0 ? 'has-children' : 'is-leaf',
-          node.missingEntity ? 'is-missing' : '',
-          node.cycle ? 'is-cycle' : '',
-          selectedItemId === node.itemId ? 'is-selected' : '',
-        ].filter(Boolean).join(' ')}
-        style={style}
-      >
-        <span className="bom-tree-depth">L{node.depth}</span>
-        <span className="bom-tree-qty">{qtyLabel}</span>
-        <button className="wiki-link bom-tree-item" onClick={() => onWikiJump(node.itemId)}>{node.itemId}</button>
-        {node.name !== node.itemId && <span className="bom-tree-name">{node.name}</span>}
-        {node.kind && <span className="bom-tree-kind">{node.kind}</span>}
-        {node.bomId && (
-          <button className="wiki-link bom-tree-bom" onClick={() => onWikiJump(node.bomId!)}>{node.bomId}</button>
-        )}
-        {node.childCount > 0 && <span className="bom-tree-count">{node.childCount} components</span>}
-        {node.missingEntity && <span className="bom-tree-warning">missing entity</span>}
-        {node.cycle && <span className="bom-tree-warning">cycle stopped</span>}
-      </div>
-      {node.children.length > 0 && (
+      {(isVisible || isContextOnly) && (
+        <div
+          className={[
+            'bom-tree-row',
+            node.childCount > 0 ? 'has-children' : 'is-leaf',
+            isContextOnly ? 'is-context-only' : '',
+            route ? 'has-route-policy' : '',
+            node.missingEntity ? 'is-missing' : '',
+            node.cycle ? 'is-cycle' : '',
+            selectedItemId === node.itemId ? 'is-selected' : '',
+          ].filter(Boolean).join(' ')}
+          style={style}
+        >
+          <span className="bom-tree-depth">L{node.depth}</span>
+          <span className="bom-tree-qty">{qtyLabel}</span>
+          <button className="wiki-link bom-tree-item" onClick={() => onWikiJump(node.itemId)}>{node.itemId}</button>
+          {node.name !== node.itemId && <span className="bom-tree-name">{node.name}</span>}
+          {node.kind && <span className="bom-tree-kind">{node.kind}</span>}
+          {policy && <span className={`route-badge bom-tree-policy policy-${policy}`}>{formatRouteLabel(policy)}</span>}
+          {node.recipeId && (
+            <a className="bom-tree-action" href={`#/wiki/${node.recipeId}`} target="_blank" rel="noreferrer" title={node.recipeId}>Recipe</a>
+          )}
+          {node.bomId && (
+            <button className="bom-tree-action" onClick={() => onWikiJump(node.bomId!)} title={node.bomId}>BOM</button>
+          )}
+          {node.childCount > 0 && <span className="bom-tree-count">{node.childCount} components</span>}
+          {isContextOnly && <span className="bom-tree-context">context</span>}
+          {node.missingEntity && <span className="bom-tree-warning">missing entity</span>}
+          {node.cycle && <span className="bom-tree-warning">cycle stopped</span>}
+        </div>
+      )}
+      {visibleChildren.length > 0 && (
         <div className="bom-tree-children">
-          {node.children.map((child, i) => (
-            <BomTreeNodeView key={`${child.itemId}:${child.depth}:${i}`} node={child} selectedItemId={selectedItemId} onWikiJump={onWikiJump} />
+          {visibleChildren.map((child, i) => (
+            <BomTreeNodeView
+              key={`${child.itemId}:${child.depth}:${i}`}
+              node={child}
+              selectedItemId={selectedItemId}
+              routeByItemId={routeByItemId}
+              policyFilter={policyFilter}
+              onWikiJump={onWikiJump}
+            />
           ))}
         </div>
       )}
     </div>
+  )
+}
+
+function hasVisibleBomTreeRow(node: BomTreeNode, routeByItemId: Map<string, EbfRouteAuditRow>, policyFilter: string): boolean {
+  const route = routeByItemId.get(node.itemId)
+  if (policyFilter === 'all' || route?.simulation_import_mass_policy === policyFilter) return true
+  return node.children.some((child) => hasVisibleBomTreeRow(child, routeByItemId, policyFilter))
+}
+
+function WikiIdList({
+  ids,
+  onWikiJump,
+  empty = 'none',
+}: {
+  ids: string[]
+  onWikiJump: (id: string) => void
+  empty?: string
+}) {
+  const uniqueIds = Array.from(new Set(ids.filter((id) => id.trim())))
+  if (uniqueIds.length === 0) return <>{empty}</>
+  return (
+    <>
+      {uniqueIds.map((id, i) => (
+        <span key={id}>
+          {i > 0 ? ', ' : ''}
+          <button className="wiki-link" onClick={() => onWikiJump(id)}>{id}</button>
+        </span>
+      ))}
+    </>
   )
 }
 
@@ -2096,6 +2502,7 @@ function WikiView({
   kbBacklinks,
   simItemUsage,
   machineProcessUsage,
+  ebfRouteAudit,
   onWikiJump,
 }: {
   selectedId?: string
@@ -2107,6 +2514,7 @@ function WikiView({
   kbBacklinks: Map<string, Array<{ id: string; name: string; kind: string }>>
   simItemUsage: Map<string, { consumers: Map<string, { id: string; label: string; kind: 'process' | 'recipe'; count: number; quantity: number; units: string[] }>; recipes: Map<string, { id: string; label: string; kind: 'process' | 'recipe'; count: number; quantity: number; units: string[] }> }>
   machineProcessUsage: Map<string, Array<{ processId: string; label: string; count: number; totalEnergy: number }>>
+  ebfRouteAudit: EbfRouteAuditPayload
   onWikiJump: (id: string) => void
 }) {
   const entity = selectedId ? entitiesById[selectedId] : undefined
@@ -2170,6 +2578,24 @@ function WikiView({
     () => (bomTreeRootItemId ? buildBomTree(bomTreeRootItemId, allEntities, entitiesById) : null),
     [allEntities, bomTreeRootItemId, entitiesById],
   )
+  const entryMass = formatEntryMass(raw)
+  const entryMaterial = entity?.kind === 'part' ? formatEntryMaterial(raw) : null
+  const entryImportStatus = formatEntryImportStatus(entity, raw)
+  const entryRouteDecision = textField(raw ?? undefined, 'route_decision')
+  const entryImportPolicy = textField(raw ?? undefined, 'simulation_import_mass_policy')
+  const entryNotes = textField(raw ?? undefined, 'notes')
+  const entryFutureImprovements = stringListFromField(raw ?? undefined, 'future_improvements')
+  const entryAuditTags = entity && isMachineEntity(entity) ? getMachineAuditTags(raw ?? undefined) : []
+  const buildRecipeIds = [
+    ...(typeof raw?.recipe === 'string' ? [raw.recipe] : []),
+    ...recipesTargetingEntity.map((recipe) => recipe.id),
+  ]
+  const buildBomIds = [
+    ...(typeof raw?.bom === 'string' ? [raw.bom] : []),
+    ...bomsTargetingEntity.map((bom) => bom.id),
+  ]
+  const buildOwnerIds = typeof raw?.owner_item_id === 'string' ? [raw.owner_item_id] : []
+  const buildTargetIds = typeof raw?.target_item_id === 'string' ? [raw.target_item_id] : []
 
   return (
     <div className="wiki-page">
@@ -2182,27 +2608,42 @@ function WikiView({
             <p><strong>Kind:</strong> {entity.kind}</p>
             <p><strong>Category:</strong> {entity.category || 'Uncategorized'}</p>
             <p><strong>Source:</strong> {entity.path}</p>
-            {recipesTargetingEntity.length > 0 && (
-              <p>
-                <strong>Recipes targeting this item:</strong>{' '}
-                {recipesTargetingEntity.map((r, i) => (
-                  <span key={r.id}>
-                    {i > 0 ? ', ' : ''}
-                    <button className="wiki-link" onClick={() => onWikiJump(r.id)}>{r.id}</button>
-                  </span>
-                ))}
-              </p>
+            {raw && (
+              <>
+                <p><strong>Mass:</strong> {entryMass || 'not listed'}</p>
+                {entity.kind === 'part' && <p><strong>Material:</strong> {entryMaterial || 'not listed'}</p>}
+                <p><strong>Import:</strong> {entryImportStatus}</p>
+                {entryRouteDecision && <p><strong>Route decision:</strong> {entryRouteDecision}</p>}
+                {entryImportPolicy && <p><strong>Route policy:</strong> {formatRouteLabel(entryImportPolicy)}</p>}
+                <p><strong>Notes:</strong> {entryNotes || 'not listed'}</p>
+                {entryFutureImprovements.length > 0 && (
+                  <p><strong>Future improvements:</strong> {entryFutureImprovements.join('; ')}</p>
+                )}
+                {entryAuditTags.length > 0 && (
+                  <p>
+                    <strong>Machine audit:</strong>{' '}
+                    {entryAuditTags.map((tag, i) => (
+                      <span key={tag} className="audit-inline-tag">
+                        {i > 0 ? ', ' : ''}
+                        {formatMachineAuditTag(tag)}
+                      </span>
+                    ))}
+                  </p>
+                )}
+              </>
             )}
-            {bomsTargetingEntity.length > 0 && (
-              <p>
-                <strong>BOMs targeting this item:</strong>{' '}
-                {bomsTargetingEntity.map((b, i) => (
-                  <span key={b.id}>
-                    {i > 0 ? ', ' : ''}
-                    <button className="wiki-link" onClick={() => onWikiJump(b.id)}>{b.id}</button>
-                  </span>
-                ))}
-              </p>
+            {raw && (
+              <div className="kb-block build-data-block">
+                <h3>Build Data</h3>
+                <p><strong>Recipe:</strong> <WikiIdList ids={buildRecipeIds} onWikiJump={onWikiJump} /></p>
+                <p><strong>BOM:</strong> <WikiIdList ids={buildBomIds} onWikiJump={onWikiJump} /></p>
+                {buildOwnerIds.length > 0 && (
+                  <p><strong>Owner:</strong> <WikiIdList ids={buildOwnerIds} onWikiJump={onWikiJump} /></p>
+                )}
+                {buildTargetIds.length > 0 && (
+                  <p><strong>Target:</strong> <WikiIdList ids={buildTargetIds} onWikiJump={onWikiJump} /></p>
+                )}
+              </div>
             )}
             {entity.sim_stats && (
               <div className="stats-grid compact">
@@ -2210,7 +2651,6 @@ function WikiView({
                 {entity.sim_stats.produced_quantity_total !== undefined && <div><label>Produced</label><strong>{entity.sim_stats.produced_quantity_total.toFixed(2)}</strong></div>}
               </div>
             )}
-            {bomTree && <BomTreeSection result={bomTree} selectedItemId={bomTreeSelectedItemId} onWikiJump={onWikiJump} />}
             {!deferRefs && references.length > 0 && (
               <div className="kb-block">
                 <h3>Referenced By (KB + Articles)</h3>
@@ -2279,16 +2719,7 @@ function WikiView({
             )}
             {isMachineEntity(entity) && raw && (
               <div className="kb-block">
-                <h3>What This Machine Does</h3>
-                {textField(raw, 'notes') ? (
-                  <div className="notes-box">
-                    {textField(raw, 'notes').split('\n').map((line, i) => (
-                      <p key={`note-${i}`}>{line.trim() || '\u00a0'}</p>
-                    ))}
-                  </div>
-                ) : (
-                  <p className="muted-text">No notes field is defined for this machine.</p>
-                )}
+                <h3>Machine Details</h3>
                 <div className="machine-summary-grid">
                   <div>
                     <label>Capabilities</label>
@@ -2297,17 +2728,6 @@ function WikiView({
                         ? stringListFromField(raw, 'capabilities').concat(stringListFromField(raw, 'resource_types')).map((cap) => <span key={cap}>{cap}</span>)
                         : <em>none listed</em>}
                     </div>
-                  </div>
-                  <div>
-                    <label>Build Data</label>
-                    <p>
-                      <strong>Recipe:</strong>{' '}
-                      {raw.recipe ? <button className="wiki-link" onClick={() => onWikiJump(String(raw.recipe))}>{String(raw.recipe)}</button> : 'none'}
-                    </p>
-                    <p>
-                      <strong>BOM:</strong>{' '}
-                      {raw.bom ? <button className="wiki-link" onClick={() => onWikiJump(String(raw.bom))}>{String(raw.bom)}</button> : 'none'}
-                    </p>
                   </div>
                   <div>
                     <label>Requirements</label>
@@ -2384,12 +2804,6 @@ function WikiView({
             {isRecipeEntity(entity) && raw && (
               <div className="kb-block">
                 <h3>Recipe</h3>
-                {Boolean(raw.target_item_id) && (
-                  <p>
-                    <strong>Target:</strong>{' '}
-                    <button className="wiki-link" onClick={() => onWikiJump(String(raw.target_item_id))}>{String(raw.target_item_id)}</button>
-                  </p>
-                )}
                 <h4>Inputs</h4>
                 <ul>
                   {asArray(raw.inputs).map((q, i) => {
@@ -2439,28 +2853,6 @@ function WikiView({
             {isBomEntity(entity) && raw && (
               <div className="kb-block">
                 <h3>BOM</h3>
-                {Boolean(raw.owner_item_id) && (
-                  <p>
-                    <strong>Owner:</strong>{' '}
-                    <button className="wiki-link" onClick={() => onWikiJump(String(raw.owner_item_id))}>{String(raw.owner_item_id)}</button>
-                  </p>
-                )}
-                {Boolean(raw.target_item_id) && (
-                  <p>
-                    <strong>Target:</strong>{' '}
-                    <button className="wiki-link" onClick={() => onWikiJump(String(raw.target_item_id))}>{String(raw.target_item_id)}</button>
-                  </p>
-                )}
-                {textField(raw, 'notes') && (
-                  <>
-                    <h4>Notes</h4>
-                    <div className="notes-box">
-                      {textField(raw, 'notes').split('\n').map((line, i) => (
-                        <p key={`bom-note-${i}`}>{line.trim() || '\u00a0'}</p>
-                      ))}
-                    </div>
-                  </>
-                )}
                 <h4>Components</h4>
                 {asArray(raw.components).length > 0 ? (
                   <ul>
@@ -2547,6 +2939,14 @@ function WikiView({
                 </ul>
               </div>
             )}
+            {bomTree && (
+              <BomTreeSection
+                result={bomTree}
+                selectedItemId={bomTreeSelectedItemId}
+                routeRows={ebfRouteAudit.rows}
+                onWikiJump={onWikiJump}
+              />
+            )}
             {raw && !isBomEntity(entity) && (
               <details className="kb-block">
                 <summary>Raw Entry (JSON)</summary>
@@ -2572,6 +2972,378 @@ function WikiView({
   )
 }
 
+function formatRouteLabel(value: string): string {
+  if (!value) return 'not listed'
+  return value.replace(/_/g, ' ')
+}
+
+function normalizeIssueQueueReason(value: string): string {
+  if (value === 'known_labor_only_route_gap' || value === 'labor_only_route_check') {
+    return 'labor_only_route_gap_or_check'
+  }
+  return value || 'blank'
+}
+
+function formatIssueQueueReason(value: string): string {
+  const normalized = normalizeIssueQueueReason(value)
+  if (normalized === 'labor_only_route_gap_or_check') return 'labor only route gap/check'
+  return formatRouteLabel(normalized)
+}
+
+function formatIssueMass(value: number | null): string {
+  if (typeof value !== 'number' || !Number.isFinite(value)) return 'n/a'
+  if (Math.abs(value) < 1) return `${value.toFixed(3)} kg`
+  if (Math.abs(value) < 10) return `${value.toFixed(2)} kg`
+  return `${value.toFixed(1)} kg`
+}
+
+type EbfProcessIssueGroup = {
+  processId: string
+  processName: string
+  rows: EbfProcessIssueRow[]
+  itemIds: string[]
+  recipeIds: string[]
+  itemCount: number
+  totalMass: number
+  priority: number
+  decisions: Record<string, number>
+  policies: Record<string, number>
+  reasons: Record<string, number>
+  machines: string[]
+  riskFlags: string[]
+  sampleNotes: string[]
+}
+
+function incrementCount(map: Record<string, number>, key: string): void {
+  const normalized = key || 'blank'
+  map[normalized] = (map[normalized] ?? 0) + 1
+}
+
+function formatIssueCountBadges(counts: Record<string, number>, classPrefix: string): ReactNode {
+  return (
+    <span className="issue-count-badges">
+      {Object.entries(counts)
+        .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
+        .slice(0, 4)
+        .map(([key, count]) => (
+          <span key={key} className={`route-badge ${classPrefix}-${key}`}>
+            {classPrefix === 'reason' ? formatIssueQueueReason(key) : formatRouteLabel(key)} {count}
+          </span>
+        ))}
+    </span>
+  )
+}
+
+function EbfProcessIssuesView({
+  payload,
+  entitiesById,
+  onSelect,
+}: {
+  payload: EbfProcessIssuesPayload
+  entitiesById: Record<string, KBEntity>
+  onSelect: (id: string) => void
+}) {
+  const [decision, setDecision] = useState('all')
+  const [policy, setPolicy] = useState('all')
+  const [material, setMaterial] = useState('all')
+  const [reason, setReason] = useState('all')
+  const [query, setQuery] = useState('')
+  const [viewMode, setViewMode] = useState<'process' | 'items'>('process')
+  const [sort, setSort] = useState<'items' | 'mass' | 'priority' | 'process'>('items')
+
+  const rows = payload.rows
+  const decisionOptions = useMemo(() => Object.keys(payload.summary.worker_decision).sort(), [payload.summary.worker_decision])
+  const policyOptions = useMemo(() => Object.keys(payload.summary.policy).sort(), [payload.summary.policy])
+  const materialOptions = useMemo(() => {
+    const counts = new Map<string, number>()
+    for (const row of rows) {
+      const key = row.material || 'blank'
+      counts.set(key, (counts.get(key) ?? 0) + 1)
+    }
+    return Array.from(counts.entries()).sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
+  }, [rows])
+  const reasonOptions = useMemo(
+    () => Array.from(new Set(rows.map((row) => normalizeIssueQueueReason(row.queue_reason)))).sort(),
+    [rows],
+  )
+  const filteredItemRows = useMemo(() => {
+    const needle = query.trim().toLowerCase()
+    return rows
+      .filter((row) => decision === 'all' || row.worker_decision === decision)
+      .filter((row) => policy === 'all' || row.policy === policy)
+      .filter((row) => material === 'all' || (row.material || 'blank') === material)
+      .filter((row) => reason === 'all' || normalizeIssueQueueReason(row.queue_reason) === reason)
+      .filter((row) => {
+        if (!needle) return true
+        return [
+          row.item_id,
+          row.material,
+          row.worker_notes,
+          row.reasoning_brief,
+          row.queue_reason,
+          formatIssueQueueReason(row.queue_reason),
+          row.worker_decision,
+          row.policy,
+          row.route_decision,
+          row.current_process_ids.join(' '),
+          row.current_machine_ids.join(' '),
+        ].join(' ').toLowerCase().includes(needle)
+      })
+  }, [decision, material, policy, query, reason, rows])
+
+  const processGroups = useMemo<EbfProcessIssueGroup[]>(() => {
+    const groups = new Map<string, EbfProcessIssueGroup>()
+    for (const row of filteredItemRows) {
+      const processIds = row.current_process_ids.length > 0 ? row.current_process_ids : [row.active_recipe_id || 'unassigned_process']
+      for (const processId of processIds) {
+        const existing = groups.get(processId) ?? {
+          processId,
+          processName: entitiesById[processId]?.name || processId,
+          rows: [],
+          itemIds: [],
+          recipeIds: [],
+          itemCount: 0,
+          totalMass: 0,
+          priority: 9999,
+          decisions: {},
+          policies: {},
+          reasons: {},
+          machines: [],
+          riskFlags: [],
+          sampleNotes: [],
+        }
+        existing.rows.push(row)
+        if (!existing.itemIds.includes(row.item_id)) existing.itemIds.push(row.item_id)
+        if (row.active_recipe_id && !existing.recipeIds.includes(row.active_recipe_id)) existing.recipeIds.push(row.active_recipe_id)
+        existing.totalMass += row.mass_nominal_kg ?? 0
+        existing.priority = Math.min(existing.priority, row.priority ?? 9999)
+        incrementCount(existing.decisions, row.worker_decision)
+        incrementCount(existing.policies, row.policy)
+        incrementCount(existing.reasons, normalizeIssueQueueReason(row.queue_reason))
+        for (const machineId of row.current_machine_ids) if (!existing.machines.includes(machineId)) existing.machines.push(machineId)
+        for (const flag of row.machine_risk_flags) if (!existing.riskFlags.includes(flag)) existing.riskFlags.push(flag)
+        const note = row.worker_notes || row.reasoning_brief
+        if (note && !existing.sampleNotes.includes(note)) existing.sampleNotes.push(note)
+        groups.set(processId, existing)
+      }
+    }
+    const out = Array.from(groups.values()).map((group) => ({ ...group, itemCount: group.itemIds.length }))
+    return out.sort((a, b) => {
+      if (sort === 'mass') return b.totalMass - a.totalMass || b.itemCount - a.itemCount || a.processId.localeCompare(b.processId)
+      if (sort === 'priority') return a.priority - b.priority || b.itemCount - a.itemCount || a.processId.localeCompare(b.processId)
+      if (sort === 'process') return a.processName.localeCompare(b.processName) || a.processId.localeCompare(b.processId)
+      return b.itemCount - a.itemCount || b.totalMass - a.totalMass || a.processId.localeCompare(b.processId)
+    })
+  }, [entitiesById, filteredItemRows, sort])
+
+  const filteredMass = useMemo(
+    () => filteredItemRows.reduce((sum, row) => sum + (row.mass_nominal_kg ?? 0), 0),
+    [filteredItemRows],
+  )
+
+  return (
+    <div className="ebf-issues-page">
+      <div className="ebf-issues-head">
+        <div>
+          <h1>EBF3 Process Issue Review</h1>
+          <p>{viewMode === 'process' ? 'Process-level view grouped by current process reference.' : 'Item-level view showing every EBF issue item row.'}</p>
+        </div>
+        <div className="ebf-issue-stats">
+          <div><label>Issue items</label><strong>{payload.summary.total.toLocaleString()}</strong></div>
+          <div><label>Visible processes</label><strong>{processGroups.length.toLocaleString()}</strong></div>
+          <div><label>Visible items</label><strong>{filteredItemRows.length.toLocaleString()}</strong></div>
+          <div><label>Visible mass</label><strong>{formatIssueMass(filteredMass)}</strong></div>
+        </div>
+      </div>
+
+      <div className="ebf-issue-pills">
+        {Object.entries(payload.summary.worker_decision).sort((a, b) => b[1] - a[1]).map(([key, count]) => (
+          <button
+            key={key}
+            className={`route-badge decision-${key} ${decision === key ? 'is-active' : ''}`}
+            onClick={() => setDecision(decision === key ? 'all' : key)}
+            title={key}
+          >
+            {formatRouteLabel(key)} {count}
+          </button>
+        ))}
+      </div>
+
+      <div className="ebf-issue-controls">
+        <select value={viewMode} onChange={(event) => setViewMode(event.target.value as 'process' | 'items')} aria-label="View mode">
+          <option value="process">By process</option>
+          <option value="items">Issue items</option>
+        </select>
+        <select value={decision} onChange={(event) => setDecision(event.target.value)} aria-label="Worker decision">
+          <option value="all">All decisions</option>
+          {decisionOptions.map((value) => <option key={value} value={value}>{formatRouteLabel(value)}</option>)}
+        </select>
+        <select value={policy} onChange={(event) => setPolicy(event.target.value)} aria-label="Policy">
+          <option value="all">All policies</option>
+          {policyOptions.map((value) => <option key={value} value={value}>{formatRouteLabel(value)}</option>)}
+        </select>
+        <select value={material} onChange={(event) => setMaterial(event.target.value)} aria-label="Material">
+          <option value="all">All materials ({materialOptions.length})</option>
+          {materialOptions.map(([value, count]) => (
+            <option key={value} value={value}>{formatRouteLabel(value)} ({count})</option>
+          ))}
+        </select>
+        <select value={reason} onChange={(event) => setReason(event.target.value)} aria-label="Queue reason">
+          <option value="all">All queue reasons</option>
+          {reasonOptions.map((value) => <option key={value} value={value}>{formatIssueQueueReason(value)}</option>)}
+        </select>
+        <select value={sort} onChange={(event) => setSort(event.target.value as 'items' | 'mass' | 'priority' | 'process')} aria-label="Sort">
+          <option value="items">Item count</option>
+          <option value="mass">Mass</option>
+          <option value="priority">Priority</option>
+          <option value="process">Process name</option>
+        </select>
+        <input
+          value={query}
+          onChange={(event) => setQuery(event.target.value)}
+          placeholder="Search item, material, process, machine, notes"
+        />
+      </div>
+
+      {viewMode === 'process' ? (
+        <EbfProcessIssueProcessTable groups={processGroups} onSelect={onSelect} />
+      ) : (
+        <EbfProcessIssueItemTable rows={filteredItemRows} onSelect={onSelect} />
+      )}
+    </div>
+  )
+}
+
+function EbfProcessIssueProcessTable({
+  groups,
+  onSelect,
+}: {
+  groups: EbfProcessIssueGroup[]
+  onSelect: (id: string) => void
+}) {
+  return (
+    <div className="ebf-issue-table-wrap">
+      <table className="ebf-issue-table">
+        <thead>
+          <tr>
+            <th>Process</th>
+            <th>EBF items</th>
+            <th>Mass</th>
+            <th>Decisions</th>
+            <th>Policies</th>
+            <th>Queue reasons</th>
+            <th>Items</th>
+          </tr>
+        </thead>
+        <tbody>
+          {groups.map((group) => (
+            <tr key={group.processId}>
+              <td>
+                <button className="wiki-link issue-item-link" onClick={() => onSelect(group.processId)}>{group.processName}</button>
+                <div className="issue-route-meta">{group.processId}</div>
+              </td>
+              <td><strong>{group.itemCount.toLocaleString()}</strong></td>
+              <td>{formatIssueMass(group.totalMass)}</td>
+              <td>{formatIssueCountBadges(group.decisions, 'decision')}</td>
+              <td>{formatIssueCountBadges(group.policies, 'policy')}</td>
+              <td>{formatIssueCountBadges(group.reasons, 'reason')}</td>
+              <td>
+                <details className="issue-item-details">
+                  <summary>{group.itemCount.toLocaleString()} items</summary>
+                  <ul>
+                    {group.rows
+                      .slice()
+                      .sort((a, b) => (a.priority ?? 9999) - (b.priority ?? 9999) || a.item_id.localeCompare(b.item_id))
+                      .map((row) => (
+                        <li key={`${group.processId}:${row.item_id}`}>
+                          <button className="wiki-link" onClick={() => onSelect(row.item_id)}>{row.item_id}</button>
+                          <span className="issue-route-meta"> {formatRouteLabel(row.worker_decision)} · {formatRouteLabel(row.policy)} · {row.material}</span>
+                          {row.active_recipe_id && (
+                            <span> · <button className="wiki-link" onClick={() => onSelect(row.active_recipe_id)}>{row.active_recipe_id}</button></span>
+                          )}
+                        </li>
+                      ))}
+                  </ul>
+                </details>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      {groups.length === 0 && <div className="empty-table">No EBF3 process groups match the current filters.</div>}
+    </div>
+  )
+}
+
+function EbfProcessIssueItemTable({
+  rows,
+  onSelect,
+}: {
+  rows: EbfProcessIssueRow[]
+  onSelect: (id: string) => void
+}) {
+  const sortedRows = useMemo(
+    () => rows.slice().sort((a, b) => (a.priority ?? 9999) - (b.priority ?? 9999) || a.item_id.localeCompare(b.item_id)),
+    [rows],
+  )
+  return (
+    <div className="ebf-issue-table-wrap">
+      <table className="ebf-issue-table item-mode">
+        <thead>
+          <tr>
+            <th>Item</th>
+            <th>Decision</th>
+            <th>Policy</th>
+            <th>Mass</th>
+            <th>Material</th>
+            <th>Process refs</th>
+            <th>Machines / risk</th>
+            <th>Reason</th>
+          </tr>
+        </thead>
+        <tbody>
+          {sortedRows.map((row) => (
+            <tr key={row.item_id}>
+              <td>
+                <button className="wiki-link issue-item-link" onClick={() => onSelect(row.item_id)}>{row.item_id}</button>
+                {row.active_recipe_id && (
+                  <div><button className="wiki-link issue-sub-link" onClick={() => onSelect(row.active_recipe_id)}>{row.active_recipe_id}</button></div>
+                )}
+              </td>
+              <td><span className={`route-badge decision-${row.worker_decision}`}>{formatRouteLabel(row.worker_decision)}</span></td>
+              <td><span className={`route-badge policy-${row.policy}`}>{formatRouteLabel(row.policy)}</span></td>
+              <td>{formatIssueMass(row.mass_nominal_kg)}</td>
+              <td>{row.material || 'n/a'}</td>
+              <td>
+                {row.current_process_ids.length > 0 ? row.current_process_ids.map((processId, i) => (
+                  <span key={processId}>
+                    {i > 0 ? ', ' : ''}
+                    <button className="wiki-link" onClick={() => onSelect(processId)}>{processId}</button>
+                  </span>
+                )) : <span className="muted-text">none</span>}
+              </td>
+              <td>
+                {row.current_machine_ids.length > 0 ? row.current_machine_ids.map((machineId, i) => (
+                  <span key={machineId}>
+                    {i > 0 ? ', ' : ''}
+                    <button className="wiki-link" onClick={() => onSelect(machineId)}>{machineId}</button>
+                  </span>
+                )) : <span className="muted-text">none</span>}
+                {row.machine_risk_flags.length > 0 && <div className="issue-route-meta">{row.machine_risk_flags.slice(0, 3).join('; ')}</div>}
+              </td>
+              <td>
+                <div>{formatIssueQueueReason(row.queue_reason)}</div>
+                <div className="issue-route-meta">{row.worker_notes || row.reasoning_brief || 'n/a'}</div>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      {sortedRows.length === 0 && <div className="empty-table">No EBF3 issue items match the current filters.</div>}
+    </div>
+  )
+}
+
 function MachineCatalogView({
   rows,
   onSelect,
@@ -2592,6 +3364,8 @@ function MachineCatalogView({
 
   const stats = useMemo(() => ({
     all: rows.length,
+    ready: rows.filter((row) => row.auditTags.length === 0).length,
+    audit: rows.filter((row) => row.auditTags.length > 0).length,
     target: rows.filter((row) => row.isTarget).length,
     used: rows.filter((row) => row.isUsed).length,
     seeded: rows.filter((row) => row.isSeeded).length,
@@ -2603,6 +3377,8 @@ function MachineCatalogView({
     const q = query.trim().toLowerCase()
     const filtered = rows.filter((row) => {
       if (filter === 'target' && !row.isTarget) return false
+      if (filter === 'ready' && row.auditTags.length > 0) return false
+      if (filter === 'audit' && row.auditTags.length === 0) return false
       if (filter === 'used' && !row.isUsed) return false
       if (filter === 'seeded' && !row.isSeeded) return false
       if (filter === 'produced' && !row.isProduced) return false
@@ -2617,6 +3393,7 @@ function MachineCatalogView({
         row.recipeId ?? '',
         row.bomId ?? '',
         ...row.capabilities,
+        ...row.auditTags,
       ].some((value) => value.toLowerCase().includes(q))
     })
 
@@ -2646,6 +3423,8 @@ function MachineCatalogView({
 
   const filters: Array<{ key: MachineCatalogFilter; label: string; count: number }> = [
     { key: 'all', label: 'All', count: stats.all },
+    { key: 'ready', label: 'Ready', count: stats.ready },
+    { key: 'audit', label: 'Audit', count: stats.audit },
     { key: 'target', label: 'Target', count: stats.target },
     { key: 'used', label: 'Used', count: stats.used },
     { key: 'seeded', label: 'Seeded', count: stats.seeded },
@@ -2703,6 +3482,7 @@ function MachineCatalogView({
         <span><span className="machine-mini-badge used">U</span> Used in current run</span>
         <span><span className="machine-mini-badge seeded">S</span> Seeded</span>
         <span><span className="machine-mini-badge produced">P</span> Produced</span>
+        <span><span className="machine-mini-badge audit">A</span> Needs audit before process selection</span>
       </div>
 
       <div className="machine-matrix-wrap">
@@ -2715,9 +3495,9 @@ function MachineCatalogView({
               {groupRows.map((row) => (
                 <button
                   key={row.id}
-                  className={`machine-cell ${row.isTarget ? 'is-target' : ''} ${row.isUsed ? 'is-used' : ''}`}
+                  className={`machine-cell ${row.isTarget ? 'is-target' : ''} ${row.isUsed ? 'is-used' : ''} ${row.auditTags.length ? 'is-audit' : ''}`}
                   onClick={() => onSelect(row.id)}
-                  title={`${row.label}\n${row.id}\n${row.family}\n${row.capabilities.slice(0, 6).join(', ') || 'no capabilities'}`}
+                  title={`${row.label}\n${row.id}\n${row.family}\n${row.capabilities.slice(0, 6).join(', ') || 'no capabilities'}${row.auditTags.length ? `\nAudit: ${row.auditTags.map(formatMachineAuditTag).join(', ')}` : ''}`}
                 >
                   <span className="machine-cell-name">{row.label}</span>
                   <span className="machine-cell-id">{row.id}</span>
@@ -2726,6 +3506,7 @@ function MachineCatalogView({
                     {row.isUsed && <span className="machine-mini-badge used">U</span>}
                     {row.isSeeded && <span className="machine-mini-badge seeded">S</span>}
                     {row.isProduced && <span className="machine-mini-badge produced">P</span>}
+                    {row.auditTags.length > 0 && <span className="machine-mini-badge audit">A</span>}
                     <span className="machine-cell-runs">{row.runCount ? `${row.runCount} runs` : row.massLabel}</span>
                     <span className="machine-cell-steps">{row.supportedProcessCount} steps</span>
                   </span>
@@ -2749,7 +3530,7 @@ function KBSearchView({
   topRecipes,
   onSelect,
 }: {
-  indexRows: Array<{ id: string; label: string; type: string }>
+  indexRows: KBSearchRow[]
   search: string
   onSearch: (s: string) => void
   topMachines: Array<{ id: string; label: string; count: number; type: string }>
@@ -2757,15 +3538,48 @@ function KBSearchView({
   topRecipes: Array<{ id: string; label: string; count: number; type: string }>
   onSelect: (id: string) => void
 }) {
+  const [typeFilter, setTypeFilter] = useState<KBSearchTypeFilter>('all')
   const query = search.trim().toLowerCase()
-  const suggestions = useMemo(
-    () =>
-      indexRows
-        .filter((row) => !query || row.id.toLowerCase().includes(query) || row.label.toLowerCase().includes(query))
-        .slice(0, 12),
-    [indexRows, query],
-  )
-  const showSuggestions = query.length > 0
+  const queryTerms = useMemo(() => query.split(/\s+/).filter(Boolean), [query])
+  const searchResults = useMemo(() => {
+    if (queryTerms.length === 0) return []
+    return indexRows
+      .filter((row) => matchesKbTypeFilter(row, typeFilter))
+      .filter((row) => {
+        const text = row.searchableText.toLowerCase()
+        return queryTerms.every((term) => text.includes(term))
+      })
+      .map((row) => ({ row, score: scoreKbSearchRow(row, queryTerms) }))
+      .sort((a, b) => b.score - a.score || kbTypeSortWeight(a.row.type) - kbTypeSortWeight(b.row.type) || a.row.label.localeCompare(b.row.label))
+      .slice(0, 80)
+      .map(({ row }) => row)
+  }, [indexRows, queryTerms, typeFilter])
+  const resultCounts = useMemo(() => {
+    const counts: Record<KBSearchTypeFilter, number> = { all: 0, process: 0, machine: 0, recipe: 0, bom: 0, item: 0, article: 0 }
+    if (queryTerms.length === 0) return counts
+    for (const row of indexRows) {
+      const text = row.searchableText.toLowerCase()
+      if (!queryTerms.every((term) => text.includes(term))) continue
+      counts.all += 1
+      const normalized = normalizeKbSearchType(row.type)
+      if (normalized === 'process' || normalized === 'machine' || normalized === 'recipe' || normalized === 'bom' || normalized === 'article') {
+        counts[normalized] += 1
+      } else {
+        counts.item += 1
+      }
+    }
+    return counts
+  }, [indexRows, queryTerms])
+  const showResults = query.length > 0
+  const filters: Array<{ id: KBSearchTypeFilter; label: string }> = [
+    { id: 'all', label: 'All' },
+    { id: 'process', label: 'Processes' },
+    { id: 'machine', label: 'Machines' },
+    { id: 'recipe', label: 'Recipes' },
+    { id: 'bom', label: 'BOMs' },
+    { id: 'item', label: 'Items' },
+    { id: 'article', label: 'Articles' },
+  ]
 
   return (
     <div className="kb-page">
@@ -2779,21 +3593,44 @@ function KBSearchView({
               onChange={(e) => onSearch(e.target.value)}
               placeholder="Search machines, processes, recipes, and articles"
             />
-            {showSuggestions && (
-              <div className="kb-suggest">
-                {suggestions.length === 0 && <div className="kb-suggest-empty">No matches.</div>}
-                {suggestions.map((row) => (
-                  <button key={`${row.type}:${row.id}`} className="kb-suggest-row" onClick={() => onSelect(row.id)}>
-                    <span>{row.label}</span>
-                    <small>{row.type}</small>
-                  </button>
-                ))}
-              </div>
-            )}
           </div>
         </div>
 
-        <div className="kb-featured-grid">
+        {showResults && (
+          <section className="kb-results-panel">
+            <div className="kb-filter-row">
+              {filters.map((filter) => (
+                <button
+                  key={filter.id}
+                  className={typeFilter === filter.id ? 'kb-filter active' : 'kb-filter'}
+                  onClick={() => setTypeFilter(filter.id)}
+                >
+                  {filter.label} <span>{resultCounts[filter.id].toLocaleString()}</span>
+                </button>
+              ))}
+            </div>
+            <div className="kb-result-summary">
+              {searchResults.length.toLocaleString()} shown from {resultCounts[typeFilter].toLocaleString()} matches
+            </div>
+            <div className="kb-results-list">
+              {searchResults.length === 0 && <div className="kb-suggest-empty">No matches.</div>}
+              {searchResults.map((row) => (
+                <button key={`${row.type}:${row.id}`} className="kb-result-row" onClick={() => onSelect(row.id)}>
+                  <span className="kb-result-main">
+                    <strong>{row.label}</strong>
+                    <span>{row.id}</span>
+                  </span>
+                  <span className="kb-result-side">
+                    <small>{row.type}</small>
+                    <em>{row.path}</em>
+                  </span>
+                </button>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {!showResults && <div className="kb-featured-grid">
           <section className="kb-featured-panel">
             <h3>Most Used Machines</h3>
             <div className="kb-list">
@@ -2827,7 +3664,7 @@ function KBSearchView({
               ))}
             </div>
           </section>
-        </div>
+        </div>}
       </section>
     </div>
   )

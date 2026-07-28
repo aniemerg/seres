@@ -4,7 +4,10 @@ name: EBF3 z axis counterbalance force element
 mass: 0.55
 unit: unit
 unit_kind: discrete
-material_class: metal
-notes: Child of ebf3_z_axis_counterbalance. Counterbalance force element for EBF3
-  Z-axis counterbalance. Exact specification and local manufacturing route remain
-  unresolved.
+material: metal
+notes: |
+  Source-first child split for the Z-axis counterbalance force element. Architecture selected is a metal spring baseline, not gas spring, hydraulic, or air-over-oil. Spring material, fatigue life, preload, guide integration, and local manufacturing route remain unresolved. See research/ebf3_bom_sources/organized/split_before_route_leaf_decomposition_plan.md.
+bom: bom_ebf3_z_axis_counterbalance_force_element
+recipe: recipe_ebf3_z_axis_counterbalance_force_element_assembly_v0
+trust_tags:
+- trusted_ebf3_unreplaced

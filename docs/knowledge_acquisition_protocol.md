@@ -62,7 +62,7 @@ Mark items with `is_import: true` (per ADR-007). Import items don't need recipes
 ## Consolidation and Reuse
 
 Before creating anything new:
-- Search for equivalents by function and material_class.
+- Search for equivalents by function, material, and relevant substitution groups.
 - Apply the 5x magnitude rule.
 - Prefer labor bots + tools over bespoke machines for low-throughput tasks.
 

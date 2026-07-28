@@ -4,9 +4,10 @@ name: EBF3 positioning base frame
 mass: 7.0
 unit: unit
 unit_kind: discrete
-material_class: metal
-notes: >
-  FS-1. Structural frame for positioning system. Minimal child BOM:
-  bom_ebf3_positioning_base_frame. No local recipe is attached yet; leave
-  manufacturing closure open until lower-level materials and fabrication routes
-  are source-supported.
+material: metal
+notes: |
+  FS-1. Structural frame for positioning system. Minimal child BOM: bom_ebf3_positioning_base_frame. Assembly recipe now only joins visible child items; lower-level material and fabrication readiness remain unresolved.
+bom: bom_ebf3_positioning_base_frame
+recipe: recipe_ebf3_positioning_base_frame_assembly_v0
+trust_tags:
+- trusted_ebf3_unreplaced

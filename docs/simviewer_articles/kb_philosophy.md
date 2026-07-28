@@ -24,7 +24,7 @@ An item being marked as an import is not a claim that it can never be made local
 
 ## Why the KB Uses Generic Items
 
-The KB strongly favors generic, reusable items over highly specific ones. Instead of `steel_304_sheet_2mm` and `steel_316_sheet_3mm` as separate entries, the model uses `metal_sheet_structural` with a `material_class` of `metal`. This approach:
+The KB strongly favors generic, reusable items over highly specific ones. Instead of `steel_304_sheet_2mm` and `steel_316_sheet_3mm` as separate entries, the model may use a shared structural sheet item with `material: steel` and document acceptable variation in notes or material groups. This approach:
 
 - Keeps the dependency graph tractable (hundreds of near-identical items obscure structure)
 - Allows recipes to express "needs metal sheet" without committing to a specific alloy

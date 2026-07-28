@@ -4,8 +4,37 @@ name: EBF3 cabin sacrificial liner panel set
 mass: 10.0
 unit: unit
 unit_kind: discrete
-material_class: metal
-notes: >
-  Child of MC-7. Replaceable liner panel set protecting chamber walls from
-  deposition, spatter, and process debris. Material and geometry remain
-  unresolved.
+material: steel
+notes: Child of MC-7. Replaceable liner panel set protecting chamber walls from deposition, spatter,
+  and process debris.
+recipe: recipe_ebf3_cabin_sacrificial_liner_panel_set
+trust_tags:
+- untrusted_global_kb
+future_improvements:
+- Resolve material and geometry.
+- Replace validation-scaled generic stock inputs with explicit EBF material lower/upper bounds and
+  material-specific recipe inputs.
+- 'Encode or verify performance requirements outside prose notes: spatter resistance; replaceable
+  liner geometry; vacuum- exposed surface cleanliness; thermal distortion tolerance.'
+- 'Review route sensitivity flags before treating the route as nominally closed: spatter;vacuum_exposed;material_geometry_unresolved.'
+- Keep sensitivity flag but drop the obsolete audit blocker.
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_cabin_sacrificial_liner_panel_set
+  source_recipe_path: kb/recipes/recipe_ebf3_cabin_sacrificial_liner_panel_set.yaml
+  source_queue_type: reachable_leaf_backfill_kb_recipe
+  route_decision: lunar_candidate_flagged
+  simulation_import_mass_policy: sensitivity_flag
+  mass_nominal_kg: 10.0
+  availability_class: local_derived
+  primary_process_id: sheet_metal_cutting_v0
+  executable_process_id: sheet_metal_cutting_v0
+  secondary_process_ids: []
+  ready_machine_ids:
+  - labor_bot_general_v0
+  - assembly_tools_basic
+  confidence: medium
+  reasoning_brief: Existing sheet-metal route is adequate for first-pass local fabrication, with labor_bot
+    limited to handling/fixturing; exposure, stiffness, fit, EMI, or grounding remain flags.
+route_decision: lunar_candidate_flagged
+simulation_import_mass_policy: sensitivity_flag

@@ -4,8 +4,47 @@ name: EBF3 cabin wall panel set
 mass: 34.0
 unit: unit
 unit_kind: discrete
-material_class: metal
-notes: >
-  Child of MC-2. Vacuum-boundary chamber wall panel set. Panel count,
-  thickness, alloy, fabrication route, and leak-test requirements remain
-  unresolved.
+material: steel
+notes: Child of MC-2. Vacuum-boundary chamber wall panel set.
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Resolve panel count, thickness, alloy, fabrication route, and leak-test requirements.
+- Replace first-pass nominal import mass with sourced lower/upper mass bounds if this item dominates
+  imported mass.
+- 'Resolve local-route blocker before claiming local manufacturing closure: Local steel sheet forming
+  exists, but vacuum wall leak- rate, joint sealing, and distortion qualification are not closed by
+  Ready processes.'
+- 'Encode or verify performance requirements outside prose notes: vacuum wall leak rate; panel flatness;
+  joint sealing; thermal distortion.'
+- 'Review route sensitivity flags before treating the route as nominally closed: vacuum_boundary;route_gap:vacuum_boundary_leak_qualification.'
+- Close panel forming, welding/joining, seal interface, and leak-test chain before dropping import
+  fallback.
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_cabin_wall_panel_set
+  source_recipe_path: kb/recipes/recipe_ebf3_cabin_wall_panel_set.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: route_gap
+  simulation_import_mass_policy: import_until_gap_resolved
+  mass_nominal_kg: 34.0
+  availability_class: local_derived
+  primary_process_id: sheet_metal_cutting_v0
+  executable_process_id: import_receiving_basic_v0
+  secondary_process_ids:
+  - steel_ingot_cast_v0
+  - sheet_making_from_ingot_v0
+  - sealing_and_assembly_basic_v0
+  - leak_test_v0
+  ready_machine_ids:
+  - labor_bot_general_v0
+  - casting_furnace_v0
+  - assembly_tools_basic
+  confidence: medium
+  reasoning_brief: Wall panel mass is lunar-material plausible, but vacuum-boundary joining, distortion
+    control, and leak qualification remain a process/QA gap.
+  blocked_machine_or_process_reason: Wall panel mass is lunar-material plausible, but vacuum-boundary
+    joining, distortion control, and leak qualification remain a process/QA gap.
+route_decision: route_gap
+simulation_import_mass_policy: import_until_gap_resolved
+is_import: true

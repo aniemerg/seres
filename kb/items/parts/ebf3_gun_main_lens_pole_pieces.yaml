@@ -4,8 +4,45 @@ name: EBF3 gun main lens pole pieces
 mass: 0.7
 unit: unit
 unit_kind: discrete
-material_class: metal
-notes: >
-  FG-7 magnetic pole-piece set for shaping the focusing field near the beam
-  bore. Magnetic alloy, gap geometry, machining tolerance, and heat treatment
-  remain unresolved.
+material: electrical_steel_or_soft_iron
+notes: FG-7 magnetic pole-piece set for shaping the focusing field near the beam bore.
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Resolve magnetic alloy, gap geometry, machining tolerance, and heat treatment.
+- Replace first-pass nominal import mass with sourced lower/upper mass bounds if this item dominates
+  imported mass.
+- 'Resolve local-route blocker before claiming local manufacturing closure: Lens pole pieces need
+  permeability, anneal state, geometry, and beam-lens magnetic validation beyond soft-iron/electrical-steel
+  stock.'
+- 'Encode or verify performance requirements outside prose notes: Pole pieces must meet magnetic permeability,
+  saturation margin, pole geometry, surface finish, alignment, and thermal stability.'
+- 'Review route sensitivity flags before treating the route as nominally closed: magnetic_pole;electron_beam_alignment;semantic_audit:main_lens_pole_gap.'
+- Import until soft-iron or electrical-steel magnetic-property route and field QA exist.
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_gun_main_lens_pole_pieces
+  source_recipe_path: kb/recipes/recipe_ebf3_gun_main_lens_pole_pieces.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: route_gap
+  simulation_import_mass_policy: import_until_gap_resolved
+  mass_nominal_kg: 0.7
+  availability_class: local_derived
+  primary_process_id: machining_basic_v0
+  executable_process_id: import_receiving_basic_v0
+  secondary_process_ids:
+  - electrical_steel_production_v0
+  - inspection_basic_v0
+  ready_machine_ids:
+  - multi_axis_cnc_machining_center
+  - labor_bot_general_v0
+  - induction_forge_v0
+  - rolling_mill_v0
+  confidence: medium
+  reasoning_brief: CNC covers pole-piece geometry but not magnetic material control anneal or lens
+    field validation.
+  blocked_machine_or_process_reason: CNC covers pole-piece geometry but not magnetic material control
+    anneal or lens field validation.
+route_decision: route_gap
+simulation_import_mass_policy: import_until_gap_resolved
+is_import: true

@@ -4,11 +4,43 @@ name: EBF3 positioning feedthrough shield termination interface
 mass: 0.05
 unit: unit
 unit_kind: discrete
-material_class: conductive_metal
-notes: >
-  Child of ebf3_positioning_electrical_feedthrough. Shield termination/interface
-  marker for positioning motor and signal wiring at the feedthrough boundary.
-  It does not define protective grounding, HV return, controls acquisition, or
-  cable shield policy for the whole machine. Termination geometry, isolation,
-  grounding policy, and local manufacturing route remain unresolved; see
-  research/ebf3_bom_sources/organized/ebf3_interface_architecture.md.
+material: aluminum
+notes: 'Child of ebf3_positioning_electrical_feedthrough. Shield termination/interface marker for
+  positioning motor and signal wiring at the feedthrough boundary. It does not define protective grounding,
+  HV return, controls acquisition, or cable shield policy for the whole machine. Termination geometry,
+  isolation, grounding policy, and first-pass manufacturing/import route is recorded in the linked
+  EBF3 route-review recipe; see research/ebf3_bom_sources/organized/ebf3_interface_architecture.md.
+
+  '
+recipe: recipe_ebf3_positioning_feedthrough_shield_termination_interface
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Replace validation-scaled generic stock inputs with explicit EBF material lower/upper bounds and
+  material-specific recipe inputs.
+- 'Encode or verify performance requirements outside prose notes: shield termination continuity; feedthrough
+  creepage; vacuum leak boundary; grounding policy.'
+- 'Review route sensitivity flags before treating the route as nominally closed: HV_feedthrough;shield_termination.'
+- Close feedthrough interface acceptance before dropping.
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_positioning_feedthrough_shield_termination_interface
+  source_recipe_path: kb/recipes/recipe_ebf3_positioning_feedthrough_shield_termination_interface.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: lunar_candidate_flagged
+  simulation_import_mass_policy: sensitivity_flag
+  mass_nominal_kg: 0.05
+  availability_class: local_derived
+  primary_process_id: machining_basic_v0
+  executable_process_id: machining_basic_v0
+  secondary_process_ids:
+  - sheet_metal_cutting_v0
+  - assembly_basic_v0
+  ready_machine_ids:
+  - multi_axis_cnc_machining_center
+  - labor_bot_general_v0
+  confidence: medium
+  reasoning_brief: Shield termination machining is local but feedthrough creepage grounding and vacuum
+    behavior remain functional gaps.
+route_decision: lunar_candidate_flagged
+simulation_import_mass_policy: sensitivity_flag

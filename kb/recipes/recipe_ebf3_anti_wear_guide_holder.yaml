@@ -1,0 +1,37 @@
+id: recipe_ebf3_anti_wear_guide_holder
+kind: recipe
+variant_id: ebf3_route_review_v0
+target_item_id: ebf3_anti_wear_guide_holder
+inputs:
+- item_id: raw_metal_block
+  qty: 0.0315
+  unit: kg
+outputs:
+- item_id: ebf3_anti_wear_guide_holder
+  qty: 1.0
+  unit: unit
+steps:
+- process_id: machining_basic_v0
+  inputs:
+  - item_id: raw_metal_block
+    qty: 0.0315
+    unit: kg
+  outputs:
+  - item_id: ebf3_anti_wear_guide_holder
+    qty: 1.0
+    unit: unit
+  notes: 'First-pass local route after targeted material/process recheck. Decision: reroute_existing_process.
+    Holder geometry is not shaft-specific; high-function CNC is the better existing route. Wear/alignment
+    remain sensitivity flags.'
+notes: 'EBF3 route-review recipe for Simviewer inspection and first-pass simulation routing.
+
+  Route decision: lunar_candidate_flagged.
+
+  Simulation import mass policy: sensitivity_flag.
+
+  Executable first-pass process: machining_basic_v0.
+
+  Targeted material/process recheck: reroute_existing_process.
+
+  Reasoning: Holder geometry is not shaft-specific; high-function CNC is the better existing route.
+  Wear/alignment remain sensitivity flags.'

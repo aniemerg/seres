@@ -4,10 +4,31 @@ name: EBF3 gun cathode lead termination set
 mass: 0.05
 unit: unit
 unit_kind: discrete
-material_class: composite
-notes: >
-  Level-3 child of FG-14. Termination hardware between the cathode current leads
-  and the cartridge hot contacts or upstream heater supply interface. Adopted as
-  a boundary item so later work can assign welds, clamps, or feedthrough-side
-  terminals without merging them into the filament emitter. Exact joint process
-  and materials remain deferred.
+material: composite
+notes: Level-3 child of FG-14. Termination hardware between the cathode current leads and the cartridge
+  hot contacts or upstream heater supply interface. Adopted as a boundary item so later work can assign
+  welds, clamps, or feedthrough-side terminals without merging them into the filament emitter.
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Resolve deferred Exact joint process and materials.
+- Replace first-pass nominal import mass with sourced lower/upper mass bounds if this item dominates
+  imported mass.
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_gun_cathode_lead_termination_set
+  source_recipe_path: kb/recipes/recipe_ebf3_gun_cathode_lead_termination_set.yaml
+  source_queue_type: leaf_decomposition_review_kb_recipe
+  route_decision: import_as_leaf
+  simulation_import_mass_policy: import_nominal
+  mass_nominal_kg: 0.05
+  availability_class: keep_ebf3_leaf
+  primary_process_id: import_receiving_basic_v0
+  executable_process_id: import_receiving_basic_v0
+  reasoning_brief: Complex electronic/optical/electron-gun item with low-confidence local capability;
+    splitting now would be a large research task for limited first-sim value
+  recommended_edit: Count as Earth import in first simulation; split only if this import mass dominates
+    the result
+route_decision: import_as_leaf
+simulation_import_mass_policy: import_nominal
+is_import: true

@@ -4,8 +4,37 @@ name: EBF3 drive roll carrier body
 mass: 0.11
 unit: unit
 unit_kind: discrete
-material_class: metal
-notes: >
-  Level-3 child of WF-10. Carrier body holding the drive-roll bearing set and
-  keeping the drive roll aligned with the wire path. Exact geometry, machining
-  tolerances, bearing seat, and vacuum-compatible finish remain deferred.
+material: steel
+notes: Level-3 child of WF-10. Carrier body holding the drive-roll bearing set and keeping the drive
+  roll aligned with the wire path.
+recipe: recipe_ebf3_drive_roll_carrier_body
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Resolve deferred Exact geometry, machining tolerances, bearing seat, and vacuum-compatible finish.
+- Replace validation-scaled generic stock inputs with explicit EBF material lower/upper bounds and
+  material-specific recipe inputs.
+- 'Encode or verify performance requirements outside prose notes: roll alignment; modest stiffness;
+  fastener fit.'
+- 'Review route sensitivity flags before treating the route as nominally closed: candidate_fit:none.'
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_drive_roll_carrier_body
+  source_recipe_path: kb/recipes/recipe_ebf3_drive_roll_carrier_body.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: lunar_candidate
+  simulation_import_mass_policy: local_nominal
+  mass_nominal_kg: 0.11
+  availability_class: local_derived
+  primary_process_id: machining_basic_v0
+  executable_process_id: machining_basic_v0
+  secondary_process_ids:
+  - assembly_basic_v0
+  ready_machine_ids:
+  - multi_axis_cnc_machining_center
+  - labor_bot_general_v0
+  - assembly_tools_basic
+  confidence: high
+  reasoning_brief: Small drive-roll carrier body is a routine local steel machining candidate
+route_decision: lunar_candidate
+simulation_import_mass_policy: local_nominal

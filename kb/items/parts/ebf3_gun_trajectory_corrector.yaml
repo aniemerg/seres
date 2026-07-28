@@ -4,11 +4,10 @@ name: EBF3 gun trajectory corrector
 mass: 0.6
 unit: unit
 unit_kind: discrete
-material_class: composite
-notes: >
-  FG-11. Beam-axis correction assembly after the anode. Current evidence
-  supports a current-driven correction function, but the specific magnetic-coil
-  or electrostatic geometry is still deferred; see
-  research/ebf3_bom_sources/organized/magnetic_steering_decomposition_plan.md
-  and research/ebf3_bom_sources/organized/electrical_signal_boundary_review.md.
-  This assembly is split by `bom_ebf3_gun_trajectory_corrector`. Child items are structural placeholders for decomposition fidelity only; no local recipe is attached yet.
+material: composite
+notes: |
+  FG-11. Beam-axis correction assembly after the anode. Current evidence supports a current-driven correction function, but the specific magnetic-coil or electrostatic geometry is still deferred; see research/ebf3_bom_sources/organized/magnetic_steering_decomposition_plan.md and research/ebf3_bom_sources/organized/electrical_signal_boundary_review.md. This assembly is split by `bom_ebf3_gun_trajectory_corrector`. Child items are structural placeholders for decomposition fidelity only; assembly recipe now only joins visible child items; child material and manufacturing readiness remain unresolved.
+bom: bom_ebf3_gun_trajectory_corrector
+recipe: recipe_ebf3_gun_trajectory_corrector_assembly_v0
+trust_tags:
+- trusted_ebf3_unreplaced

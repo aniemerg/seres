@@ -4,9 +4,10 @@ name: EBF3 pressure adjustment knob
 mass: 0.2
 unit: unit
 unit_kind: discrete
-material_class: composite
-notes: >
-  WF-14. Adjustment knob or threaded adjuster for setting drive-roll pressure.
-  See research/ebf3_bom_sources/organized/wire_feeder_level_2_audit.md. No local
-  recipe is attached yet.
-  This assembly is split by `bom_ebf3_pressure_adjustment_knob`. Child items are structural placeholders for decomposition fidelity only; no local recipe is attached yet.
+material: composite
+notes: |
+  WF-14. Adjustment knob or threaded adjuster for setting drive-roll pressure. See research/ebf3_bom_sources/organized/wire_feeder_level_2_audit.md. No local recipe is attached yet. This assembly is split by `bom_ebf3_pressure_adjustment_knob`. Child items are structural placeholders for decomposition fidelity only; assembly recipe now only joins visible child items; child material and manufacturing readiness remain unresolved.
+bom: bom_ebf3_pressure_adjustment_knob
+recipe: recipe_ebf3_pressure_adjustment_knob_assembly_v0
+trust_tags:
+- trusted_ebf3_unreplaced

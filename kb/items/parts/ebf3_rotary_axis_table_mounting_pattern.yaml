@@ -4,8 +4,36 @@ name: EBF3 rotary axis table mounting pattern
 mass: 0.6
 unit: unit
 unit_kind: discrete
-material_class: precision_metal
-notes: >
-  Level-3 child of FS-17. Mounting-hole/datum feature set for attaching substrate
-  tooling or platform hardware to the rotary table. Exact pattern and tolerance
-  remain deferred.
+material: steel
+notes: Level-3 child of FS-17. Mounting-hole/datum feature set for attaching substrate tooling or
+  platform hardware to the rotary table.
+recipe: recipe_ebf3_rotary_axis_table_mounting_pattern
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Resolve deferred Exact pattern and tolerance.
+- Replace validation-scaled generic stock inputs with explicit EBF material lower/upper bounds and
+  material-specific recipe inputs.
+- 'Encode or verify performance requirements outside prose notes: bolt pattern accuracy; rotary axis
+  concentricity; clamp repeatability; stiffness.'
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_rotary_axis_table_mounting_pattern
+  source_recipe_path: kb/recipes/recipe_ebf3_rotary_axis_table_mounting_pattern.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: lunar_candidate
+  simulation_import_mass_policy: local_nominal
+  mass_nominal_kg: 0.6
+  availability_class: local_derived
+  primary_process_id: machining_basic_v0
+  executable_process_id: machining_basic_v0
+  secondary_process_ids:
+  - assembly_basic_v0
+  ready_machine_ids:
+  - multi_axis_cnc_machining_center
+  - labor_bot_general_v0
+  - alignment_tools
+  confidence: medium
+  reasoning_brief: Mounting pattern holes and datum features are CNC-local geometry.
+route_decision: lunar_candidate
+simulation_import_mass_policy: local_nominal

@@ -4,7 +4,29 @@ name: EBF3 cabin wall panel seam set
 mass: 3.0
 unit: unit
 unit_kind: discrete
-material_class: composite
-notes: >
-  Child of MC-2. Seams, weld lands, or seal interfaces between chamber wall
-  panels. The actual sealing method and leak-test process remain unresolved.
+material: steel
+notes: Child of MC-2. Seams, weld lands, or seal interfaces between chamber wall panels.
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Resolve the actual sealing method and leak-test process.
+- Replace first-pass nominal import mass with sourced lower/upper mass bounds if this item dominates
+  imported mass.
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_cabin_wall_panel_seam_set
+  source_recipe_path: kb/recipes/recipe_ebf3_cabin_wall_panel_seam_set.yaml
+  source_queue_type: leaf_decomposition_review_kb_recipe
+  route_decision: defer_split_import_fallback
+  simulation_import_mass_policy: import_until_gap_resolved
+  mass_nominal_kg: 3.0
+  availability_class: keep_ebf3_leaf
+  primary_process_id: import_receiving_basic_v0
+  executable_process_id: import_receiving_basic_v0
+  reasoning_brief: Seam is probably a manufacturing/process feature rather than a stable discrete
+    child item; routing it now risks fake BOM fidelity
+  recommended_edit: Use first-run import/defer fallback for accounting, then replace with welded seam/leak-test
+    process if cabin manufacturing energy is material
+route_decision: defer_split_import_fallback
+simulation_import_mass_policy: import_until_gap_resolved
+is_import: true

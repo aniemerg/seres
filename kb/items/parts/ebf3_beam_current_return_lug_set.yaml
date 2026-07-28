@@ -4,10 +4,42 @@ name: EBF3 beam current return lug set
 mass: 0.12
 unit: unit
 unit_kind: discrete
-material_class: metal
-notes: >
-  Child of ebf3_beam_current_return_strap. Lug set for connecting the
-  platform/substrate continuity strap to its local attachment points. This does
-  not define the global HV return bus. Lug geometry, contact surface, fastener
-  pattern, material, and local manufacturing route remain unresolved; see
-  research/ebf3_bom_sources/organized/hv_grounding_return_review.md.
+material: aluminum
+notes: 'Child of ebf3_beam_current_return_strap. Lug set for connecting the platform/substrate continuity
+  strap to its local attachment points. This does not define the global HV return bus. Lug geometry,
+  contact surface, fastener pattern, material, and first-pass manufacturing/import route is recorded
+  in the linked EBF3 route-review recipe; see research/ebf3_bom_sources/organized/hv_grounding_return_review.md.
+
+  '
+recipe: recipe_ebf3_beam_current_return_lug_set
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Replace validation-scaled generic stock inputs with explicit EBF material lower/upper bounds and
+  material-specific recipe inputs.
+- 'Encode or verify performance requirements outside prose notes: Low resistance contact; thermal
+  cycling; electron-beam return geometry; clean oxide-controlled mating faces.'
+- 'Review route sensitivity flags before treating the route as nominally closed: electron_beam;electrical_contact;material_fix:aluminum_conductor_for_current_return.'
+- Close current return contact area heating and fastening acceptance before promoting.
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_beam_current_return_lug_set
+  source_recipe_path: kb/recipes/recipe_ebf3_beam_current_return_lug_set.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: lunar_candidate_flagged
+  simulation_import_mass_policy: sensitivity_flag
+  mass_nominal_kg: 0.12
+  availability_class: local_derived
+  primary_process_id: machining_basic_v0
+  executable_process_id: machining_basic_v0
+  secondary_process_ids:
+  - electrical_assembly_basic_v0
+  ready_machine_ids:
+  - labor_bot_general_v0
+  - assembly_tools_basic
+  - multi_axis_cnc_machining_center
+  confidence: medium
+  reasoning_brief: Machining the aluminum lug is local but contact resistance and beam-current heating
+    are electrical performance risks.
+route_decision: lunar_candidate_flagged
+simulation_import_mass_policy: sensitivity_flag

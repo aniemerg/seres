@@ -4,6 +4,44 @@ name: EBF3 gun cathode radiation shield clip set
 mass: 0.01
 unit: unit
 unit_kind: discrete
-material_class: refractory_metal
-notes: Child of ebf3_gun_cathode_radiation_shield. Shield clip set for EBF3 gun cathode
-  radiation shield. Exact specification and local manufacturing route remain unresolved.
+material: refractory_metal
+notes: Child of ebf3_gun_cathode_radiation_shield. Shield clip set for EBF3 gun cathode radiation
+  shield.
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Replace coarse item specification with explicit material, geometry/interface requirements, and lower/upper
+  mass bounds.
+- Replace validation-scaled generic stock inputs with explicit EBF material lower/upper bounds and
+  material-specific recipe inputs.
+- 'Resolve local-route blocker before claiming local manufacturing closure: If refractory foil is
+  required then no Ready local refractory sheet route is available.'
+- 'Encode or verify performance requirements outside prose notes: radiation shield retention; cathode
+  temperature exposure; HV clearance; low outgassing.'
+- 'Review route sensitivity flags before treating the route as nominally closed: performance_flag:thermal;performance_flag:HV;candidate_fit:none.'
+- Split steel clip versus refractory foil clip before localizing.
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_gun_cathode_radiation_shield_clip_set
+  source_recipe_path: kb/recipes/recipe_ebf3_gun_cathode_radiation_shield_clip_set.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: route_gap
+  simulation_import_mass_policy: import_until_gap_resolved
+  mass_nominal_kg: 0.01
+  availability_class: local_derived
+  primary_process_id: machining_basic_v0
+  executable_process_id: import_receiving_basic_v0
+  secondary_process_ids:
+  - assembly_basic_v0
+  ready_machine_ids:
+  - multi_axis_cnc_machining_center
+  - labor_bot_general_v0
+  - assembly_tools_basic
+  confidence: medium
+  reasoning_brief: If refractory foil is required the material route is not local; CNC only covers
+    a possible steel-clip variant.
+  blocked_machine_or_process_reason: If refractory foil is required the material route is not local;
+    CNC only covers a possible steel-clip variant.
+route_decision: route_gap
+simulation_import_mass_policy: import_until_gap_resolved
+is_import: true

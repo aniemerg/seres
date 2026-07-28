@@ -20,6 +20,10 @@ Scope:
   ownership, or material/process decisions. Rejected candidates, inactive
   cathode variants, and rows already owned by another subsystem are intentionally
   kept out of the register.
+- Whole-machine existing-item replacement review, including `not enough
+  accuracy` markings for existing KB candidates, is tracked in
+  `research/ebf3_bom_sources/derived/ebf3_leaf_material_process_readiness.csv` rather
+  than duplicated here.
 
 Source plans:
 
@@ -56,7 +60,7 @@ Workflow references:
 | --- | --- | --- |
 | Architecture decision needed | Cannot proceed until a layout or implementation is selected. | Cathode package geometry, gun-side oil volume, trajectory corrector implementation. |
 | Boundary decision needed | Candidate crosses subsystem or parent boundaries and ownership is still unresolved. | HV cable/gun termination, signal feedthrough, grounding/return path. |
-| Later child-level plan | Candidate belongs below an already-adopted child assembly. | Lens coil insulation, deflection coil insulation, bobbin/former, coil leads. |
+| Later child-level plan | Candidate belongs below an already-adopted child assembly. | Only use when the child is independently supported; current gun coils are not in this bucket. |
 | Source geometry needed | Function is supported, but exact EBF3 geometry is not. | Beam-boundary collector, secondary-electron collector, aperture inserts, gun-column flange. |
 | Manufacturing readiness only | Candidate should not become a BOM child yet; it belongs to later material/process review. | Stainless vacuum material choices, ceramic metallization, cooling and thermal features. |
 
@@ -69,10 +73,10 @@ Workflow references:
    `research/ebf3_bom_sources/organized/ebf3_interface_architecture.md`; use it
    before decomposing controls, power supplies, diagnostics, feedthroughs, or
    gun signal wiring.
-4. Coil-level review is recorded in
-   `research/ebf3_bom_sources/organized/coil_level_decomposition_plan.md`; its
-   unresolved rows should feed a later electrical-interface or material/process
-   readiness review, not immediate child BOM creation.
+4. Coil leaf review is recorded in
+   `research/ebf3_bom_sources/organized/coil_level_decomposition_plan.md`; gun
+   coils stay as leaf items. Remaining work is electrical-interface or
+   material/process readiness, not child BOM creation.
 5. Cathode variant review is recorded in
    `research/ebf3_bom_sources/organized/cathode_variant_review.md`; the active
    package direction is now direct-heated tungsten hairpin/filament for lunar
@@ -100,17 +104,17 @@ Workflow references:
 | FG-D-019 | Mounting washer or clamp for insulator | defer | FG-4 / FG-17 | Boundary-sensitive with gun column hardware. | Source mechanical mount layout. | electrode family |
 | FG-D-020 | Screen-electrode aperture edge or insert | defer | FG-5 | Candidate-only; generic aperture source. | Source screen/boundary electrode geometry. | electrode family |
 | FG-D-021 | Screen-electrode electrical connection | split_boundary / defer | FG-5 / FG-19 | Contact geometry and wiring ownership unresolved. | Resolve local gun wiring/contact interface. | electrode family |
-| FG-D-022 | Lens bobbin / coil former | defer | FG-6 / FG-7 | Coil-level review found no source-confirmed distinct EBF3 former. | Source distinct lens-coil former geometry. | electromagnetic lens; coil-level |
-| FG-D-023 | Lens coil insulation / sealing / potting | defer | FG-6 / FG-7 | Coil-level review keeps this as material/process readiness, not a child BOM item. | Material/process review for vacuum-compatible coil insulation. | electromagnetic lens; coil-level |
+| FG-D-022 | Lens coil material/process readiness | material/process readiness | FG-6 / FG-7 | Coil leaf review treats the lens coil as the BOM leaf. Bobbin/former/potting should not become child items unless a later source shows distinct hardware. | Select conductor, insulation, winding method, vacuum compatibility, and test requirements. | electromagnetic lens; coil leaf review |
+| FG-D-023 | Lens coil electrical interface | split_boundary / defer | FG-6 / FG-7 / FG-19 / power supplies | Coil pigtail, gun wiring, and regulated current supply ownership are not yet selected. | Resolve coil-to-gun-wiring and coil-to-current-supply boundary. | electromagnetic lens; coil leaf review |
 | FG-D-024 | Lens mounting structure/interface | defer | FG-6 / FG-7 / FG-17 | Source is generic or patent-geometry-specific; boundary with gun column. | Source EBF3 lens mounting layout. | electromagnetic lens |
 | FG-D-028 | Stigmator | defer | FG-6 / FG-7 | Generic candidate only. | Need EBF3-specific or comparable gun source. | electromagnetic lens |
 | FG-D-029 | Lens aperture | split_boundary / defer | FG-6 / FG-7 / electrodes | Aperture-like functions already exist in electrode family. | Revisit only if source shows aperture integrated into lens package. | electromagnetic lens |
 | FG-D-030 | Lens cooling jacket / heat sink | defer | FG-6 / FG-7 | Generic thermal candidate; not EBF3 lens-level evidence. | Source thermal design or coil-level heat-load requirement. | electromagnetic lens |
-| FG-D-031 | Deflection coil former / bobbin | defer | FG-8 | Coil-level review found patent-specific magnetic core/bobbin may overlap existing deflection yoke. | Source EBF3 deflection coil pair geometry or revise yoke/core boundary. | magnetic steering; coil-level |
-| FG-D-032 | Deflection coil insulation | defer | FG-8 | Coil-level review keeps this as material/process readiness, not a child BOM item. | Material/process review for vacuum-compatible coil insulation. | magnetic steering; coil-level |
-| FG-D-033 | Deflection coil leads / terminations | split_boundary / defer | FG-8 / FG-19 / power supplies | Coil-level review confirmed electrical boundary with driver and gun harness remains unresolved. | Resolve coil load-to-driver interface. | magnetic steering; coil-level |
-| FG-D-035 | Deflection mount or bracket | split_boundary / defer | FG-8 / FG-17 | Coil-level review keeps mount/bracket boundary unresolved with gun column. | Source physical mounting layout. | magnetic steering; coil-level |
-| FG-D-036 | Deflection cooling / thermal features | defer | FG-8 | Coil-level review found no source-specific heat-load evidence. | Source coil thermal design. | magnetic steering; coil-level |
+| FG-D-031 | Deflection coil material/process readiness | material/process readiness | FG-8 | Coil leaf review treats X/Y coil pairs as BOM leaves. Bobbin/former/potting should not become child items unless a later source shows distinct hardware. | Select conductor, insulation, winding pattern, vacuum compatibility, inductance/current limits, and test requirements. | magnetic steering; coil leaf review |
+| FG-D-032 | Deflection magnetic-core/yoke boundary | split_boundary / defer | FG-8 | Patent-specific magnetic core/bobbin language may overlap the already-modeled `ebf3_gun_deflection_magnetic_yoke`. | Source EBF3 deflection magnetic circuit geometry before changing the yoke/coil boundary. | magnetic steering; coil leaf review |
+| FG-D-033 | Deflection coil electrical interface | split_boundary / defer | FG-8 / FG-19 / power supplies | Coil leaf review confirmed electrical boundary with driver and gun harness remains unresolved. | Resolve coil load-to-driver interface. | magnetic steering; coil leaf review |
+| FG-D-035 | Deflection mount or bracket | split_boundary / defer | FG-8 / FG-17 | Mount/bracket ownership remains unresolved with gun column. | Source physical mounting layout. | magnetic steering; coil leaf review |
+| FG-D-036 | Deflection cooling / thermal features | defer | FG-8 | Do not model separate cooling hardware unless heat-load evidence requires it. | Source coil thermal design if needed. | magnetic steering; coil leaf review |
 | FG-D-037 | Trajectory-corrector magnetic coil set | modeled / detail deferred | FG-11 | Modeled as `ebf3_gun_trajectory_corrector_coil_set`; external electron-lens source supports coils for correcting electron-beam trajectory. Corrector geometry and magnetic-versus-electrostatic architecture remain unresolved. | Source EBF3 corrector implementation or decide architecture. | magnetic steering |
 | FG-D-039 | Corrector yoke / pole structure | defer | FG-11 | Would risk duplicating FG-8 or lens yokes. | Source FG-11-specific geometry. | magnetic steering |
 | FG-D-040 | Corrector power/signal leads | split_boundary / defer | FG-11 / power supplies / controls | Load may be in gun; regulated source and commands are outside gun. | Resolve driver/control ownership. | magnetic steering |
@@ -180,5 +184,6 @@ Workflow references:
    minimal Level-3 KB representation. FG-D-066, FG-D-067, FG-D-070 through
    FG-D-075 remain deferred or split-boundary.
 9. `coil_material_process_readiness_review`: address FG-D-022, FG-D-023,
-   FG-D-031, FG-D-032, FG-D-033, FG-D-035, and FG-D-036 after coil electrical
-   interface ownership is clearer.
+   FG-D-031, FG-D-032, FG-D-033, FG-D-035, and FG-D-036 as coil leaf readiness
+   and interface work. Do not use these rows as permission to create lower
+   coil child BOMs.

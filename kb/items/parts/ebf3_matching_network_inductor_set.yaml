@@ -4,6 +4,10 @@ name: EBF3 matching network inductor set
 mass: 1.3
 unit: unit
 unit_kind: discrete
-material_class: electronic
-notes: Child of ebf3_inverter_matching_network. Matching inductor set for EBF3 inverter
-  matching network. Exact specification and local manufacturing route remain unresolved.
+material: electronic
+notes: |
+  Source-first child split for the matching network inductor set. The child BOM exposes magnetic core, winding, insulation/support, terminals, and mounting base, but topology, ratings, magnetic material, winding geometry, insulation, thermal behavior, and local manufacturing route remain unresolved. See research/ebf3_bom_sources/organized/split_before_route_leaf_decomposition_plan.md.
+bom: bom_ebf3_matching_network_inductor_set
+recipe: recipe_ebf3_matching_network_inductor_set_assembly_v0
+trust_tags:
+- trusted_ebf3_unreplaced

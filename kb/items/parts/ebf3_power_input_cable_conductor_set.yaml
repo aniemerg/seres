@@ -4,7 +4,48 @@ name: EBF3 power input cable conductor set
 mass: 0.7
 unit: unit
 unit_kind: discrete
-material_class: metal
-notes: Child of ebf3_power_input_cable_gland. Power input conductor set for EBF3 power
-  input cable and gland. Exact specification and local manufacturing route remain
-  unresolved.
+material: aluminum
+notes: Child of ebf3_power_input_cable_gland. Power input conductor set for EBF3 power input cable
+  and gland.
+trust_tags:
+- untrusted_global_kb
+future_improvements:
+- Replace coarse item specification with explicit material, geometry/interface requirements, and lower/upper
+  mass bounds.
+- Replace first-pass nominal import mass with sourced lower/upper mass bounds if this item dominates
+  imported mass.
+- 'Resolve local-route blocker before claiming local manufacturing closure: Power cable conductor
+  requires drawn/flexible conductor route and cable qualification; existing similar EBF conductor
+  items are route_gap because wire drawing and insulation routes are not closed.'
+- 'Encode or verify performance requirements outside prose notes: current capacity; flexibility/strain
+  relief; termination compatibility; vacuum/outgassing near gland; electrical safety.'
+- 'Review route sensitivity flags before treating the route as nominally closed: power_cable;wire_drawing_blocked;cable_qualification.'
+- Define conductor drawing, insulation or bare-clearance policy, termination crimp/bond, electrical
+  test, and vacuum compatibility checks.
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_power_input_cable_conductor_set
+  source_recipe_path: kb/recipes/recipe_ebf3_power_input_cable_conductor_set.yaml
+  source_queue_type: reachable_leaf_backfill_kb_recipe
+  route_decision: route_gap
+  simulation_import_mass_policy: import_until_gap_resolved
+  mass_nominal_kg: 0.7
+  availability_class: local_derived
+  primary_process_id: wire_drawing_aluminum_v0
+  executable_process_id: import_receiving_basic_v0
+  secondary_process_ids:
+  - power_cable_assembly_v0
+  - metal_wire_drawing_process_v0
+  ready_machine_ids:
+  - labor_bot_general_v0
+  - assembly_tools_basic
+  confidence: medium
+  reasoning_brief: Aluminum conductor stock is plausible and drawing equipment exists, but vacuum
+    cable insulation, termination, flex, and continuity QA are not modeled by the current labor-heavy
+    route.
+  blocked_machine_or_process_reason: Aluminum conductor stock is plausible and drawing equipment exists,
+    but vacuum cable insulation, termination, flex, and continuity QA are not modeled by the current
+    labor-heavy route.
+route_decision: route_gap
+simulation_import_mass_policy: import_until_gap_resolved
+is_import: true

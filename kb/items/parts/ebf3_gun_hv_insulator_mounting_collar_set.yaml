@@ -4,11 +4,54 @@ name: EBF3 gun HV insulator mounting collar set
 mass: 0.12
 unit: unit
 unit_kind: discrete
-material_class: metal
-notes: >
-  Level-3 child of FG-13. Mounting collar or clamp-interface marker for holding
-  the standalone gun high-voltage insulator in the gun structure. It is not the
-  FG-12 HV input flange and not the chamber gun port. Collar geometry,
-  fasteners, contact pressure, material choice, and local manufacturing route
-  remain unresolved; see
-  research/ebf3_bom_sources/organized/hv_gun_side_insulation_decomposition_plan.md.
+material: alumina_ceramic
+notes: 'Level-3 child of FG-13. Mounting collar or clamp-interface marker for holding the standalone
+  gun high-voltage insulator in the gun structure. It is not the FG-12 HV input flange and not the
+  chamber gun port. Collar geometry, fasteners, contact pressure, material choice, and first-pass
+  manufacturing/import route is recorded in the linked EBF3 route-review recipe; see research/ebf3_bom_sources/organized/hv_gun_side_insulation_decomposition_plan.md.
+
+  '
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Replace first-pass nominal import mass with sourced lower/upper mass bounds if this item dominates
+  imported mass.
+- 'Resolve local-route blocker before claiming local manufacturing closure: Generic ceramic/machining
+  routes do not close HV dielectric clearance, beamline alignment, and thermal-mismatch qualification.'
+- 'Encode or verify performance requirements outside prose notes: Insulator support pressure; dielectric
+  clearance; beamline alignment; thermal expansion mismatch.'
+- 'Review route sensitivity flags before treating the route as nominally closed: HV_dielectric;electron_beam;semantic_audit:gun_hv_insulator_gap.'
+- Define ceramic forming/sintering, metallization or glass/ceramic sealing, cleaning, dielectric test,
+  and leak/outgassing acceptance before claiming local closure.
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_gun_hv_insulator_mounting_collar_set
+  source_recipe_path: kb/recipes/recipe_ebf3_gun_hv_insulator_mounting_collar_set.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: route_gap
+  simulation_import_mass_policy: import_until_gap_resolved
+  mass_nominal_kg: 0.12
+  availability_class: local_derived
+  primary_process_id: ceramic_forming_basic_v0
+  executable_process_id: import_receiving_basic_v0
+  secondary_process_ids:
+  - machining_basic_v0
+  - assembly_basic_v0
+  - ceramic_sintering_process_v0
+  ready_machine_ids:
+  - labor_bot_general_v0
+  - multi_axis_cnc_machining_center
+  - assembly_tools_basic
+  - pressing_mold_set
+  - hydraulic_press
+  - kiln_ceramic
+  confidence: medium
+  reasoning_brief: Material route is lunar-plausible, but this part is an HV/electron-gun/feedthrough
+    dielectric boundary requiring creepage, leakage, partial-discharge or hermetic QA; labor-bot capability
+    is irrelevant.
+  blocked_machine_or_process_reason: Material route is lunar-plausible, but this part is an HV/electron-gun/feedthrough
+    dielectric boundary requiring creepage, leakage, partial-discharge or hermetic QA; labor-bot capability
+    is irrelevant.
+route_decision: route_gap
+simulation_import_mass_policy: import_until_gap_resolved
+is_import: true

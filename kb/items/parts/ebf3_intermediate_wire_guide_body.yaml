@@ -4,6 +4,35 @@ name: EBF3 intermediate wire guide body
 mass: 0.16
 unit: unit
 unit_kind: discrete
-material_class: metal
-notes: Child of ebf3_intermediate_wire_guide. Guide body for EBF3 intermediate wire
-  guide. Exact specification and local manufacturing route remain unresolved.
+material: steel
+notes: Child of ebf3_intermediate_wire_guide. Guide body for EBF3 intermediate wire guide.
+recipe: recipe_ebf3_intermediate_wire_guide_body
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Replace coarse item specification with explicit material, geometry/interface requirements, and lower/upper
+  mass bounds.
+- Replace validation-scaled generic stock inputs with explicit EBF material lower/upper bounds and
+  material-specific recipe inputs.
+- 'Encode or verify performance requirements outside prose notes: Wire bore finish; wear resistance;
+  alignment to feed path; vacuum debris control.'
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_intermediate_wire_guide_body
+  source_recipe_path: kb/recipes/recipe_ebf3_intermediate_wire_guide_body.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: lunar_candidate
+  simulation_import_mass_policy: local_nominal
+  mass_nominal_kg: 0.16
+  availability_class: local_derived
+  primary_process_id: machining_basic_v0
+  executable_process_id: machining_basic_v0
+  secondary_process_ids:
+  - inspection_basic_v0
+  ready_machine_ids:
+  - labor_bot_general_v0
+  - multi_axis_cnc_machining_center
+  confidence: medium
+  reasoning_brief: Bore finish contouring and deburring are CNC and finishing scope.
+route_decision: lunar_candidate
+simulation_import_mass_policy: local_nominal

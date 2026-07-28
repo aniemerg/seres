@@ -4,7 +4,44 @@ name: EBF3 cabin access door vacuum seal
 mass: 2.0
 unit: unit
 unit_kind: discrete
-material_class: polymer
-notes: >
-  Child of MC-3. Vacuum seal for the access door. Seal material and reusable
-  versus metal-gasket architecture remain unresolved.
+material: vacuum_elastomer_or_metal_gasket
+notes: Child of MC-3. Vacuum seal for the access door.
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Resolve seal material and reusable versus metal-gasket architecture.
+- Replace first-pass nominal import mass with sourced lower/upper mass bounds if this item dominates
+  imported mass.
+- 'Resolve local-route blocker before claiming local manufacturing closure: Large chamber-door seal
+  needs gasket material, springback/compression set, outgassing, and leak verification beyond generic
+  assembly.'
+- 'Encode or verify performance requirements outside prose notes: Door seal must meet cabin/chamber
+  leak rate, compression- set or metal-gasket springback, outgassing, dust tolerance, and repeated-open
+  lifetime.'
+- 'Review route sensitivity flags before treating the route as nominally closed: vacuum_seal;large_seal;material_gap;semantic_audit:vacuum_door_seal_gap.'
+- Define gasket/seal material, flange finish, compression hardware, and leak-test acceptance.
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_cabin_access_door_vacuum_seal
+  source_recipe_path: kb/recipes/recipe_ebf3_cabin_access_door_vacuum_seal.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: route_gap
+  simulation_import_mass_policy: import_until_gap_resolved
+  mass_nominal_kg: 2.0
+  availability_class: import_or_recycle
+  primary_process_id: vacuum_seal_assembly_fabrication_v0
+  executable_process_id: import_receiving_basic_v0
+  secondary_process_ids:
+  - leak_test_v0
+  ready_machine_ids:
+  - labor_bot_general_v0
+  - assembly_tools_basic
+  confidence: medium
+  reasoning_brief: Reusable cabin seal is leak-critical and depends on metal gasket or imported elastomer
+    material, surface finish, compression set, and leak QA; not a labor-bot gap.
+  blocked_machine_or_process_reason: Reusable cabin seal is leak-critical and depends on metal gasket
+    or imported elastomer material, surface finish, compression set, and leak QA; not a labor-bot
+    gap.
+route_decision: route_gap
+simulation_import_mass_policy: import_until_gap_resolved
+is_import: true

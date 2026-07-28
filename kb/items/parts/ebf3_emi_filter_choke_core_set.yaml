@@ -1,0 +1,52 @@
+id: ebf3_emi_filter_choke_core_set
+kind: part
+name: EBF3 EMI filter choke core set
+mass: 0.25
+unit: unit
+unit_kind: discrete
+material: ferrite
+notes: 'Magnetic/ferrite core set for the EBF3 EMI filter choke set. Child of `ebf3_emi_filter_choke_set`
+  from research/ebf3_bom_sources/organized/split_before_route_leaf_decomposition_plan.md. This is
+  not local-ready and has no manufacturing recipe.
+
+  '
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Replace first-pass nominal import mass with sourced lower/upper mass bounds if this item dominates
+  imported mass.
+- 'Resolve local-route blocker before claiming local manufacturing closure: Ferrite shaping/sintering
+  requires sintering_furnace_v0 and pressing_mold_set which are not Ready; transformer-style laminations
+  need unproven cutting/coating/anneal route for core performance.'
+- 'Encode or verify performance requirements outside prose notes: EMI choke core must meet permeability,
+  saturation flux, core loss at switching frequency, temperature rise, and insulation compatibility.'
+- 'Review route sensitivity flags before treating the route as nominally closed: magnetic_core;emi;blocked_sintering.'
+- Define magnetic core fabrication and test chain before replacing import fallback.
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_emi_filter_choke_core_set
+  source_recipe_path: kb/recipes/recipe_ebf3_emi_filter_choke_core_set.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: route_gap
+  simulation_import_mass_policy: import_until_gap_resolved
+  mass_nominal_kg: 0.25
+  availability_class: local_derived
+  primary_process_id: ferrite_sintering_process_v0
+  executable_process_id: import_receiving_basic_v0
+  secondary_process_ids:
+  - ferrite_powder_synthesis_v0
+  - electrical_steel_production_v0
+  ready_machine_ids:
+  - labor_bot_general_v0
+  - rolling_mill_v0
+  - induction_forge_v0
+  confidence: low
+  reasoning_brief: The issue is controlled magnetic properties, losses, lamination/air-gap geometry,
+    insulation, and acceptance testing; existing material production is not enough and labor_bot is
+    not core evidence.
+  blocked_machine_or_process_reason: The issue is controlled magnetic properties, losses, lamination/air-gap
+    geometry, insulation, and acceptance testing; existing material production is not enough and labor_bot
+    is not core evidence.
+route_decision: route_gap
+simulation_import_mass_policy: import_until_gap_resolved
+is_import: true

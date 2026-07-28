@@ -4,7 +4,29 @@ name: EBF3 floating-side screw radial bearing set
 mass: 0.3
 unit: unit
 unit_kind: discrete
-material_class: precision_metal
-notes: >
-  Level-3 child of FS-8. Radial bearing set for floating-side ball-screw support.
-  Bearing type, fit, and vacuum lubrication remain deferred.
+material: bearing_steel
+notes: Level-3 child of FS-8. Radial bearing set for floating-side ball-screw support.
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Resolve deferred Bearing type, fit, and vacuum lubrication.
+- Replace first-pass nominal import mass with sourced lower/upper mass bounds if this item dominates
+  imported mass.
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_floating_side_screw_radial_bearing_set
+  source_recipe_path: kb/recipes/recipe_ebf3_floating_side_screw_radial_bearing_set.yaml
+  source_queue_type: leaf_decomposition_review_kb_recipe
+  route_decision: defer_split_import_fallback
+  simulation_import_mass_policy: import_until_gap_resolved
+  mass_nominal_kg: 0.3
+  availability_class: expand_but_flag
+  primary_process_id: import_receiving_basic_v0
+  executable_process_id: import_receiving_basic_v0
+  reasoning_brief: Precision mechanical part may be locally manufacturable eventually, but low mass
+    or hidden tolerances make direct import acceptable for first sim
+  recommended_edit: Import for conservative first run; split into races/gears/shafts/lube only if
+    sensitivity demands
+route_decision: defer_split_import_fallback
+simulation_import_mass_policy: import_until_gap_resolved
+is_import: true

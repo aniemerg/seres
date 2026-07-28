@@ -4,6 +4,37 @@ name: EBF3 controls cabinet door and latch
 mass: 0.69
 unit: unit
 unit_kind: discrete
-material_class: metal
-notes: Child of ebf3_controls_cabinet. Door and latch for EBF3 controls cabinet. Exact
-  specification and local manufacturing route remain unresolved.
+material: steel
+notes: Child of ebf3_controls_cabinet. Door and latch for EBF3 controls cabinet.
+recipe: recipe_ebf3_controls_cabinet_door_and_latch
+trust_tags:
+- untrusted_global_kb
+future_improvements:
+- Replace coarse item specification with explicit material, geometry/interface requirements, and lower/upper
+  mass bounds.
+- Replace validation-scaled generic stock inputs with explicit EBF material lower/upper bounds and
+  material-specific recipe inputs.
+- 'Encode or verify performance requirements outside prose notes: cabinet fit; latch reliability;
+  grounding/EMI continuity; service access.'
+- 'Review route sensitivity flags before treating the route as nominally closed: electrical_enclosure;latch;emi.'
+- Keep sensitivity flag but drop the obsolete audit blocker.
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_controls_cabinet_door_and_latch
+  source_recipe_path: kb/recipes/recipe_ebf3_controls_cabinet_door_and_latch.yaml
+  source_queue_type: reachable_leaf_backfill_kb_recipe
+  route_decision: lunar_candidate_flagged
+  simulation_import_mass_policy: sensitivity_flag
+  mass_nominal_kg: 0.69
+  availability_class: local_derived
+  primary_process_id: sheet_metal_cutting_v0
+  executable_process_id: sheet_metal_cutting_v0
+  secondary_process_ids: []
+  ready_machine_ids:
+  - labor_bot_general_v0
+  - assembly_tools_basic
+  confidence: medium
+  reasoning_brief: Existing sheet-metal route is adequate for first-pass local fabrication, with labor_bot
+    limited to handling/fixturing; exposure, stiffness, fit, EMI, or grounding remain flags.
+route_decision: lunar_candidate_flagged
+simulation_import_mass_policy: sensitivity_flag

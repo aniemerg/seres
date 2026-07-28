@@ -4,10 +4,34 @@ name: EBF3 gun cathode cartridge base
 mass: 0.18
 unit: unit
 unit_kind: discrete
-material_class: composite
-notes: >
-  Level-3 child of FG-15. Replaceable base/holder body for locating the selected
-  direct-heated tungsten hairpin/filament cathode package. Adopted as a physical
-  child because BINP supports a preliminary adjusted cartridge and electron-gun
-  package sources support mounted cathode assemblies. Exact material, datum
-  geometry, and precision-machining route remain deferred.
+material: composite
+notes: 'Level-3 child of FG-15. Replaceable base/holder body for locating the selected direct-heated
+  tungsten hairpin/filament cathode package. Adopted as a physical child because BINP supports a preliminary
+  adjusted cartridge and electron-gun package sources support mounted cathode assemblies. Exact material,
+  datum geometry, and precision-first-pass manufacturing/import route is recorded in the linked EBF3
+  route-review recipe; machining details remain coarse.
+
+  '
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Replace first-pass nominal import mass with sourced lower/upper mass bounds if this item dominates
+  imported mass.
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_gun_cathode_cartridge_base
+  source_recipe_path: kb/recipes/recipe_ebf3_gun_cathode_cartridge_base.yaml
+  source_queue_type: leaf_decomposition_review_kb_recipe
+  route_decision: defer_split_import_fallback
+  simulation_import_mass_policy: import_until_gap_resolved
+  mass_nominal_kg: 0.18
+  availability_class: keep_ebf3_leaf
+  primary_process_id: import_receiving_basic_v0
+  executable_process_id: import_receiving_basic_v0
+  reasoning_brief: Composite/mixed-material leaf is small; splitting may be unnecessary for first
+    sim unless it controls a critical capability
+  recommended_edit: Use import fallback now; split only if sensitivity/high-risk subsystem requires
+    it
+route_decision: defer_split_import_fallback
+simulation_import_mass_policy: import_until_gap_resolved
+is_import: true

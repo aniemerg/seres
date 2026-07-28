@@ -4,10 +4,36 @@ name: EBF3 wire inlet guide
 mass: 0.15
 unit: unit
 unit_kind: discrete
-material_class: metal
-notes: >
-  WF-16. Inlet guide positioning wire into the drive-roll area. Intentional
-  Level-2 single-part guide leaf; bore profile, wear material, and finish remain
-  deferred. See
-  research/ebf3_bom_sources/organized/wire_feeder_level_2_audit.md. No local
-  recipe is attached yet.
+material: steel
+notes: WF-16. Inlet guide positioning wire into the drive-roll area. See research/ebf3_bom_sources/organized/wire_feeder_level_2_audit.md.
+  First-pass manufacturing/import route is recorded in the linked EBF3 route-review recipe.
+recipe: recipe_ebf3_wire_inlet_guide
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Resolve deferred Intentional Level-2 single-part guide leaf; bore profile, wear material, and finish.
+- Replace validation-scaled generic stock inputs with explicit EBF material lower/upper bounds and
+  material-specific recipe inputs.
+- 'Encode or verify performance requirements outside prose notes: wire path smoothness; wear; burr-free
+  surface; alignment to feed rolls.'
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_wire_inlet_guide
+  source_recipe_path: kb/recipes/recipe_ebf3_wire_inlet_guide.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: lunar_candidate
+  simulation_import_mass_policy: local_nominal
+  mass_nominal_kg: 0.15
+  availability_class: local_derived
+  primary_process_id: machining_basic_v0
+  executable_process_id: machining_basic_v0
+  secondary_process_ids:
+  - assembly_basic_v0
+  ready_machine_ids:
+  - multi_axis_cnc_machining_center
+  - labor_bot_general_v0
+  - assembly_tools_basic
+  confidence: medium
+  reasoning_brief: Wire-path bore smoothness and guide geometry are CNC and finishing scope.
+route_decision: lunar_candidate
+simulation_import_mass_policy: local_nominal

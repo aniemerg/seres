@@ -4,8 +4,39 @@ name: EBF3 wire feed pressure-arm pivot pin
 mass: 0.04
 unit: unit
 unit_kind: discrete
-material_class: metal
-notes: >
-  Level-3 child of WF-13. Pivot pin for the pressure-arm mechanism. Adopted as
-  the minimal pivot hardware needed for an adjustable pressure arm; material,
-  retention, bearing interface, and vacuum wear details remain deferred.
+material: steel
+notes: Level-3 child of WF-13. Pivot pin for the pressure-arm mechanism.
+recipe: recipe_ebf3_wire_feed_pressure_arm_pivot_pin
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Resolve deferred Adopted as the minimal pivot hardware needed for an adjustable pressure arm; material,
+  retention, bearing interface, and vacuum wear details.
+- Replace validation-scaled generic stock inputs with explicit EBF material lower/upper bounds and
+  material-specific recipe inputs.
+- 'Encode or verify performance requirements outside prose notes: pivot tolerance; wear; retention;
+  vacuum-compatible surface.'
+- 'Review route sensitivity flags before treating the route as nominally closed: wire_feed_wear.'
+- Do not block on the old audit label; add finish/inspection detail only if this leaf dominates simulation
+  sensitivity.
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_wire_feed_pressure_arm_pivot_pin
+  source_recipe_path: kb/recipes/recipe_ebf3_wire_feed_pressure_arm_pivot_pin.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: lunar_candidate_flagged
+  simulation_import_mass_policy: sensitivity_flag
+  mass_nominal_kg: 0.04
+  availability_class: local_derived
+  primary_process_id: steel_shaft_machining_v0
+  executable_process_id: steel_shaft_machining_v0
+  secondary_process_ids: []
+  ready_machine_ids:
+  - labor_bot_general_v0
+  - multi_axis_cnc_machining_center
+  confidence: medium
+  reasoning_brief: Steel machining route already has a concrete CNC/lathe-style machine; labor_bot
+    is handling only. Keep performance flags for alignment, seal, preload, wear, fatigue, or cleanliness
+    as applicable.
+route_decision: lunar_candidate_flagged
+simulation_import_mass_policy: sensitivity_flag

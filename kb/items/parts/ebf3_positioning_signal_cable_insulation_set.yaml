@@ -4,7 +4,36 @@ name: EBF3 positioning signal cable insulation set
 mass: 0.2
 unit: unit
 unit_kind: discrete
-material_class: polymer
-notes: Child of ebf3_vacuum_compatible_signal_cabling. Signal cable insulation set
-  for EBF3 vacuum-compatible signal cabling. Exact specification and local manufacturing
-  route remain unresolved.
+material: polymer_dielectric
+notes: Child of ebf3_vacuum_compatible_signal_cabling. Signal cable insulation set for EBF3 vacuum-compatible
+  signal cabling.
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Replace coarse item specification with explicit material, geometry/interface requirements, and lower/upper
+  mass bounds.
+- Replace first-pass nominal import mass with sourced lower/upper mass bounds if this item dominates
+  imported mass.
+- 'Resolve local-route blocker before claiming local manufacturing closure: vacuum compatible flexible
+  cable insulation depends on polymer volatile chemistry and local cable qualification is absent.'
+- 'Encode or verify performance requirements outside prose notes: Signal insulation resistance; vacuum
+  outgassing; flexibility; radiation aging; conductor insulation adhesion.'
+- 'Review route sensitivity flags before treating the route as nominally closed: polymer;vacuum_cable;earth_import.'
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_positioning_signal_cable_insulation_set
+  source_recipe_path: kb/recipes/recipe_ebf3_positioning_signal_cable_insulation_set.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: earth_import
+  simulation_import_mass_policy: import_nominal
+  mass_nominal_kg: 0.2
+  availability_class: import_or_recycle
+  primary_process_id: import_receiving_basic_v0
+  executable_process_id: import_receiving_basic_v0
+  ready_machine_ids:
+  - labor_bot_general_v0
+  confidence: high
+  reasoning_brief: Signal cable insulation should be imported rather than hidden inside local cabling
+route_decision: earth_import
+simulation_import_mass_policy: import_nominal
+is_import: true

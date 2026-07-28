@@ -4,8 +4,10 @@ name: EBF3 rotary axis table
 mass: 5.0
 unit: unit
 unit_kind: discrete
-material_class: metal
-notes: >
-  FS-17. Rotary build table mounted on linear axes. Minimal child BOM:
-  bom_ebf3_rotary_axis_table. No local recipe is attached yet; runout, balance,
-  mounting pattern, and thermal distortion remain deferred.
+material: metal
+notes: |
+  FS-17. Rotary build table mounted on linear axes. Minimal child BOM: bom_ebf3_rotary_axis_table. Assembly recipe now only joins visible child items; runout, balance, mounting pattern, and thermal distortion remain deferred.
+bom: bom_ebf3_rotary_axis_table
+recipe: recipe_ebf3_rotary_axis_table_assembly_v0
+trust_tags:
+- trusted_ebf3_unreplaced

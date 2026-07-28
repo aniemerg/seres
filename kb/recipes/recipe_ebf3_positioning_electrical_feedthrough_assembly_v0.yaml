@@ -1,0 +1,42 @@
+id: recipe_ebf3_positioning_electrical_feedthrough_assembly_v0
+kind: recipe
+variant_id: assembly_v0
+target_item_id: ebf3_positioning_electrical_feedthrough
+inputs: &id001
+- item_id: ebf3_positioning_feedthrough_motor_power_pin_set
+  qty: 1.0
+  unit: unit
+- item_id: ebf3_positioning_feedthrough_signal_pin_set
+  qty: 1.0
+  unit: unit
+- item_id: ebf3_positioning_feedthrough_insulator_body
+  qty: 1.0
+  unit: unit
+- item_id: ebf3_positioning_feedthrough_flange
+  qty: 1.0
+  unit: unit
+- item_id: ebf3_positioning_feedthrough_vacuum_side_connector
+  qty: 1.0
+  unit: unit
+- item_id: ebf3_positioning_feedthrough_air_side_connector
+  qty: 1.0
+  unit: unit
+- item_id: ebf3_positioning_feedthrough_shield_termination_interface
+  qty: 1.0
+  unit: unit
+outputs:
+- item_id: ebf3_positioning_electrical_feedthrough
+  qty: 1.0
+  unit: unit
+steps:
+- process_id: assembly_basic_v0
+  inputs: *id001
+  outputs:
+  - item_id: ebf3_positioning_electrical_feedthrough
+    qty: 1.0
+    unit: unit
+  notes: Assemble EBF3 positioning electrical feedthrough from its source-aligned
+    EBF3 child items; child material and manufacturing readiness remain on the children.
+notes: BOM assembly recipe for EBF3 positioning electrical feedthrough. This recipe
+  only assembles already-modeled EBF3 child items and does not claim local fabrication
+  of unresolved children.

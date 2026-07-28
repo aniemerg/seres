@@ -4,6 +4,37 @@ name: EBF3 z axis counterbalance guide or link
 mass: 0.2
 unit: unit
 unit_kind: discrete
-material_class: metal
+material: steel
 notes: Child of ebf3_z_axis_counterbalance. Guide or link for EBF3 Z-axis counterbalance.
-  Exact specification and local manufacturing route remain unresolved.
+recipe: recipe_ebf3_z_axis_counterbalance_guide_or_link
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Replace coarse item specification with explicit material, geometry/interface requirements, and lower/upper
+  mass bounds.
+- Replace validation-scaled generic stock inputs with explicit EBF material lower/upper bounds and
+  material-specific recipe inputs.
+- 'Encode or verify performance requirements outside prose notes: guide alignment; fatigue; wear;
+  counterbalance load path.'
+- 'Review route sensitivity flags before treating the route as nominally closed: motion_load_path.'
+- Do not block on the old audit label; add finish/inspection detail only if this leaf dominates simulation
+  sensitivity.
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_z_axis_counterbalance_guide_or_link
+  source_recipe_path: kb/recipes/recipe_ebf3_z_axis_counterbalance_guide_or_link.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: lunar_candidate_flagged
+  simulation_import_mass_policy: sensitivity_flag
+  mass_nominal_kg: 0.2
+  availability_class: local_derived
+  primary_process_id: machining_basic_v0
+  executable_process_id: machining_basic_v0
+  secondary_process_ids: []
+  ready_machine_ids:
+  - multi_axis_cnc_machining_center
+  confidence: medium
+  reasoning_brief: Guide/link geometry should route through general CNC rather than shaft machining;
+    load path and wear remain sensitivity flags.
+route_decision: lunar_candidate_flagged
+simulation_import_mass_policy: sensitivity_flag

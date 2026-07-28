@@ -1,0 +1,41 @@
+id: ebf3_cabin_access_door_latch_fastener_interface_set
+kind: part
+name: EBF3 cabin access door latch fastener interface set
+mass: 0.5
+unit: unit
+unit_kind: discrete
+material: steel
+notes: 'Fastener/interface hardware for mounting the EBF3 cabin access door latch set. Child of `ebf3_cabin_access_door_latch_set`
+  from research/ebf3_bom_sources/organized/split_before_route_leaf_decomposition_plan.md.
+
+  '
+recipe: recipe_ebf3_cabin_access_door_latch_fastener_interface_set
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Replace validation-scaled generic stock inputs with explicit EBF material lower/upper bounds and
+  material-specific recipe inputs.
+- 'Encode or verify performance requirements outside prose notes: latch strength; thread fit; vibration
+  retention.'
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_cabin_access_door_latch_fastener_interface_set
+  source_recipe_path: kb/recipes/recipe_ebf3_cabin_access_door_latch_fastener_interface_set.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: lunar_candidate
+  simulation_import_mass_policy: local_nominal
+  mass_nominal_kg: 0.5
+  availability_class: local_derived
+  primary_process_id: machining_basic_v0
+  executable_process_id: machining_basic_v0
+  secondary_process_ids:
+  - assembly_basic_v0
+  ready_machine_ids:
+  - multi_axis_cnc_machining_center
+  - labor_bot_general_v0
+  - assembly_tools_basic
+  confidence: high
+  reasoning_brief: Threaded and fastener interface features are covered by drilling tapping boring
+    and probing.
+route_decision: lunar_candidate
+simulation_import_mass_policy: local_nominal

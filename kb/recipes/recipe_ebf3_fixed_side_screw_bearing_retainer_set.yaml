@@ -1,0 +1,37 @@
+id: recipe_ebf3_fixed_side_screw_bearing_retainer_set
+kind: recipe
+variant_id: ebf3_route_review_v0
+target_item_id: ebf3_fixed_side_screw_bearing_retainer_set
+inputs:
+- item_id: raw_metal_block
+  qty: 0.1575
+  unit: kg
+outputs:
+- item_id: ebf3_fixed_side_screw_bearing_retainer_set
+  qty: 1.0
+  unit: unit
+steps:
+- process_id: machining_basic_v0
+  inputs:
+  - item_id: raw_metal_block
+    qty: 0.1575
+    unit: kg
+  outputs:
+  - item_id: ebf3_fixed_side_screw_bearing_retainer_set
+    qty: 1.0
+    unit: unit
+  notes: 'First-pass local route after targeted material/process recheck. Decision: reroute_existing_process.
+    Bearing retainer/cap geometry is not a shaft; CNC machining covers the geometry, while preload/runout
+    remain sensitivity flags.'
+notes: 'EBF3 route-review recipe for Simviewer inspection and first-pass simulation routing.
+
+  Route decision: lunar_candidate_flagged.
+
+  Simulation import mass policy: sensitivity_flag.
+
+  Executable first-pass process: machining_basic_v0.
+
+  Targeted material/process recheck: reroute_existing_process.
+
+  Reasoning: Bearing retainer/cap geometry is not a shaft; CNC machining covers the geometry, while
+  preload/runout remain sensitivity flags.'

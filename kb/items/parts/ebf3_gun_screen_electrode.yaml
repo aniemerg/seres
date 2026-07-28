@@ -4,12 +4,41 @@ name: EBF3 gun screen electrode
 mass: 0.08
 unit: unit
 unit_kind: discrete
-material_class: refractory_metal
-notes: >
-  FG-5. Boundary/screen electrode used to shape the electric field near the
-  cathode and reduce unwanted side or edge emission effects. Intentional
-  Level-2 leaf: current evidence supports the screen electrode function, not a
-  confirmed lower assembly. Aperture-edge, contact, and material details are
-  deferred. See
-  research/ebf3_bom_sources/organized/electrode_family_decomposition_plan.md
-  and research/ebf3_bom_sources/organized/electrical_signal_boundary_review.md.
+material: refractory_metal
+notes: 'FG-5. Boundary/screen electrode used to shape the electric field near the cathode and reduce
+  unwanted side or edge emission effects. Intentional Level-2 leaf: current evidence supports the
+  screen electrode function. See research/ebf3_bom_sources/organized/electrode_family_decomposition_plan.md
+  and research/ebf3_bom_sources/organized/electrical_signal_boundary_review.md.'
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Resolve deferred Aperture-edge, contact, and material details.
+- Replace first-pass nominal import mass with sourced lower/upper mass bounds if this item dominates
+  imported mass.
+- 'Resolve local-route blocker before claiming local manufacturing closure: Refractory-metal routes
+  depend on trace or meteoritic feedstock and tungsten_sintering_high_temp_v0 needs sintering_furnace_v0
+  and inert_atmosphere_system not Ready.'
+- 'Encode or verify performance requirements outside prose notes: electron optics geometry; high temperature
+  stability; low sputter and contamination; precise aperture.'
+- 'Review route sensitivity flags before treating the route as nominally closed: performance_flag:refractory_metal;performance_flag:electron_beam;candidate_fit:none.'
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_gun_screen_electrode
+  source_recipe_path: kb/recipes/recipe_ebf3_gun_screen_electrode.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: earth_import
+  simulation_import_mass_policy: import_nominal
+  mass_nominal_kg: 0.08
+  availability_class: scarce_trace
+  primary_process_id: tungsten_sintering_high_temp_v0
+  executable_process_id: import_receiving_basic_v0
+  secondary_process_ids:
+  - tungsten_extraction_meteorite_v0
+  ready_machine_ids:
+  - labor_bot_general_v0
+  confidence: high
+  reasoning_brief: Molybdenum or tungsten electrode mass is small but high performance and trace-
+    material closure make Earth import the conservative first route
+route_decision: earth_import
+simulation_import_mass_policy: import_nominal
+is_import: true

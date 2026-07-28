@@ -4,10 +4,39 @@ name: EBF3 gun beam-boundary collector electrode
 mass: 0.12
 unit: unit
 unit_kind: discrete
-material_class: conductive_metal
-notes: >
-  Level-3 child of FG-9. Beam-boundary pickup collector or intercept electrode
-  for detecting beam deviation beyond the allowed envelope. Adopted as the
-  minimal physical sensing element named by the beam-boundary pickup function.
-  Exact edge/intercept geometry, heat load, and material selection remain
-  deferred.
+material: refractory_metal
+notes: Level-3 child of FG-9. Beam-boundary pickup collector or intercept electrode for detecting
+  beam deviation beyond the allowed envelope. Adopted as the minimal physical sensing element named
+  by the beam-boundary pickup function.
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Resolve deferred Exact edge/intercept geometry, heat load, and material selection.
+- Replace first-pass nominal import mass with sourced lower/upper mass bounds if this item dominates
+  imported mass.
+- 'Resolve local-route blocker before claiming local manufacturing closure: Refractory-metal supply
+  is scarce and candidate KB route uses non-Ready sintering and inert atmosphere machines.'
+- 'Encode or verify performance requirements outside prose notes: electron beam interception heat
+  load; dimensional stability; low secondary emission uncertainty; vacuum cleanliness.'
+- 'Review route sensitivity flags before treating the route as nominally closed: performance_flag:refractory_metal;performance_flag:electron_beam;candidate_fit:none.'
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_gun_beam_boundary_collector_electrode
+  source_recipe_path: kb/recipes/recipe_ebf3_gun_beam_boundary_collector_electrode.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: earth_import
+  simulation_import_mass_policy: import_nominal
+  mass_nominal_kg: 0.12
+  availability_class: scarce_trace
+  primary_process_id: tungsten_sintering_high_temp_v0
+  executable_process_id: import_receiving_basic_v0
+  secondary_process_ids:
+  - tungsten_extraction_meteorite_v0
+  ready_machine_ids:
+  - labor_bot_general_v0
+  confidence: high
+  reasoning_brief: Collector electrode should be imported until a qualified refractory-metal route
+    exists
+route_decision: earth_import
+simulation_import_mass_policy: import_nominal
+is_import: true

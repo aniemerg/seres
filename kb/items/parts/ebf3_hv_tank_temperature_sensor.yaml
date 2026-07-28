@@ -4,13 +4,10 @@ name: EBF3 HV tank temperature sensor
 mass: 0.1
 unit: unit
 unit_kind: discrete
-material_class: electronic
-notes: >
-  HV-14. Oil or HV transformer temperature sensing hardware for protection and
-  control feedback. Earlier scaffold notes used HV-12, but the visible
-  high-voltage tank table uses HV-12 for output/return current monitoring; see
-  research/ebf3_bom_sources/organized/high_voltage_tank_level_2_audit.md,
-  research/ebf3_bom_sources/organized/hv_electrical_interface_review.md, and
-  research/ebf3_bom_sources/organized/hv_tank_service_protection_review.md. No
-  local recipe is attached yet.
-  This assembly is split by `bom_ebf3_hv_tank_temperature_sensor`. Child items are structural placeholders for decomposition fidelity only; no local recipe is attached yet.
+material: electronic
+notes: |
+  HV-14. Oil or HV transformer temperature sensing hardware for protection and control feedback. Earlier scaffold notes used HV-12, but the visible high-voltage tank table uses HV-12 for output/return current monitoring; see research/ebf3_bom_sources/organized/high_voltage_tank_level_2_audit.md, research/ebf3_bom_sources/organized/hv_electrical_interface_review.md, and research/ebf3_bom_sources/organized/hv_tank_service_protection_review.md. No local recipe is attached yet. This assembly is split by `bom_ebf3_hv_tank_temperature_sensor`. Child items are structural placeholders for decomposition fidelity only; assembly recipe now only joins visible child items; child material and manufacturing readiness remain unresolved.
+bom: bom_ebf3_hv_tank_temperature_sensor
+recipe: recipe_ebf3_hv_tank_temperature_sensor_assembly_v0
+trust_tags:
+- trusted_ebf3_unreplaced

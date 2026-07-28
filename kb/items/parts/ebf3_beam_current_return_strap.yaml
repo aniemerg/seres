@@ -4,13 +4,10 @@ name: EBF3 beam-current return strap
 mass: 0.5
 unit: unit
 unit_kind: discrete
-material_class: metal
-notes: >
-  FS-24. Platform/substrate beam-current continuity strap. This remains with
-  the four-axis positioning package because it is attached to the moving
-  platform/substrate region; it is not a complete system-level HV return bus.
-  See research/ebf3_bom_sources/organized/hv_grounding_return_review.md.
-  Current interface architecture is summarized in
-  research/ebf3_bom_sources/organized/ebf3_interface_architecture.md. No local
-  recipe is attached yet.
-  This assembly is split by `bom_ebf3_beam_current_return_strap`. Child items are mechanical placeholders for decomposition fidelity only; no local recipe is attached yet.
+material: metal
+notes: |
+  FS-24. Platform/substrate beam-current continuity strap. This remains with the four-axis positioning package because it is attached to the moving platform/substrate region. See research/ebf3_bom_sources/organized/hv_grounding_return_review.md. Current interface architecture is summarized in research/ebf3_bom_sources/organized/ebf3_interface_architecture.md. No local recipe is attached yet. This assembly is split by `bom_ebf3_beam_current_return_strap`. Child items are mechanical placeholders for decomposition fidelity only; assembly recipe now only joins visible child items; child material and manufacturing readiness remain unresolved.
+bom: bom_ebf3_beam_current_return_strap
+recipe: recipe_ebf3_beam_current_return_strap_assembly_v0
+trust_tags:
+- trusted_ebf3_unreplaced

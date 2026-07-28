@@ -1,0 +1,42 @@
+id: recipe_ebf3_sectioned_hv_step_up_transformer_assembly_v0
+kind: recipe
+variant_id: assembly_v0
+target_item_id: ebf3_sectioned_hv_step_up_transformer
+inputs: &id001
+- item_id: ebf3_hv_transformer_magnetic_core_set
+  qty: 1.0
+  unit: unit
+- item_id: ebf3_hv_transformer_primary_winding_set
+  qty: 1.0
+  unit: unit
+- item_id: ebf3_hv_transformer_secondary_winding_set
+  qty: 1.0
+  unit: unit
+- item_id: ebf3_hv_transformer_interwinding_insulation_set
+  qty: 1.0
+  unit: unit
+- item_id: ebf3_hv_transformer_internal_hv_lead_set
+  qty: 1.0
+  unit: unit
+- item_id: ebf3_hv_transformer_section_support_structure
+  qty: 1.0
+  unit: unit
+- item_id: ebf3_hv_transformer_oil_interface_marker
+  qty: 1.0
+  unit: unit
+outputs:
+- item_id: ebf3_sectioned_hv_step_up_transformer
+  qty: 1.0
+  unit: unit
+steps:
+- process_id: assembly_basic_v0
+  inputs: *id001
+  outputs:
+  - item_id: ebf3_sectioned_hv_step_up_transformer
+    qty: 1.0
+    unit: unit
+  notes: Assemble `ebf3_sectioned_hv_step_up_transformer` from source-first child items; child material and
+    manufacturing readiness remain unresolved.
+notes: >
+  BOM assembly recipe for `ebf3_sectioned_hv_step_up_transformer`. This recipe only joins already-modeled
+  child items and does not claim local fabrication of unresolved children.

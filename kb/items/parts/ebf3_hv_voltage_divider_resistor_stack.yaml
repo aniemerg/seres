@@ -4,7 +4,30 @@ name: EBF3 hv voltage divider resistor stack
 mass: 0.28
 unit: unit
 unit_kind: discrete
-material_class: electronic
-notes: Child of ebf3_hv_output_voltage_divider_sensing. Divider resistor stack for
-  EBF3 HV output voltage divider sensing hardware. Exact specification and local manufacturing
-  route remain unresolved.
+material: electronic
+notes: Child of ebf3_hv_output_voltage_divider_sensing. Divider resistor stack for EBF3 HV output
+  voltage divider sensing hardware.
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Replace coarse item specification with explicit material, geometry/interface requirements, and lower/upper
+  mass bounds.
+- Replace first-pass nominal import mass with sourced lower/upper mass bounds if this item dominates
+  imported mass.
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_hv_voltage_divider_resistor_stack
+  source_recipe_path: kb/recipes/recipe_ebf3_hv_voltage_divider_resistor_stack.yaml
+  source_queue_type: leaf_decomposition_review_kb_recipe
+  route_decision: import_as_leaf
+  simulation_import_mass_policy: import_nominal
+  mass_nominal_kg: 0.28
+  availability_class: keep_ebf3_leaf
+  primary_process_id: import_receiving_basic_v0
+  executable_process_id: import_receiving_basic_v0
+  reasoning_brief: Electronic/control item has no trusted lunar electronics process route; direct
+    import is more honest than pseudo-decomposition
+  recommended_edit: Count as Earth import in conservative simulation
+route_decision: import_as_leaf
+simulation_import_mass_policy: import_nominal
+is_import: true

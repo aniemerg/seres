@@ -1,0 +1,36 @@
+id: recipe_ebf3_emi_filter_choke_set_assembly_v0
+kind: recipe
+variant_id: assembly_v0
+target_item_id: ebf3_emi_filter_choke_set
+inputs: &id001
+- item_id: ebf3_emi_filter_choke_core_set
+  qty: 1.0
+  unit: unit
+- item_id: ebf3_emi_filter_choke_winding_set
+  qty: 1.0
+  unit: unit
+- item_id: ebf3_emi_filter_choke_bobbin_or_insulation_set
+  qty: 1.0
+  unit: unit
+- item_id: ebf3_emi_filter_choke_terminal_set
+  qty: 1.0
+  unit: unit
+- item_id: ebf3_emi_filter_choke_mounting_base_set
+  qty: 1.0
+  unit: unit
+outputs:
+- item_id: ebf3_emi_filter_choke_set
+  qty: 1.0
+  unit: unit
+steps:
+- process_id: assembly_basic_v0
+  inputs: *id001
+  outputs:
+  - item_id: ebf3_emi_filter_choke_set
+    qty: 1.0
+    unit: unit
+  notes: Assemble `ebf3_emi_filter_choke_set` from source-first child items; child material and
+    manufacturing readiness remain unresolved.
+notes: >
+  BOM assembly recipe for `ebf3_emi_filter_choke_set`. This recipe only joins already-modeled
+  child items and does not claim local fabrication of unresolved children.

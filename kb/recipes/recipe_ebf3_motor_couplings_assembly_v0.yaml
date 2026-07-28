@@ -1,0 +1,29 @@
+id: recipe_ebf3_motor_couplings_assembly_v0
+kind: recipe
+variant_id: assembly_v0
+target_item_id: ebf3_motor_couplings
+inputs: &id001
+- item_id: ebf3_motor_coupling_hub_set
+  qty: 1.0
+  unit: unit
+- item_id: ebf3_motor_coupling_flexible_element_set
+  qty: 1.0
+  unit: unit
+- item_id: ebf3_motor_coupling_clamp_screw_set
+  qty: 1.0
+  unit: unit
+outputs:
+- item_id: ebf3_motor_couplings
+  qty: 1.0
+  unit: unit
+steps:
+- process_id: assembly_basic_v0
+  inputs: *id001
+  outputs:
+  - item_id: ebf3_motor_couplings
+    qty: 1.0
+    unit: unit
+  notes: Assemble EBF3 motor couplings from its reviewed EBF3 child items; child
+    material and manufacturing readiness remain on the children.
+notes: BOM assembly recipe for EBF3 motor couplings. This recipe only assembles already-modeled
+  EBF3 child items and does not claim local fabrication of unresolved children.

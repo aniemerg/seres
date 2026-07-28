@@ -4,8 +4,45 @@ name: EBF3 cabin access door panel
 mass: 13.0
 unit: unit
 unit_kind: discrete
-material_class: metal
-notes: >
-  Child of MC-3. Main door panel for service access to the manufacture cabin.
-  Panel material, stiffness, shielding role, and vacuum sealing details remain
-  unresolved.
+material: steel
+notes: Child of MC-3. Main door panel for service access to the manufacture cabin.
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Resolve panel material, stiffness, shielding role, and vacuum sealing details.
+- Replace first-pass nominal import mass with sourced lower/upper mass bounds if this item dominates
+  imported mass.
+- 'Resolve local-route blocker before claiming local manufacturing closure: Sheet cutting does not
+  close vacuum-door seal-face flatness, repeated seal loading, and leak qualification.'
+- 'Encode or verify performance requirements outside prose notes: vacuum boundary stiffness; sealing
+  face flatness; leak rate; low outgassing finish.'
+- 'Review route sensitivity flags before treating the route as nominally closed: vacuum_boundary;route_gap:vacuum_door_panel_leak_qualification.'
+- Define vacuum door panel fabrication and leak/deflection acceptance before local credit.
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_cabin_access_door_panel
+  source_recipe_path: kb/recipes/recipe_ebf3_cabin_access_door_panel.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: route_gap
+  simulation_import_mass_policy: import_until_gap_resolved
+  mass_nominal_kg: 13.0
+  availability_class: local_derived
+  primary_process_id: sheet_metal_cutting_v0
+  executable_process_id: import_receiving_basic_v0
+  secondary_process_ids:
+  - steel_ingot_cast_v0
+  - sheet_making_from_ingot_v0
+  - sealing_and_assembly_basic_v0
+  - leak_test_v0
+  ready_machine_ids:
+  - labor_bot_general_v0
+  - casting_furnace_v0
+  - assembly_tools_basic
+  confidence: medium
+  reasoning_brief: Door panel is a vacuum boundary, not just a cut sheet; local sheet work exists
+    but forming, stiffness, seal-face, and leak qualification are not closed.
+  blocked_machine_or_process_reason: Door panel is a vacuum boundary, not just a cut sheet; local
+    sheet work exists but forming, stiffness, seal-face, and leak qualification are not closed.
+route_decision: route_gap
+simulation_import_mass_policy: import_until_gap_resolved
+is_import: true

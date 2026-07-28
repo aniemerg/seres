@@ -1,0 +1,30 @@
+id: recipe_ebf3_wire_feed_encoder_sensor_assembly_v0
+kind: recipe
+variant_id: assembly_v0
+target_item_id: ebf3_wire_feed_encoder_sensor
+inputs: &id001
+- item_id: ebf3_wire_feed_encoder_sensor_body
+  qty: 1.0
+  unit: unit
+- item_id: ebf3_wire_feed_encoder_target
+  qty: 1.0
+  unit: unit
+- item_id: ebf3_wire_feed_encoder_signal_lead
+  qty: 1.0
+  unit: unit
+outputs:
+- item_id: ebf3_wire_feed_encoder_sensor
+  qty: 1.0
+  unit: unit
+steps:
+- process_id: assembly_basic_v0
+  inputs: *id001
+  outputs:
+  - item_id: ebf3_wire_feed_encoder_sensor
+    qty: 1.0
+    unit: unit
+  notes: Assemble EBF3 wire feed encoder sensor from its source-aligned EBF3 child
+    items; child material and manufacturing readiness remain on the children.
+notes: BOM assembly recipe for EBF3 wire feed encoder sensor. This recipe only assembles
+  already-modeled EBF3 child items and does not claim local fabrication of unresolved
+  children.

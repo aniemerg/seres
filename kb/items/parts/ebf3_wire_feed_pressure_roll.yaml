@@ -4,11 +4,44 @@ name: EBF3 wire feed pressure roll
 mass: 0.25
 unit: unit
 unit_kind: discrete
-material_class: metal
-notes: >
-  Level-3 child of WF-13. Pressure/idler roll in the wire-feed pressure-arm
-  assembly. Reintroduced below the source-table aligned pressure arm instead of
-  as a top-level wire-feeder row. Groove/profile, bearing interface, material,
-  and vacuum wear details remain deferred. See
-  research/ebf3_bom_sources/organized/wire_feeder_level_2_audit.md. No local
-  recipe is attached yet.
+material: steel
+notes: Level-3 child of WF-13. Pressure/idler roll in the wire-feed pressure-arm assembly. Reintroduced
+  below the source-table aligned pressure arm instead of as a top-level wire-feeder row. See research/ebf3_bom_sources/organized/wire_feeder_level_2_audit.md.
+  First-pass manufacturing/import route is recorded in the linked EBF3 route-review recipe.
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Resolve deferred Groove/profile, bearing interface, material, and vacuum wear details.
+- Replace first-pass nominal import mass with sourced lower/upper mass bounds if this item dominates
+  imported mass.
+- 'Resolve local-route blocker before claiming local manufacturing closure: Pressure roll needs hardened/contact
+  surface, concentricity, contamination control, and feed-life performance beyond CNC shape.'
+- 'Encode or verify performance requirements outside prose notes: Pressure roll must meet concentricity,
+  surface finish, grip force, wear resistance, and avoid wire contamination/damage.'
+- 'Review route sensitivity flags before treating the route as nominally closed: wire_feed_roll;wear;motion_contact;semantic_audit:pressure_roll_wear_gap.'
+- Import until pressure-roll hardening finishing and wear qualification exist.
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_wire_feed_pressure_roll
+  source_recipe_path: kb/recipes/recipe_ebf3_wire_feed_pressure_roll.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: route_gap
+  simulation_import_mass_policy: import_until_gap_resolved
+  mass_nominal_kg: 0.25
+  availability_class: local_derived
+  primary_process_id: machining_basic_v0
+  executable_process_id: import_receiving_basic_v0
+  secondary_process_ids:
+  - heat_treat_basic_v0
+  - inspection_basic_v0
+  ready_machine_ids:
+  - multi_axis_cnc_machining_center
+  - labor_bot_general_v0
+  confidence: medium
+  reasoning_brief: The roll geometry is machinable but heat treatment wear and feed-force qualification
+    remain route gaps.
+  blocked_machine_or_process_reason: The roll geometry is machinable but heat treatment wear and feed-force
+    qualification remain route gaps.
+route_decision: route_gap
+simulation_import_mass_policy: import_until_gap_resolved
+is_import: true

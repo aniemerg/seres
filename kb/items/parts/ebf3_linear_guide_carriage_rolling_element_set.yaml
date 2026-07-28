@@ -4,8 +4,46 @@ name: EBF3 linear guide carriage rolling element set
 mass: 0.55
 unit: unit
 unit_kind: discrete
-material_class: precision_metal
-notes: >
-  Level-3 child of FS-4. Ball or roller elements for the linear guide carriages.
-  Element geometry, preload, material, and vacuum lubrication strategy remain
-  deferred.
+material: bearing_steel
+notes: Level-3 child of FS-4. Ball or roller elements for the linear guide carriages.
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Resolve deferred Element geometry, preload, material, and vacuum lubrication strategy.
+- Replace first-pass nominal import mass with sourced lower/upper mass bounds if this item dominates
+  imported mass.
+- 'Resolve local-route blocker before claiming local manufacturing closure: precision_grinding_basic_v0
+  requires surface_grinder and grinding_wheels; heat_treat_basic_v0 requires heat_treatment_furnace_v0;
+  bearing route also includes grease/seal materials.'
+- 'Encode or verify performance requirements outside prose notes: Rolling elements must meet hardness,
+  roundness, surface finish, fatigue life, preload, lubrication, and vacuum compatibility.'
+- 'Review route sensitivity flags before treating the route as nominally closed: precision_bearing;heat_treat_blocked;grinding_blocked.'
+- Define bearing/ball-screw route with heat treat, precision grinding, lapping, inspection, lubrication,
+  and acceptance tests before local credit.
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_linear_guide_carriage_rolling_element_set
+  source_recipe_path: kb/recipes/recipe_ebf3_linear_guide_carriage_rolling_element_set.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: route_gap
+  simulation_import_mass_policy: import_until_gap_resolved
+  mass_nominal_kg: 0.55
+  availability_class: local_derived
+  primary_process_id: precision_grinding_basic_v0
+  executable_process_id: import_receiving_basic_v0
+  secondary_process_ids:
+  - heat_treat_basic_v0
+  - assembly_process_bearing_v0
+  ready_machine_ids:
+  - labor_bot_general_v0
+  - assembly_tools_basic
+  confidence: high
+  reasoning_brief: Material and some machines exist, but bearing/ball-screw/linear-guide geometry
+    needs hardened races, precision grinding/lapping, preload/runout control, lubrication, metrology,
+    and life QA; this is a performance chain gap.
+  blocked_machine_or_process_reason: Material and some machines exist, but bearing/ball-screw/linear-guide
+    geometry needs hardened races, precision grinding/lapping, preload/runout control, lubrication,
+    metrology, and life QA; this is a performance chain gap.
+route_decision: route_gap
+simulation_import_mass_policy: import_until_gap_resolved
+is_import: true

@@ -1,0 +1,84 @@
+id: recipe_ebf3_feed_liner_tube
+kind: recipe
+variant_id: ebf3_route_review_v0
+target_item_id: ebf3_feed_liner_tube
+inputs:
+- item_id: metal_tubing_stock
+  qty: 0.31
+  unit: kg
+- item_id: cleaning_solvent_or_detergent_v0
+  qty: 0.03
+  unit: kg
+outputs:
+- item_id: ebf3_feed_liner_tube
+  qty: 1.0
+  unit: unit
+steps:
+- process_id: tube_bending_and_cutting_v0
+  inputs:
+  - item_id: metal_tubing_stock
+    qty: 0.31
+    unit: kg
+  outputs:
+  - item_id: ebf3_feed_liner_tube
+    qty: 1.0
+    unit: unit
+  notes: Cut tube stock to length; tube stock is the route basis.
+- process_id: machining_finish_basic_v0
+  inputs:
+  - item_id: ebf3_feed_liner_tube
+    qty: 1.0
+    unit: unit
+  outputs:
+  - item_id: ebf3_feed_liner_tube
+    qty: 1.0
+    unit: unit
+  notes: End-face, ream/polish bore, and deburr the wire path.
+- process_id: inspection_basic_v0
+  inputs:
+  - item_id: ebf3_feed_liner_tube
+    qty: 1.0
+    unit: unit
+  outputs:
+  - item_id: ebf3_feed_liner_tube
+    qty: 1.0
+    unit: unit
+  notes: Inspect bore smoothness, burrs, and alignment-critical dimensions.
+- process_id: cleaning_basic_v0
+  inputs:
+  - item_id: ebf3_feed_liner_tube
+    qty: 1.0
+    unit: unit
+  - item_id: cleaning_solvent_or_detergent_v0
+    qty: 0.03
+    unit: kg
+  outputs:
+  - item_id: ebf3_feed_liner_tube
+    qty: 1.0
+    unit: unit
+  notes: Clean tube before wire-feed service.
+notes: 'EBF3 route-review recipe for Simviewer inspection and first-pass simulation routing.
+
+  Route decision: lunar_candidate_flagged.
+
+  Simulation import mass policy: sensitivity_flag.
+
+  Executable first-pass process: tube_bending_and_cutting_v0.
+
+  Material: steel.
+
+  Lunar availability class: local_derived.
+
+  Mass used for first-pass accounting: 0.28 kg nominal.
+
+  Primary local process candidate: tube_bending_and_cutting_v0.
+
+  Secondary process candidates: machining_finish_basic_v0;inspection_basic_v0;cleaning_basic_v0.
+
+  Ready machine ids considered: labor_bot_general_v0;tube_bender;metal_shear_or_saw;multi_axis_cnc_machining_center;cutting_tools_general;cleaning_station_basic_v0.
+
+  Confidence: medium.
+
+  Reasoning: Source-first decomposition selected a replaceable metallic guide tube; tube stock,
+  CNC bore/end finishing, inspection, and cleaning are local-plausible, while wire-feed wear and
+  vacuum cleanliness remain sensitivity flags.'

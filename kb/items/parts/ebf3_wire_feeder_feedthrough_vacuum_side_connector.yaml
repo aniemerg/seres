@@ -4,11 +4,33 @@ name: EBF3 wire feeder feedthrough vacuum-side connector
 mass: 0.05
 unit: unit
 unit_kind: discrete
-material_class: composite
-notes: >
-  Child of ebf3_wire_feeder_feedthrough_connector. Vacuum-side connector or
-  terminal interface for wire-feeder motor and sensor wiring inside the chamber.
-  It does not include external controls harnessing or power driver hardware.
-  Connector family, vacuum compatibility, material choices, and local
-  manufacturing route remain unresolved; see
-  research/ebf3_bom_sources/organized/wire_feeder_level_2_audit.md.
+material: composite
+notes: 'Child of ebf3_wire_feeder_feedthrough_connector. Vacuum-side connector or terminal interface
+  for wire-feeder motor and sensor wiring inside the chamber. It does not include external controls
+  harnessing or power driver hardware. Connector family, vacuum compatibility, material choices, and
+  first-pass manufacturing/import route is recorded in the linked EBF3 route-review recipe; see research/ebf3_bom_sources/organized/wire_feeder_level_2_audit.md.
+
+  '
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Replace first-pass nominal import mass with sourced lower/upper mass bounds if this item dominates
+  imported mass.
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_wire_feeder_feedthrough_vacuum_side_connector
+  source_recipe_path: kb/recipes/recipe_ebf3_wire_feeder_feedthrough_vacuum_side_connector.yaml
+  source_queue_type: leaf_decomposition_review_kb_recipe
+  route_decision: import_as_leaf
+  simulation_import_mass_policy: import_nominal
+  mass_nominal_kg: 0.05
+  availability_class: keep_ebf3_leaf
+  primary_process_id: import_receiving_basic_v0
+  executable_process_id: import_receiving_basic_v0
+  reasoning_brief: Connector/terminal item is low-mass, mixed-material, and rating-sensitive; direct
+    import avoids invented contact/body/dielectric manufacturing
+  recommended_edit: Count as Earth import for first run; split only for a later connector-specific
+    study
+route_decision: import_as_leaf
+simulation_import_mass_policy: import_nominal
+is_import: true

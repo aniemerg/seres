@@ -4,11 +4,33 @@ name: EBF3 hv return current sensing element
 mass: 0.16
 unit: unit
 unit_kind: discrete
-material_class: electronic
-notes: >
-  Child of ebf3_hv_output_return_current_monitor. Primary HV-side current
-  sensing element for the output or return current monitor. This is a package
-  marker only; shunt/CT/Hall choice, return-leg placement, insulation rating,
-  signal isolation, and local manufacturing route remain unresolved. See
-  research/ebf3_bom_sources/organized/hv_grounding_return_review.md and
-  research/ebf3_bom_sources/organized/ebf3_interface_architecture.md.
+material: electronic
+notes: 'Child of ebf3_hv_output_return_current_monitor. Primary HV-side current sensing element for
+  the output or return current monitor. This is a package marker only; shunt/CT/Hall choice, return-leg
+  placement, insulation rating, signal isolation, and first-pass manufacturing/import route is recorded
+  in the linked EBF3 route-review recipe. See research/ebf3_bom_sources/organized/hv_grounding_return_review.md
+  and research/ebf3_bom_sources/organized/ebf3_interface_architecture.md.
+
+  '
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Replace first-pass nominal import mass with sourced lower/upper mass bounds if this item dominates
+  imported mass.
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_hv_return_current_sensing_element
+  source_recipe_path: kb/recipes/recipe_ebf3_hv_return_current_sensing_element.yaml
+  source_queue_type: leaf_decomposition_review_kb_recipe
+  route_decision: import_as_leaf
+  simulation_import_mass_policy: import_nominal
+  mass_nominal_kg: 0.16
+  availability_class: keep_ebf3_leaf
+  primary_process_id: import_receiving_basic_v0
+  executable_process_id: import_receiving_basic_v0
+  reasoning_brief: Electronic/control item has no trusted lunar electronics process route; direct
+    import is more honest than pseudo-decomposition
+  recommended_edit: Count as Earth import in conservative simulation
+route_decision: import_as_leaf
+simulation_import_mass_policy: import_nominal
+is_import: true

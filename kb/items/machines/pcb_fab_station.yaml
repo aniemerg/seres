@@ -3,7 +3,6 @@ kind: machine
 name: PCB fabrication station
 mass: 350.0
 unit: unit
-material_class: composite
 bom: bom_pcb_fab_station
 capabilities:
 - pcb_fabrication
@@ -13,3 +12,6 @@ processes_supported:
 notes: Stub machine created during ADR 003 migration.
 recipe: recipe_pcb_fab_station_v0
 unit_kind: discrete
+trust_tags:
+- untrusted_global_kb
+- machine_audit_stub

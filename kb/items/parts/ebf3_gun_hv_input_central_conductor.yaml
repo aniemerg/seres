@@ -4,10 +4,41 @@ name: EBF3 gun HV input central conductor
 mass: 0.18
 unit: unit
 unit_kind: discrete
-material_class: conductive_metal
-notes: >
-  Level-3 child of FG-12. Central high-voltage conductor carrying accelerating
-  potential from the gun-side receiving terminal into the electron gun
-  high-voltage region. Adopted because HV feedthrough/input sources require a
-  conductor path; exact material, diameter, creepage clearance, and joint details
-  remain deferred. Do not merge with tank-side HV cable conductor.
+material: aluminum
+notes: Level-3 child of FG-12. Central high-voltage conductor carrying accelerating potential from
+  the gun-side receiving terminal into the electron gun high-voltage region. Do not merge with tank-side
+  HV cable conductor.
+recipe: recipe_ebf3_gun_hv_input_central_conductor
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Resolve deferred Adopted because HV feedthrough/input sources require a conductor path; exact material,
+  diameter, creepage clearance, and joint details.
+- Replace validation-scaled generic stock inputs with explicit EBF material lower/upper bounds and
+  material-specific recipe inputs.
+- 'Encode or verify performance requirements outside prose notes: HV creepage and clearance; smooth
+  radius to avoid corona; contact resistance; vacuum cleanliness.'
+- 'Review route sensitivity flags before treating the route as nominally closed: performance_flag:HV;performance_flag:electron_beam;candidate_fit:accuracy_risk.'
+- Retain until HV cleaning surface finish and withstand checks are modeled.
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_gun_hv_input_central_conductor
+  source_recipe_path: kb/recipes/recipe_ebf3_gun_hv_input_central_conductor.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: lunar_candidate_flagged
+  simulation_import_mass_policy: sensitivity_flag
+  mass_nominal_kg: 0.18
+  availability_class: local_derived
+  primary_process_id: machining_basic_v0
+  executable_process_id: machining_basic_v0
+  secondary_process_ids:
+  - assembly_basic_v0
+  ready_machine_ids:
+  - multi_axis_cnc_machining_center
+  - labor_bot_general_v0
+  - assembly_tools_basic
+  confidence: medium
+  reasoning_brief: Field radii and smooth conductor geometry are CNC scope but HV withstand and cleanliness
+    remain core acceptance gaps.
+route_decision: lunar_candidate_flagged
+simulation_import_mass_policy: sensitivity_flag

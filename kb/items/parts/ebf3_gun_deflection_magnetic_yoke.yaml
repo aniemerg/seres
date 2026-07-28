@@ -4,10 +4,32 @@ name: EBF3 gun deflection magnetic yoke
 mass: 0.4
 unit: unit
 unit_kind: discrete
-material_class: composite
-notes: >
-  FG-8 child item adopted from
-  research/ebf3_bom_sources/organized/magnetic_steering_decomposition_plan.md.
-  Kept as an unresolved yoke assembly or part candidate until magnetic material,
-  segmentation, machining constraints, vacuum compatibility, and field-response
-  requirements are reviewed.
+material: electrical_steel_or_soft_iron
+notes: 'FG-8 child item adopted from research/ebf3_bom_sources/organized/magnetic_steering_decomposition_plan.md.
+  Kept as an unresolved yoke assembly or part candidate until magnetic material, segmentation, machining
+  constraints, vacuum compatibility, and field-response requirements are reviewed.
+
+  '
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Replace first-pass nominal import mass with sourced lower/upper mass bounds if this item dominates
+  imported mass.
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_gun_deflection_magnetic_yoke
+  source_recipe_path: kb/recipes/recipe_ebf3_gun_deflection_magnetic_yoke.yaml
+  source_queue_type: leaf_decomposition_review_kb_recipe
+  route_decision: defer_split_import_fallback
+  simulation_import_mass_policy: import_until_gap_resolved
+  mass_nominal_kg: 0.4
+  availability_class: keep_ebf3_leaf
+  primary_process_id: import_receiving_basic_v0
+  executable_process_id: import_receiving_basic_v0
+  reasoning_brief: Dedicated magnetic-steering plan still defers lower yoke geometry; routing as a
+    generic metal/composite part would hide magnetic performance risk
+  recommended_edit: Use first-run import/defer fallback; revisit if gun import mass or magnetic steering
+    capability dominates
+route_decision: defer_split_import_fallback
+simulation_import_mass_policy: import_until_gap_resolved
+is_import: true

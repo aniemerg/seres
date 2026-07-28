@@ -4,12 +4,10 @@ name: EBF3 vacuum-compatible motor cabling
 mass: 0.8
 unit: unit
 unit_kind: discrete
-material_class: composite
-notes: >
-  FS-28. Vacuum-compatible local motor power cabling owned by the positioning
-  subsystem. Power supplies own driver outputs, and controls own motion
-  commands. Do not split conductor, insulation, connector, shield, or strain
-  relief children until cable/feedthrough topology and motor current ratings are
-  selected. See
-  research/ebf3_bom_sources/organized/four_axis_positioning_level_2_audit.md.
-  This assembly is split by `bom_ebf3_vacuum_compatible_motor_cabling`. Child items are structural placeholders for decomposition fidelity only; no local recipe is attached yet.
+material: composite
+notes: |
+  FS-28. Vacuum-compatible local motor power cabling owned by the positioning subsystem. Power supplies own driver outputs, and controls own motion commands. Do not split conductor, insulation, connector, shield, or strain relief children until cable/feedthrough topology and motor current ratings are selected. See research/ebf3_bom_sources/organized/four_axis_positioning_level_2_audit.md. This assembly is split by `bom_ebf3_vacuum_compatible_motor_cabling`. Child items are structural placeholders for decomposition fidelity only; assembly recipe now only joins visible child items; child material and manufacturing readiness remain unresolved.
+bom: bom_ebf3_vacuum_compatible_motor_cabling
+recipe: recipe_ebf3_vacuum_compatible_motor_cabling_assembly_v0
+trust_tags:
+- trusted_ebf3_unreplaced

@@ -4,9 +4,10 @@ name: EBF3 control computer
 mass: 4.0
 unit: unit
 unit_kind: discrete
-material_class: composite
-notes: >
-  CTL-1. Industrial PC/control computer for operator commands, subsystem coordination, and fabrication process management. First-pass leaf item from EBF3 organized BOM table. No local
-  recipe is attached yet; leave manufacturing closure open until lower-level
-  materials and fabrication routes are source-supported.
-  This assembly is split by `bom_ebf3_control_computer`. Child items are package-level placeholders for decomposition fidelity only; no local recipe is attached yet.
+material: composite
+notes: |
+  CTL-1. Industrial PC/control computer for operator commands, subsystem coordination, and fabrication process management. First-pass leaf item from EBF3 organized BOM table. No local recipe is attached yet; leave manufacturing closure open until lower-level materials and fabrication routes are source-supported. This assembly is split by `bom_ebf3_control_computer`. Child items are package-level placeholders for decomposition fidelity only; assembly recipe now only joins visible child items; child material and manufacturing readiness remain unresolved.
+bom: bom_ebf3_control_computer
+recipe: recipe_ebf3_control_computer_assembly_v0
+trust_tags:
+- trusted_ebf3_unreplaced

@@ -1,0 +1,42 @@
+id: ebf3_emi_filter_choke_winding_set
+kind: part
+name: EBF3 EMI filter choke winding set
+mass: 0.3
+unit: unit
+unit_kind: discrete
+material: copper
+notes: 'Conductor winding set for the EBF3 EMI filter choke set. Child of `ebf3_emi_filter_choke_set`
+  from research/ebf3_bom_sources/organized/split_before_route_leaf_decomposition_plan.md. This is
+  not local-ready and has no manufacturing recipe.
+
+  '
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Replace first-pass nominal import mass with sourced lower/upper mass bounds if this item dominates
+  imported mass.
+- 'Resolve local-route blocker before claiming local manufacturing closure: Copper magnet wire and
+  qualified EMI winding insulation are scarce/high-risk and not closed by Ready local processes.'
+- 'Encode or verify performance requirements outside prose notes: current density; insulation class;
+  EMI impedance; thermal rise; vacuum outgassing.'
+- 'Review route sensitivity flags before treating the route as nominally closed: copper_scarcity;magnetic_component;implemented_split_child;semantic_audit:copper_magn
+  et_wire_import.'
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_emi_filter_choke_winding_set
+  source_recipe_path: kb/recipes/recipe_ebf3_emi_filter_choke_winding_set.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: earth_import
+  simulation_import_mass_policy: import_nominal
+  mass_nominal_kg: 0.3
+  availability_class: scarce_trace
+  primary_process_id: import_receiving_basic_v0
+  executable_process_id: import_receiving_basic_v0
+  ready_machine_ids:
+  - labor_bot_general_v0
+  confidence: low
+  reasoning_brief: EMI choke winding is copper magnet wire with qualified insulation and EMI thermal
+    behavior; count as Earth import in first simulation
+route_decision: earth_import
+simulation_import_mass_policy: import_nominal
+is_import: true

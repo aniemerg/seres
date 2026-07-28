@@ -1,0 +1,50 @@
+id: recipe_ebf3_cabin_wire_feeder_port_reinforcement_ring
+kind: recipe
+variant_id: ebf3_route_review_v0
+target_item_id: ebf3_cabin_wire_feeder_port_reinforcement_ring
+inputs:
+- item_id: raw_metal_block
+  qty: 4.2
+  unit: kg
+outputs:
+- item_id: ebf3_cabin_wire_feeder_port_reinforcement_ring
+  qty: 1.0
+  unit: unit
+steps:
+- process_id: machining_basic_v0
+  inputs:
+  - item_id: raw_metal_block
+    qty: 4.2
+    unit: kg
+  outputs:
+  - item_id: ebf3_cabin_wire_feeder_port_reinforcement_ring
+    qty: 1.0
+    unit: unit
+  notes: 'First-pass local route candidate from EBF3 semantic route review. Inputs use validation-scaled
+    generic stock. Decision: lunar_candidate_flagged; policy: sensitivity_flag; flags: vacuum_interface;wire_feed_alignment'
+notes: 'EBF3 route-review recipe for Simviewer inspection and first-pass simulation routing. Generated
+  from research/ebf3_bom_sources/derived/ebf3_process_route_review.csv after semantic audit integration.
+  This recipe records a routing judgement.
+
+  Route decision: lunar_candidate_flagged.
+
+  Simulation import mass policy: sensitivity_flag.
+
+  Executable first-pass process: machining_basic_v0.
+
+  Material: steel.
+
+  Lunar availability class: local_derived.
+
+  Mass used for first-pass accounting: 4 kg nominal.
+
+  Primary local process candidate: machining_basic_v0.
+
+  Secondary process candidates: metal_fabrication_basic_v0;assembly_basic_v0.
+
+  Ready machine ids considered: labor_bot_general_v0;assembly_tools_basic;multi_axis_cnc_machining_center.
+
+  Confidence: medium.
+
+  Reasoning: The reinforcement ring is machinable but belongs to a feedthrough port and needs vacuum
+  and alignment marking.'

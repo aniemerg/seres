@@ -4,7 +4,44 @@ name: EBF3 thermal isolation standoff body set
 mass: 0.3
 unit: unit
 unit_kind: discrete
-material_class: insulator
-notes: Child of ebf3_thermal_isolation_standoffs. Thermal isolation standoff body
-  set for EBF3 thermal isolation standoffs. Exact specification and local manufacturing
-  route remain unresolved.
+material: alumina_ceramic
+notes: Child of ebf3_thermal_isolation_standoffs. Thermal isolation standoff body set for EBF3 thermal
+  isolation standoffs.
+recipe: recipe_ebf3_thermal_isolation_standoff_body_set
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Replace coarse item specification with explicit material, geometry/interface requirements, and lower/upper
+  mass bounds.
+- Replace validation-scaled generic stock inputs with explicit EBF material lower/upper bounds and
+  material-specific recipe inputs.
+- 'Encode or verify performance requirements outside prose notes: Thermal conductivity limit; compressive
+  strength; electrical isolation if present; thermal shock.'
+- 'Review route sensitivity flags before treating the route as nominally closed: thermal;ceramic.'
+- 'Keep out of CNC: ceramic standoff needs explicit ceramic pressing/sintering route.'
+- Reroute recipe away from ceramic_block_small/ceramic_base labor placeholder and add inspection/finish
+  notes appropriate to the EBF3 leaf.
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_thermal_isolation_standoff_body_set
+  source_recipe_path: kb/recipes/recipe_ebf3_thermal_isolation_standoff_body_set.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: lunar_candidate_flagged
+  simulation_import_mass_policy: sensitivity_flag
+  mass_nominal_kg: 0.3
+  availability_class: local_derived
+  primary_process_id: ceramic_forming_basic_v0
+  executable_process_id: ceramic_forming_basic_v0
+  secondary_process_ids:
+  - ceramic_sintering_process_v0
+  ready_machine_ids:
+  - labor_bot_general_v0
+  - pressing_mold_set
+  - hydraulic_press
+  - kiln_ceramic
+  confidence: medium
+  reasoning_brief: Existing ceramic forming/sintering route has concrete press/mold/kiln machines
+    now usable_unreviewed; keep only part-specific dielectric, wear, thermal shock, dimensional, or
+    cleanliness flags.
+route_decision: lunar_candidate_flagged
+simulation_import_mass_policy: sensitivity_flag

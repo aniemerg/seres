@@ -4,7 +4,38 @@ name: EBF3 HV tank fill port
 mass: 0.12
 unit: unit
 unit_kind: discrete
-material_class: metal
-notes: >
-  Child of HV-13. Fill port for transformer insulating fluid. Thread, cap,
-  filter, and oil-handling method remain unresolved.
+material: steel
+notes: Child of HV-13. Fill port for transformer insulating fluid.
+recipe: recipe_ebf3_hv_fill_port
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Resolve thread, cap, filter, and oil-handling method.
+- Replace validation-scaled generic stock inputs with explicit EBF material lower/upper bounds and
+  material-specific recipe inputs.
+- 'Encode or verify performance requirements outside prose notes: thread sealing; oil compatibility;
+  HV tank cleanliness; leak rate.'
+- 'Review route sensitivity flags before treating the route as nominally closed: HV_tank;seal_interface.'
+- Do not block on the old audit label; add finish/inspection detail only if this leaf dominates simulation
+  sensitivity.
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_hv_fill_port
+  source_recipe_path: kb/recipes/recipe_ebf3_hv_fill_port.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: lunar_candidate_flagged
+  simulation_import_mass_policy: sensitivity_flag
+  mass_nominal_kg: 0.12
+  availability_class: local_derived
+  primary_process_id: steel_shaft_machining_v0
+  executable_process_id: steel_shaft_machining_v0
+  secondary_process_ids: []
+  ready_machine_ids:
+  - labor_bot_general_v0
+  - multi_axis_cnc_machining_center
+  confidence: medium
+  reasoning_brief: Steel machining route already has a concrete CNC/lathe-style machine; labor_bot
+    is handling only. Keep performance flags for alignment, seal, preload, wear, fatigue, or cleanliness
+    as applicable.
+route_decision: lunar_candidate_flagged
+simulation_import_mass_policy: sensitivity_flag

@@ -1,7 +1,7 @@
 # KB Schema Reference (Current)
 
 This document is the authoritative, up-to-date summary of the KB schema and
-modeling rules. It consolidates 012/013/014/016/017 for daily use.
+modeling rules. It consolidates 012/013/014/016/017/027 for daily use.
 
 ## Items
 
@@ -16,21 +16,85 @@ intended to fail fast at runtime so users/agents manually update references.
 Required:
 - `id`, `name`, `kind: material`, `unit`, `unit_kind: bulk`, `notes`
 Recommended:
-- `material_class`, `density`, `state`, `composition`, `source_tags`
+- `density`, `state`, `composition`, `source_tags`
 Optional:
 - `is_scrap: true` to mark byproduct/offal materials that should not require recipes or closure expansion
 
 ### Parts
 Required:
-- `id`, `name`, `kind: part`, `unit`, `unit_kind: discrete`, `mass_kg` (mass per unit), `material_class`, `notes`
+- `id`, `name`, `kind: part`, `unit`, `unit_kind: discrete`, `mass_kg` (mass per unit), `material`, `notes`
 Recommended:
 - `dimensions`, `source_tags`
+Legacy:
+- `material_class` is deprecated for parts. Use `material` for the material the
+  part is actually made from. Material substitution should be represented in a
+  separate material/group model, not on the part item itself.
 
 ### Machines
 Required:
 - `id`, `name`, `kind: machine`, `unit`, `unit_kind: discrete`, `mass_kg` (mass per unit), `notes`
 Recommended:
 - `bom`, `capabilities`, `power_draw_kW`, `source_tags`
+Notes:
+- Do not put `material` or `material_class` on machines. A machine's material
+  makeup is represented by its BOM components.
+
+### Shared Optional Item Fields
+
+For parts and machines, `mass_kg` remains the nominal mass used for count <-> mass
+conversion. When mass is uncertain or scale-dependent, add:
+
+```yaml
+mass_low_kg: 0.5
+mass_high_kg: 2.0
+```
+
+The range is an uncertainty bracket for review, substitution, and difficulty
+estimation. It is not a replacement for `mass_kg`, and should be omitted when no
+useful bound is known.
+
+Use `performance_requirements` for requirements that affect substitution,
+manufacturing route selection, or simulation fidelity. Prefer this structured
+block over prose-only notes when an item depends on precision, sealing, or
+interface quality:
+
+```yaml
+performance_requirements:
+  tolerance: "e.g. +/-0.01 mm bearing seat, or review_required"
+  surface_finish: "e.g. Ra <= 0.4 um on sealing face"
+  sealing_quality: "e.g. helium leak test required, target leak rate TBD"
+  alignment_accuracy: "e.g. coaxiality/alignment budget TBD"
+```
+
+Only populate fields that matter for the item's role. Leave unrelated
+requirements absent instead of adding placeholder nulls. See ADR-027 for the
+rationale.
+
+Use `trust_tags` when an item needs explicit trust/audit status:
+
+```yaml
+trust_tags:
+- untrusted_global_kb
+```
+
+Trust tags are project-policy annotations. They do not by themselves prove or
+invalidate manufacturability.
+
+Use `future_improvements` for known modeling gaps that should not be mixed into
+general notes. Keep `notes` for current assumptions/rationale; put backlog items
+such as missing part-specific tooling, unresolved mass bounds, missing material
+selection, route blockers, or required future decomposition here:
+
+```yaml
+future_improvements:
+- Add part-specific punch/die tooling before treating stamping as locally closed.
+- Replace coarse item specification with explicit material, geometry/interface
+  requirements, and lower/upper mass bounds.
+```
+
+This field is advisory metadata. It does not change simulation routing or prove
+manufacturing closure unless the referenced BOMs, recipes, processes, and
+resource requirements are also updated.
 
 ## Processes
 

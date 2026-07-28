@@ -4,7 +4,37 @@ name: EBF3 positioning motor cable insulation set
 mass: 0.24
 unit: unit
 unit_kind: discrete
-material_class: polymer
-notes: Child of ebf3_vacuum_compatible_motor_cabling. Motor cable insulation set for
-  EBF3 vacuum-compatible motor cabling. Exact specification and local manufacturing
-  route remain unresolved.
+material: polymer_dielectric
+notes: Child of ebf3_vacuum_compatible_motor_cabling. Motor cable insulation set for EBF3 vacuum-compatible
+  motor cabling.
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Replace coarse item specification with explicit material, geometry/interface requirements, and lower/upper
+  mass bounds.
+- Replace first-pass nominal import mass with sourced lower/upper mass bounds if this item dominates
+  imported mass.
+- 'Resolve local-route blocker before claiming local manufacturing closure: Vacuum-rated polymer cable
+  insulation is import-first; local cable assembly does not produce qualified insulation material.'
+- 'Encode or verify performance requirements outside prose notes: dielectric strength; flex life;
+  vacuum outgassing; motor current heating; abrasion resistance.'
+- 'Review route sensitivity flags before treating the route as nominally closed: polymer_scarcity;HV_cable;blocked_nonready_machine;process_cleanup:import_route_only.'
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_positioning_motor_cable_insulation_set
+  source_recipe_path: kb/recipes/recipe_ebf3_positioning_motor_cable_insulation_set.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: earth_import
+  simulation_import_mass_policy: import_nominal
+  mass_nominal_kg: 0.24
+  availability_class: import_or_recycle
+  primary_process_id: import_receiving_basic_v0
+  executable_process_id: import_receiving_basic_v0
+  ready_machine_ids:
+  - labor_bot_general_v0
+  confidence: low
+  reasoning_brief: Positioning motor cable insulation remains Earth import; local harness process
+    fields were cleared
+route_decision: earth_import
+simulation_import_mass_policy: import_nominal
+is_import: true

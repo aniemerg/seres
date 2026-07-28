@@ -1,0 +1,51 @@
+id: recipe_ebf3_heater_supply_heat_sink
+kind: recipe
+variant_id: ebf3_route_review_v0
+target_item_id: ebf3_heater_supply_heat_sink
+inputs:
+- item_id: machined_part_raw
+  qty: 1.26
+  unit: kg
+outputs:
+- item_id: ebf3_heater_supply_heat_sink
+  qty: 1.0
+  unit: unit
+steps:
+- process_id: aluminum_housing_machining_v1
+  inputs:
+  - item_id: machined_part_raw
+    qty: 1.26
+    unit: kg
+  outputs:
+  - item_id: ebf3_heater_supply_heat_sink
+    qty: 1.0
+    unit: unit
+  notes: First-pass EBF3 local route candidate using aluminum_housing_machining_v1. Inputs use validation-scaled
+    generic stock. CNC aluminum heat-sink proxy consistent with other EBF3 heat-sink routes; thermal
+    margin remains flagged.
+notes: 'EBF3 route-review recipe for Simviewer inspection and first-pass simulation routing. Generated
+  from research/ebf3_bom_sources/derived/ebf3_process_route_review.csv after semantic audit integration.
+  This recipe records a routing judgement.
+
+  Route decision: lunar_candidate_flagged.
+
+  Simulation import mass policy: sensitivity_flag.
+
+  Executable first-pass process: aluminum_housing_machining_v1.
+
+  Material: aluminum.
+
+  Lunar availability class: local_derived.
+
+  Mass used for first-pass accounting: 1.2 kg nominal.
+
+  Primary local process candidate: aluminum_housing_machining_v1.
+
+  Secondary process candidates: machining_basic_v0.
+
+  Ready machine ids considered: multi_axis_cnc_machining_center;labor_bot_general_v0.
+
+  Confidence: medium.
+
+  Reasoning: Aluminum heat sink material is lunar-derived in principle and Ready machining exists
+  but heat-load adequacy needs a sensitivity flag.'

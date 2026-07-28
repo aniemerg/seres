@@ -4,6 +4,38 @@ name: EBF3 disconnect switch housing
 mass: 0.6
 unit: unit
 unit_kind: discrete
-material_class: metal
-notes: Child of ebf3_main_disconnect_switch. Switch housing for EBF3 main disconnect
-  switch. Exact specification and local manufacturing route remain unresolved.
+material: steel
+notes: Child of ebf3_main_disconnect_switch. Switch housing for EBF3 main disconnect switch.
+recipe: recipe_ebf3_disconnect_switch_housing
+trust_tags:
+- untrusted_global_kb
+future_improvements:
+- Replace coarse item specification with explicit material, geometry/interface requirements, and lower/upper
+  mass bounds.
+- Replace validation-scaled generic stock inputs with explicit EBF material lower/upper bounds and
+  material-specific recipe inputs.
+- 'Encode or verify performance requirements outside prose notes: switch clearance; mechanical protection;
+  arc/thermal environment; mounting fit.'
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_disconnect_switch_housing
+  source_recipe_path: kb/recipes/recipe_ebf3_disconnect_switch_housing.yaml
+  source_queue_type: reachable_leaf_backfill_kb_recipe
+  route_decision: lunar_candidate
+  simulation_import_mass_policy: local_nominal
+  mass_nominal_kg: 0.6
+  availability_class: local_derived
+  primary_process_id: machining_basic_v0
+  executable_process_id: machining_basic_v0
+  secondary_process_ids:
+  - sheet_metal_cutting_v0
+  - assembly_basic_v0
+  ready_machine_ids:
+  - labor_bot_general_v0
+  - multi_axis_cnc_machining_center
+  - assembly_tools_basic
+  confidence: medium
+  reasoning_brief: Disconnect switch housing is ordinary local metal housing fabrication; electrical
+    clearance belongs to assembly/integration verification.
+route_decision: lunar_candidate
+simulation_import_mass_policy: local_nominal

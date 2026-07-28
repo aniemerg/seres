@@ -4,8 +4,10 @@ name: EBF3 substrate clamp
 mass: 1.0
 unit: unit
 unit_kind: discrete
-material_class: metal
-notes: >
-  FS-23. Clamp securing substrate to build platform. Minimal child BOM:
-  bom_ebf3_substrate_clamp. No local recipe is attached yet; clamp pressure,
-  high-temperature contact, and current-return interaction remain deferred.
+material: metal
+notes: |
+  FS-23. Clamp securing substrate to build platform. Minimal child BOM: bom_ebf3_substrate_clamp. Assembly recipe now only joins visible child items; clamp pressure, high-temperature contact, and current-return interaction remain deferred.
+bom: bom_ebf3_substrate_clamp
+recipe: recipe_ebf3_substrate_clamp_assembly_v0
+trust_tags:
+- trusted_ebf3_unreplaced

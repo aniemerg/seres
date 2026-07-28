@@ -1,0 +1,37 @@
+id: recipe_ebf3_positioning_base_frame_crossmember_set
+kind: recipe
+variant_id: ebf3_route_review_v0
+target_item_id: ebf3_positioning_base_frame_crossmember_set
+inputs:
+- item_id: raw_metal_block
+  qty: 2.31
+  unit: kg
+outputs:
+- item_id: ebf3_positioning_base_frame_crossmember_set
+  qty: 1.0
+  unit: unit
+steps:
+- process_id: machining_basic_v0
+  inputs:
+  - item_id: raw_metal_block
+    qty: 2.31
+    unit: kg
+  outputs:
+  - item_id: ebf3_positioning_base_frame_crossmember_set
+    qty: 1.0
+    unit: unit
+  notes: 'First-pass local route after targeted material/process recheck. Decision: reroute_existing_process.
+    Crossmember needs structural stock plus end/mounting features; CNC is a more explicit existing
+    route than generic labor/tool fabrication.'
+notes: 'EBF3 route-review recipe for Simviewer inspection and first-pass simulation routing.
+
+  Route decision: lunar_candidate.
+
+  Simulation import mass policy: local_nominal.
+
+  Executable first-pass process: machining_basic_v0.
+
+  Targeted material/process recheck: reroute_existing_process.
+
+  Reasoning: Crossmember needs structural stock plus end/mounting features; CNC is a more explicit
+  existing route than generic labor/tool fabrication.'

@@ -4,9 +4,40 @@ name: EBF3 gun-feeder adapter body
 mass: 0.42
 unit: unit
 unit_kind: discrete
-material_class: vacuum_structural_metal
-notes: >
-  Level-3 child of WF-22. Adapter body connecting the wire feeder output toward
-  the fixed-gun-side wire path. It is feeder-owned and does not replace the
-  permanent gun-column datum or chamber-side port. Geometry, sealing, fasteners,
-  and vacuum material selection remain deferred.
+material: steel
+notes: Level-3 child of WF-22. Adapter body connecting the wire feeder output toward the fixed-gun-side
+  wire path. It is feeder-owned and does not replace the permanent gun-column datum or chamber-side
+  port.
+recipe: recipe_ebf3_gun_feeder_adapter_body
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Resolve deferred Geometry, sealing, fasteners, and vacuum material selection.
+- Replace validation-scaled generic stock inputs with explicit EBF material lower/upper bounds and
+  material-specific recipe inputs.
+- 'Encode or verify performance requirements outside prose notes: vacuum structural fit; wire path
+  alignment; sealing interface; low outgassing.'
+- 'Review route sensitivity flags before treating the route as nominally closed: vacuum_interface;wire_feed_alignment.'
+- Do not block on the old audit label; add finish/inspection detail only if this leaf dominates simulation
+  sensitivity.
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_gun_feeder_adapter_body
+  source_recipe_path: kb/recipes/recipe_ebf3_gun_feeder_adapter_body.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: lunar_candidate_flagged
+  simulation_import_mass_policy: sensitivity_flag
+  mass_nominal_kg: 0.42
+  availability_class: local_derived
+  primary_process_id: steel_shaft_machining_v0
+  executable_process_id: steel_shaft_machining_v0
+  secondary_process_ids: []
+  ready_machine_ids:
+  - labor_bot_general_v0
+  - multi_axis_cnc_machining_center
+  confidence: medium
+  reasoning_brief: Steel machining route already has a concrete CNC/lathe-style machine; labor_bot
+    is handling only. Keep performance flags for alignment, seal, preload, wear, fatigue, or cleanliness
+    as applicable.
+route_decision: lunar_candidate_flagged
+simulation_import_mass_policy: sensitivity_flag

@@ -66,13 +66,13 @@ Specialized labor bots are only introduced when capability requirements differ b
 
 Most assembly, fitting, fastening, and inspection tasks are handled by `[[labor_bot_general_v0]]`.
 
-## Material Classes
+## Materials
 
-Parts and materials carry a `material_class` field that enables generic substitution — for example, allowing an iron sheet to satisfy a recipe that calls for generic metal sheet stock. This is covered in detail in [[material_classes]].
+Parts carry a `material` field for what the item is actually made from. Generic substitution is being moved out of part records and into reviewed material groups. This is covered in detail in [[material_classes]].
 
 ## Related Articles
 
 - [[about_seres]] — Project overview and modeling principles
 - [[kb_philosophy]] — Why the KB uses generic items and what gaps mean
-- [[material_classes]] — Material types and substitution system
+- [[material_classes]] — Materials and substitution status
 - [[supply_chain_patterns]] — Known validated production chains

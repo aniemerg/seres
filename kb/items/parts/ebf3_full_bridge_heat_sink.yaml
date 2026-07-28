@@ -4,6 +4,39 @@ name: EBF3 full bridge heat sink
 mass: 1.5
 unit: unit
 unit_kind: discrete
-material_class: metal
+material: aluminum
 notes: Child of ebf3_full_bridge_inverter. Heat sink for EBF3 full-bridge inverter.
-  Exact specification and local manufacturing route remain unresolved.
+recipe: recipe_ebf3_full_bridge_heat_sink
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Replace coarse item specification with explicit material, geometry/interface requirements, and lower/upper
+  mass bounds.
+- Replace validation-scaled generic stock inputs with explicit EBF material lower/upper bounds and
+  material-specific recipe inputs.
+- 'Encode or verify performance requirements outside prose notes: Heat sink must meet thermal resistance,
+  mounting flatness, electrical isolation where needed, and allowable temperature rise for inverter
+  semiconductors.'
+- 'Review route sensitivity flags before treating the route as nominally closed: thermal;power_electronics.'
+- Use machined aluminum route for first pass and add thermal/contact acceptance when modeling detail
+  increases.
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_full_bridge_heat_sink
+  source_recipe_path: kb/recipes/recipe_ebf3_full_bridge_heat_sink.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: lunar_candidate_flagged
+  simulation_import_mass_policy: sensitivity_flag
+  mass_nominal_kg: 1.5
+  availability_class: local_derived
+  primary_process_id: aluminum_housing_machining_v1
+  executable_process_id: aluminum_housing_machining_v1
+  secondary_process_ids: []
+  ready_machine_ids:
+  - labor_bot_general_v0
+  - multi_axis_cnc_machining_center
+  confidence: medium
+  reasoning_brief: Aluminum thermal/contact part can use existing CNC aluminum route; labor_bot only
+    supports loading. Keep thermal resistance, flatness, isolation, or contact-heating flags.
+route_decision: lunar_candidate_flagged
+simulation_import_mass_policy: sensitivity_flag

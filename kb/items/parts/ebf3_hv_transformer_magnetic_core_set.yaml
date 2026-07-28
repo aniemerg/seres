@@ -1,0 +1,52 @@
+id: ebf3_hv_transformer_magnetic_core_set
+kind: part
+name: EBF3 HV transformer magnetic core set
+mass: 3.0
+unit: unit
+unit_kind: discrete
+material: electrical_steel_or_soft_iron
+notes: 'Magnetic core set for the EBF3 sectioned HV step-up transformer. Child of `ebf3_sectioned_hv_step_up_transformer`
+  from research/ebf3_bom_sources/organized/split_before_route_leaf_decomposition_plan.md. This is
+  not local-ready and has no manufacturing recipe.
+
+  '
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Replace first-pass nominal import mass with sourced lower/upper mass bounds if this item dominates
+  imported mass.
+- 'Resolve local-route blocker before claiming local manufacturing closure: Electrical steel sheet
+  is plausible, but lamination cutting, interlaminar insulation, stacking/anneal, and core-loss qualification
+  are not closed.'
+- 'Encode or verify performance requirements outside prose notes: Core loss; permeability; lamination
+  thickness; insulation between laminations; saturation at HV transformer flux.'
+- 'Review route sensitivity flags before treating the route as nominally closed: magnetic;HV_transformer;route_gap:transformer_core_lamination_qualification.'
+- Define magnetic core fabrication and test chain before replacing import fallback.
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_hv_transformer_magnetic_core_set
+  source_recipe_path: kb/recipes/recipe_ebf3_hv_transformer_magnetic_core_set.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: route_gap
+  simulation_import_mass_policy: import_until_gap_resolved
+  mass_nominal_kg: 3.0
+  availability_class: local_derived
+  primary_process_id: electrical_steel_production_v0
+  executable_process_id: import_receiving_basic_v0
+  secondary_process_ids:
+  - assembly_basic_v0
+  ready_machine_ids:
+  - labor_bot_general_v0
+  - induction_forge_v0
+  - rolling_mill_v0
+  - assembly_tools_basic
+  confidence: medium
+  reasoning_brief: The issue is controlled magnetic properties, losses, lamination/air-gap geometry,
+    insulation, and acceptance testing; existing material production is not enough and labor_bot is
+    not core evidence.
+  blocked_machine_or_process_reason: The issue is controlled magnetic properties, losses, lamination/air-gap
+    geometry, insulation, and acceptance testing; existing material production is not enough and labor_bot
+    is not core evidence.
+route_decision: route_gap
+simulation_import_mass_policy: import_until_gap_resolved
+is_import: true

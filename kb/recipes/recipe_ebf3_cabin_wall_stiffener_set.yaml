@@ -1,0 +1,50 @@
+id: recipe_ebf3_cabin_wall_stiffener_set
+kind: recipe
+variant_id: ebf3_route_review_v0
+target_item_id: ebf3_cabin_wall_stiffener_set
+inputs:
+- item_id: sheet_metal_or_structural_steel
+  qty: 8.4
+  unit: kg
+outputs:
+- item_id: ebf3_cabin_wall_stiffener_set
+  qty: 1.0
+  unit: unit
+steps:
+- process_id: sheet_metal_cutting_v0
+  inputs:
+  - item_id: sheet_metal_or_structural_steel
+    qty: 8.4
+    unit: kg
+  outputs:
+  - item_id: ebf3_cabin_wall_stiffener_set
+    qty: 1.0
+    unit: unit
+  notes: 'First-pass local route: sheet/plate cutting for cabin wall stiffeners; cabin stiffness and
+    vacuum-boundary distortion remain sensitivity flags.'
+notes: 'EBF3 route-review recipe for Simviewer inspection and first-pass simulation routing. Generated
+  from research/ebf3_bom_sources/derived/ebf3_process_route_review.csv after semantic audit integration.
+  This recipe records a routing judgement.
+
+  Route decision: lunar_candidate_flagged.
+
+  Simulation import mass policy: sensitivity_flag.
+
+  Executable first-pass process: sheet_metal_cutting_v0.
+
+  Material: steel.
+
+  Lunar availability class: local_derived.
+
+  Mass used for first-pass accounting: 8 kg nominal.
+
+  Primary local process candidate: sheet_metal_cutting_v0.
+
+  Secondary process candidates: machining_basic_v0;inspection_basic_v0.
+
+  Ready machine ids considered: labor_bot_general_v0;assembly_tools_basic.
+
+  Confidence: medium.
+
+  Reasoning: Cabin wall stiffeners are better represented as sheet/plate cut stiffeners; cabin stiffness
+  and vacuum-boundary distortion remain sensitivity flags..'

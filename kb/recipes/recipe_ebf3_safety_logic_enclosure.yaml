@@ -1,0 +1,34 @@
+id: recipe_ebf3_safety_logic_enclosure
+kind: recipe
+variant_id: ebf3_route_review_v0
+target_item_id: ebf3_safety_logic_enclosure
+inputs:
+- item_id: sheet_metal_or_structural_steel
+  qty: 0.2835
+  unit: kg
+outputs:
+- item_id: ebf3_safety_logic_enclosure
+  qty: 1.0
+  unit: unit
+steps:
+- process_id: sheet_metal_cutting_v0
+  inputs:
+  - item_id: sheet_metal_or_structural_steel
+    qty: 0.2835
+    unit: kg
+  outputs:
+  - item_id: ebf3_safety_logic_enclosure
+    qty: 1.0
+    unit: unit
+  notes: 'First-pass local route candidate from EBF3 reachable-leaf backfill. Inputs use validation-scaled
+    generic stock. Decision: lunar_candidate; policy: local_nominal; flags: electronics_enclosure;safety'
+notes: "EBF3 route-review recipe for Simviewer inspection and first-pass simulation routing. Generated\
+  \ from research/ebf3_bom_sources/derived/ebf3_reachable_leaf_backfill_route_review.csv after synchronizing\
+  \ EBF3 BOM components to assembly_v0 recipe inputs. This recipe records a routing judgement.\n \
+  \ Route decision: lunar_candidate.\n  Simulation import mass policy: local_nominal.\nExecutable\
+  \ first-pass process: sheet_metal_cutting_v0.\nMaterial: steel.\nLunar availability class: local_derived.\n\
+  Mass used for first-pass accounting: 0.25 kg nominal. Parent ids: ebf3_safety_blocking_logic.\n\
+  Primary local process candidate: sheet_metal_cutting_v0.\nSecondary process candidates: machining_basic_v0.\n\
+  Ready machine ids considered: labor_bot_general_v0;multi_axis_cnc_machining_center.\nConfidence:\
+  \ medium.\n  Reasoning: Safety logic enclosure is ordinary local sheet/metal enclosure fabrication;\
+  \ electrical safety belongs to assembly/integration verification.."

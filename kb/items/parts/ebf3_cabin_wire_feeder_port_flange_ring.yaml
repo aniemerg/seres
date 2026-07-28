@@ -4,8 +4,36 @@ name: EBF3 cabin wire-feeder port flange ring
 mass: 6.0
 unit: unit
 unit_kind: discrete
-material_class: metal
-notes: >
-  Child of MC-6. Chamber-side flange ring for the wire-feeder mounting port.
-  Feeder-side connector insert, guide hardware, seal type, and bolt pattern
-  remain unresolved.
+material: steel
+notes: Child of MC-6. Chamber-side flange ring for the wire-feeder mounting port.
+recipe: recipe_ebf3_cabin_wire_feeder_port_flange_ring
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Resolve feeder-side connector insert, guide hardware, seal type, and bolt pattern.
+- Replace validation-scaled generic stock inputs with explicit EBF material lower/upper bounds and
+  material-specific recipe inputs.
+- 'Encode or verify performance requirements outside prose notes: vacuum sealing face flatness; feedthrough
+  alignment; bolt preload retention.'
+- 'Review route sensitivity flags before treating the route as nominally closed: performance_flag:vacuum;candidate_fit:none.'
+- Retain until leak-rate and feedthrough alignment assumptions are explicit.
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_cabin_wire_feeder_port_flange_ring
+  source_recipe_path: kb/recipes/recipe_ebf3_cabin_wire_feeder_port_flange_ring.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: lunar_candidate_flagged
+  simulation_import_mass_policy: sensitivity_flag
+  mass_nominal_kg: 6.0
+  availability_class: local_derived
+  primary_process_id: machining_basic_v0
+  executable_process_id: machining_basic_v0
+  secondary_process_ids:
+  - component_to_seal_from_raw_material_v0
+  ready_machine_ids:
+  - multi_axis_cnc_machining_center
+  - labor_bot_general_v0
+  confidence: medium
+  reasoning_brief: Machined ring geometry is local but this is a feedthrough port vacuum seal interface.
+route_decision: lunar_candidate_flagged
+simulation_import_mass_policy: sensitivity_flag

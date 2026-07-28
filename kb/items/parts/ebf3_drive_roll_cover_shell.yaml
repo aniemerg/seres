@@ -4,6 +4,44 @@ name: EBF3 drive roll cover shell
 mass: 0.48
 unit: unit
 unit_kind: discrete
-material_class: metal
-notes: Child of ebf3_drive_roll_cover. Cover shell for EBF3 drive-roll cover. Exact
-  specification and local manufacturing route remain unresolved.
+material: steel
+notes: Child of ebf3_drive_roll_cover. Cover shell for EBF3 drive-roll cover.
+recipe: recipe_ebf3_drive_roll_cover_shell
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Replace coarse item specification with explicit material, geometry/interface requirements, and lower/upper
+  mass bounds.
+- Replace validation-scaled generic stock inputs with explicit EBF material lower/upper bounds and
+  material-specific recipe inputs.
+- 'Encode or verify performance requirements outside prose notes: Guard clearance; fastener fit; no
+  rubbing on drive roll.'
+- 'Review route sensitivity flags before treating the route as nominally closed: ordinary_sheet_metal.'
+- Replace generic stamping tooling with a drive-roll-cover-specific die/forming route if this cover
+  affects local manufacturing conclusions.
+- If production volume matters, later define part-specific die/stamping route; first pass can use
+  forming/cutting with guard-fit flag.
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_drive_roll_cover_shell
+  source_recipe_path: kb/recipes/recipe_ebf3_drive_roll_cover_shell.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: lunar_candidate_flagged
+  simulation_import_mass_policy: sensitivity_flag
+  mass_nominal_kg: 0.48
+  availability_class: local_derived
+  primary_process_id: metal_forming_basic_v0
+  executable_process_id: metal_forming_basic_v0
+  secondary_process_ids: []
+  ready_machine_ids:
+  - labor_bot_general_v0
+  - hydraulic_press
+  - plate_rolling_mill
+  confidence: medium
+  reasoning_brief: Formed cover shell is better represented by existing metal forming/cutting route
+    than a stamping template tied to placeholder tooling.
+  flags:
+  - ordinary_sheet_metal
+  - stamping_tooling
+route_decision: lunar_candidate_flagged
+simulation_import_mass_policy: sensitivity_flag

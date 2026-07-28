@@ -4,8 +4,39 @@ name: EBF3 gun dynamic lens pole pieces
 mass: 0.3
 unit: unit
 unit_kind: discrete
-material_class: metal
-notes: >
-  FG-6 magnetic pole-piece set for shaping the dynamic lens focusing field near
-  the beam bore. Magnetic alloy, gap geometry, machining tolerance, and heat
-  treatment remain unresolved.
+material: electrical_steel_or_soft_iron
+notes: FG-6 magnetic pole-piece set for shaping the dynamic lens focusing field near the beam bore.
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Resolve magnetic alloy, gap geometry, machining tolerance, and heat treatment.
+- Replace validation-scaled generic stock inputs with explicit EBF material lower/upper bounds and
+  material-specific recipe inputs.
+- 'Resolve local-route blocker before claiming local manufacturing closure: annealing_v0 references
+  cooling_chamber_controlled which is not Ready; use as performance flag rather than clean local closure.'
+- 'Encode or verify performance requirements outside prose notes: magnetic permeability; saturation;
+  pole face geometry; low remanence after anneal; electron beam alignment.'
+- 'Review route sensitivity flags before treating the route as nominally closed: performance_flag:magnetic;performance_flag:electron_beam;candidate_fit:accuracy_risk.'
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_gun_dynamic_lens_pole_pieces
+  source_recipe_path: kb/recipes/recipe_ebf3_gun_dynamic_lens_pole_pieces.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: route_gap
+  simulation_import_mass_policy: import_until_gap_resolved
+  mass_nominal_kg: 0.3
+  availability_class: local_derived
+  primary_process_id: machining_basic_v0
+  executable_process_id: import_receiving_basic_v0
+  secondary_process_ids:
+  - annealing_v0
+  ready_machine_ids:
+  - multi_axis_cnc_machining_center
+  - labor_bot_general_v0
+  - annealing_oven_small
+  confidence: medium
+  reasoning_brief: CNC geometry is not the blocker; soft-magnetic alloy control, anneal/stress relief,
+    and magnetic-property QA must close before local credit
+route_decision: route_gap
+simulation_import_mass_policy: import_until_gap_resolved
+is_import: true

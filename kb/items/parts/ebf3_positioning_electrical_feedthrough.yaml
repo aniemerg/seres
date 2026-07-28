@@ -4,19 +4,10 @@ name: EBF3 positioning electrical feedthrough
 mass: 1.0
 unit: unit
 unit_kind: discrete
-material_class: composite
-notes: >
-  FS-30. Positioning-specific electrical feedthrough interface for passing motor
-  power and sensor signals through the chamber boundary. The cabin owns only the
-  chamber-side passive opening/flange, controls own acquisition and logic, and
-  power supplies own driver outputs. See
-  research/ebf3_bom_sources/organized/feedthrough_interface_review.md and
-  research/ebf3_bom_sources/organized/four_axis_positioning_level_2_audit.md. No
-  local recipe is attached yet. This assembly is split by
-  `bom_ebf3_positioning_electrical_feedthrough` into motor-power pin, signal
-  pin, ceramic body, flange, vacuum-side connector, air-side connector, and
-  shield-termination interface markers. Exact pinout, connector family, ratings,
-  and local manufacturing route remain unresolved until the physical feedthrough
-  topology is selected.
-  Current interface architecture is summarized in
-  research/ebf3_bom_sources/organized/ebf3_interface_architecture.md.
+material: composite
+notes: |
+  FS-30. Positioning-specific electrical feedthrough interface for passing motor power and sensor signals through the chamber boundary. The cabin owns only the chamber-side passive opening/flange, controls own acquisition and logic, and power supplies own driver outputs. See research/ebf3_bom_sources/organized/feedthrough_interface_review.md and research/ebf3_bom_sources/organized/four_axis_positioning_level_2_audit.md. No local recipe is attached yet. This assembly is split by `bom_ebf3_positioning_electrical_feedthrough` into motor-power pin, signal pin, ceramic body, flange, vacuum-side connector, air-side connector, and shield-termination interface markers. Exact pinout, connector family, ratings, and local manufacturing route remain unresolved until the physical feedthrough topology is selected. Current interface architecture is summarized in research/ebf3_bom_sources/organized/ebf3_interface_architecture.md.
+bom: bom_ebf3_positioning_electrical_feedthrough
+recipe: recipe_ebf3_positioning_electrical_feedthrough_assembly_v0
+trust_tags:
+- trusted_ebf3_unreplaced

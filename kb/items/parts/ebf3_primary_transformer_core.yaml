@@ -4,7 +4,49 @@ name: EBF3 primary transformer core
 mass: 1.5
 unit: unit
 unit_kind: discrete
-material_class: metal
-notes: Child of ebf3_primary_isolation_transformer. Transformer core for EBF3 primary
-  isolation transformer. Exact specification and local manufacturing route remain
-  unresolved.
+material: electrical_steel_or_soft_iron
+notes: Child of ebf3_primary_isolation_transformer. Transformer core for EBF3 primary isolation transformer.
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Replace coarse item specification with explicit material, geometry/interface requirements, and lower/upper
+  mass bounds.
+- Replace first-pass nominal import mass with sourced lower/upper mass bounds if this item dominates
+  imported mass.
+- 'Resolve local-route blocker before claiming local manufacturing closure: Electrical steel production
+  itself uses Ready machines, but core recipe needs lamination cutting, insulation coating, stacking,
+  and anneal routes whose process equipment is not all Ready/proven for transformer loss.'
+- 'Encode or verify performance requirements outside prose notes: Transformer core must meet magnetic
+  permeability, saturation flux, lamination thickness, core loss, insulation between laminations,
+  temperature rise, and acoustic/vibration constraints.'
+- 'Review route sensitivity flags before treating the route as nominally closed: transformer_core;magnetic;lamination_gap.'
+- Define magnetic core fabrication and test chain before replacing import fallback.
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_primary_transformer_core
+  source_recipe_path: kb/recipes/recipe_ebf3_primary_transformer_core.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: route_gap
+  simulation_import_mass_policy: import_until_gap_resolved
+  mass_nominal_kg: 1.5
+  availability_class: local_derived
+  primary_process_id: electrical_steel_production_v0
+  executable_process_id: import_receiving_basic_v0
+  secondary_process_ids:
+  - sheet_metal_cutting_v0
+  - coating_insulation_v0
+  - annealing_basic_v0
+  ready_machine_ids:
+  - labor_bot_general_v0
+  - induction_forge_v0
+  - rolling_mill_v0
+  confidence: medium
+  reasoning_brief: The issue is controlled magnetic properties, losses, lamination/air-gap geometry,
+    insulation, and acceptance testing; existing material production is not enough and labor_bot is
+    not core evidence.
+  blocked_machine_or_process_reason: The issue is controlled magnetic properties, losses, lamination/air-gap
+    geometry, insulation, and acceptance testing; existing material production is not enough and labor_bot
+    is not core evidence.
+route_decision: route_gap
+simulation_import_mass_policy: import_until_gap_resolved
+is_import: true

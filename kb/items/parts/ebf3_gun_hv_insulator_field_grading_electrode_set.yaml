@@ -4,12 +4,39 @@ name: EBF3 gun HV insulator field grading electrode set
 mass: 0.1
 unit: unit
 unit_kind: discrete
-material_class: conductive_metal
-notes: >
-  Level-3 child of FG-13. Gun-side field-grading or corona-control electrode
-  marker associated with the high-voltage insulator. External HV feedthrough and
-  electron-gun insulator sources support flashover/corona/electric-field
-  concerns, but final ring/shield geometry, potential connection, material,
-  surface finish, and local manufacturing route remain unresolved; see
-  research/ebf3_bom_sources/organized/hv_gun_side_insulation_decomposition_plan.md
+material: aluminum
+notes: 'Level-3 child of FG-13. Gun-side field-grading or corona-control electrode marker associated
+  with the high-voltage insulator. External HV feedthrough and electron-gun insulator sources support
+  flashover/corona/electric-field concerns, but final ring/shield geometry, potential connection,
+  material, surface finish, and first-pass manufacturing/import route is recorded in the linked EBF3
+  route-review recipe; see research/ebf3_bom_sources/organized/hv_gun_side_insulation_decomposition_plan.md
   and research/ebf3_bom_sources/organized/ebf3_interface_architecture.md.
+
+  '
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Replace first-pass nominal import mass with sourced lower/upper mass bounds if this item dominates
+  imported mass.
+- 'Resolve local-route blocker before claiming local manufacturing closure: Refractory metal electrode
+  route is not closed and material is trace/localized; HV field grading geometry is critical.'
+- 'Encode or verify performance requirements outside prose notes: Field grading electrode must meet
+  smooth HV geometry, no sharp edges, vacuum cleanliness, thermal stability, and beam-adjacent alignment.'
+- 'Review route sensitivity flags before treating the route as nominally closed: hv;refractory_metal;field_grading;electron_gun.'
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_gun_hv_insulator_field_grading_electrode_set
+  source_recipe_path: kb/recipes/recipe_ebf3_gun_hv_insulator_field_grading_electrode_set.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: earth_import
+  simulation_import_mass_policy: import_nominal
+  mass_nominal_kg: 0.1
+  availability_class: scarce_trace
+  primary_process_id: none
+  executable_process_id: import_receiving_basic_v0
+  confidence: high
+  reasoning_brief: This should be imported for first-pass simulation because material and geometry
+    performance dominate its small mass
+route_decision: earth_import
+simulation_import_mass_policy: import_nominal
+is_import: true

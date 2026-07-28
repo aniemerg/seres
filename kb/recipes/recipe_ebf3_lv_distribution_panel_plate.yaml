@@ -1,0 +1,50 @@
+id: recipe_ebf3_lv_distribution_panel_plate
+kind: recipe
+variant_id: ebf3_route_review_v0
+target_item_id: ebf3_lv_distribution_panel_plate
+inputs:
+- item_id: sheet_metal_or_structural_steel
+  qty: 0.84
+  unit: kg
+outputs:
+- item_id: ebf3_lv_distribution_panel_plate
+  qty: 1.0
+  unit: unit
+steps:
+- process_id: sheet_metal_cutting_v0
+  inputs:
+  - item_id: sheet_metal_or_structural_steel
+    qty: 0.84
+    unit: kg
+  outputs:
+  - item_id: ebf3_lv_distribution_panel_plate
+    qty: 1.0
+    unit: unit
+  notes: 'First-pass local route candidate from EBF3 reachable-leaf backfill. Inputs use validation-scaled
+    generic stock. Decision: lunar_candidate_flagged; policy: sensitivity_flag; flags: electrical_enclosure;panel'
+notes: 'EBF3 route-review recipe for Simviewer inspection and first-pass simulation routing. Generated
+  from research/ebf3_bom_sources/derived/ebf3_reachable_leaf_backfill_route_review.csv after synchronizing
+  EBF3 BOM components to assembly_v0 recipe inputs. This recipe records a routing judgement.
+
+  Route decision: lunar_candidate_flagged.
+
+  Simulation import mass policy: sensitivity_flag.
+
+  Executable first-pass process: sheet_metal_cutting_v0.
+
+  Material: steel.
+
+  Lunar availability class: local_derived.
+
+  Mass used for first-pass accounting: 0.8 kg nominal. Parent ids: ebf3_low_voltage_distribution_panel.
+
+  Primary local process candidate: sheet_metal_cutting_v0.
+
+  Secondary process candidates: machining_basic_v0.
+
+  Ready machine ids considered: labor_bot_general_v0;multi_axis_cnc_machining_center.
+
+  Confidence: medium.
+
+  Reasoning: Panel plate is a simple metal plate but electrical clearances and grounding fit need
+  flags.'

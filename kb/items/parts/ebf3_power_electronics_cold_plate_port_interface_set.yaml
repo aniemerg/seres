@@ -1,0 +1,47 @@
+id: ebf3_power_electronics_cold_plate_port_interface_set
+kind: part
+name: EBF3 power electronics cold plate port interface set
+mass: 0.3
+unit: unit
+unit_kind: discrete
+material: aluminum
+notes: 'Cold-plate port/interface hardware for the EBF3 power electronics thermal path. Child of `ebf3_power_electronics_cooling_duct_or_line_set`
+  from research/ebf3_bom_sources/organized/split_before_route_leaf_decomposition_plan.md. Includes the previous remote-heat-exchanger
+  boundary marker mass as a first-pass physical interface proxy.
+
+  '
+recipe: recipe_ebf3_power_electronics_cold_plate_port_interface_set
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Replace validation-scaled generic stock inputs with explicit EBF material lower/upper bounds and
+  material-specific recipe inputs.
+- 'Encode or verify performance requirements outside prose notes: thermal contact resistance; leak
+  tight coolant or conduction interface; flatness; vacuum conduction assumption validity.'
+- 'Review route sensitivity flags before treating the route as nominally closed: performance_flag:thermal;architecture_assumption:lunar_vacuum_conduction_cold_plate_b
+  aseline;implemented_split_child.'
+- Retain until cold-plate port seal and conductance acceptance are represented.
+- Keep the remote radiator or heat-exchanger topology as a parent/interface requirement, not as a
+  separate non-physical leaf.
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_power_electronics_cold_plate_port_interface_set
+  source_recipe_path: kb/recipes/recipe_ebf3_power_electronics_cold_plate_port_interface_set.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: lunar_candidate_flagged
+  simulation_import_mass_policy: sensitivity_flag
+  mass_nominal_kg: 0.3
+  availability_class: local_derived
+  primary_process_id: machining_basic_v0
+  executable_process_id: machining_basic_v0
+  secondary_process_ids:
+  - brazing_process_v0
+  ready_machine_ids:
+  - multi_axis_cnc_machining_center
+  - labor_bot_general_v0
+  - brazing_furnace_v0
+  confidence: medium
+  reasoning_brief: Aluminum port and remote-interface proxy machining is local but leak tightness
+    and thermal contact affect electronics cooling.
+route_decision: lunar_candidate_flagged
+simulation_import_mass_policy: sensitivity_flag

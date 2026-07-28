@@ -4,6 +4,46 @@ name: EBF3 ripple inductor winding
 mass: 0.45
 unit: unit
 unit_kind: discrete
-material_class: metal
-notes: Child of ebf3_ripple_damping_inductor. Inductor winding for EBF3 ripple damping
-  inductor. Exact specification and local manufacturing route remain unresolved.
+material: aluminum
+notes: Child of ebf3_ripple_damping_inductor. Inductor winding for EBF3 ripple damping inductor.
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Replace coarse item specification with explicit material, geometry/interface requirements, and lower/upper
+  mass bounds.
+- Replace first-pass nominal import mass with sourced lower/upper mass bounds if this item dominates
+  imported mass.
+- 'Resolve local-route blocker before claiming local manufacturing closure: Inductor winding needs
+  conductor drawing, insulation, winding geometry, ripple-current thermal qualification, and vacuum
+  compatibility beyond current route.'
+- 'Encode or verify performance requirements outside prose notes: ripple current; insulation class;
+  thermal rise; winding geometry; vibration.'
+- 'Review route sensitivity flags before treating the route as nominally closed: inductor_winding;aluminum_substitution;blocked_nonready_machine;semantic_audit:induct
+  or_winding_gap.'
+- Add winding-specific process chain and QA; keep import fallback until chain is executable.
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_ripple_inductor_winding
+  source_recipe_path: kb/recipes/recipe_ebf3_ripple_inductor_winding.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: route_gap
+  simulation_import_mass_policy: import_until_gap_resolved
+  mass_nominal_kg: 0.45
+  availability_class: local_derived
+  primary_process_id: spool_winding_basic_v0
+  executable_process_id: import_receiving_basic_v0
+  secondary_process_ids:
+  - spiral_winding_basic_v0
+  ready_machine_ids:
+  - labor_bot_general_v0
+  - winding_drums
+  confidence: low
+  reasoning_brief: Existing coil_winding_basic_v0 has a concrete winding machine, so this is not a
+    labor-only gap; the missing piece is insulation, termination, impregnation/spacing policy, and
+    electrical acceptance.
+  blocked_machine_or_process_reason: Existing coil_winding_basic_v0 has a concrete winding machine,
+    so this is not a labor-only gap; the missing piece is insulation, termination, impregnation/spacing
+    policy, and electrical acceptance.
+route_decision: route_gap
+simulation_import_mass_policy: import_until_gap_resolved
+is_import: true

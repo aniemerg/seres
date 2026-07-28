@@ -4,10 +4,10 @@ name: EBF3 wire feeder base
 mass: 2.86
 unit: unit
 unit_kind: discrete
-material_class: metal
-notes: >
-  WF-24. Structural base plate for the wire feeder. Mass is a first-pass
-  allocation retained for current recipe mass balance, not a sourced base mass.
-  See research/ebf3_bom_sources/organized/wire_feeder_level_2_audit.md. No local
-  recipe is attached yet.
-  This assembly is split by `bom_ebf3_wire_feeder_base`. Child items are mechanical placeholders for decomposition fidelity only; no local recipe is attached yet.
+material: metal
+notes: |
+  WF-24. Structural base plate for the wire feeder. Mass is a first-pass allocation retained for current recipe mass balance. See research/ebf3_bom_sources/organized/wire_feeder_level_2_audit.md. No local recipe is attached yet. This assembly is split by `bom_ebf3_wire_feeder_base`. Child items are mechanical placeholders for decomposition fidelity only; assembly recipe now only joins visible child items; child material and manufacturing readiness remain unresolved.
+bom: bom_ebf3_wire_feeder_base
+recipe: recipe_ebf3_wire_feeder_base_assembly_v0
+trust_tags:
+- trusted_ebf3_unreplaced

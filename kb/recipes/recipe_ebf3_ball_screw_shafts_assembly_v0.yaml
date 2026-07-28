@@ -1,0 +1,30 @@
+id: recipe_ebf3_ball_screw_shafts_assembly_v0
+kind: recipe
+variant_id: assembly_v0
+target_item_id: ebf3_ball_screw_shafts
+inputs: &id001
+- item_id: ebf3_x_axis_ball_screw_shaft
+  qty: 1.0
+  unit: unit
+- item_id: ebf3_y_axis_ball_screw_shaft
+  qty: 1.0
+  unit: unit
+- item_id: ebf3_z_axis_ball_screw_shaft
+  qty: 1.0
+  unit: unit
+outputs:
+- item_id: ebf3_ball_screw_shafts
+  qty: 1.0
+  unit: unit
+steps:
+- process_id: assembly_basic_v0
+  inputs: *id001
+  outputs:
+  - item_id: ebf3_ball_screw_shafts
+    qty: 1.0
+    unit: unit
+  notes: Assemble EBF3 ball screw shafts from its reviewed EBF3 child items;
+    child material and manufacturing readiness remain on the children.
+notes: BOM assembly recipe for EBF3 ball screw shafts. This recipe only assembles
+  already-modeled EBF3 child items and does not claim local fabrication of unresolved
+  children.

@@ -4,6 +4,37 @@ name: EBF3 multi channel output terminal set
 mass: 0.8
 unit: unit
 unit_kind: discrete
-material_class: electronic
-notes: Child of ebf3_multi_channel_driver_module. Output terminal set for EBF3 multi-channel
-  driver module. Exact specification and local manufacturing route remain unresolved.
+material: electronic
+notes: Child of ebf3_multi_channel_driver_module. Output terminal set for EBF3 multi-channel driver
+  module.
+trust_tags:
+- untrusted_global_kb
+future_improvements:
+- Replace coarse item specification with explicit material, geometry/interface requirements, and lower/upper
+  mass bounds.
+- Replace first-pass nominal import mass with sourced lower/upper mass bounds if this item dominates
+  imported mass.
+- 'Resolve local-route blocker before claiming local manufacturing closure: Driver output terminals
+  are rating-sensitive electrical connection hardware with mixed conductor/insulator details.'
+- 'Encode or verify performance requirements outside prose notes: electrical rating; insulation/outgassing;
+  connector fit; termination reliability.'
+- 'Review route sensitivity flags before treating the route as nominally closed: electrical;connector_or_cable;earth_import.'
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_multi_channel_output_terminal_set
+  source_recipe_path: kb/recipes/recipe_ebf3_multi_channel_output_terminal_set.yaml
+  source_queue_type: reachable_leaf_backfill_kb_recipe
+  route_decision: earth_import
+  simulation_import_mass_policy: import_nominal
+  mass_nominal_kg: 0.8
+  availability_class: earth_import
+  primary_process_id: import_receiving_basic_v0
+  executable_process_id: import_receiving_basic_v0
+  ready_machine_ids:
+  - labor_bot_general_v0
+  confidence: medium
+  reasoning_brief: Driver output terminals are rating-sensitive electrical connection hardware with
+    mixed conductor/insulator details
+route_decision: earth_import
+simulation_import_mass_policy: import_nominal
+is_import: true

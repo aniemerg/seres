@@ -4,7 +4,35 @@ name: EBF3 moveable build platform clamp slot set
 mass: 0.7
 unit: unit
 unit_kind: discrete
-material_class: precision_metal
-notes: >
-  Level-3 child of FS-22. Clamp slots or mounting features for substrate-holding
-  hardware. Exact slot geometry and tooling interface remain deferred.
+material: steel
+notes: Level-3 child of FS-22. Clamp slots or mounting features for substrate-holding hardware.
+recipe: recipe_ebf3_moveable_build_platform_clamp_slot_set
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Resolve deferred Exact slot geometry and tooling interface.
+- Replace validation-scaled generic stock inputs with explicit EBF material lower/upper bounds and
+  material-specific recipe inputs.
+- 'Encode or verify performance requirements outside prose notes: slot position tolerance; clamp repeatability;
+  stiffness; thermal distortion near build area.'
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_moveable_build_platform_clamp_slot_set
+  source_recipe_path: kb/recipes/recipe_ebf3_moveable_build_platform_clamp_slot_set.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: lunar_candidate
+  simulation_import_mass_policy: local_nominal
+  mass_nominal_kg: 0.7
+  availability_class: local_derived
+  primary_process_id: machining_basic_v0
+  executable_process_id: machining_basic_v0
+  secondary_process_ids:
+  - assembly_basic_v0
+  ready_machine_ids:
+  - multi_axis_cnc_machining_center
+  - labor_bot_general_v0
+  - assembly_tools_basic
+  confidence: medium
+  reasoning_brief: Clamp slots and mounting features are CNC-local geometry.
+route_decision: lunar_candidate
+simulation_import_mass_policy: local_nominal

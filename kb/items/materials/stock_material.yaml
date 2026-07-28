@@ -3,15 +3,12 @@ kind: material
 name: Stock material (DEPRECATED)
 mass: 1.0
 unit: kg
-material_class: composite
 is_import: true
 notes: 'DEPRECATED: This generic placeholder is banned per ADR-009.
-
 
   Previously used as a catch-all for raw stock material in manufacturing processes,
 
   representing bar stock, plate, sheet, tube, or other semi-finished forms.
-
 
   Do NOT use this item in new or updated recipes. Use specific material types instead:
 
@@ -25,8 +22,9 @@ notes: 'DEPRECATED: This generic placeholder is banned per ADR-009.
 
   - etc.
 
-
   This item is kept for backward compatibility during cleanup only.
 
   '
 unit_kind: bulk
+trust_tags:
+- untrusted_global_kb

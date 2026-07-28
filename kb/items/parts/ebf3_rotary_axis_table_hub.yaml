@@ -4,8 +4,41 @@ name: EBF3 rotary axis table hub
 mass: 1.4
 unit: unit
 unit_kind: discrete
-material_class: precision_metal
-notes: >
-  Level-3 child of FS-17. Hub or central interface between the rotary table
-  plate and bearing/drive structure. Runout, fit, and drive coupling geometry
-  remain deferred.
+material: steel
+notes: Level-3 child of FS-17. Hub or central interface between the rotary table plate and bearing/drive
+  structure.
+recipe: recipe_ebf3_rotary_axis_table_hub
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Resolve deferred Runout, fit, and drive coupling geometry.
+- Replace validation-scaled generic stock inputs with explicit EBF material lower/upper bounds and
+  material-specific recipe inputs.
+- 'Resolve local-route blocker before claiming local manufacturing closure: Precision grinding fallback
+  uses non-Ready surface_grinder/grinding_wheels if rotary runout exceeds CNC-only capability.'
+- 'Encode or verify performance requirements outside prose notes: Rotary hub must meet runout, flatness,
+  bearing-seat tolerance, torque transfer, stiffness, and thermal stability.'
+- 'Review route sensitivity flags before treating the route as nominally closed: precision_motion;rotary_runout.'
+- Retain until rotary-axis runout and bearing-seat acceptance are explicit.
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_rotary_axis_table_hub
+  source_recipe_path: kb/recipes/recipe_ebf3_rotary_axis_table_hub.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: lunar_candidate_flagged
+  simulation_import_mass_policy: sensitivity_flag
+  mass_nominal_kg: 1.4
+  availability_class: local_derived
+  primary_process_id: machining_basic_v0
+  executable_process_id: machining_basic_v0
+  secondary_process_ids:
+  - inspection_basic_v0
+  - precision_grinding_basic_v0
+  ready_machine_ids:
+  - multi_axis_cnc_machining_center
+  - labor_bot_general_v0
+  confidence: medium
+  reasoning_brief: The hub is machinable but bearing-seat tolerance and rotary runout are precision-motion
+    core risks.
+route_decision: lunar_candidate_flagged
+simulation_import_mass_policy: sensitivity_flag

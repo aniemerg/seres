@@ -4,9 +4,36 @@ name: EBF3 feed liner end ferrule set
 mass: 0.08
 unit: unit
 unit_kind: discrete
-material_class: metal
-notes: >
-  Level-3 child of WF-20. End ferrules or retention collars for seating the feed
-  liner in the downstream wire path. Adopted as minimal service/retention
-  hardware; exact ferrule geometry, material, and replacement policy remain
-  deferred.
+material: steel
+notes: Level-3 child of WF-20. End ferrules or retention collars for seating the feed liner in the
+  downstream wire path.
+recipe: recipe_ebf3_feed_liner_end_ferrule_set
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Resolve deferred Adopted as minimal service/retention hardware; exact ferrule geometry, material,
+  and replacement policy.
+- Replace validation-scaled generic stock inputs with explicit EBF material lower/upper bounds and
+  material-specific recipe inputs.
+- 'Encode or verify performance requirements outside prose notes: Ferrules must retain liner ends,
+  avoid burrs, and preserve feed path fit under thermal cycling.'
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_feed_liner_end_ferrule_set
+  source_recipe_path: kb/recipes/recipe_ebf3_feed_liner_end_ferrule_set.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: lunar_candidate
+  simulation_import_mass_policy: local_nominal
+  mass_nominal_kg: 0.08
+  availability_class: local_derived
+  primary_process_id: machining_basic_v0
+  executable_process_id: machining_basic_v0
+  secondary_process_ids:
+  - inspection_basic_v0
+  ready_machine_ids:
+  - multi_axis_cnc_machining_center
+  - labor_bot_general_v0
+  confidence: medium
+  reasoning_brief: Ferrule turning boring and deburring are within CNC and finishing scope.
+route_decision: lunar_candidate
+simulation_import_mass_policy: local_nominal

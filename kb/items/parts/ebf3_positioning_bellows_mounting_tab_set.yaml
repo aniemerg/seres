@@ -4,6 +4,36 @@ name: EBF3 positioning bellows mounting tab set
 mass: 0.07
 unit: unit
 unit_kind: discrete
-material_class: metal
-notes: Child of ebf3_positioning_bellows_cover. Mounting tab set for EBF3 positioning
-  bellows cover. Exact specification and local manufacturing route remain unresolved.
+material: steel
+notes: Child of ebf3_positioning_bellows_cover. Mounting tab set for EBF3 positioning bellows cover.
+recipe: recipe_ebf3_positioning_bellows_mounting_tab_set
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Replace coarse item specification with explicit material, geometry/interface requirements, and lower/upper
+  mass bounds.
+- Replace validation-scaled generic stock inputs with explicit EBF material lower/upper bounds and
+  material-specific recipe inputs.
+- 'Encode or verify performance requirements outside prose notes: tab fit; fastener retention; basic
+  vacuum-compatible finish.'
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_positioning_bellows_mounting_tab_set
+  source_recipe_path: kb/recipes/recipe_ebf3_positioning_bellows_mounting_tab_set.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: lunar_candidate
+  simulation_import_mass_policy: local_nominal
+  mass_nominal_kg: 0.07
+  availability_class: local_derived
+  primary_process_id: machining_basic_v0
+  executable_process_id: machining_basic_v0
+  secondary_process_ids:
+  - sheet_metal_cutting_v0
+  - assembly_basic_v0
+  ready_machine_ids:
+  - multi_axis_cnc_machining_center
+  - labor_bot_general_v0
+  confidence: medium
+  reasoning_brief: Small bellows tabs are ordinary CNC steel parts.
+route_decision: lunar_candidate
+simulation_import_mass_policy: local_nominal

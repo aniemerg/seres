@@ -4,6 +4,35 @@ name: EBF3 dc link mounting frame
 mass: 0.7
 unit: unit
 unit_kind: discrete
-material_class: metal
-notes: Child of ebf3_dc_link_capacitor_bank. Mounting frame for EBF3 DC-link capacitor
-  bank. Exact specification and local manufacturing route remain unresolved.
+material: steel
+notes: Child of ebf3_dc_link_capacitor_bank. Mounting frame for EBF3 DC-link capacitor bank.
+recipe: recipe_ebf3_dc_link_mounting_frame
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Replace coarse item specification with explicit material, geometry/interface requirements, and lower/upper
+  mass bounds.
+- Replace validation-scaled generic stock inputs with explicit EBF material lower/upper bounds and
+  material-specific recipe inputs.
+- 'Encode or verify performance requirements outside prose notes: DC-link frame must preserve capacitor
+  support, vibration restraint, grounding, creepage/clearance, and service access.'
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_dc_link_mounting_frame
+  source_recipe_path: kb/recipes/recipe_ebf3_dc_link_mounting_frame.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: lunar_candidate
+  simulation_import_mass_policy: local_nominal
+  mass_nominal_kg: 0.7
+  availability_class: local_derived
+  primary_process_id: machining_basic_v0
+  executable_process_id: machining_basic_v0
+  secondary_process_ids:
+  - machining_basic_v0
+  - inspection_basic_v0
+  ready_machine_ids:
+  - multi_axis_cnc_machining_center
+  confidence: medium
+  reasoning_brief: Frame holes faces and clearances are local CNC geometry.
+route_decision: lunar_candidate
+simulation_import_mass_policy: local_nominal

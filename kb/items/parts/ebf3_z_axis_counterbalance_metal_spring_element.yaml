@@ -1,0 +1,50 @@
+id: ebf3_z_axis_counterbalance_metal_spring_element
+kind: part
+name: EBF3 Z-axis counterbalance metal spring element
+mass: 0.35
+unit: unit
+unit_kind: discrete
+material: spring_steel
+notes: 'Metal spring force element for the EBF3 Z-axis counterbalance. Child of `ebf3_z_axis_counterbalance_force_element`
+  from research/ebf3_bom_sources/organized/split_before_route_leaf_decomposition_plan.md. This is
+  not local-ready and has no manufacturing recipe.
+
+  '
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Replace first-pass nominal import mass with sourced lower/upper mass bounds if this item dominates
+  imported mass.
+- 'Resolve local-route blocker before claiming local manufacturing closure: heat_treat_basic_v0 requires
+  heat_treatment_furnace_v0 which audit marks machine_audit_no_capabilities; fatigue testing route
+  is not proven.'
+- 'Encode or verify performance requirements outside prose notes: Counterbalance spring must meet
+  force-deflection curve, fatigue life, creep/relaxation, thermal stability, safety margin, and vacuum/galling
+  compatibility.'
+- 'Review route sensitivity flags before treating the route as nominally closed: architecture_assumption:metal_spring_counterbalance_baseline;spring;heat_treat_blocked.'
+- Define spring winding/forming, quench/temper, shot/finish if needed, and fatigue/load test chain.
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_z_axis_counterbalance_metal_spring_element
+  source_recipe_path: kb/recipes/recipe_ebf3_z_axis_counterbalance_metal_spring_element.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: route_gap
+  simulation_import_mass_policy: import_until_gap_resolved
+  mass_nominal_kg: 0.35
+  availability_class: local_derived
+  primary_process_id: heat_treat_basic_v0
+  executable_process_id: import_receiving_basic_v0
+  secondary_process_ids:
+  - machining_basic_v0
+  - inspection_basic_v0
+  ready_machine_ids:
+  - labor_bot_general_v0
+  - multi_axis_cnc_machining_center
+  confidence: medium
+  reasoning_brief: Steel is lunar-plausible and heat-treatment furnace exists, but spring geometry,
+    temper, fatigue life, relaxation, and load acceptance are not closed.
+  blocked_machine_or_process_reason: Steel is lunar-plausible and heat-treatment furnace exists, but
+    spring geometry, temper, fatigue life, relaxation, and load acceptance are not closed.
+route_decision: route_gap
+simulation_import_mass_policy: import_until_gap_resolved
+is_import: true

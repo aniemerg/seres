@@ -4,6 +4,47 @@ name: EBF3 rotary axis bearing inner ring
 mass: 1.1
 unit: unit
 unit_kind: discrete
-material_class: metal
-notes: Child of ebf3_rotary_axis_bearing. Bearing inner ring for EBF3 rotary axis
-  bearing. Exact specification and local manufacturing route remain unresolved.
+material: bearing_steel
+notes: Child of ebf3_rotary_axis_bearing. Bearing inner ring for EBF3 rotary axis bearing.
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Replace coarse item specification with explicit material, geometry/interface requirements, and lower/upper
+  mass bounds.
+- Replace first-pass nominal import mass with sourced lower/upper mass bounds if this item dominates
+  imported mass.
+- 'Resolve local-route blocker before claiming local manufacturing closure: precision_grinding_basic_v0
+  requires surface_grinder/grinding_wheels and heat_treat_basic_v0 requires heat_treatment_furnace_v0;
+  bearing-grade ring route is not Ready.'
+- 'Encode or verify performance requirements outside prose notes: Bearing inner ring must meet raceway
+  hardness, roundness, surface finish, fatigue life, preload geometry, lubrication, and vacuum compatibility.'
+- 'Review route sensitivity flags before treating the route as nominally closed: precision_bearing;grinding_blocked;heat_treat_blocked.'
+- Define bearing/ball-screw route with heat treat, precision grinding, lapping, inspection, lubrication,
+  and acceptance tests before local credit.
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_rotary_axis_bearing_inner_ring
+  source_recipe_path: kb/recipes/recipe_ebf3_rotary_axis_bearing_inner_ring.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: route_gap
+  simulation_import_mass_policy: import_until_gap_resolved
+  mass_nominal_kg: 1.1
+  availability_class: local_derived
+  primary_process_id: precision_grinding_basic_v0
+  executable_process_id: import_receiving_basic_v0
+  secondary_process_ids:
+  - heat_treat_basic_v0
+  - machining_basic_v0
+  ready_machine_ids:
+  - labor_bot_general_v0
+  - multi_axis_cnc_machining_center
+  confidence: high
+  reasoning_brief: Material and some machines exist, but bearing/ball-screw/linear-guide geometry
+    needs hardened races, precision grinding/lapping, preload/runout control, lubrication, metrology,
+    and life QA; this is a performance chain gap.
+  blocked_machine_or_process_reason: Material and some machines exist, but bearing/ball-screw/linear-guide
+    geometry needs hardened races, precision grinding/lapping, preload/runout control, lubrication,
+    metrology, and life QA; this is a performance chain gap.
+route_decision: route_gap
+simulation_import_mass_policy: import_until_gap_resolved
+is_import: true

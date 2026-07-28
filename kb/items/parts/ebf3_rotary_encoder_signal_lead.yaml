@@ -4,6 +4,36 @@ name: EBF3 rotary encoder signal lead
 mass: 0.1
 unit: unit
 unit_kind: discrete
-material_class: composite
+material: composite
 notes: Child of ebf3_rotary_encoder. Encoder signal lead for EBF3 rotary encoder.
-  Exact specification and local manufacturing route remain unresolved.
+trust_tags:
+- untrusted_global_kb
+future_improvements:
+- Replace coarse item specification with explicit material, geometry/interface requirements, and lower/upper
+  mass bounds.
+- Replace first-pass nominal import mass with sourced lower/upper mass bounds if this item dominates
+  imported mass.
+- 'Resolve local-route blocker before claiming local manufacturing closure: Encoder signal lead is
+  low-mass shielded signal cabling; local cable/connector qualification is not closed.'
+- 'Encode or verify performance requirements outside prose notes: electrical rating; insulation/outgassing;
+  connector fit; termination reliability.'
+- 'Review route sensitivity flags before treating the route as nominally closed: electrical;connector_or_cable;earth_import.'
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_rotary_encoder_signal_lead
+  source_recipe_path: kb/recipes/recipe_ebf3_rotary_encoder_signal_lead.yaml
+  source_queue_type: reachable_leaf_backfill_kb_recipe
+  route_decision: earth_import
+  simulation_import_mass_policy: import_nominal
+  mass_nominal_kg: 0.1
+  availability_class: earth_import
+  primary_process_id: import_receiving_basic_v0
+  executable_process_id: import_receiving_basic_v0
+  ready_machine_ids:
+  - labor_bot_general_v0
+  confidence: medium
+  reasoning_brief: Encoder signal lead is low-mass shielded signal cabling; local cable/connector
+    qualification is not closed
+route_decision: earth_import
+simulation_import_mass_policy: import_nominal
+is_import: true

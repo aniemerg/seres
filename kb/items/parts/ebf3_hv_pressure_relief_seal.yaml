@@ -4,7 +4,38 @@ name: EBF3 HV tank pressure relief seal
 mass: 0.08
 unit: unit
 unit_kind: discrete
-material_class: polymer
-notes: >
-  Child of HV-13. Seal for pressure relief hardware. Material and oil/thermal
-  compatibility remain unresolved.
+material: vacuum_elastomer_or_metal_gasket
+notes: Child of HV-13. Seal for pressure relief hardware.
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Resolve material and oil/thermal compatibility.
+- Replace first-pass nominal import mass with sourced lower/upper mass bounds if this item dominates
+  imported mass.
+- 'Resolve local-route blocker before claiming local manufacturing closure: Silicone or elastomer
+  route depends on scarce volatile chemistry and non-Ready forming or cutting equipment; qualified
+  pressure relief seal is not locally closed.'
+- 'Encode or verify performance requirements outside prose notes: HV oil compatibility; pressure relief
+  leak rate; compression set; outgassing; thermal aging.'
+- 'Review route sensitivity flags before treating the route as nominally closed: performance_flag:HV;performance_flag:vacuum_seal;candidate_fit:accuracy_risk.'
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_hv_pressure_relief_seal
+  source_recipe_path: kb/recipes/recipe_ebf3_hv_pressure_relief_seal.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: earth_import
+  simulation_import_mass_policy: import_nominal
+  mass_nominal_kg: 0.08
+  availability_class: import_or_recycle
+  primary_process_id: silicone_rubber_vulcanization_v0
+  executable_process_id: import_receiving_basic_v0
+  secondary_process_ids:
+  - gasket_sheet_cut_to_part_v0
+  ready_machine_ids:
+  - labor_bot_general_v0
+  confidence: high
+  reasoning_brief: This is a seal-critical polymer item and should be imported rather than proxied
+    as local rubber
+route_decision: earth_import
+simulation_import_mass_policy: import_nominal
+is_import: true

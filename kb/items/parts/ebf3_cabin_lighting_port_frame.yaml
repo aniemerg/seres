@@ -4,8 +4,44 @@ name: EBF3 cabin lighting port frame
 mass: 30.0
 unit: unit
 unit_kind: discrete
-material_class: metal
-notes: >
-  Child of MC-9. Passive chamber-side frame or port for process lighting access.
-  Powered light source, optics, wiring, seal material, and controls ownership
-  remain unresolved.
+material: steel
+notes: Child of MC-9. Passive chamber-side frame or port for process lighting access.
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Resolve powered light source, optics, wiring, seal material, and controls ownership.
+- Replace first-pass nominal import mass with sourced lower/upper mass bounds if this item dominates
+  imported mass.
+- 'Resolve local-route blocker before claiming local manufacturing closure: Local steel stock is plausible,
+  but sealing face geometry, optical port alignment, and leak qualification are not closed.'
+- 'Encode or verify performance requirements outside prose notes: port flatness; optical opening alignment;
+  leak rate at attached seal; thermal distortion.'
+- 'Review route sensitivity flags before treating the route as nominally closed: vacuum_port;route_gap:vacuum_port_frame_qualification.'
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_cabin_lighting_port_frame
+  source_recipe_path: kb/recipes/recipe_ebf3_cabin_lighting_port_frame.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: route_gap
+  simulation_import_mass_policy: import_until_gap_resolved
+  mass_nominal_kg: 30.0
+  availability_class: local_derived
+  primary_process_id: steel_bar_stock_rolling_shop_v0
+  executable_process_id: import_receiving_basic_v0
+  secondary_process_ids:
+  - steel_ingot_cast_v0
+  - machining_basic_v0
+  - sealing_and_assembly_basic_v0
+  - leak_test_v0
+  ready_machine_ids:
+  - labor_bot_general_v0
+  - casting_furnace_v0
+  - rolling_mill_v0
+  - multi_axis_cnc_machining_center
+  - assembly_tools_basic
+  confidence: medium
+  reasoning_brief: The port frame is a large vacuum-boundary item; local material is plausible but
+    the qualified fabrication route is still a gap
+route_decision: route_gap
+simulation_import_mass_policy: import_until_gap_resolved
+is_import: true

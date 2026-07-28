@@ -4,9 +4,10 @@ name: EBF3 EMI filter
 mass: 2.0
 unit: unit
 unit_kind: discrete
-material_class: electronic
-notes: >
-  PS-3. EMI filter for reducing high-frequency conducted noise. First-pass leaf item from EBF3 organized BOM table. No local
-  recipe is attached yet; leave manufacturing closure open until lower-level
-  materials and fabrication routes are source-supported.
-  This assembly is split by `bom_ebf3_emi_filter`. Child items are package-level placeholders for decomposition fidelity only; no local recipe is attached yet.
+material: electronic
+notes: |
+  PS-3. EMI filter for reducing high-frequency conducted noise. First-pass leaf item from EBF3 organized BOM table. No local recipe is attached yet; leave manufacturing closure open until lower-level materials and fabrication routes are source-supported. This assembly is split by `bom_ebf3_emi_filter`. Child items are package-level placeholders for decomposition fidelity only; assembly recipe now only joins visible child items; child material and manufacturing readiness remain unresolved.
+bom: bom_ebf3_emi_filter
+recipe: recipe_ebf3_emi_filter_assembly_v0
+trust_tags:
+- trusted_ebf3_unreplaced

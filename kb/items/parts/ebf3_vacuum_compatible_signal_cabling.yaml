@@ -4,11 +4,10 @@ name: EBF3 vacuum-compatible signal cabling
 mass: 0.7
 unit: unit
 unit_kind: discrete
-material_class: composite
-notes: >
-  FS-29. Vacuum-compatible local encoder and sensor signal cabling owned by the
-  positioning subsystem. Controls own acquisition and signal interpretation. Do
-  not split cable, connector, shielding, or feedthrough-pin children until the
-  physical signal path is selected. See
-  research/ebf3_bom_sources/organized/four_axis_positioning_level_2_audit.md.
-  This assembly is split by `bom_ebf3_vacuum_compatible_signal_cabling`. Child items are structural placeholders for decomposition fidelity only; no local recipe is attached yet.
+material: composite
+notes: |
+  FS-29. Vacuum-compatible local encoder and sensor signal cabling owned by the positioning subsystem. Controls own acquisition and signal interpretation. Do not split cable, connector, shielding, or feedthrough-pin children until the physical signal path is selected. See research/ebf3_bom_sources/organized/four_axis_positioning_level_2_audit.md. This assembly is split by `bom_ebf3_vacuum_compatible_signal_cabling`. Child items are structural placeholders for decomposition fidelity only; assembly recipe now only joins visible child items; child material and manufacturing readiness remain unresolved.
+bom: bom_ebf3_vacuum_compatible_signal_cabling
+recipe: recipe_ebf3_vacuum_compatible_signal_cabling_assembly_v0
+trust_tags:
+- trusted_ebf3_unreplaced

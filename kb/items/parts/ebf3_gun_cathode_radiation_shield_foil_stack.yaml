@@ -4,7 +4,37 @@ name: EBF3 gun cathode radiation shield foil stack
 mass: 0.07
 unit: unit
 unit_kind: discrete
-material_class: refractory_metal
-notes: Child of ebf3_gun_cathode_radiation_shield. Refractory foil shield stack for
-  EBF3 gun cathode radiation shield. Exact specification and local manufacturing route
-  remain unresolved.
+material: refractory_metal
+notes: Child of ebf3_gun_cathode_radiation_shield. Refractory foil shield stack for EBF3 gun cathode
+  radiation shield.
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Replace coarse item specification with explicit material, geometry/interface requirements, and lower/upper
+  mass bounds.
+- Replace first-pass nominal import mass with sourced lower/upper mass bounds if this item dominates
+  imported mass.
+- 'Resolve local-route blocker before claiming local manufacturing closure: refractory foil stack
+  route is absent and molybdenum feedstock is imported in KB.'
+- 'Encode or verify performance requirements outside prose notes: Cathode radiant heat shielding;
+  low vapor pressure; foil thickness control; vacuum cleanliness.'
+- 'Review route sensitivity flags before treating the route as nominally closed: refractory_foil;thermal;earth_import.'
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_gun_cathode_radiation_shield_foil_stack
+  source_recipe_path: kb/recipes/recipe_ebf3_gun_cathode_radiation_shield_foil_stack.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: earth_import
+  simulation_import_mass_policy: import_nominal
+  mass_nominal_kg: 0.07
+  availability_class: import_or_recycle
+  primary_process_id: import_receiving_basic_v0
+  executable_process_id: import_receiving_basic_v0
+  ready_machine_ids:
+  - labor_bot_general_v0
+  confidence: medium
+  reasoning_brief: The foil stack is low mass but uses specialty refractory foil that should remain
+    import mass
+route_decision: earth_import
+simulation_import_mass_policy: import_nominal
+is_import: true

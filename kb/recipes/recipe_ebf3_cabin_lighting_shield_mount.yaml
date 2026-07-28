@@ -1,0 +1,33 @@
+id: recipe_ebf3_cabin_lighting_shield_mount
+kind: recipe
+variant_id: ebf3_route_review_v0
+target_item_id: ebf3_cabin_lighting_shield_mount
+inputs:
+- item_id: sheet_metal_or_structural_steel
+  qty: 12.684
+  unit: kg
+outputs:
+- item_id: ebf3_cabin_lighting_shield_mount
+  qty: 1.0
+  unit: unit
+steps:
+- process_id: sheet_metal_cutting_v0
+  inputs:
+  - item_id: sheet_metal_or_structural_steel
+    qty: 12.684
+    unit: kg
+  outputs:
+  - item_id: ebf3_cabin_lighting_shield_mount
+    qty: 1.0
+    unit: unit
+  notes: 'First-pass local route: sheet/plate cutting and fitting for a large shield mount; stiffness
+    and vacuum exposure remain sensitivity flags.'
+notes: "EBF3 route-review recipe for Simviewer inspection and first-pass simulation routing. Generated\
+  \ from research/ebf3_bom_sources/derived/ebf3_process_route_review.csv after semantic audit integration.\
+  \ This recipe records a routing judgement.\n  Route decision: lunar_candidate.\n  Simulation import\
+  \ mass policy: local_nominal.\nExecutable first-pass process: sheet_metal_cutting_v0.\nMaterial:\
+  \ steel.\nLunar availability class: local_derived.\nMass used for first-pass accounting: 12.08 kg\
+  \ nominal.\nPrimary local process candidate: sheet_metal_cutting_v0.\nSecondary process candidates:\
+  \ machining_basic_v0;inspection_basic_v0.\nReady machine ids considered: labor_bot_general_v0;assembly_tools_basic.\n\
+  Confidence: medium.\n  Reasoning: Cabin lighting shield mount is ordinary local sheet/plate fabrication;\
+  \ stiffness and vacuum exposure remain requirements.."

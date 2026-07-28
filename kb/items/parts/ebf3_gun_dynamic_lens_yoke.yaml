@@ -4,8 +4,51 @@ name: EBF3 gun dynamic lens yoke
 mass: 0.4
 unit: unit
 unit_kind: discrete
-material_class: metal
-notes: >
-  FG-6 magnetic return-path structure for the dynamic magnetic lens. Modeled
-  separately from pole pieces because source evidence distinguishes yoke
-  magnetic path from pole-piece field-shaping function.
+material: electrical_steel_or_soft_iron
+notes: 'FG-6 magnetic return-path structure for the dynamic magnetic lens. Modeled separately from
+  pole pieces because source evidence distinguishes yoke magnetic path from pole-piece field-shaping
+  function.
+
+  '
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Replace first-pass nominal import mass with sourced lower/upper mass bounds if this item dominates
+  imported mass.
+- 'Resolve local-route blocker before claiming local manufacturing closure: Electrical steel feedstock
+  does not close magnetic lens yoke permeability, hysteresis, geometry, anneal, and beam-performance
+  qualification.'
+- 'Encode or verify performance requirements outside prose notes: Magnetic permeability; saturation;
+  hysteresis; pole/yoke geometry; thermal stability.'
+- 'Review route sensitivity flags before treating the route as nominally closed: magnetic;electron_beam;semantic_audit:magnetic_lens_yoke_gap.'
+- Define magnetic core fabrication and test chain before replacing import fallback.
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_gun_dynamic_lens_yoke
+  source_recipe_path: kb/recipes/recipe_ebf3_gun_dynamic_lens_yoke.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: route_gap
+  simulation_import_mass_policy: import_until_gap_resolved
+  mass_nominal_kg: 0.4
+  availability_class: local_derived
+  primary_process_id: electrical_steel_production_v0
+  executable_process_id: import_receiving_basic_v0
+  secondary_process_ids:
+  - machining_basic_v0
+  - assembly_basic_v0
+  ready_machine_ids:
+  - labor_bot_general_v0
+  - induction_forge_v0
+  - rolling_mill_v0
+  - multi_axis_cnc_machining_center
+  - assembly_tools_basic
+  confidence: medium
+  reasoning_brief: The issue is controlled magnetic properties, losses, lamination/air-gap geometry,
+    insulation, and acceptance testing; existing material production is not enough and labor_bot is
+    not core evidence.
+  blocked_machine_or_process_reason: The issue is controlled magnetic properties, losses, lamination/air-gap
+    geometry, insulation, and acceptance testing; existing material production is not enough and labor_bot
+    is not core evidence.
+route_decision: route_gap
+simulation_import_mass_policy: import_until_gap_resolved
+is_import: true

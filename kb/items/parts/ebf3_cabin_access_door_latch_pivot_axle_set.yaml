@@ -1,0 +1,44 @@
+id: ebf3_cabin_access_door_latch_pivot_axle_set
+kind: part
+name: EBF3 cabin access door latch pivot axle set
+mass: 0.4
+unit: unit
+unit_kind: discrete
+material: steel
+notes: 'Common pivot/axle hardware for the EBF3 cabin access door latch set. Child of `ebf3_cabin_access_door_latch_set`
+  from research/ebf3_bom_sources/organized/split_before_route_leaf_decomposition_plan.md. This is
+  not local-ready and has no manufacturing recipe.
+
+  '
+recipe: recipe_ebf3_cabin_access_door_latch_pivot_axle_set
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Replace validation-scaled generic stock inputs with explicit EBF material lower/upper bounds and
+  material-specific recipe inputs.
+- 'Encode or verify performance requirements outside prose notes: pivot diameter tolerance; latch
+  preload; wear; vacuum- compatible surface.'
+- 'Review route sensitivity flags before treating the route as nominally closed: vacuum_motion;implemented_split_child.'
+- Do not block on the old audit label; add finish/inspection detail only if this leaf dominates simulation
+  sensitivity.
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_cabin_access_door_latch_pivot_axle_set
+  source_recipe_path: kb/recipes/recipe_ebf3_cabin_access_door_latch_pivot_axle_set.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: lunar_candidate_flagged
+  simulation_import_mass_policy: sensitivity_flag
+  mass_nominal_kg: 0.4
+  availability_class: local_derived
+  primary_process_id: steel_shaft_machining_v0
+  executable_process_id: steel_shaft_machining_v0
+  secondary_process_ids: []
+  ready_machine_ids:
+  - labor_bot_general_v0
+  - multi_axis_cnc_machining_center
+  confidence: medium
+  reasoning_brief: Steel machining route already has a concrete CNC/lathe-style machine; labor_bot
+    is handling only. Keep performance flags for alignment, seal, preload, wear, fatigue, or cleanliness
+    as applicable.
+route_decision: lunar_candidate_flagged
+simulation_import_mass_policy: sensitivity_flag

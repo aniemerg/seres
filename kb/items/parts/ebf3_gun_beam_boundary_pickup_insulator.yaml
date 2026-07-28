@@ -4,9 +4,52 @@ name: EBF3 gun beam-boundary pickup insulator
 mass: 0.06
 unit: unit
 unit_kind: discrete
-material_class: ceramic
-notes: >
-  Level-3 child of FG-9. Local electrical isolation for the beam-boundary
-  collector electrode. Adopted because charged-particle pickup sources require
-  the collector signal to be isolated from grounded structure. Exact ceramic
-  shape, mounting, and feedthrough boundary remain deferred.
+material: ceramic
+notes: Level-3 child of FG-9. Local electrical isolation for the beam-boundary collector electrode.
+  Adopted because charged-particle pickup sources require the collector signal to be isolated from
+  grounded structure.
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Resolve deferred Exact ceramic shape, mounting, and feedthrough boundary.
+- Replace first-pass nominal import mass with sourced lower/upper mass bounds if this item dominates
+  imported mass.
+- 'Resolve local-route blocker before claiming local manufacturing closure: Alumina feedstock does
+  not close HV leakage, vacuum dielectric behavior, and electron-beam charging qualification.'
+- 'Encode or verify performance requirements outside prose notes: Dielectric strength; leakage current;
+  electron-beam charging; vacuum outgassing; geometry repeatability.'
+- 'Review route sensitivity flags before treating the route as nominally closed: HV_dielectric;electron_beam;semantic_audit:hv_vacuum_dielectric_gap.'
+- Define ceramic forming/sintering, metallization or glass/ceramic sealing, cleaning, dielectric test,
+  and leak/outgassing acceptance before claiming local closure.
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_gun_beam_boundary_pickup_insulator
+  source_recipe_path: kb/recipes/recipe_ebf3_gun_beam_boundary_pickup_insulator.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: route_gap
+  simulation_import_mass_policy: import_until_gap_resolved
+  mass_nominal_kg: 0.06
+  availability_class: local_derived
+  primary_process_id: ceramic_forming_basic_v0
+  executable_process_id: import_receiving_basic_v0
+  secondary_process_ids:
+  - alumina_extraction_from_highlands_v0
+  - ceramic_powder_synthesis_v0
+  - ceramic_sintering_process_v0
+  ready_machine_ids:
+  - labor_bot_general_v0
+  - chemical_reactor_basic
+  - ball_mill_v0
+  - pressing_mold_set
+  - hydraulic_press
+  - kiln_ceramic
+  confidence: medium
+  reasoning_brief: Material route is lunar-plausible, but this part is an HV/electron-gun/feedthrough
+    dielectric boundary requiring creepage, leakage, partial-discharge or hermetic QA; labor-bot capability
+    is irrelevant.
+  blocked_machine_or_process_reason: Material route is lunar-plausible, but this part is an HV/electron-gun/feedthrough
+    dielectric boundary requiring creepage, leakage, partial-discharge or hermetic QA; labor-bot capability
+    is irrelevant.
+route_decision: route_gap
+simulation_import_mass_policy: import_until_gap_resolved
+is_import: true

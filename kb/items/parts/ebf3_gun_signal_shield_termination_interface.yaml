@@ -4,13 +4,42 @@ name: EBF3 gun signal shield termination interface
 mass: 0.05
 unit: unit
 unit_kind: discrete
-material_class: conductive_metal
-notes: >
-  Level-3 child of FG-19. Physical shield termination/interface marker for
-  gun-side diagnostic signal wiring. It keeps the signal-shield boundary visible
-  without merging it into protective ground, HV source return, beam-current
-  return, or controls-side acquisition. Exact grounding policy, isolation,
-  connector geometry, and material/process readiness remain unresolved; see
-  research/ebf3_bom_sources/organized/beam_diagnostics_decomposition_plan.md,
-  research/ebf3_bom_sources/organized/electrical_signal_boundary_review.md, and
-  research/ebf3_bom_sources/organized/ebf3_interface_architecture.md.
+material: aluminum
+notes: Level-3 child of FG-19. Physical shield termination/interface marker for gun-side diagnostic
+  signal wiring. It keeps the signal-shield boundary visible without merging it into protective ground,
+  HV source return, beam-current return, or controls-side acquisition.
+recipe: recipe_ebf3_gun_signal_shield_termination_interface
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Resolve exact grounding policy, isolation, connector geometry, and material/process readiness; see
+  research/ebf3_bom_sources/organized/beam_diagnostics_decomposition_plan.md, research/ebf3_bom_sources/organized/electrical_signal_boundary_review.md,
+  and research/ebf3_bom_sources/organized/ebf3_interface_architecture.md.
+- Replace validation-scaled generic stock inputs with explicit EBF material lower/upper bounds and
+  material-specific recipe inputs.
+- 'Encode or verify performance requirements outside prose notes: Shield termination must meet electrical
+  continuity, EMI shielding, grounding, vacuum cleanliness, and thermal stability near gun wiring.'
+- 'Review route sensitivity flags before treating the route as nominally closed: emi_shield;electron_gun_interface.'
+- Close grounding continuity cleanliness and feedthrough interface acceptance.
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_gun_signal_shield_termination_interface
+  source_recipe_path: kb/recipes/recipe_ebf3_gun_signal_shield_termination_interface.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: lunar_candidate_flagged
+  simulation_import_mass_policy: sensitivity_flag
+  mass_nominal_kg: 0.05
+  availability_class: local_derived
+  primary_process_id: machining_basic_v0
+  executable_process_id: machining_basic_v0
+  secondary_process_ids:
+  - machining_basic_v0
+  - assembly_basic_v0
+  ready_machine_ids:
+  - multi_axis_cnc_machining_center
+  - labor_bot_general_v0
+  confidence: medium
+  reasoning_brief: The shield termination is machinable but gun-side EMI continuity and vacuum cleanliness
+    are core acceptance risks.
+route_decision: lunar_candidate_flagged
+simulation_import_mass_policy: sensitivity_flag

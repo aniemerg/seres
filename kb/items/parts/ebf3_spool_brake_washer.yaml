@@ -4,10 +4,38 @@ name: EBF3 spool brake washer
 mass: 0.08
 unit: unit
 unit_kind: discrete
-material_class: metal
-notes: >
-  WF-5. Brake washer adding friction to prevent spool overrun. Intentional
-  Level-2 single-part leaf; friction material, surface finish, and wear behavior
-  remain deferred. See
-  research/ebf3_bom_sources/organized/wire_feeder_level_2_audit.md. No local
-  recipe is attached yet.
+material: steel
+notes: WF-5. Brake washer adding friction to prevent spool overrun. See research/ebf3_bom_sources/organized/wire_feeder_level_2_audit.md.
+  First-pass manufacturing/import route is recorded in the linked EBF3 route-review recipe.
+recipe: recipe_ebf3_spool_brake_washer
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Resolve deferred Intentional Level-2 single-part leaf; friction material, surface finish, and wear
+  behavior.
+- Replace validation-scaled generic stock inputs with explicit EBF material lower/upper bounds and
+  material-specific recipe inputs.
+- 'Encode or verify performance requirements outside prose notes: friction coefficient; wear debris;
+  brake heat; vacuum- compatible surface.'
+- 'Review route sensitivity flags before treating the route as nominally closed: friction_wear.'
+- Reroute to sheet cutting or machining and keep only brake friction/wear note if needed.
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_spool_brake_washer
+  source_recipe_path: kb/recipes/recipe_ebf3_spool_brake_washer.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: lunar_candidate_flagged
+  simulation_import_mass_policy: sensitivity_flag
+  mass_nominal_kg: 0.08
+  availability_class: local_derived
+  primary_process_id: sheet_metal_cutting_v0
+  executable_process_id: sheet_metal_cutting_v0
+  secondary_process_ids: []
+  ready_machine_ids:
+  - labor_bot_general_v0
+  - assembly_tools_basic
+  confidence: medium
+  reasoning_brief: A flat washer can be cut or machined from sheet/plate with existing routes; it
+    does not need to remain on a stamping/labor placeholder.
+route_decision: lunar_candidate_flagged
+simulation_import_mass_policy: sensitivity_flag

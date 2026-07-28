@@ -4,6 +4,44 @@ name: EBF3 thermal isolation standoff washer set
 mass: 0.06
 unit: unit
 unit_kind: discrete
-material_class: insulator
-notes: Child of ebf3_thermal_isolation_standoffs. Insulating washer set for EBF3 thermal
-  isolation standoffs. Exact specification and local manufacturing route remain unresolved.
+material: alumina_ceramic
+notes: Child of ebf3_thermal_isolation_standoffs. Insulating washer set for EBF3 thermal isolation
+  standoffs.
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Replace coarse item specification with explicit material, geometry/interface requirements, and lower/upper
+  mass bounds.
+- Replace first-pass nominal import mass with sourced lower/upper mass bounds if this item dominates
+  imported mass.
+- 'Resolve local-route blocker before claiming local manufacturing closure: ceramic_sintering_process_v0
+  requires kiln_ceramic which is not Ready; fastener_kit_medium is only a shape proxy and does not
+  prove ceramic washer material.'
+- 'Encode or verify performance requirements outside prose notes: Washer must meet thermal isolation,
+  compressive strength, dielectric isolation if present, creep/cracking resistance, and vacuum cleanliness.'
+- 'Review route sensitivity flags before treating the route as nominally closed: ceramic_standoff;thermal;blocked_sintering.'
+- Drop the obsolete audit blocker; add surface finish/inspection if needed.
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_thermal_isolation_standoff_washer_set
+  source_recipe_path: kb/recipes/recipe_ebf3_thermal_isolation_standoff_washer_set.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: lunar_candidate_flagged
+  simulation_import_mass_policy: sensitivity_flag
+  mass_nominal_kg: 0.06
+  availability_class: local_derived
+  primary_process_id: ceramic_forming_basic_v0
+  executable_process_id: ceramic_forming_basic_v0
+  secondary_process_ids:
+  - ceramic_sintering_process_v0
+  ready_machine_ids:
+  - labor_bot_general_v0
+  - pressing_mold_set
+  - hydraulic_press
+  - kiln_ceramic
+  confidence: medium
+  reasoning_brief: 'The old kiln/press audit rationale is obsolete: press/mold/kiln machines are usable_unreviewed
+    and semantically match. Keep only wear, thermal, chipping, and dimensional flags.'
+route_decision: lunar_candidate_flagged
+simulation_import_mass_policy: sensitivity_flag
+recipe: recipe_ebf3_thermal_isolation_standoff_washer_set

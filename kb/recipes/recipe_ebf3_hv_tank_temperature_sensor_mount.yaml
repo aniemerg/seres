@@ -1,0 +1,37 @@
+id: recipe_ebf3_hv_tank_temperature_sensor_mount
+kind: recipe
+variant_id: ebf3_route_review_v0
+target_item_id: ebf3_hv_tank_temperature_sensor_mount
+inputs:
+- item_id: raw_metal_block
+  qty: 0.021
+  unit: kg
+outputs:
+- item_id: ebf3_hv_tank_temperature_sensor_mount
+  qty: 1.0
+  unit: unit
+steps:
+- process_id: machining_basic_v0
+  inputs:
+  - item_id: raw_metal_block
+    qty: 0.021
+    unit: kg
+  outputs:
+  - item_id: ebf3_hv_tank_temperature_sensor_mount
+    qty: 1.0
+    unit: unit
+  notes: 'First-pass local route after targeted material/process recheck. Decision: reroute_existing_process.
+    Sensor mount geometry is a small machined bracket/interface, not a shaft; thermal/HV interface
+    requirements remain flagged.'
+notes: 'EBF3 route-review recipe for Simviewer inspection and first-pass simulation routing.
+
+  Route decision: lunar_candidate_flagged.
+
+  Simulation import mass policy: sensitivity_flag.
+
+  Executable first-pass process: machining_basic_v0.
+
+  Targeted material/process recheck: reroute_existing_process.
+
+  Reasoning: Sensor mount geometry is a small machined bracket/interface, not a shaft; thermal/HV
+  interface requirements remain flagged.'

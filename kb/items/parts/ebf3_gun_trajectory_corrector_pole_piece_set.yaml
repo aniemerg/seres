@@ -4,6 +4,49 @@ name: EBF3 gun trajectory corrector pole piece set
 mass: 0.18
 unit: unit
 unit_kind: discrete
-material_class: metal
-notes: Child of ebf3_gun_trajectory_corrector. Pole piece set for EBF3 gun trajectory
-  corrector. Exact specification and local manufacturing route remain unresolved.
+material: electrical_steel_or_soft_iron
+notes: Child of ebf3_gun_trajectory_corrector. Pole piece set for EBF3 gun trajectory corrector.
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Replace coarse item specification with explicit material, geometry/interface requirements, and lower/upper
+  mass bounds.
+- Replace first-pass nominal import mass with sourced lower/upper mass bounds if this item dominates
+  imported mass.
+- 'Resolve local-route blocker before claiming local manufacturing closure: Beam steering pole pieces
+  need permeability, hysteresis, pole geometry, and magnetic-field acceptance beyond electrical steel
+  feedstock and CNC.'
+- 'Encode or verify performance requirements outside prose notes: magnetic permeability; hysteresis;
+  pole geometry; beam steering alignment.'
+- 'Review route sensitivity flags before treating the route as nominally closed: magnetic_component;electron_gun_precision;semantic_audit:trajectory_corrector_magnetic_gap.'
+- Define magnetic core fabrication and test chain before replacing import fallback.
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_gun_trajectory_corrector_pole_piece_set
+  source_recipe_path: kb/recipes/recipe_ebf3_gun_trajectory_corrector_pole_piece_set.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: route_gap
+  simulation_import_mass_policy: import_until_gap_resolved
+  mass_nominal_kg: 0.18
+  availability_class: local_derived
+  primary_process_id: electrical_steel_production_v0
+  executable_process_id: import_receiving_basic_v0
+  secondary_process_ids:
+  - steel_shaft_machining_v0
+  - machining_basic_v0
+  ready_machine_ids:
+  - labor_bot_general_v0
+  - induction_forge_v0
+  - rolling_mill_v0
+  - multi_axis_cnc_machining_center
+  - alignment_tools
+  confidence: medium
+  reasoning_brief: The issue is controlled magnetic properties, losses, lamination/air-gap geometry,
+    insulation, and acceptance testing; existing material production is not enough and labor_bot is
+    not core evidence.
+  blocked_machine_or_process_reason: The issue is controlled magnetic properties, losses, lamination/air-gap
+    geometry, insulation, and acceptance testing; existing material production is not enough and labor_bot
+    is not core evidence.
+route_decision: route_gap
+simulation_import_mass_policy: import_until_gap_resolved
+is_import: true

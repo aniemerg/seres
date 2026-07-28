@@ -4,11 +4,10 @@ name: EBF3 cathode heater supply
 mass: 5.0
 unit: unit
 unit_kind: discrete
-material_class: electronic
-notes: >
-  PS-11. Stabilized cathode heater power supply. The gun owns the cathode and
-  hot-side heater-lead assembly; this item owns the power-supply-side current
-  source. No local recipe is attached yet. See
-  research/ebf3_bom_sources/organized/power_supplies_level_2_audit.md and
-  research/ebf3_bom_sources/organized/cathode_variant_review.md.
-  This assembly is split by `bom_ebf3_cathode_heater_supply`. Child items are package-level placeholders for decomposition fidelity only; no local recipe is attached yet.
+material: electronic
+notes: |
+  PS-11. Stabilized cathode heater power supply. The gun owns the cathode and hot-side heater-lead assembly; this item owns the power-supply-side current source. Assembly recipe now only joins visible child items; child material and manufacturing readiness remain unresolved. See research/ebf3_bom_sources/organized/power_supplies_level_2_audit.md and research/ebf3_bom_sources/organized/cathode_variant_review.md. This assembly is split by `bom_ebf3_cathode_heater_supply`. Child items are package-level placeholders for decomposition fidelity only; assembly recipe now only joins visible child items; child material and manufacturing readiness remain unresolved.
+bom: bom_ebf3_cathode_heater_supply
+recipe: recipe_ebf3_cathode_heater_supply_assembly_v0
+trust_tags:
+- trusted_ebf3_unreplaced

@@ -4,10 +4,42 @@ name: EBF3 spool support shaft
 mass: 0.5
 unit: unit
 unit_kind: discrete
-material_class: metal
-notes: >
-  WF-3. Support shaft for spool hub rotation. Intentional Level-2 single-part
-  shaft leaf; bearing seats, thread ends, and surface finish remain material and
-  process details, not child BOMs yet. See
-  research/ebf3_bom_sources/organized/wire_feeder_level_2_audit.md. No local
-  recipe is attached yet.
+material: steel
+notes: 'WF-3. Support shaft for spool hub rotation. Intentional Level-2 single-part shaft leaf; bearing
+  seats, thread ends, and surface finish remain material and process details, not child BOMs yet.
+  See research/ebf3_bom_sources/organized/wire_feeder_level_2_audit.md. First-pass manufacturing/import
+  route is recorded in the linked EBF3 route-review recipe.
+
+  '
+recipe: recipe_ebf3_spool_support_shaft
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Replace validation-scaled generic stock inputs with explicit EBF material lower/upper bounds and
+  material-specific recipe inputs.
+- 'Encode or verify performance requirements outside prose notes: Shaft straightness; bearing seat
+  finish; spool runout; wear surface.'
+- 'Review route sensitivity flags before treating the route as nominally closed: motion_precision;shaft.'
+- Do not block on the old audit label; add finish/inspection detail only if this leaf dominates simulation
+  sensitivity.
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_spool_support_shaft
+  source_recipe_path: kb/recipes/recipe_ebf3_spool_support_shaft.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: lunar_candidate_flagged
+  simulation_import_mass_policy: sensitivity_flag
+  mass_nominal_kg: 0.5
+  availability_class: local_derived
+  primary_process_id: steel_shaft_machining_v1
+  executable_process_id: steel_shaft_machining_v1
+  secondary_process_ids: []
+  ready_machine_ids:
+  - labor_bot_general_v0
+  - multi_axis_cnc_machining_center
+  confidence: medium
+  reasoning_brief: Steel machining route already has a concrete CNC/lathe-style machine; labor_bot
+    is handling only. Keep performance flags for alignment, seal, preload, wear, fatigue, or cleanliness
+    as applicable.
+route_decision: lunar_candidate_flagged
+simulation_import_mass_policy: sensitivity_flag

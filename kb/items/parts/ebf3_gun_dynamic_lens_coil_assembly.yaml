@@ -4,9 +4,40 @@ name: EBF3 gun dynamic lens coil assembly
 mass: 0.5
 unit: unit
 unit_kind: discrete
-material_class: composite
-notes: >
-  FG-6 dynamic lens coil assembly. Coil-level review keeps this unresolved as an
-  assembly; conductor, insulation, sealing, potting, lead termination, vacuum
-  compatibility, and thermal details remain deferred. See
-  research/ebf3_bom_sources/organized/coil_level_decomposition_plan.md.
+material: copper
+notes: 'FG-6 dynamic lens coil. Coil leaf review treats this as a terminal BOM leaf; conductor grade,
+  insulation, winding method, vacuum compatibility, electrical interface, and thermal checks remain
+  material/process readiness work. See research/ebf3_bom_sources/organized/coil_level_decomposition_plan.md.
+
+  '
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- 'Encode or verify performance requirements outside prose notes: Dynamic lens coil must meet ampere-turns,
+  magnetic field uniformity, insulation class, vacuum outgassing, thermal rise, and beam focus stability.'
+- 'Review route sensitivity flags before treating the route as nominally closed: coil;magnetic_lens;electron_beam;blocked_winding;semantic_audit:beam_lens_coil_gap.'
+- Keep local flagged until conductor source, insulation class, vacuum outgassing, thermal rise, and
+  magnetic field acceptance are verified.
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_gun_dynamic_lens_coil_assembly
+  source_recipe_path: kb/recipes/recipe_ebf3_gun_dynamic_lens_coil_assembly.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: lunar_candidate_flagged
+  simulation_import_mass_policy: sensitivity_flag
+  mass_nominal_kg: 0.5
+  availability_class: import_or_recycle
+  primary_process_id: coil_winding_basic_v0
+  executable_process_id: coil_winding_basic_v0
+  secondary_process_ids:
+  - electrical_steel_production_v0
+  - coil_insulation_production_v0
+  ready_machine_ids:
+  - labor_bot_general_v0
+  - coil_winding_machine
+  confidence: medium
+  reasoning_brief: Dynamic lens coil winding geometry is within coil_winding_machine scope for first-pass
+    simulation; keep flags for vacuum insulation, heat, conductor import/recycle, field mapping, and
+    focus-field acceptance.
+route_decision: lunar_candidate_flagged
+simulation_import_mass_policy: sensitivity_flag

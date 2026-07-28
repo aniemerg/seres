@@ -4,9 +4,35 @@ name: EBF3 HV cable semiconductive stress-control layer
 mass: 0.08
 unit: unit
 unit_kind: discrete
-material_class: conductive_polymer_composite
-notes: >
-  Level-3 child of HV-9. Semiconductive layer or stress-control interface within
-  the HV cable insulation system. Adopted from e-beam/x-ray HV cable source
-  classes; exact layer count, placement, material, and termination treatment
-  remain deferred.
+material: conductive_polymer_composite
+notes: Level-3 child of HV-9. Semiconductive layer or stress-control interface within the HV cable
+  insulation system.
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Resolve deferred Adopted from e-beam/x-ray HV cable source classes; exact layer count, placement,
+  material, and termination treatment.
+- Replace first-pass nominal import mass with sourced lower/upper mass bounds if this item dominates
+  imported mass.
+- 'Resolve local-route blocker before claiming local manufacturing closure: Polymer and controlled
+  semiconductive stress layer chemistry is outside early lunar closure.'
+- 'Encode or verify performance requirements outside prose notes: field grading resistivity; dielectric
+  compatibility; adhesion; vacuum/oil compatibility.'
+- 'Review route sensitivity flags before treating the route as nominally closed: polymer_scarcity;HV_cable.'
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_hv_cable_semiconductive_stress_control_layer
+  source_recipe_path: kb/recipes/recipe_ebf3_hv_cable_semiconductive_stress_control_layer.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: earth_import
+  simulation_import_mass_policy: import_nominal
+  mass_nominal_kg: 0.08
+  availability_class: import_or_recycle
+  primary_process_id: none
+  executable_process_id: import_receiving_basic_v0
+  confidence: low
+  reasoning_brief: The semiconductive stress-control layer is specialty HV cable material and should
+    be imported
+route_decision: earth_import
+simulation_import_mass_policy: import_nominal
+is_import: true

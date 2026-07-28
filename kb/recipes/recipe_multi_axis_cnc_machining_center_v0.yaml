@@ -1,0 +1,68 @@
+id: recipe_multi_axis_cnc_machining_center_v0
+target_item_id: multi_axis_cnc_machining_center
+variant_id: v0
+inputs:
+  - item_id: structural_steel_frame
+    qty: 400
+    unit: kg
+  - item_id: linear_guide_rails
+    qty: 4
+    unit: unit
+  - item_id: ball_screw_assembly
+    qty: 3
+    unit: unit
+  - item_id: spindle_drive_motor_small
+    qty: 1
+    unit: unit
+  - item_id: motor_electric_medium
+    qty: 3
+    unit: unit
+  - item_id: control_panel_assembly_v0
+    qty: 1
+    unit: unit
+  - item_id: power_supply_low_voltage
+    qty: 1
+    unit: unit
+  - item_id: fastener_kit_medium
+    qty: 1
+    unit: kit
+outputs:
+  - item_id: multi_axis_cnc_machining_center
+    qty: 1.0
+    unit: unit
+steps:
+  - process_id: assembly_basic_v0
+    inputs:
+      - item_id: structural_steel_frame
+        qty: 400
+        unit: kg
+      - item_id: linear_guide_rails
+        qty: 4
+        unit: unit
+      - item_id: ball_screw_assembly
+        qty: 3
+        unit: unit
+      - item_id: spindle_drive_motor_small
+        qty: 1
+        unit: unit
+      - item_id: motor_electric_medium
+        qty: 3
+        unit: unit
+      - item_id: control_panel_assembly_v0
+        qty: 1
+        unit: unit
+      - item_id: power_supply_low_voltage
+        qty: 1
+        unit: unit
+      - item_id: fastener_kit_medium
+        qty: 1
+        unit: kit
+    outputs:
+      - item_id: multi_axis_cnc_machining_center
+        qty: 1.0
+        unit: unit
+    est_time_hr: 40.0
+    labor_hours: 40.0
+    notes: "Assemble multi-axis CNC machining center from frame, motion components, motors, and controls per BOM."
+assumptions: Assembly-only; subcomponents sourced via their own recipes or imports.
+notes: "Simplified multi-axis CNC machining center assembly recipe using BOM components."

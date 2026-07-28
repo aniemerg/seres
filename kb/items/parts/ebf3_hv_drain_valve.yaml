@@ -4,7 +4,44 @@ name: EBF3 HV tank drain valve
 mass: 0.2
 unit: unit
 unit_kind: discrete
-material_class: metal
-notes: >
-  Child of HV-13. Drain valve or drain fitting for transformer insulating fluid.
-  Valve type, seal material, and service procedure remain unresolved.
+material: steel
+notes: Child of HV-13. Drain valve or drain fitting for transformer insulating fluid.
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Resolve valve type, seal material, and service procedure.
+- Replace first-pass nominal import mass with sourced lower/upper mass bounds if this item dominates
+  imported mass.
+- 'Resolve local-route blocker before claiming local manufacturing closure: Valve body may be Ready-machinable
+  but compatible seals and leak-tested oil service are not closed.'
+- 'Encode or verify performance requirements outside prose notes: Oil compatibility; leak tightness;
+  relief isolation; dielectric contamination control.'
+- 'Review route sensitivity flags before treating the route as nominally closed: HV_oil;seal_gap.'
+- Define valve body machining, seal material, assembly, and leak/pressure test chain.
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_hv_drain_valve
+  source_recipe_path: kb/recipes/recipe_ebf3_hv_drain_valve.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: route_gap
+  simulation_import_mass_policy: import_until_gap_resolved
+  mass_nominal_kg: 0.2
+  availability_class: local_derived
+  primary_process_id: pressure_control_valve_assembly_v0
+  executable_process_id: import_receiving_basic_v0
+  secondary_process_ids:
+  - machining_basic_v0
+  - assembly_basic_v0
+  ready_machine_ids:
+  - labor_bot_general_v0
+  - multi_axis_cnc_machining_center
+  - assembly_tools_basic
+  confidence: medium
+  reasoning_brief: A drain valve includes sealing surfaces, stem/seat geometry, gasket material, oil
+    compatibility, pressure/leak test, and cleanliness; generic labor assembly is not enough.
+  blocked_machine_or_process_reason: A drain valve includes sealing surfaces, stem/seat geometry,
+    gasket material, oil compatibility, pressure/leak test, and cleanliness; generic labor assembly
+    is not enough.
+route_decision: route_gap
+simulation_import_mass_policy: import_until_gap_resolved
+is_import: true

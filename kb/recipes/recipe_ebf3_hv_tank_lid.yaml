@@ -1,0 +1,68 @@
+id: recipe_ebf3_hv_tank_lid
+kind: recipe
+variant_id: ebf3_route_review_v0
+target_item_id: ebf3_hv_tank_lid
+inputs:
+- item_id: sheet_metal_or_structural_steel
+  qty: 2.1
+  unit: kg
+outputs:
+- item_id: ebf3_hv_tank_lid
+  qty: 1.0
+  unit: unit
+steps:
+- process_id: sheet_metal_cutting_v0
+  inputs:
+  - item_id: sheet_metal_or_structural_steel
+    qty: 2.1
+    unit: kg
+  outputs:
+  - item_id: ebf3_hv_tank_lid
+    qty: 1.0
+    unit: unit
+  notes: Cut steel lid blank from sheet/plate stock; labor bot is handling only.
+- process_id: machining_finish_basic_v0
+  inputs:
+  - item_id: ebf3_hv_tank_lid
+    qty: 1.0
+    unit: unit
+  outputs:
+  - item_id: ebf3_hv_tank_lid
+    qty: 1.0
+    unit: unit
+  notes: Finish seal faces, holes, and edges needed for HV oil tank service.
+- process_id: inspection_basic_v0
+  inputs:
+  - item_id: ebf3_hv_tank_lid
+    qty: 1.0
+    unit: unit
+  outputs:
+  - item_id: ebf3_hv_tank_lid
+    qty: 1.0
+    unit: unit
+  notes: Inspect lid flatness, hole pattern, and sealing surfaces.
+notes: 'EBF3 route-review recipe for Simviewer inspection and first-pass simulation routing. Generated
+  from research/ebf3_bom_sources/derived/ebf3_process_route_review.csv after semantic audit integration.
+  This recipe records a routing judgement.
+
+  Route decision: lunar_candidate_flagged.
+
+  Simulation import mass policy: sensitivity_flag.
+
+  Executable first-pass process: sheet_metal_cutting_v0.
+
+  Material: steel.
+
+  Lunar availability class: local_derived.
+
+  Mass used for first-pass accounting: 2 kg nominal.
+
+  Primary local process candidate: sheet_metal_cutting_v0.
+
+  Secondary process candidates: steel_ingot_cast_v0;sheet_making_from_ingot_v0;machining_basic _v0;sealing_and_assembly_basic_v0.
+
+  Ready machine ids considered: labor_bot_general_v0;casting_furnace_v0;multi_axis_cnc_machining_center;assembly_tools_basic.
+
+  Confidence: medium.
+
+  Reasoning: HV tank lid is local steel fabrication but seal and HV clearance gates keep it flagged.'

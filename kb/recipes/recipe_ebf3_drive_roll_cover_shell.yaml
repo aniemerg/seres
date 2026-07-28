@@ -1,0 +1,36 @@
+id: recipe_ebf3_drive_roll_cover_shell
+kind: recipe
+variant_id: ebf3_route_review_v0
+target_item_id: ebf3_drive_roll_cover_shell
+inputs:
+- item_id: steel_sheet_1mm
+  qty: 0.504
+  unit: kg
+outputs:
+- item_id: ebf3_drive_roll_cover_shell
+  qty: 1.0
+  unit: unit
+steps:
+- process_id: metal_forming_basic_v0
+  inputs:
+  - item_id: steel_sheet_1mm
+    qty: 0.504
+    unit: kg
+  outputs:
+  - item_id: ebf3_drive_roll_cover_shell
+    qty: 1.0
+    unit: unit
+  notes: Form/cut steel cover shell with existing forming equipment; tooling and guard fit remain
+    flagged.
+notes: 'EBF3 route-review recipe for Simviewer inspection and first-pass simulation routing.
+
+  Route decision: lunar_candidate_flagged.
+
+  Simulation import mass policy: sensitivity_flag.
+
+  Executable first-pass process: metal_forming_basic_v0.
+
+  Targeted material/process recheck: keep_flagged_local.
+
+  Reasoning: Formed steel cover shell can use existing forming/cutting equipment for first-pass simulation;
+  part-specific die/tooling and guard fit remain sensitivity flags.'

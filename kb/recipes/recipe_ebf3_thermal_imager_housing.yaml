@@ -1,0 +1,33 @@
+id: recipe_ebf3_thermal_imager_housing
+kind: recipe
+variant_id: ebf3_route_review_v0
+target_item_id: ebf3_thermal_imager_housing
+inputs:
+- item_id: machined_part_raw
+  qty: 0.21
+  unit: kg
+outputs:
+- item_id: ebf3_thermal_imager_housing
+  qty: 1.0
+  unit: unit
+steps:
+- process_id: aluminum_housing_machining_v1
+  inputs:
+  - item_id: machined_part_raw
+    qty: 0.21
+    unit: kg
+  outputs:
+  - item_id: ebf3_thermal_imager_housing
+    qty: 1.0
+    unit: unit
+  notes: 'First-pass local route candidate from EBF3 semantic route review. Inputs use validation-scaled
+    generic stock. Decision: lunar_candidate; policy: local_nominal; flags: performance_flag:thermal;performance_flag:electronics;candidate_fit:accuracy_risk'
+notes: "EBF3 route-review recipe for Simviewer inspection and first-pass simulation routing. Generated\
+  \ from research/ebf3_bom_sources/derived/ebf3_process_route_review.csv after semantic audit integration.\
+  \ This recipe records a routing judgement.\n  Route decision: lunar_candidate.\n  Simulation import\
+  \ mass policy: local_nominal.\nExecutable first-pass process: aluminum_housing_machining_v1.\nMaterial:\
+  \ aluminum.\nLunar availability class: local_derived.\nMass used for first-pass accounting: 0.2\
+  \ kg nominal.\nPrimary local process candidate: aluminum_housing_machining_v1.\nSecondary process\
+  \ candidates: assembly_basic_v0.\nReady machine ids considered: labor_bot_general_v0;multi_axis_cnc_machining_center;assembly_tools_basic.\n\
+  Confidence: medium.\n  Reasoning: Thermal imager housing is ordinary local machined housing fabrication;\
+  \ camera alignment and thermal behavior remain requirements.."

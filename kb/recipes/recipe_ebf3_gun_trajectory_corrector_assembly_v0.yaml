@@ -1,0 +1,33 @@
+id: recipe_ebf3_gun_trajectory_corrector_assembly_v0
+kind: recipe
+variant_id: assembly_v0
+target_item_id: ebf3_gun_trajectory_corrector
+inputs: &id001
+- item_id: ebf3_gun_trajectory_corrector_coil_set
+  qty: 1.0
+  unit: unit
+- item_id: ebf3_gun_trajectory_corrector_pole_piece_set
+  qty: 1.0
+  unit: unit
+- item_id: ebf3_gun_trajectory_corrector_insulator_set
+  qty: 1.0
+  unit: unit
+- item_id: ebf3_gun_trajectory_corrector_mount
+  qty: 1.0
+  unit: unit
+outputs:
+- item_id: ebf3_gun_trajectory_corrector
+  qty: 1.0
+  unit: unit
+steps:
+- process_id: assembly_basic_v0
+  inputs: *id001
+  outputs:
+  - item_id: ebf3_gun_trajectory_corrector
+    qty: 1.0
+    unit: unit
+  notes: Assemble EBF3 gun trajectory corrector from its source-aligned EBF3 child
+    items; child material and manufacturing readiness remain on the children.
+notes: BOM assembly recipe for EBF3 gun trajectory corrector. This recipe only assembles
+  already-modeled EBF3 child items and does not claim local fabrication of unresolved
+  children.

@@ -4,12 +4,35 @@ name: EBF3 rotary worm shaft
 mass: 1.5
 unit: unit
 unit_kind: discrete
-material_class: metal
-notes: >
-  FS-20. Threaded worm shaft driving the rotary-axis worm wheel. Rotary motor
-  hardware is covered by the broader FS-9 axis motor row until a later
-  motor/rotary-drive decomposition separates it. Intentional Level-2 precision
-  metal leaf; thread profile, bearing seats, material pairing, lubrication, and
-  manufacturing route remain deferred. See
-  research/ebf3_bom_sources/organized/four_axis_positioning_level_2_audit.md.
-  No local recipe is attached yet.
+material: hardened_steel
+notes: 'FS-20. Threaded worm shaft driving the rotary-axis worm wheel. Rotary motor hardware is covered
+  by the broader FS-9 axis motor row until a later motor/rotary-drive decomposition separates it.
+  Intentional Level-2 precision metal leaf; thread profile, bearing seats, material pairing, lubrication,
+  and first-pass manufacturing/import route is recorded in the linked EBF3 route-review recipe. See
+  research/ebf3_bom_sources/organized/four_axis_positioning_level_2_audit.md. First-pass manufacturing/import
+  route is recorded in the linked EBF3 route-review recipe. recipe: recipe_ebf3_rotary_worm_shaft
+
+  '
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Replace first-pass nominal import mass with sourced lower/upper mass bounds if this item dominates
+  imported mass.
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_rotary_worm_shaft
+  source_recipe_path: kb/recipes/recipe_ebf3_rotary_worm_shaft.yaml
+  source_queue_type: leaf_decomposition_review_kb_recipe
+  route_decision: defer_split_import_fallback
+  simulation_import_mass_policy: import_until_gap_resolved
+  mass_nominal_kg: 1.5
+  availability_class: expand_but_flag
+  primary_process_id: import_receiving_basic_v0
+  executable_process_id: import_receiving_basic_v0
+  reasoning_brief: Precision mechanical part may be locally manufacturable eventually, but low mass
+    or hidden tolerances make direct import acceptable for first sim
+  recommended_edit: Import for conservative first run; split into races/gears/shafts/lube only if
+    sensitivity demands
+route_decision: defer_split_import_fallback
+simulation_import_mass_policy: import_until_gap_resolved
+is_import: true

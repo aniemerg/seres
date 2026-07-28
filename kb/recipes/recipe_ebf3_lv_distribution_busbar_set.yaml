@@ -1,0 +1,50 @@
+id: recipe_ebf3_lv_distribution_busbar_set
+kind: recipe
+variant_id: ebf3_route_review_v0
+target_item_id: ebf3_lv_distribution_busbar_set
+inputs:
+- item_id: raw_metal_block
+  qty: 1.155
+  unit: kg
+outputs:
+- item_id: ebf3_lv_distribution_busbar_set
+  qty: 1.0
+  unit: unit
+steps:
+- process_id: machining_basic_v0
+  inputs:
+  - item_id: raw_metal_block
+    qty: 1.155
+    unit: kg
+  outputs:
+  - item_id: ebf3_lv_distribution_busbar_set
+    qty: 1.0
+    unit: unit
+  notes: 'First-pass local route candidate from EBF3 semantic route review. Inputs use validation-scaled
+    generic stock. Decision: lunar_candidate_flagged; policy: sensitivity_flag; flags: busbar;electrical_rating'
+notes: 'EBF3 route-review recipe for Simviewer inspection and first-pass simulation routing. Generated
+  from research/ebf3_bom_sources/derived/ebf3_process_route_review.csv after semantic audit integration.
+  This recipe records a routing judgement.
+
+  Route decision: lunar_candidate_flagged.
+
+  Simulation import mass policy: sensitivity_flag.
+
+  Executable first-pass process: machining_basic_v0.
+
+  Material: aluminum.
+
+  Lunar availability class: local_derived.
+
+  Mass used for first-pass accounting: 1.1 kg nominal.
+
+  Primary local process candidate: machining_basic_v0.
+
+  Secondary process candidates: sheet_making_from_ingot_to_metal_sheet_v0;inspection_basic_v0.
+
+  Ready machine ids considered: multi_axis_cnc_machining_center;labor_bot_general_v0.
+
+  Confidence: medium.
+
+  Reasoning: Aluminum busbars are plausible local candidates, with electrical rating carried as a
+  simulation sensitivity.'

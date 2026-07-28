@@ -1,0 +1,33 @@
+id: recipe_ebf3_cabin_access_door_hinge_set_assembly_v0
+kind: recipe
+variant_id: assembly_v0
+target_item_id: ebf3_cabin_access_door_hinge_set
+inputs: &id001
+- item_id: ebf3_cabin_access_door_hinge_leaf_or_bracket_set
+  qty: 1.0
+  unit: unit
+- item_id: ebf3_cabin_access_door_hinge_pin_or_shaft_set
+  qty: 1.0
+  unit: unit
+- item_id: ebf3_cabin_access_door_hinge_bushing_or_bearing_set
+  qty: 1.0
+  unit: unit
+- item_id: ebf3_cabin_access_door_hinge_fastener_interface_set
+  qty: 1.0
+  unit: unit
+outputs:
+- item_id: ebf3_cabin_access_door_hinge_set
+  qty: 1.0
+  unit: unit
+steps:
+- process_id: assembly_basic_v0
+  inputs: *id001
+  outputs:
+  - item_id: ebf3_cabin_access_door_hinge_set
+    qty: 1.0
+    unit: unit
+  notes: Assemble `ebf3_cabin_access_door_hinge_set` from source-first child items; child material and
+    manufacturing readiness remain unresolved.
+notes: >
+  BOM assembly recipe for `ebf3_cabin_access_door_hinge_set`. This recipe only joins already-modeled
+  child items and does not claim local fabrication of unresolved children.

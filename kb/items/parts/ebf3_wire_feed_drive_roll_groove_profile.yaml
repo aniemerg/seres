@@ -4,7 +4,45 @@ name: EBF3 wire feed drive roll groove profile
 mass: 0.05
 unit: unit
 unit_kind: discrete
-material_class: metal
-notes: Child of ebf3_wire_feed_drive_roll. Wire-contact groove/profile surface for
-  EBF3 wire feed drive roll. Exact specification and local manufacturing route remain
-  unresolved.
+material: hardened_steel
+notes: Child of ebf3_wire_feed_drive_roll. Wire-contact groove/profile surface for EBF3 wire feed
+  drive roll.
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Replace coarse item specification with explicit material, geometry/interface requirements, and lower/upper
+  mass bounds.
+- Replace first-pass nominal import mass with sourced lower/upper mass bounds if this item dominates
+  imported mass.
+- 'Resolve local-route blocker before claiming local manufacturing closure: Drive-roll groove depends
+  on hardened wear surface, grip, concentricity, surface finish, heat treatment, and wear qualification
+  beyond CNC shape.'
+- 'Encode or verify performance requirements outside prose notes: Groove profile must meet wire grip,
+  concentricity, surface finish, wear resistance, and no wire damage.'
+- 'Review route sensitivity flags before treating the route as nominally closed: wire_feed_wear;motion_contact;semantic_audit:drive_roll_wear_gap.'
+- Import until roll hardening finishing and wire-traction qualification are modeled.
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_wire_feed_drive_roll_groove_profile
+  source_recipe_path: kb/recipes/recipe_ebf3_wire_feed_drive_roll_groove_profile.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: route_gap
+  simulation_import_mass_policy: import_until_gap_resolved
+  mass_nominal_kg: 0.05
+  availability_class: local_derived
+  primary_process_id: machining_basic_v0
+  executable_process_id: import_receiving_basic_v0
+  secondary_process_ids:
+  - heat_treat_basic_v0
+  - inspection_basic_v0
+  ready_machine_ids:
+  - multi_axis_cnc_machining_center
+  - labor_bot_general_v0
+  confidence: medium
+  reasoning_brief: CNC can cut the groove but hardened wear surface traction and heat treatment are
+    unresolved.
+  blocked_machine_or_process_reason: CNC can cut the groove but hardened wear surface traction and
+    heat treatment are unresolved.
+route_decision: route_gap
+simulation_import_mass_policy: import_until_gap_resolved
+is_import: true

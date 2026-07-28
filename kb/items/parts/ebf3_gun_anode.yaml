@@ -4,11 +4,38 @@ name: EBF3 gun anode
 mass: 0.25
 unit: unit
 unit_kind: discrete
-material_class: refractory_metal
-notes: >
-  FG-2. Precision accelerating electrode with beam aperture for the EBF3 fixed
-  electron beam gun. Intentional Level-2 leaf: current evidence supports the
-  anode as a precision electrode, not a confirmed multi-part assembly.
-  Replaceable aperture inserts, cooling features, and final material selection
-  are deferred until a source confirms them. See
-  research/ebf3_bom_sources/organized/electrode_family_decomposition_plan.md.
+material: refractory_metal
+notes: 'FG-2. Precision accelerating electrode with beam aperture for the EBF3 fixed electron beam
+  gun. Intentional Level-2 leaf: current evidence supports the anode as a precision electrode. See
+  research/ebf3_bom_sources/organized/electrode_family_decomposition_plan.md.'
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Replaceable aperture inserts, cooling features, and final material selection are deferred until
+  a source confirms them.
+- Replace first-pass nominal import mass with sourced lower/upper mass bounds if this item dominates
+  imported mass.
+- 'Resolve local-route blocker before claiming local manufacturing closure: molybdenum_metal is an
+  import placeholder and precision refractory electrode route is not Ready.'
+- 'Encode or verify performance requirements outside prose notes: Beam aperture accuracy; high temperature
+  stability; sputter resistance; vacuum cleanliness; HV field shape.'
+- 'Review route sensitivity flags before treating the route as nominally closed: refractory_metal;electron_beam;earth_import.'
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_gun_anode
+  source_recipe_path: kb/recipes/recipe_ebf3_gun_anode.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: earth_import
+  simulation_import_mass_policy: import_nominal
+  mass_nominal_kg: 0.25
+  availability_class: import_or_recycle
+  primary_process_id: import_receiving_basic_v0
+  executable_process_id: import_receiving_basic_v0
+  ready_machine_ids:
+  - labor_bot_general_v0
+  confidence: medium
+  reasoning_brief: The anode is a precision refractory electron-gun electrode and should be imported
+    for the first simulation
+route_decision: earth_import
+simulation_import_mass_policy: import_nominal
+is_import: true

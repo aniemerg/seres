@@ -1,0 +1,1789 @@
+{
+  "sim_id": "anvil_block_basic_runbook",
+  "summary": {
+    "sim_id": "anvil_block_basic_runbook",
+    "time_hours": 240.0,
+    "time_days": 10.0,
+    "total_energy_kwh": 2900.3157894736837,
+    "process_runs_total": 14,
+    "process_runs_completed": 14,
+    "process_runs_by_status": {
+      "success": 14
+    },
+    "inventory_items": 22,
+    "imports_tracked": 18
+  },
+  "machine_lanes": [
+    {
+      "machine_type": "ball_mill_v0",
+      "lane_id": "ball_mill_v0#1",
+      "lane_index": 0
+    },
+    {
+      "machine_type": "casting_mold_set",
+      "lane_id": "casting_mold_set#1",
+      "lane_index": 0
+    },
+    {
+      "machine_type": "multi_axis_cnc_machining_center",
+      "lane_id": "multi_axis_cnc_machining_center#1",
+      "lane_index": 0
+    },
+    {
+      "machine_type": "crucible_refractory",
+      "lane_id": "crucible_refractory#1",
+      "lane_index": 0
+    },
+    {
+      "machine_type": "cutting_tools_general",
+      "lane_id": "cutting_tools_general#1",
+      "lane_index": 0
+    },
+    {
+      "machine_type": "dust_collection_system",
+      "lane_id": "dust_collection_system#1",
+      "lane_index": 0
+    },
+    {
+      "machine_type": "electrodes",
+      "lane_id": "electrodes#1",
+      "lane_index": 0
+    },
+    {
+      "machine_type": "furnace_basic",
+      "lane_id": "furnace_basic#1",
+      "lane_index": 0
+    },
+    {
+      "machine_type": "heat_treatment_furnace_v0",
+      "lane_id": "heat_treatment_furnace_v0#1",
+      "lane_index": 0
+    },
+    {
+      "machine_type": "high_temperature_power_supply_v0",
+      "lane_id": "high_temperature_power_supply_v0#1",
+      "lane_index": 0
+    },
+    {
+      "machine_type": "labor_bot_general_v0",
+      "lane_id": "labor_bot_general_v0#1",
+      "lane_index": 0
+    },
+    {
+      "machine_type": "mre_reactor_v0",
+      "lane_id": "mre_reactor_v0#1",
+      "lane_index": 0
+    },
+    {
+      "machine_type": "quench_tank",
+      "lane_id": "quench_tank#1",
+      "lane_index": 0
+    },
+    {
+      "machine_type": "rock_crusher_basic",
+      "lane_id": "rock_crusher_basic#1",
+      "lane_index": 0
+    },
+    {
+      "machine_type": "surface_grinder",
+      "lane_id": "surface_grinder#1",
+      "lane_index": 0
+    },
+    {
+      "machine_type": "vibrating_screen_v0",
+      "lane_id": "vibrating_screen_v0#1",
+      "lane_index": 0
+    }
+  ],
+  "process_runs": [
+    {
+      "process_run_id": "2e7d34a5-63a0-4d15-849c-54a79f00aace",
+      "process_id": "metal_casting_basic_v0",
+      "recipe_run_id": "ae245b9f-a715-4ed9-a84d-267107c12ee9",
+      "recipe_id": "recipe_anvil_block_basic_v0",
+      "start_time": 0.0,
+      "end_time": 1.5,
+      "duration_hours": 1.5,
+      "energy_kwh": 313.1578947368421,
+      "status": "success",
+      "machine_type": "crucible_refractory",
+      "lane_id": "labor_bot_general_v0#1",
+      "inputs": {
+        "regolith_metal_crude": {
+          "quantity": 90.0,
+          "unit": "kg"
+        }
+      },
+      "outputs": {
+        "cast_metal_parts": {
+          "quantity": 85.0,
+          "unit": "kg"
+        }
+      },
+      "reserved_machines": [
+        {
+          "machine_id": "labor_bot_general_v0",
+          "qty": 1.0,
+          "unit": "count",
+          "start_time": 0.0,
+          "end_time": 1.5,
+          "machine_instance_ids": [
+            "labor_bot_general_v0#1"
+          ]
+        },
+        {
+          "machine_id": "crucible_refractory",
+          "qty": 1.0,
+          "unit": "count",
+          "start_time": 0.0,
+          "end_time": 1.5,
+          "machine_instance_ids": [
+            "crucible_refractory#1"
+          ]
+        },
+        {
+          "machine_id": "furnace_basic",
+          "qty": 1.0,
+          "unit": "count",
+          "start_time": 0.0,
+          "end_time": 1.5,
+          "machine_instance_ids": [
+            "furnace_basic#1"
+          ]
+        },
+        {
+          "machine_id": "casting_mold_set",
+          "qty": 1.0,
+          "unit": "count",
+          "start_time": 0.0,
+          "end_time": 1.5,
+          "machine_instance_ids": [
+            "casting_mold_set#1"
+          ]
+        }
+      ],
+      "goal_context": {
+        "goal_target_item_id": "anvil_block_basic"
+      },
+      "error_message": null
+    },
+    {
+      "process_run_id": "b34af705-8208-4aea-82f3-b94cfeb0a08c",
+      "process_id": "machining_finish_basic_v0",
+      "recipe_run_id": "ae245b9f-a715-4ed9-a84d-267107c12ee9",
+      "recipe_id": "recipe_anvil_block_basic_v0",
+      "start_time": 1.5,
+      "end_time": 26.4024902490249,
+      "duration_hours": 24.9024902490249,
+      "energy_kwh": 124.5,
+      "status": "success",
+      "machine_type": "multi_axis_cnc_machining_center",
+      "lane_id": "labor_bot_general_v0#1",
+      "inputs": {
+        "cast_metal_parts": {
+          "quantity": 85.0,
+          "unit": "kg"
+        }
+      },
+      "outputs": {
+        "machined_part_raw": {
+          "quantity": 83.0,
+          "unit": "kg"
+        }
+      },
+      "reserved_machines": [
+        {
+          "machine_id": "labor_bot_general_v0",
+          "qty": 1.0,
+          "unit": "count",
+          "start_time": 1.5,
+          "end_time": 26.4024902490249,
+          "machine_instance_ids": [
+            "labor_bot_general_v0#1"
+          ]
+        },
+        {
+          "machine_id": "multi_axis_cnc_machining_center",
+          "qty": 1.0,
+          "unit": "count",
+          "start_time": 1.5,
+          "end_time": 26.4024902490249,
+          "machine_instance_ids": [
+            "multi_axis_cnc_machining_center#1"
+          ]
+        },
+        {
+          "machine_id": "cutting_tools_general",
+          "qty": 1.0,
+          "unit": "count",
+          "start_time": 1.5,
+          "end_time": 26.4024902490249,
+          "machine_instance_ids": [
+            "cutting_tools_general#1"
+          ]
+        }
+      ],
+      "goal_context": {
+        "goal_target_item_id": "anvil_block_basic"
+      },
+      "error_message": null
+    },
+    {
+      "process_run_id": "9e07c193-8008-4256-b3d0-853f1c71822e",
+      "process_id": "heat_treatment_basic_v0",
+      "recipe_run_id": "ae245b9f-a715-4ed9-a84d-267107c12ee9",
+      "recipe_id": "recipe_anvil_block_basic_v0",
+      "start_time": 26.4024902490249,
+      "end_time": 29.4024902490249,
+      "duration_hours": 3.0,
+      "energy_kwh": 207.50000000000003,
+      "status": "success",
+      "machine_type": "heat_treatment_furnace_v0",
+      "lane_id": "labor_bot_general_v0#1",
+      "inputs": {
+        "machined_part_raw": {
+          "quantity": 83.0,
+          "unit": "kg"
+        }
+      },
+      "outputs": {
+        "finished_part": {
+          "quantity": 83.0,
+          "unit": "kg"
+        }
+      },
+      "reserved_machines": [
+        {
+          "machine_id": "labor_bot_general_v0",
+          "qty": 1.0,
+          "unit": "count",
+          "start_time": 26.4024902490249,
+          "end_time": 29.4024902490249,
+          "machine_instance_ids": [
+            "labor_bot_general_v0#1"
+          ]
+        },
+        {
+          "machine_id": "heat_treatment_furnace_v0",
+          "qty": 1.0,
+          "unit": "count",
+          "start_time": 26.4024902490249,
+          "end_time": 29.4024902490249,
+          "machine_instance_ids": [
+            "heat_treatment_furnace_v0#1"
+          ]
+        },
+        {
+          "machine_id": "quench_tank",
+          "qty": 1.0,
+          "unit": "count",
+          "start_time": 26.4024902490249,
+          "end_time": 29.4024902490249,
+          "machine_instance_ids": [
+            "quench_tank#1"
+          ]
+        }
+      ],
+      "goal_context": {
+        "goal_target_item_id": "anvil_block_basic"
+      },
+      "error_message": null
+    },
+    {
+      "process_run_id": "4ebe8271-1a20-48f3-84db-8f2dad104cd9",
+      "process_id": "surface_finishing_v0",
+      "recipe_run_id": "ae245b9f-a715-4ed9-a84d-267107c12ee9",
+      "recipe_id": "recipe_anvil_block_basic_v0",
+      "start_time": 29.4024902490249,
+      "end_time": 31.4024902490249,
+      "duration_hours": 2.0,
+      "energy_kwh": 1.0,
+      "status": "success",
+      "machine_type": "surface_grinder",
+      "lane_id": "labor_bot_general_v0#1",
+      "inputs": {
+        "finished_part": {
+          "quantity": 83.0,
+          "unit": "kg"
+        }
+      },
+      "outputs": {
+        "finished_part_deburred": {
+          "quantity": 80.0,
+          "unit": "kg"
+        }
+      },
+      "reserved_machines": [
+        {
+          "machine_id": "labor_bot_general_v0",
+          "qty": 1.0,
+          "unit": "count",
+          "start_time": 29.4024902490249,
+          "end_time": 31.4024902490249,
+          "machine_instance_ids": [
+            "labor_bot_general_v0#1"
+          ]
+        },
+        {
+          "machine_id": "surface_grinder",
+          "qty": 1.0,
+          "unit": "count",
+          "start_time": 29.4024902490249,
+          "end_time": 31.4024902490249,
+          "machine_instance_ids": [
+            "surface_grinder#1"
+          ]
+        }
+      ],
+      "goal_context": {
+        "goal_target_item_id": "anvil_block_basic"
+      },
+      "error_message": null
+    },
+    {
+      "process_run_id": "d1768870-50d2-4d69-9891-cc49dec2001e",
+      "process_id": "inspection_basic_v0",
+      "recipe_run_id": "ae245b9f-a715-4ed9-a84d-267107c12ee9",
+      "recipe_id": "recipe_anvil_block_basic_v0",
+      "start_time": 31.4024902490249,
+      "end_time": 32.4024902490249,
+      "duration_hours": 1.0,
+      "energy_kwh": 0.0,
+      "status": "success",
+      "machine_type": "labor_bot_general_v0",
+      "lane_id": "labor_bot_general_v0#1",
+      "inputs": {
+        "finished_part_deburred": {
+          "quantity": 80.0,
+          "unit": "kg"
+        }
+      },
+      "outputs": {
+        "anvil_block_basic": {
+          "quantity": 1.0,
+          "unit": "unit"
+        }
+      },
+      "reserved_machines": [
+        {
+          "machine_id": "labor_bot_general_v0",
+          "qty": 1.0,
+          "unit": "count",
+          "start_time": 31.4024902490249,
+          "end_time": 32.4024902490249,
+          "machine_instance_ids": [
+            "labor_bot_general_v0#1"
+          ]
+        }
+      ],
+      "goal_context": {
+        "goal_target_item_id": "anvil_block_basic"
+      },
+      "error_message": null
+    },
+    {
+      "process_run_id": "286bb587-0b8d-49f9-a09f-f7ca36366a50",
+      "process_id": "regolith_mining_simple_v0",
+      "recipe_run_id": "598cdb42-8151-4113-8929-35e2b29c84e1",
+      "recipe_id": "recipe_regolith_metal_crude_v0",
+      "start_time": 90.0,
+      "end_time": 94.0,
+      "duration_hours": 4.0,
+      "energy_kwh": 20.0,
+      "status": "success",
+      "machine_type": "labor_bot_general_v0",
+      "lane_id": "labor_bot_general_v0#1",
+      "inputs": {},
+      "outputs": {
+        "regolith_lunar_mare": {
+          "quantity": 400.0,
+          "unit": "kg"
+        }
+      },
+      "reserved_machines": [
+        {
+          "machine_id": "labor_bot_general_v0",
+          "qty": 1.0,
+          "unit": "count",
+          "start_time": 90.0,
+          "end_time": 94.0,
+          "machine_instance_ids": [
+            "labor_bot_general_v0#1"
+          ]
+        }
+      ],
+      "goal_context": {
+        "goal_target_item_id": "regolith_metal_crude"
+      },
+      "error_message": null
+    },
+    {
+      "process_run_id": "41739f92-34d7-4c80-a0f1-52c79d458f58",
+      "process_id": "regolith_screening_sieving_v0",
+      "recipe_run_id": "598cdb42-8151-4113-8929-35e2b29c84e1",
+      "recipe_id": "recipe_regolith_metal_crude_v0",
+      "start_time": 94.0,
+      "end_time": 95.0,
+      "duration_hours": 1.0,
+      "energy_kwh": 20.0,
+      "status": "success",
+      "machine_type": "vibrating_screen_v0",
+      "lane_id": "labor_bot_general_v0#1",
+      "inputs": {
+        "regolith_lunar_mare": {
+          "quantity": 400.0,
+          "unit": "kg"
+        }
+      },
+      "outputs": {
+        "regolith_coarse_fraction": {
+          "quantity": 240.0,
+          "unit": "kg"
+        },
+        "regolith_fine_fraction": {
+          "quantity": 160.0,
+          "unit": "kg"
+        }
+      },
+      "reserved_machines": [
+        {
+          "machine_id": "labor_bot_general_v0",
+          "qty": 1.0,
+          "unit": "count",
+          "start_time": 94.0,
+          "end_time": 95.0,
+          "machine_instance_ids": [
+            "labor_bot_general_v0#1"
+          ]
+        },
+        {
+          "machine_id": "vibrating_screen_v0",
+          "qty": 1.0,
+          "unit": "count",
+          "start_time": 94.0,
+          "end_time": 95.0,
+          "machine_instance_ids": [
+            "vibrating_screen_v0#1"
+          ]
+        },
+        {
+          "machine_id": "dust_collection_system",
+          "qty": 1.0,
+          "unit": "count",
+          "start_time": 94.0,
+          "end_time": 95.0,
+          "machine_instance_ids": [
+            "dust_collection_system#1"
+          ]
+        }
+      ],
+      "goal_context": {
+        "goal_target_item_id": "regolith_metal_crude"
+      },
+      "error_message": null
+    },
+    {
+      "process_run_id": "90540aec-3860-4f1c-9aba-7194546521ac",
+      "process_id": "regolith_crushing_grinding_v0",
+      "recipe_run_id": "598cdb42-8151-4113-8929-35e2b29c84e1",
+      "recipe_id": "recipe_regolith_metal_crude_v0",
+      "start_time": 95.0,
+      "end_time": 96.0,
+      "duration_hours": 1.0,
+      "energy_kwh": 48.0,
+      "status": "success",
+      "machine_type": "rock_crusher_basic",
+      "lane_id": "labor_bot_general_v0#1",
+      "inputs": {
+        "regolith_coarse_fraction": {
+          "quantity": 160.0,
+          "unit": "kg"
+        }
+      },
+      "outputs": {
+        "regolith_powder": {
+          "quantity": 152.0,
+          "unit": "kg"
+        }
+      },
+      "reserved_machines": [
+        {
+          "machine_id": "labor_bot_general_v0",
+          "qty": 1.0,
+          "unit": "count",
+          "start_time": 95.0,
+          "end_time": 96.0,
+          "machine_instance_ids": [
+            "labor_bot_general_v0#1"
+          ]
+        },
+        {
+          "machine_id": "rock_crusher_basic",
+          "qty": 1.0,
+          "unit": "count",
+          "start_time": 95.0,
+          "end_time": 96.0,
+          "machine_instance_ids": [
+            "rock_crusher_basic#1"
+          ]
+        },
+        {
+          "machine_id": "ball_mill_v0",
+          "qty": 1.0,
+          "unit": "count",
+          "start_time": 95.0,
+          "end_time": 96.0,
+          "machine_instance_ids": [
+            "ball_mill_v0#1"
+          ]
+        },
+        {
+          "machine_id": "dust_collection_system",
+          "qty": 1.0,
+          "unit": "count",
+          "start_time": 95.0,
+          "end_time": 96.0,
+          "machine_instance_ids": [
+            "dust_collection_system#1"
+          ]
+        }
+      ],
+      "goal_context": {
+        "goal_target_item_id": "regolith_metal_crude"
+      },
+      "error_message": null
+    },
+    {
+      "process_run_id": "fc7a0b62-a4ea-4e97-ae83-6523a4a7fc08",
+      "process_id": "oxygen_extraction_molten_regolith_electrolysis_v0",
+      "recipe_run_id": "598cdb42-8151-4113-8929-35e2b29c84e1",
+      "recipe_id": "recipe_regolith_metal_crude_v0",
+      "start_time": 96.0,
+      "end_time": 108.0,
+      "duration_hours": 12.0,
+      "energy_kwh": 1519.9999999999998,
+      "status": "success",
+      "machine_type": "mre_reactor_v0",
+      "lane_id": "labor_bot_general_v0#1",
+      "inputs": {
+        "regolith_powder": {
+          "quantity": 152.0,
+          "unit": "kg"
+        }
+      },
+      "outputs": {
+        "oxygen_gas": {
+          "quantity": 60.8,
+          "unit": "kg"
+        },
+        "regolith_metal_crude": {
+          "quantity": 91.2,
+          "unit": "kg"
+        }
+      },
+      "reserved_machines": [
+        {
+          "machine_id": "labor_bot_general_v0",
+          "qty": 1.0,
+          "unit": "count",
+          "start_time": 96.0,
+          "end_time": 108.0,
+          "machine_instance_ids": [
+            "labor_bot_general_v0#1"
+          ]
+        },
+        {
+          "machine_id": "mre_reactor_v0",
+          "qty": 1.0,
+          "unit": "count",
+          "start_time": 96.0,
+          "end_time": 108.0,
+          "machine_instance_ids": [
+            "mre_reactor_v0#1"
+          ]
+        },
+        {
+          "machine_id": "high_temperature_power_supply_v0",
+          "qty": 1.0,
+          "unit": "count",
+          "start_time": 96.0,
+          "end_time": 108.0,
+          "machine_instance_ids": [
+            "high_temperature_power_supply_v0#1"
+          ]
+        },
+        {
+          "machine_id": "electrodes",
+          "qty": 1.0,
+          "unit": "count",
+          "start_time": 96.0,
+          "end_time": 108.0,
+          "machine_instance_ids": [
+            "electrodes#1"
+          ]
+        }
+      ],
+      "goal_context": {
+        "goal_target_item_id": "regolith_metal_crude"
+      },
+      "error_message": null
+    },
+    {
+      "process_run_id": "6a40ff2d-7f30-4ca2-88bb-292bfd18ca2c",
+      "process_id": "metal_casting_basic_v0",
+      "recipe_run_id": "d7e1b27e-96da-44ef-b711-0d86f1841975",
+      "recipe_id": "recipe_anvil_block_basic_v0",
+      "start_time": 150.0,
+      "end_time": 151.5,
+      "duration_hours": 1.5,
+      "energy_kwh": 313.1578947368421,
+      "status": "success",
+      "machine_type": "crucible_refractory",
+      "lane_id": "labor_bot_general_v0#1",
+      "inputs": {
+        "regolith_metal_crude": {
+          "quantity": 90.0,
+          "unit": "kg"
+        }
+      },
+      "outputs": {
+        "cast_metal_parts": {
+          "quantity": 85.0,
+          "unit": "kg"
+        }
+      },
+      "reserved_machines": [
+        {
+          "machine_id": "labor_bot_general_v0",
+          "qty": 1.0,
+          "unit": "count",
+          "start_time": 150.0,
+          "end_time": 151.5,
+          "machine_instance_ids": [
+            "labor_bot_general_v0#1"
+          ]
+        },
+        {
+          "machine_id": "crucible_refractory",
+          "qty": 1.0,
+          "unit": "count",
+          "start_time": 150.0,
+          "end_time": 151.5,
+          "machine_instance_ids": [
+            "crucible_refractory#1"
+          ]
+        },
+        {
+          "machine_id": "furnace_basic",
+          "qty": 1.0,
+          "unit": "count",
+          "start_time": 150.0,
+          "end_time": 151.5,
+          "machine_instance_ids": [
+            "furnace_basic#1"
+          ]
+        },
+        {
+          "machine_id": "casting_mold_set",
+          "qty": 1.0,
+          "unit": "count",
+          "start_time": 150.0,
+          "end_time": 151.5,
+          "machine_instance_ids": [
+            "casting_mold_set#1"
+          ]
+        }
+      ],
+      "goal_context": {
+        "goal_target_item_id": "anvil_block_basic"
+      },
+      "error_message": null
+    },
+    {
+      "process_run_id": "22caf277-8202-4e87-afa7-96aef0087fd9",
+      "process_id": "machining_finish_basic_v0",
+      "recipe_run_id": "d7e1b27e-96da-44ef-b711-0d86f1841975",
+      "recipe_id": "recipe_anvil_block_basic_v0",
+      "start_time": 151.5,
+      "end_time": 176.4024902490249,
+      "duration_hours": 24.902490249024908,
+      "energy_kwh": 124.5,
+      "status": "success",
+      "machine_type": "multi_axis_cnc_machining_center",
+      "lane_id": "labor_bot_general_v0#1",
+      "inputs": {
+        "cast_metal_parts": {
+          "quantity": 85.0,
+          "unit": "kg"
+        }
+      },
+      "outputs": {
+        "machined_part_raw": {
+          "quantity": 83.0,
+          "unit": "kg"
+        }
+      },
+      "reserved_machines": [
+        {
+          "machine_id": "labor_bot_general_v0",
+          "qty": 1.0,
+          "unit": "count",
+          "start_time": 151.5,
+          "end_time": 176.4024902490249,
+          "machine_instance_ids": [
+            "labor_bot_general_v0#1"
+          ]
+        },
+        {
+          "machine_id": "multi_axis_cnc_machining_center",
+          "qty": 1.0,
+          "unit": "count",
+          "start_time": 151.5,
+          "end_time": 176.4024902490249,
+          "machine_instance_ids": [
+            "multi_axis_cnc_machining_center#1"
+          ]
+        },
+        {
+          "machine_id": "cutting_tools_general",
+          "qty": 1.0,
+          "unit": "count",
+          "start_time": 151.5,
+          "end_time": 176.4024902490249,
+          "machine_instance_ids": [
+            "cutting_tools_general#1"
+          ]
+        }
+      ],
+      "goal_context": {
+        "goal_target_item_id": "anvil_block_basic"
+      },
+      "error_message": null
+    },
+    {
+      "process_run_id": "87adf15c-e556-4230-8cc4-5b6088e50748",
+      "process_id": "heat_treatment_basic_v0",
+      "recipe_run_id": "d7e1b27e-96da-44ef-b711-0d86f1841975",
+      "recipe_id": "recipe_anvil_block_basic_v0",
+      "start_time": 176.4024902490249,
+      "end_time": 179.4024902490249,
+      "duration_hours": 3.0,
+      "energy_kwh": 207.50000000000003,
+      "status": "success",
+      "machine_type": "heat_treatment_furnace_v0",
+      "lane_id": "labor_bot_general_v0#1",
+      "inputs": {
+        "machined_part_raw": {
+          "quantity": 83.0,
+          "unit": "kg"
+        }
+      },
+      "outputs": {
+        "finished_part": {
+          "quantity": 83.0,
+          "unit": "kg"
+        }
+      },
+      "reserved_machines": [
+        {
+          "machine_id": "labor_bot_general_v0",
+          "qty": 1.0,
+          "unit": "count",
+          "start_time": 176.4024902490249,
+          "end_time": 179.4024902490249,
+          "machine_instance_ids": [
+            "labor_bot_general_v0#1"
+          ]
+        },
+        {
+          "machine_id": "heat_treatment_furnace_v0",
+          "qty": 1.0,
+          "unit": "count",
+          "start_time": 176.4024902490249,
+          "end_time": 179.4024902490249,
+          "machine_instance_ids": [
+            "heat_treatment_furnace_v0#1"
+          ]
+        },
+        {
+          "machine_id": "quench_tank",
+          "qty": 1.0,
+          "unit": "count",
+          "start_time": 176.4024902490249,
+          "end_time": 179.4024902490249,
+          "machine_instance_ids": [
+            "quench_tank#1"
+          ]
+        }
+      ],
+      "goal_context": {
+        "goal_target_item_id": "anvil_block_basic"
+      },
+      "error_message": null
+    },
+    {
+      "process_run_id": "fa28d1ec-a115-451e-bcca-d144bd5183c8",
+      "process_id": "surface_finishing_v0",
+      "recipe_run_id": "d7e1b27e-96da-44ef-b711-0d86f1841975",
+      "recipe_id": "recipe_anvil_block_basic_v0",
+      "start_time": 179.4024902490249,
+      "end_time": 181.4024902490249,
+      "duration_hours": 2.0,
+      "energy_kwh": 1.0,
+      "status": "success",
+      "machine_type": "surface_grinder",
+      "lane_id": "labor_bot_general_v0#1",
+      "inputs": {
+        "finished_part": {
+          "quantity": 83.0,
+          "unit": "kg"
+        }
+      },
+      "outputs": {
+        "finished_part_deburred": {
+          "quantity": 80.0,
+          "unit": "kg"
+        }
+      },
+      "reserved_machines": [
+        {
+          "machine_id": "labor_bot_general_v0",
+          "qty": 1.0,
+          "unit": "count",
+          "start_time": 179.4024902490249,
+          "end_time": 181.4024902490249,
+          "machine_instance_ids": [
+            "labor_bot_general_v0#1"
+          ]
+        },
+        {
+          "machine_id": "surface_grinder",
+          "qty": 1.0,
+          "unit": "count",
+          "start_time": 179.4024902490249,
+          "end_time": 181.4024902490249,
+          "machine_instance_ids": [
+            "surface_grinder#1"
+          ]
+        }
+      ],
+      "goal_context": {
+        "goal_target_item_id": "anvil_block_basic"
+      },
+      "error_message": null
+    },
+    {
+      "process_run_id": "0649e847-c94d-4e9c-a260-dc4b36ef6a17",
+      "process_id": "inspection_basic_v0",
+      "recipe_run_id": "d7e1b27e-96da-44ef-b711-0d86f1841975",
+      "recipe_id": "recipe_anvil_block_basic_v0",
+      "start_time": 181.4024902490249,
+      "end_time": 182.4024902490249,
+      "duration_hours": 1.0,
+      "energy_kwh": 0.0,
+      "status": "success",
+      "machine_type": "labor_bot_general_v0",
+      "lane_id": "labor_bot_general_v0#1",
+      "inputs": {
+        "finished_part_deburred": {
+          "quantity": 80.0,
+          "unit": "kg"
+        }
+      },
+      "outputs": {
+        "anvil_block_basic": {
+          "quantity": 1.0,
+          "unit": "unit"
+        }
+      },
+      "reserved_machines": [
+        {
+          "machine_id": "labor_bot_general_v0",
+          "qty": 1.0,
+          "unit": "count",
+          "start_time": 181.4024902490249,
+          "end_time": 182.4024902490249,
+          "machine_instance_ids": [
+            "labor_bot_general_v0#1"
+          ]
+        }
+      ],
+      "goal_context": {
+        "goal_target_item_id": "anvil_block_basic"
+      },
+      "error_message": null
+    }
+  ],
+  "machine_assignments": [
+    {
+      "assignment_id": "2e7d34a5-63a0-4d15-849c-54a79f00aace:labor_bot_general_v0:0:0",
+      "process_run_id": "2e7d34a5-63a0-4d15-849c-54a79f00aace",
+      "machine_id": "labor_bot_general_v0",
+      "machine_instance_id": "labor_bot_general_v0#1",
+      "start_time": 0.0,
+      "end_time": 1.5,
+      "duration_hours": 1.5,
+      "lane_id": "labor_bot_general_v0#1",
+      "lane_index": 0
+    },
+    {
+      "assignment_id": "2e7d34a5-63a0-4d15-849c-54a79f00aace:crucible_refractory:1:0",
+      "process_run_id": "2e7d34a5-63a0-4d15-849c-54a79f00aace",
+      "machine_id": "crucible_refractory",
+      "machine_instance_id": "crucible_refractory#1",
+      "start_time": 0.0,
+      "end_time": 1.5,
+      "duration_hours": 1.5,
+      "lane_id": "crucible_refractory#1",
+      "lane_index": 0
+    },
+    {
+      "assignment_id": "2e7d34a5-63a0-4d15-849c-54a79f00aace:furnace_basic:2:0",
+      "process_run_id": "2e7d34a5-63a0-4d15-849c-54a79f00aace",
+      "machine_id": "furnace_basic",
+      "machine_instance_id": "furnace_basic#1",
+      "start_time": 0.0,
+      "end_time": 1.5,
+      "duration_hours": 1.5,
+      "lane_id": "furnace_basic#1",
+      "lane_index": 0
+    },
+    {
+      "assignment_id": "2e7d34a5-63a0-4d15-849c-54a79f00aace:casting_mold_set:3:0",
+      "process_run_id": "2e7d34a5-63a0-4d15-849c-54a79f00aace",
+      "machine_id": "casting_mold_set",
+      "machine_instance_id": "casting_mold_set#1",
+      "start_time": 0.0,
+      "end_time": 1.5,
+      "duration_hours": 1.5,
+      "lane_id": "casting_mold_set#1",
+      "lane_index": 0
+    },
+    {
+      "assignment_id": "b34af705-8208-4aea-82f3-b94cfeb0a08c:labor_bot_general_v0:0:0",
+      "process_run_id": "b34af705-8208-4aea-82f3-b94cfeb0a08c",
+      "machine_id": "labor_bot_general_v0",
+      "machine_instance_id": "labor_bot_general_v0#1",
+      "start_time": 1.5,
+      "end_time": 26.4024902490249,
+      "duration_hours": 24.9024902490249,
+      "lane_id": "labor_bot_general_v0#1",
+      "lane_index": 0
+    },
+    {
+      "assignment_id": "b34af705-8208-4aea-82f3-b94cfeb0a08c:multi_axis_cnc_machining_center:1:0",
+      "process_run_id": "b34af705-8208-4aea-82f3-b94cfeb0a08c",
+      "machine_id": "multi_axis_cnc_machining_center",
+      "machine_instance_id": "multi_axis_cnc_machining_center#1",
+      "start_time": 1.5,
+      "end_time": 26.4024902490249,
+      "duration_hours": 24.9024902490249,
+      "lane_id": "multi_axis_cnc_machining_center#1",
+      "lane_index": 0
+    },
+    {
+      "assignment_id": "b34af705-8208-4aea-82f3-b94cfeb0a08c:cutting_tools_general:2:0",
+      "process_run_id": "b34af705-8208-4aea-82f3-b94cfeb0a08c",
+      "machine_id": "cutting_tools_general",
+      "machine_instance_id": "cutting_tools_general#1",
+      "start_time": 1.5,
+      "end_time": 26.4024902490249,
+      "duration_hours": 24.9024902490249,
+      "lane_id": "cutting_tools_general#1",
+      "lane_index": 0
+    },
+    {
+      "assignment_id": "9e07c193-8008-4256-b3d0-853f1c71822e:labor_bot_general_v0:0:0",
+      "process_run_id": "9e07c193-8008-4256-b3d0-853f1c71822e",
+      "machine_id": "labor_bot_general_v0",
+      "machine_instance_id": "labor_bot_general_v0#1",
+      "start_time": 26.4024902490249,
+      "end_time": 29.4024902490249,
+      "duration_hours": 3.0,
+      "lane_id": "labor_bot_general_v0#1",
+      "lane_index": 0
+    },
+    {
+      "assignment_id": "9e07c193-8008-4256-b3d0-853f1c71822e:heat_treatment_furnace_v0:1:0",
+      "process_run_id": "9e07c193-8008-4256-b3d0-853f1c71822e",
+      "machine_id": "heat_treatment_furnace_v0",
+      "machine_instance_id": "heat_treatment_furnace_v0#1",
+      "start_time": 26.4024902490249,
+      "end_time": 29.4024902490249,
+      "duration_hours": 3.0,
+      "lane_id": "heat_treatment_furnace_v0#1",
+      "lane_index": 0
+    },
+    {
+      "assignment_id": "9e07c193-8008-4256-b3d0-853f1c71822e:quench_tank:2:0",
+      "process_run_id": "9e07c193-8008-4256-b3d0-853f1c71822e",
+      "machine_id": "quench_tank",
+      "machine_instance_id": "quench_tank#1",
+      "start_time": 26.4024902490249,
+      "end_time": 29.4024902490249,
+      "duration_hours": 3.0,
+      "lane_id": "quench_tank#1",
+      "lane_index": 0
+    },
+    {
+      "assignment_id": "4ebe8271-1a20-48f3-84db-8f2dad104cd9:labor_bot_general_v0:0:0",
+      "process_run_id": "4ebe8271-1a20-48f3-84db-8f2dad104cd9",
+      "machine_id": "labor_bot_general_v0",
+      "machine_instance_id": "labor_bot_general_v0#1",
+      "start_time": 29.4024902490249,
+      "end_time": 31.4024902490249,
+      "duration_hours": 2.0,
+      "lane_id": "labor_bot_general_v0#1",
+      "lane_index": 0
+    },
+    {
+      "assignment_id": "4ebe8271-1a20-48f3-84db-8f2dad104cd9:surface_grinder:1:0",
+      "process_run_id": "4ebe8271-1a20-48f3-84db-8f2dad104cd9",
+      "machine_id": "surface_grinder",
+      "machine_instance_id": "surface_grinder#1",
+      "start_time": 29.4024902490249,
+      "end_time": 31.4024902490249,
+      "duration_hours": 2.0,
+      "lane_id": "surface_grinder#1",
+      "lane_index": 0
+    },
+    {
+      "assignment_id": "d1768870-50d2-4d69-9891-cc49dec2001e:labor_bot_general_v0:0:0",
+      "process_run_id": "d1768870-50d2-4d69-9891-cc49dec2001e",
+      "machine_id": "labor_bot_general_v0",
+      "machine_instance_id": "labor_bot_general_v0#1",
+      "start_time": 31.4024902490249,
+      "end_time": 32.4024902490249,
+      "duration_hours": 1.0,
+      "lane_id": "labor_bot_general_v0#1",
+      "lane_index": 0
+    },
+    {
+      "assignment_id": "286bb587-0b8d-49f9-a09f-f7ca36366a50:labor_bot_general_v0:0:0",
+      "process_run_id": "286bb587-0b8d-49f9-a09f-f7ca36366a50",
+      "machine_id": "labor_bot_general_v0",
+      "machine_instance_id": "labor_bot_general_v0#1",
+      "start_time": 90.0,
+      "end_time": 94.0,
+      "duration_hours": 4.0,
+      "lane_id": "labor_bot_general_v0#1",
+      "lane_index": 0
+    },
+    {
+      "assignment_id": "41739f92-34d7-4c80-a0f1-52c79d458f58:labor_bot_general_v0:0:0",
+      "process_run_id": "41739f92-34d7-4c80-a0f1-52c79d458f58",
+      "machine_id": "labor_bot_general_v0",
+      "machine_instance_id": "labor_bot_general_v0#1",
+      "start_time": 94.0,
+      "end_time": 95.0,
+      "duration_hours": 1.0,
+      "lane_id": "labor_bot_general_v0#1",
+      "lane_index": 0
+    },
+    {
+      "assignment_id": "41739f92-34d7-4c80-a0f1-52c79d458f58:vibrating_screen_v0:1:0",
+      "process_run_id": "41739f92-34d7-4c80-a0f1-52c79d458f58",
+      "machine_id": "vibrating_screen_v0",
+      "machine_instance_id": "vibrating_screen_v0#1",
+      "start_time": 94.0,
+      "end_time": 95.0,
+      "duration_hours": 1.0,
+      "lane_id": "vibrating_screen_v0#1",
+      "lane_index": 0
+    },
+    {
+      "assignment_id": "41739f92-34d7-4c80-a0f1-52c79d458f58:dust_collection_system:2:0",
+      "process_run_id": "41739f92-34d7-4c80-a0f1-52c79d458f58",
+      "machine_id": "dust_collection_system",
+      "machine_instance_id": "dust_collection_system#1",
+      "start_time": 94.0,
+      "end_time": 95.0,
+      "duration_hours": 1.0,
+      "lane_id": "dust_collection_system#1",
+      "lane_index": 0
+    },
+    {
+      "assignment_id": "90540aec-3860-4f1c-9aba-7194546521ac:labor_bot_general_v0:0:0",
+      "process_run_id": "90540aec-3860-4f1c-9aba-7194546521ac",
+      "machine_id": "labor_bot_general_v0",
+      "machine_instance_id": "labor_bot_general_v0#1",
+      "start_time": 95.0,
+      "end_time": 96.0,
+      "duration_hours": 1.0,
+      "lane_id": "labor_bot_general_v0#1",
+      "lane_index": 0
+    },
+    {
+      "assignment_id": "90540aec-3860-4f1c-9aba-7194546521ac:rock_crusher_basic:1:0",
+      "process_run_id": "90540aec-3860-4f1c-9aba-7194546521ac",
+      "machine_id": "rock_crusher_basic",
+      "machine_instance_id": "rock_crusher_basic#1",
+      "start_time": 95.0,
+      "end_time": 96.0,
+      "duration_hours": 1.0,
+      "lane_id": "rock_crusher_basic#1",
+      "lane_index": 0
+    },
+    {
+      "assignment_id": "90540aec-3860-4f1c-9aba-7194546521ac:ball_mill_v0:2:0",
+      "process_run_id": "90540aec-3860-4f1c-9aba-7194546521ac",
+      "machine_id": "ball_mill_v0",
+      "machine_instance_id": "ball_mill_v0#1",
+      "start_time": 95.0,
+      "end_time": 96.0,
+      "duration_hours": 1.0,
+      "lane_id": "ball_mill_v0#1",
+      "lane_index": 0
+    },
+    {
+      "assignment_id": "90540aec-3860-4f1c-9aba-7194546521ac:dust_collection_system:3:0",
+      "process_run_id": "90540aec-3860-4f1c-9aba-7194546521ac",
+      "machine_id": "dust_collection_system",
+      "machine_instance_id": "dust_collection_system#1",
+      "start_time": 95.0,
+      "end_time": 96.0,
+      "duration_hours": 1.0,
+      "lane_id": "dust_collection_system#1",
+      "lane_index": 0
+    },
+    {
+      "assignment_id": "fc7a0b62-a4ea-4e97-ae83-6523a4a7fc08:labor_bot_general_v0:0:0",
+      "process_run_id": "fc7a0b62-a4ea-4e97-ae83-6523a4a7fc08",
+      "machine_id": "labor_bot_general_v0",
+      "machine_instance_id": "labor_bot_general_v0#1",
+      "start_time": 96.0,
+      "end_time": 108.0,
+      "duration_hours": 12.0,
+      "lane_id": "labor_bot_general_v0#1",
+      "lane_index": 0
+    },
+    {
+      "assignment_id": "fc7a0b62-a4ea-4e97-ae83-6523a4a7fc08:mre_reactor_v0:1:0",
+      "process_run_id": "fc7a0b62-a4ea-4e97-ae83-6523a4a7fc08",
+      "machine_id": "mre_reactor_v0",
+      "machine_instance_id": "mre_reactor_v0#1",
+      "start_time": 96.0,
+      "end_time": 108.0,
+      "duration_hours": 12.0,
+      "lane_id": "mre_reactor_v0#1",
+      "lane_index": 0
+    },
+    {
+      "assignment_id": "fc7a0b62-a4ea-4e97-ae83-6523a4a7fc08:high_temperature_power_supply_v0:2:0",
+      "process_run_id": "fc7a0b62-a4ea-4e97-ae83-6523a4a7fc08",
+      "machine_id": "high_temperature_power_supply_v0",
+      "machine_instance_id": "high_temperature_power_supply_v0#1",
+      "start_time": 96.0,
+      "end_time": 108.0,
+      "duration_hours": 12.0,
+      "lane_id": "high_temperature_power_supply_v0#1",
+      "lane_index": 0
+    },
+    {
+      "assignment_id": "fc7a0b62-a4ea-4e97-ae83-6523a4a7fc08:electrodes:3:0",
+      "process_run_id": "fc7a0b62-a4ea-4e97-ae83-6523a4a7fc08",
+      "machine_id": "electrodes",
+      "machine_instance_id": "electrodes#1",
+      "start_time": 96.0,
+      "end_time": 108.0,
+      "duration_hours": 12.0,
+      "lane_id": "electrodes#1",
+      "lane_index": 0
+    },
+    {
+      "assignment_id": "6a40ff2d-7f30-4ca2-88bb-292bfd18ca2c:labor_bot_general_v0:0:0",
+      "process_run_id": "6a40ff2d-7f30-4ca2-88bb-292bfd18ca2c",
+      "machine_id": "labor_bot_general_v0",
+      "machine_instance_id": "labor_bot_general_v0#1",
+      "start_time": 150.0,
+      "end_time": 151.5,
+      "duration_hours": 1.5,
+      "lane_id": "labor_bot_general_v0#1",
+      "lane_index": 0
+    },
+    {
+      "assignment_id": "6a40ff2d-7f30-4ca2-88bb-292bfd18ca2c:crucible_refractory:1:0",
+      "process_run_id": "6a40ff2d-7f30-4ca2-88bb-292bfd18ca2c",
+      "machine_id": "crucible_refractory",
+      "machine_instance_id": "crucible_refractory#1",
+      "start_time": 150.0,
+      "end_time": 151.5,
+      "duration_hours": 1.5,
+      "lane_id": "crucible_refractory#1",
+      "lane_index": 0
+    },
+    {
+      "assignment_id": "6a40ff2d-7f30-4ca2-88bb-292bfd18ca2c:furnace_basic:2:0",
+      "process_run_id": "6a40ff2d-7f30-4ca2-88bb-292bfd18ca2c",
+      "machine_id": "furnace_basic",
+      "machine_instance_id": "furnace_basic#1",
+      "start_time": 150.0,
+      "end_time": 151.5,
+      "duration_hours": 1.5,
+      "lane_id": "furnace_basic#1",
+      "lane_index": 0
+    },
+    {
+      "assignment_id": "6a40ff2d-7f30-4ca2-88bb-292bfd18ca2c:casting_mold_set:3:0",
+      "process_run_id": "6a40ff2d-7f30-4ca2-88bb-292bfd18ca2c",
+      "machine_id": "casting_mold_set",
+      "machine_instance_id": "casting_mold_set#1",
+      "start_time": 150.0,
+      "end_time": 151.5,
+      "duration_hours": 1.5,
+      "lane_id": "casting_mold_set#1",
+      "lane_index": 0
+    },
+    {
+      "assignment_id": "22caf277-8202-4e87-afa7-96aef0087fd9:labor_bot_general_v0:0:0",
+      "process_run_id": "22caf277-8202-4e87-afa7-96aef0087fd9",
+      "machine_id": "labor_bot_general_v0",
+      "machine_instance_id": "labor_bot_general_v0#1",
+      "start_time": 151.5,
+      "end_time": 176.4024902490249,
+      "duration_hours": 24.902490249024908,
+      "lane_id": "labor_bot_general_v0#1",
+      "lane_index": 0
+    },
+    {
+      "assignment_id": "22caf277-8202-4e87-afa7-96aef0087fd9:multi_axis_cnc_machining_center:1:0",
+      "process_run_id": "22caf277-8202-4e87-afa7-96aef0087fd9",
+      "machine_id": "multi_axis_cnc_machining_center",
+      "machine_instance_id": "multi_axis_cnc_machining_center#1",
+      "start_time": 151.5,
+      "end_time": 176.4024902490249,
+      "duration_hours": 24.902490249024908,
+      "lane_id": "multi_axis_cnc_machining_center#1",
+      "lane_index": 0
+    },
+    {
+      "assignment_id": "22caf277-8202-4e87-afa7-96aef0087fd9:cutting_tools_general:2:0",
+      "process_run_id": "22caf277-8202-4e87-afa7-96aef0087fd9",
+      "machine_id": "cutting_tools_general",
+      "machine_instance_id": "cutting_tools_general#1",
+      "start_time": 151.5,
+      "end_time": 176.4024902490249,
+      "duration_hours": 24.902490249024908,
+      "lane_id": "cutting_tools_general#1",
+      "lane_index": 0
+    },
+    {
+      "assignment_id": "87adf15c-e556-4230-8cc4-5b6088e50748:labor_bot_general_v0:0:0",
+      "process_run_id": "87adf15c-e556-4230-8cc4-5b6088e50748",
+      "machine_id": "labor_bot_general_v0",
+      "machine_instance_id": "labor_bot_general_v0#1",
+      "start_time": 176.4024902490249,
+      "end_time": 179.4024902490249,
+      "duration_hours": 3.0,
+      "lane_id": "labor_bot_general_v0#1",
+      "lane_index": 0
+    },
+    {
+      "assignment_id": "87adf15c-e556-4230-8cc4-5b6088e50748:heat_treatment_furnace_v0:1:0",
+      "process_run_id": "87adf15c-e556-4230-8cc4-5b6088e50748",
+      "machine_id": "heat_treatment_furnace_v0",
+      "machine_instance_id": "heat_treatment_furnace_v0#1",
+      "start_time": 176.4024902490249,
+      "end_time": 179.4024902490249,
+      "duration_hours": 3.0,
+      "lane_id": "heat_treatment_furnace_v0#1",
+      "lane_index": 0
+    },
+    {
+      "assignment_id": "87adf15c-e556-4230-8cc4-5b6088e50748:quench_tank:2:0",
+      "process_run_id": "87adf15c-e556-4230-8cc4-5b6088e50748",
+      "machine_id": "quench_tank",
+      "machine_instance_id": "quench_tank#1",
+      "start_time": 176.4024902490249,
+      "end_time": 179.4024902490249,
+      "duration_hours": 3.0,
+      "lane_id": "quench_tank#1",
+      "lane_index": 0
+    },
+    {
+      "assignment_id": "fa28d1ec-a115-451e-bcca-d144bd5183c8:labor_bot_general_v0:0:0",
+      "process_run_id": "fa28d1ec-a115-451e-bcca-d144bd5183c8",
+      "machine_id": "labor_bot_general_v0",
+      "machine_instance_id": "labor_bot_general_v0#1",
+      "start_time": 179.4024902490249,
+      "end_time": 181.4024902490249,
+      "duration_hours": 2.0,
+      "lane_id": "labor_bot_general_v0#1",
+      "lane_index": 0
+    },
+    {
+      "assignment_id": "fa28d1ec-a115-451e-bcca-d144bd5183c8:surface_grinder:1:0",
+      "process_run_id": "fa28d1ec-a115-451e-bcca-d144bd5183c8",
+      "machine_id": "surface_grinder",
+      "machine_instance_id": "surface_grinder#1",
+      "start_time": 179.4024902490249,
+      "end_time": 181.4024902490249,
+      "duration_hours": 2.0,
+      "lane_id": "surface_grinder#1",
+      "lane_index": 0
+    },
+    {
+      "assignment_id": "0649e847-c94d-4e9c-a260-dc4b36ef6a17:labor_bot_general_v0:0:0",
+      "process_run_id": "0649e847-c94d-4e9c-a260-dc4b36ef6a17",
+      "machine_id": "labor_bot_general_v0",
+      "machine_instance_id": "labor_bot_general_v0#1",
+      "start_time": 181.4024902490249,
+      "end_time": 182.4024902490249,
+      "duration_hours": 1.0,
+      "lane_id": "labor_bot_general_v0#1",
+      "lane_index": 0
+    }
+  ],
+  "inventory_checkpoints": [
+    {
+      "idx": 0,
+      "time_hours": 0.0,
+      "process_complete_count": 0,
+      "inventory": {
+        "labor_bot_general_v0": {
+          "quantity": 2.0,
+          "unit": "unit"
+        }
+      }
+    },
+    {
+      "idx": 1,
+      "time_hours": 90.0,
+      "process_complete_count": 5,
+      "inventory": {
+        "labor_bot_general_v0": {
+          "quantity": 2.0,
+          "unit": "unit"
+        },
+        "crucible_refractory": {
+          "quantity": 1.0,
+          "unit": "unit"
+        },
+        "furnace_basic": {
+          "quantity": 1.0,
+          "unit": "unit"
+        },
+        "casting_mold_set": {
+          "quantity": 1.0,
+          "unit": "unit"
+        },
+        "multi_axis_cnc_machining_center": {
+          "quantity": 1.0,
+          "unit": "unit"
+        },
+        "cutting_tools_general": {
+          "quantity": 1.0,
+          "unit": "unit"
+        },
+        "heat_treatment_furnace_v0": {
+          "quantity": 1.0,
+          "unit": "unit"
+        },
+        "quench_tank": {
+          "quantity": 1.0,
+          "unit": "unit"
+        },
+        "surface_grinder": {
+          "quantity": 1.0,
+          "unit": "unit"
+        },
+        "anvil_block_basic": {
+          "quantity": 1.0,
+          "unit": "unit"
+        }
+      }
+    },
+    {
+      "idx": 2,
+      "time_hours": 150.0,
+      "process_complete_count": 9,
+      "inventory": {
+        "labor_bot_general_v0": {
+          "quantity": 2.0,
+          "unit": "unit"
+        },
+        "crucible_refractory": {
+          "quantity": 1.0,
+          "unit": "unit"
+        },
+        "furnace_basic": {
+          "quantity": 1.0,
+          "unit": "unit"
+        },
+        "casting_mold_set": {
+          "quantity": 1.0,
+          "unit": "unit"
+        },
+        "multi_axis_cnc_machining_center": {
+          "quantity": 1.0,
+          "unit": "unit"
+        },
+        "cutting_tools_general": {
+          "quantity": 1.0,
+          "unit": "unit"
+        },
+        "heat_treatment_furnace_v0": {
+          "quantity": 1.0,
+          "unit": "unit"
+        },
+        "quench_tank": {
+          "quantity": 1.0,
+          "unit": "unit"
+        },
+        "surface_grinder": {
+          "quantity": 1.0,
+          "unit": "unit"
+        },
+        "anvil_block_basic": {
+          "quantity": 1.0,
+          "unit": "unit"
+        },
+        "vibrating_screen_v0": {
+          "quantity": 1.0,
+          "unit": "unit"
+        },
+        "rock_crusher_basic": {
+          "quantity": 1.0,
+          "unit": "unit"
+        },
+        "ball_mill_v0": {
+          "quantity": 1.0,
+          "unit": "unit"
+        },
+        "dust_collection_system": {
+          "quantity": 1.0,
+          "unit": "unit"
+        },
+        "mre_reactor_v0": {
+          "quantity": 1.0,
+          "unit": "unit"
+        },
+        "high_temperature_power_supply_v0": {
+          "quantity": 1.0,
+          "unit": "unit"
+        },
+        "electrodes": {
+          "quantity": 1.0,
+          "unit": "unit"
+        },
+        "electrical_energy": {
+          "quantity": 5000.0,
+          "unit": "kWh"
+        },
+        "regolith_coarse_fraction": {
+          "quantity": 80.0,
+          "unit": "kg"
+        },
+        "regolith_fine_fraction": {
+          "quantity": 160.0,
+          "unit": "kg"
+        },
+        "oxygen_gas": {
+          "quantity": 60.8,
+          "unit": "kg"
+        },
+        "regolith_metal_crude": {
+          "quantity": 91.2,
+          "unit": "kg"
+        }
+      }
+    },
+    {
+      "idx": 3,
+      "time_hours": 240.0,
+      "process_complete_count": 14,
+      "inventory": {
+        "labor_bot_general_v0": {
+          "quantity": 2.0,
+          "unit": "unit"
+        },
+        "crucible_refractory": {
+          "quantity": 1.0,
+          "unit": "unit"
+        },
+        "furnace_basic": {
+          "quantity": 1.0,
+          "unit": "unit"
+        },
+        "casting_mold_set": {
+          "quantity": 1.0,
+          "unit": "unit"
+        },
+        "multi_axis_cnc_machining_center": {
+          "quantity": 1.0,
+          "unit": "unit"
+        },
+        "cutting_tools_general": {
+          "quantity": 1.0,
+          "unit": "unit"
+        },
+        "heat_treatment_furnace_v0": {
+          "quantity": 1.0,
+          "unit": "unit"
+        },
+        "quench_tank": {
+          "quantity": 1.0,
+          "unit": "unit"
+        },
+        "surface_grinder": {
+          "quantity": 1.0,
+          "unit": "unit"
+        },
+        "anvil_block_basic": {
+          "quantity": 2.0,
+          "unit": "unit"
+        },
+        "vibrating_screen_v0": {
+          "quantity": 1.0,
+          "unit": "unit"
+        },
+        "rock_crusher_basic": {
+          "quantity": 1.0,
+          "unit": "unit"
+        },
+        "ball_mill_v0": {
+          "quantity": 1.0,
+          "unit": "unit"
+        },
+        "dust_collection_system": {
+          "quantity": 1.0,
+          "unit": "unit"
+        },
+        "mre_reactor_v0": {
+          "quantity": 1.0,
+          "unit": "unit"
+        },
+        "high_temperature_power_supply_v0": {
+          "quantity": 1.0,
+          "unit": "unit"
+        },
+        "electrodes": {
+          "quantity": 1.0,
+          "unit": "unit"
+        },
+        "electrical_energy": {
+          "quantity": 5000.0,
+          "unit": "kWh"
+        },
+        "regolith_coarse_fraction": {
+          "quantity": 80.0,
+          "unit": "kg"
+        },
+        "regolith_fine_fraction": {
+          "quantity": 160.0,
+          "unit": "kg"
+        },
+        "oxygen_gas": {
+          "quantity": 60.8,
+          "unit": "kg"
+        },
+        "regolith_metal_crude": {
+          "quantity": 1.2000000000000028,
+          "unit": "kg"
+        }
+      }
+    }
+  ],
+  "inventory_deltas": [
+    {
+      "process_run_id": "2e7d34a5-63a0-4d15-849c-54a79f00aace",
+      "time_hours": 1.5,
+      "delta": {
+        "regolith_metal_crude": {
+          "quantity": -90.0,
+          "unit": "kg"
+        },
+        "cast_metal_parts": {
+          "quantity": 85.0,
+          "unit": "kg"
+        }
+      }
+    },
+    {
+      "process_run_id": "b34af705-8208-4aea-82f3-b94cfeb0a08c",
+      "time_hours": 26.4024902490249,
+      "delta": {
+        "cast_metal_parts": {
+          "quantity": -85.0,
+          "unit": "kg"
+        },
+        "machined_part_raw": {
+          "quantity": 83.0,
+          "unit": "kg"
+        }
+      }
+    },
+    {
+      "process_run_id": "9e07c193-8008-4256-b3d0-853f1c71822e",
+      "time_hours": 29.4024902490249,
+      "delta": {
+        "machined_part_raw": {
+          "quantity": -83.0,
+          "unit": "kg"
+        },
+        "finished_part": {
+          "quantity": 83.0,
+          "unit": "kg"
+        }
+      }
+    },
+    {
+      "process_run_id": "4ebe8271-1a20-48f3-84db-8f2dad104cd9",
+      "time_hours": 31.4024902490249,
+      "delta": {
+        "finished_part": {
+          "quantity": -83.0,
+          "unit": "kg"
+        },
+        "finished_part_deburred": {
+          "quantity": 80.0,
+          "unit": "kg"
+        }
+      }
+    },
+    {
+      "process_run_id": "d1768870-50d2-4d69-9891-cc49dec2001e",
+      "time_hours": 32.4024902490249,
+      "delta": {
+        "finished_part_deburred": {
+          "quantity": -80.0,
+          "unit": "kg"
+        },
+        "anvil_block_basic": {
+          "quantity": 1.0,
+          "unit": "unit"
+        }
+      }
+    },
+    {
+      "process_run_id": "286bb587-0b8d-49f9-a09f-f7ca36366a50",
+      "time_hours": 94.0,
+      "delta": {
+        "regolith_lunar_mare": {
+          "quantity": 400.0,
+          "unit": "kg"
+        }
+      }
+    },
+    {
+      "process_run_id": "41739f92-34d7-4c80-a0f1-52c79d458f58",
+      "time_hours": 95.0,
+      "delta": {
+        "regolith_lunar_mare": {
+          "quantity": -400.0,
+          "unit": "kg"
+        },
+        "regolith_coarse_fraction": {
+          "quantity": 240.0,
+          "unit": "kg"
+        },
+        "regolith_fine_fraction": {
+          "quantity": 160.0,
+          "unit": "kg"
+        }
+      }
+    },
+    {
+      "process_run_id": "90540aec-3860-4f1c-9aba-7194546521ac",
+      "time_hours": 96.0,
+      "delta": {
+        "regolith_coarse_fraction": {
+          "quantity": -160.0,
+          "unit": "kg"
+        },
+        "regolith_powder": {
+          "quantity": 152.0,
+          "unit": "kg"
+        }
+      }
+    },
+    {
+      "process_run_id": "fc7a0b62-a4ea-4e97-ae83-6523a4a7fc08",
+      "time_hours": 108.0,
+      "delta": {
+        "regolith_powder": {
+          "quantity": -152.0,
+          "unit": "kg"
+        },
+        "oxygen_gas": {
+          "quantity": 60.8,
+          "unit": "kg"
+        },
+        "regolith_metal_crude": {
+          "quantity": 91.2,
+          "unit": "kg"
+        }
+      }
+    },
+    {
+      "process_run_id": "6a40ff2d-7f30-4ca2-88bb-292bfd18ca2c",
+      "time_hours": 151.5,
+      "delta": {
+        "regolith_metal_crude": {
+          "quantity": -90.0,
+          "unit": "kg"
+        },
+        "cast_metal_parts": {
+          "quantity": 85.0,
+          "unit": "kg"
+        }
+      }
+    },
+    {
+      "process_run_id": "22caf277-8202-4e87-afa7-96aef0087fd9",
+      "time_hours": 176.4024902490249,
+      "delta": {
+        "cast_metal_parts": {
+          "quantity": -85.0,
+          "unit": "kg"
+        },
+        "machined_part_raw": {
+          "quantity": 83.0,
+          "unit": "kg"
+        }
+      }
+    },
+    {
+      "process_run_id": "87adf15c-e556-4230-8cc4-5b6088e50748",
+      "time_hours": 179.4024902490249,
+      "delta": {
+        "machined_part_raw": {
+          "quantity": -83.0,
+          "unit": "kg"
+        },
+        "finished_part": {
+          "quantity": 83.0,
+          "unit": "kg"
+        }
+      }
+    },
+    {
+      "process_run_id": "fa28d1ec-a115-451e-bcca-d144bd5183c8",
+      "time_hours": 181.4024902490249,
+      "delta": {
+        "finished_part": {
+          "quantity": -83.0,
+          "unit": "kg"
+        },
+        "finished_part_deburred": {
+          "quantity": 80.0,
+          "unit": "kg"
+        }
+      }
+    },
+    {
+      "process_run_id": "0649e847-c94d-4e9c-a260-dc4b36ef6a17",
+      "time_hours": 182.4024902490249,
+      "delta": {
+        "finished_part_deburred": {
+          "quantity": -80.0,
+          "unit": "kg"
+        },
+        "anvil_block_basic": {
+          "quantity": 1.0,
+          "unit": "unit"
+        }
+      }
+    }
+  ]
+}

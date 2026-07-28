@@ -4,10 +4,46 @@ name: EBF3 pressure spring
 mass: 0.3
 unit: unit
 unit_kind: discrete
-material_class: metal
-notes: >
-  WF-15. Spring providing drive-roll pressure force. Intentional Level-2
-  single-part spring leaf; spring rate, wire diameter, alloy, and heat treatment
-  remain material/process details. See
-  research/ebf3_bom_sources/organized/wire_feeder_level_2_audit.md. No local
-  recipe is attached yet.
+material: steel
+notes: 'WF-15. Spring providing drive-roll pressure force. Intentional Level-2 single-part spring
+  leaf; spring rate, wire diameter, alloy, and heat treatment remain material/process details. See
+  research/ebf3_bom_sources/organized/wire_feeder_level_2_audit.md. First-pass manufacturing/import
+  route is recorded in the linked EBF3 route-review recipe.
+
+  '
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Replace first-pass nominal import mass with sourced lower/upper mass bounds if this item dominates
+  imported mass.
+- 'Resolve local-route blocker before claiming local manufacturing closure: metal_forming_basic_v0
+  requires non-Ready hydraulic_press and plate_rolling_mill; KB also lacks spring steel heat treatment
+  and fatigue-qualified spring forming route.'
+- 'Encode or verify performance requirements outside prose notes: Spring rate; preload; fatigue life;
+  heat treatment; vacuum cleanliness.'
+- 'Review route sensitivity flags before treating the route as nominally closed: spring;fatigue;route_gap.'
+- Define spring winding/forming, quench/temper, shot/finish if needed, and fatigue/load test chain.
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_pressure_spring
+  source_recipe_path: kb/recipes/recipe_ebf3_pressure_spring.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: route_gap
+  simulation_import_mass_policy: import_until_gap_resolved
+  mass_nominal_kg: 0.3
+  availability_class: local_derived
+  primary_process_id: metal_forming_basic_v0
+  executable_process_id: import_receiving_basic_v0
+  secondary_process_ids:
+  - inspection_basic_v0
+  ready_machine_ids:
+  - labor_bot_general_v0
+  - assembly_tools_basic
+  confidence: low
+  reasoning_brief: Steel is lunar-plausible and heat-treatment furnace exists, but spring geometry,
+    temper, fatigue life, relaxation, and load acceptance are not closed.
+  blocked_machine_or_process_reason: Steel is lunar-plausible and heat-treatment furnace exists, but
+    spring geometry, temper, fatigue life, relaxation, and load acceptance are not closed.
+route_decision: route_gap
+simulation_import_mass_policy: import_until_gap_resolved
+is_import: true

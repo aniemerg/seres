@@ -1,6 +1,8 @@
-# Coil-Level Decomposition Plan
+# Coil Leaf Readiness Review
 
-Status: Level-3 planning file with targeted source review completed.
+Status: targeted source review completed. Decision: the reviewed gun coil items
+remain leaf parts for BOM purposes. The open work is material/process and
+electrical-interface readiness, not further child-BOM decomposition.
 
 Parent items:
 
@@ -23,9 +25,7 @@ Source registry:
 
 Target KB BOMs:
 
-- None yet. This pass resolves the first coil-level review by keeping adopted
-  lens/deflection coil assemblies intact until source geometry and electrical
-  interface ownership are stronger.
+- None. The four gun coil items should not receive child BOMs in this pass.
 
 Workflow and decision-status definitions:
 
@@ -177,19 +177,18 @@ Use:
 
 | Candidate component/function | Status | Applies to | KB representation | Decision basis |
 | --- | --- | --- | --- | --- |
-| Lens coil winding pack | defer | main/dynamic lens coil assemblies | None | Diamond supports a coil at the lens level, but the current parent item already is the coil assembly. No source confirms a separately serviceable winding pack. |
-| Lens bobbin / former | defer | main/dynamic lens coil assemblies | None | Candidate remains plausible, but current sources do not show a distinct EBF3 lens bobbin/former. |
-| Lens coil insulation / sealing / potting | defer | main/dynamic lens coil assemblies | None | Required in practice, but no EBF3 geometry, material, or vacuum compatibility basis yet. |
-| Lens lead terminations | split_boundary / defer | lens coil assemblies / FG-19 / power supplies | None | Real electrical interface, but ownership between coil pigtail, gun wiring, and regulated current supply is unresolved. |
-| Lens cooling feature | defer | lens coil assemblies / gun column | None | Thermal feature is plausible but source-specific heat load and cooling method are missing. |
-| Deflection coil winding below X/Y pair | defer | X/Y deflection coil pairs | None | CN103406657A supports coil winding generally, but adopting a winding child below a coil-pair parent would duplicate the parent unless the winding layout is source-defined. |
-| Deflection magnetic core/bobbin | split_boundary / defer | X/Y deflection coil pairs / deflection yoke | Existing `ebf3_gun_deflection_magnetic_yoke` owns yoke-level magnetic circuit | Patent supports magnetic core/bobbin, but this may be the same physical magnetic circuit currently represented by the yoke. Do not create a second overlapping child. |
-| Deflection coil insulation | defer | X/Y deflection coil pairs | None | Coil-level material/process detail; no EBF3 vacuum-compatible insulation source yet. |
-| Deflection coil leads / terminations | split_boundary / defer | X/Y deflection coil pairs / FG-19 / power supplies | None | Electrical interface to current driver is unresolved. |
+| Lens coil as leaf winding | route_as_single_leaf | main/dynamic lens coil assemblies | Existing `ebf3_gun_main_lens_coil_assembly`, `ebf3_gun_dynamic_lens_coil_assembly` | A coil is already the relevant BOM leaf here. Do not split into winding pack, bobbin, potting, or terminals without source-confirmed separate hardware. |
+| Lens coil material/process readiness | material_process_pending | main/dynamic lens coil assemblies | Same existing leaf items | Select conductor, insulation, winding method, vacuum compatibility, and test requirements later. |
+| Lens lead interface | split_boundary / defer | lens coil leaves / FG-19 / power supplies | None | Real electrical interface, but ownership between coil pigtail, gun wiring, and regulated current supply is unresolved. |
+| Lens cooling feature | defer | lens coil leaves / gun column | None | Only add separate cooling hardware if a source or heat-load design requires it. |
+| Deflection X/Y coil pair as leaf winding | route_as_single_leaf | X/Y deflection coil pairs | Existing `ebf3_gun_deflection_x_coil_pair`, `ebf3_gun_deflection_y_coil_pair` | The coil pair is the relevant leaf. A lower winding child would duplicate the parent unless a source defines separately serviceable subcoils. |
+| Deflection magnetic core/bobbin | split_boundary / defer | X/Y deflection coil pairs / deflection yoke | Existing `ebf3_gun_deflection_magnetic_yoke` owns yoke-level magnetic circuit | Patent-specific core/bobbin language may describe the same magnetic circuit already represented by the yoke. Do not create a second overlapping child. |
+| Deflection coil material/process readiness | material_process_pending | X/Y deflection coil pairs | Same existing leaf items | Select conductor, insulation, winding pattern, vacuum compatibility, inductance/current limits, and test requirements later. |
+| Deflection coil leads / terminations | split_boundary / defer | X/Y deflection coil leaves / FG-19 / power supplies | None | Electrical interface to current driver is unresolved. |
 | Deflection mount or bracket | split_boundary / defer | FG-8 / FG-17 | None | Could belong to the coil pair, deflection yoke, or gun column. Needs physical mounting source. |
-| Deflection cooling or thermal feature | defer | FG-8 | None | No source-specific heat-load evidence. |
+| Deflection cooling or thermal feature | defer | FG-8 | None | Only add separate cooling hardware if a source or heat-load design requires it. |
 | Current driver / amplifier | split_boundary | power supplies / controls | None under gun coil items | Ribton, JEOL, and Kimball reinforce driver importance, but source/supply/control ownership is outside coil BOM. |
-| Coil conductor material | defer | all coil parent items | None | Copper is likely for coils, but this review is not a material/process readiness review and no EBF3 coil material is specified. |
+| Coil conductor material | material_process_pending | all coil parent items | Same existing leaf items | Copper is the baseline conductor material; this review does not yet set conductor grade, cross-section, insulation, or winding process. |
 | Coil manufacturing recipe | reject for this pass | all coil parent items | None | Local closure would be premature without winding pattern, conductor specification, insulation, vacuum compatibility, and test requirements. |
 
 ## Current KB Action
@@ -198,24 +197,25 @@ Use:
 - Keep `ebf3_gun_main_lens_coil_assembly`,
   `ebf3_gun_dynamic_lens_coil_assembly`,
   `ebf3_gun_deflection_x_coil_pair`, and
-  `ebf3_gun_deflection_y_coil_pair` as unresolved coil assemblies.
-- Update notes to point to this plan and state that lower coil details remain
-  deferred after review, not forgotten.
+  `ebf3_gun_deflection_y_coil_pair` as leaf coil items.
+- Update notes to point to this plan and state that material/process readiness
+  remains open.
 - Do not model current drivers, power supplies, or control electronics under the
-  coil assemblies.
+  coil items.
 
 ## Register Updates
 
-Rows addressed by this plan remain unresolved:
+Rows addressed by this plan should be interpreted as material/process or
+interface work, not child-BOM work:
 
-- FG-D-022 and FG-D-031: bobbin/former remains deferred until a source shows a
-  distinct physical former at the relevant parent level.
-- FG-D-023 and FG-D-032: insulation/sealing/potting remains deferred to
-  material/process readiness.
+- FG-D-022 and FG-D-031: do not create bobbin/former children unless a source
+  shows distinct physical hardware at the relevant parent level.
+- FG-D-023 and FG-D-032: coil insulation remains material/process readiness.
 - FG-D-033: coil leads/terminations remain split-boundary/defer pending an
   electrical interface plan.
 - FG-D-035: deflection mount/bracket remains boundary-sensitive with gun column.
-- FG-D-036: deflection cooling remains deferred pending thermal design evidence.
+- FG-D-036: deflection cooling remains deferred unless thermal design evidence
+  requires separate hardware.
 
 ## Manufacturing Readiness
 

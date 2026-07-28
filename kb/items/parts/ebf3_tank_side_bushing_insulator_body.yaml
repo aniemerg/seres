@@ -4,11 +4,53 @@ name: EBF3 tank-side bushing insulator body
 mass: 0.75
 unit: unit
 unit_kind: discrete
-material_class: ceramic
-notes: >
-  Child of HV-8. Insulating body for the tank-side high-voltage output bushing.
-  This keeps the tank-wall insulation function visible without deciding whether
-  the final design is ceramic, oil-impregnated paper, or another HV insulation
-  construction. Creepage distance, field stress design, sealing, and material
-  readiness remain unresolved; see
-  research/ebf3_bom_sources/organized/hv_tank_interface_hardware_plan.md.
+material: ceramic
+notes: Child of HV-8. Insulating body for the tank-side high-voltage output bushing. This keeps the
+  tank-wall insulation function visible without deciding whether the final design is ceramic, oil-impregnated
+  paper, or another HV insulation construction.
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Resolve creepage distance, field stress design, sealing, and material readiness; see research/ebf3_bom_sources/organized/hv_tank_interface_hardware_plan.md.
+- Replace first-pass nominal import mass with sourced lower/upper mass bounds if this item dominates
+  imported mass.
+- 'Resolve local-route blocker before claiming local manufacturing closure: HV bushing body needs
+  dielectric/seal qualification, partial-discharge margin, oil/vacuum sealing, creepage, and metallization
+  beyond alumina material.'
+- 'Encode or verify performance requirements outside prose notes: HV creepage and clearance; oil/vacuum
+  seal; dielectric strength; partial discharge margin.'
+- 'Review route sensitivity flags before treating the route as nominally closed: HV_bushing;vacuum_or_oil_seal;semantic_audit:hv_bushing_gap.'
+- Define ceramic forming/sintering, metallization or glass/ceramic sealing, cleaning, dielectric test,
+  and leak/outgassing acceptance before claiming local closure.
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_tank_side_bushing_insulator_body
+  source_recipe_path: kb/recipes/recipe_ebf3_tank_side_bushing_insulator_body.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: route_gap
+  simulation_import_mass_policy: import_until_gap_resolved
+  mass_nominal_kg: 0.75
+  availability_class: local_derived
+  primary_process_id: ceramic_forming_basic_v0
+  executable_process_id: import_receiving_basic_v0
+  secondary_process_ids:
+  - alumina_extraction_from_highlands_v0
+  - ceramic_base_fabrication_ v0
+  - electrical_feedthrough_vacuum_fabrication_v0
+  - ceramic_sintering_process_v0
+  ready_machine_ids:
+  - labor_bot_general_v0
+  - chemical_reactor_basic
+  - pressing_mold_set
+  - hydraulic_press
+  - kiln_ceramic
+  confidence: low
+  reasoning_brief: Material route is lunar-plausible, but this part is an HV/electron-gun/feedthrough
+    dielectric boundary requiring creepage, leakage, partial-discharge or hermetic QA; labor-bot capability
+    is irrelevant.
+  blocked_machine_or_process_reason: Material route is lunar-plausible, but this part is an HV/electron-gun/feedthrough
+    dielectric boundary requiring creepage, leakage, partial-discharge or hermetic QA; labor-bot capability
+    is irrelevant.
+route_decision: route_gap
+simulation_import_mass_policy: import_until_gap_resolved
+is_import: true

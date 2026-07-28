@@ -1,0 +1,36 @@
+id: recipe_ebf3_cabin_frame_corner_gusset_set
+kind: recipe
+variant_id: ebf3_route_review_v0
+target_item_id: ebf3_cabin_frame_corner_gusset_set
+inputs:
+- item_id: steel_plate_or_sheet
+  qty: 7.35
+  unit: kg
+outputs:
+- item_id: ebf3_cabin_frame_corner_gusset_set
+  qty: 1.0
+  unit: unit
+steps:
+- process_id: sheet_metal_fabrication_v0
+  inputs:
+  - item_id: steel_plate_or_sheet
+    qty: 7.35
+    unit: kg
+  outputs:
+  - item_id: ebf3_cabin_frame_corner_gusset_set
+    qty: 1.0
+    unit: unit
+  notes: 'First-pass local route: fabricate/cut/form steel plate gussets; cabin stiffness, hole accuracy,
+    and vacuum-clean finish remain sensitivity flags.'
+notes: 'EBF3 route-review recipe for Simviewer inspection and first-pass simulation routing.
+
+  Route decision: lunar_candidate_flagged.
+
+  Simulation import mass policy: sensitivity_flag.
+
+  Executable first-pass process: sheet_metal_fabrication_v0.
+
+  Targeted material/process recheck: reroute_existing_process.
+
+  Reasoning: Corner gussets are sheet-metal/plate fabrication with hole and edge finishing; cabin
+  stiffness and datum accuracy remain sensitivity flags.'

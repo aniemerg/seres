@@ -4,10 +4,12 @@ name: EBF3 wire feed spring tensioner
 mass: 0.3
 unit: unit
 unit_kind: discrete
-material_class: metal
+material: metal
 notes: >
   Deferred pressure-adjustment candidate. The source-table aligned rows are
   `ebf3_pressure_adjustment_knob` and `ebf3_pressure_spring`; this tensioner
   should return only if a later child decomposition needs a separate assembly.
   See research/ebf3_bom_sources/organized/wire_feeder_level_2_audit.md. No local
   recipe is attached yet.
+trust_tags:
+- trusted_ebf3_unreplaced

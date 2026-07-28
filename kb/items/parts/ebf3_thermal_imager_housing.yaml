@@ -4,6 +4,38 @@ name: EBF3 thermal imager housing
 mass: 0.2
 unit: unit
 unit_kind: discrete
-material_class: metal
-notes: Child of ebf3_thermal_imaging_monitoring_system. Housing for EBF3 thermal imaging
-  monitoring system. Exact specification and local manufacturing route remain unresolved.
+material: aluminum
+notes: Child of ebf3_thermal_imaging_monitoring_system. Housing for EBF3 thermal imaging monitoring
+  system.
+recipe: recipe_ebf3_thermal_imager_housing
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Replace coarse item specification with explicit material, geometry/interface requirements, and lower/upper
+  mass bounds.
+- Replace validation-scaled generic stock inputs with explicit EBF material lower/upper bounds and
+  material-specific recipe inputs.
+- 'Encode or verify performance requirements outside prose notes: camera thermal path; vacuum compatibility;
+  optical alignment mounting; electronics shielding.'
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_thermal_imager_housing
+  source_recipe_path: kb/recipes/recipe_ebf3_thermal_imager_housing.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: lunar_candidate
+  simulation_import_mass_policy: local_nominal
+  mass_nominal_kg: 0.2
+  availability_class: local_derived
+  primary_process_id: aluminum_housing_machining_v1
+  executable_process_id: aluminum_housing_machining_v1
+  secondary_process_ids:
+  - assembly_basic_v0
+  ready_machine_ids:
+  - labor_bot_general_v0
+  - multi_axis_cnc_machining_center
+  - assembly_tools_basic
+  confidence: medium
+  reasoning_brief: Thermal imager housing is ordinary local machined housing fabrication; camera alignment
+    and thermal behavior remain requirements.
+route_decision: lunar_candidate
+simulation_import_mass_policy: local_nominal

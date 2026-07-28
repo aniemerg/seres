@@ -4,6 +4,47 @@ name: EBF3 x axis ball screw shaft
 mass: 1.0
 unit: unit
 unit_kind: discrete
-material_class: metal
-notes: Child of ebf3_ball_screw_shafts. X-axis ball screw shaft for EBF3 ball screw
-  shafts. Exact specification and local manufacturing route remain unresolved.
+material: hardened_steel
+notes: Child of ebf3_ball_screw_shafts. X-axis ball screw shaft for EBF3 ball screw shafts.
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Replace coarse item specification with explicit material, geometry/interface requirements, and lower/upper
+  mass bounds.
+- Replace first-pass nominal import mass with sourced lower/upper mass bounds if this item dominates
+  imported mass.
+- 'Resolve local-route blocker before claiming local manufacturing closure: Ball-screw shaft needs
+  precision lead, ground race/thread finish, hardness, straightness, inspection, and vacuum lubricant
+  interface beyond steel machining.'
+- 'Encode or verify performance requirements outside prose notes: lead accuracy; straightness; surface
+  hardness; finish; vacuum compatible lubricant interface.'
+- 'Review route sensitivity flags before treating the route as nominally closed: performance_flag:precision_motion;candidate_fit:accuracy_risk;semantic_audit:ball_scr
+  ew_route_gap.'
+- Define bearing/ball-screw route with heat treat, precision grinding, lapping, inspection, lubrication,
+  and acceptance tests before local credit.
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_x_axis_ball_screw_shaft
+  source_recipe_path: kb/recipes/recipe_ebf3_x_axis_ball_screw_shaft.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: route_gap
+  simulation_import_mass_policy: import_until_gap_resolved
+  mass_nominal_kg: 1.0
+  availability_class: local_derived
+  primary_process_id: steel_shaft_machining_v1
+  executable_process_id: import_receiving_basic_v0
+  secondary_process_ids:
+  - precision_grinding_basic_v0
+  ready_machine_ids:
+  - labor_bot_general_v0
+  - multi_axis_cnc_machining_center
+  confidence: medium
+  reasoning_brief: Material and some machines exist, but bearing/ball-screw/linear-guide geometry
+    needs hardened races, precision grinding/lapping, preload/runout control, lubrication, metrology,
+    and life QA; this is a performance chain gap.
+  blocked_machine_or_process_reason: Material and some machines exist, but bearing/ball-screw/linear-guide
+    geometry needs hardened races, precision grinding/lapping, preload/runout control, lubrication,
+    metrology, and life QA; this is a performance chain gap.
+route_decision: route_gap
+simulation_import_mass_policy: import_until_gap_resolved
+is_import: true

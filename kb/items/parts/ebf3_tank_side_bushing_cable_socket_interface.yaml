@@ -4,11 +4,32 @@ name: EBF3 tank-side bushing cable socket interface
 mass: 0.2
 unit: unit
 unit_kind: discrete
-material_class: composite
-notes: >
-  Child of HV-8. Socket or receiving interface for the HV cable on the tank
-  side. This is a package marker to keep the tank-side cable interface out of
-  the main cable body and out of the gun-side HV input. Connector geometry,
-  stress-control transition, and service boundary remain unresolved; see
-  research/ebf3_bom_sources/organized/hv_tank_interface_hardware_plan.md and
-  research/ebf3_bom_sources/organized/ebf3_interface_architecture.md.
+material: composite
+notes: Child of HV-8. Socket or receiving interface for the HV cable on the tank side. This is a package
+  marker to keep the tank-side cable interface out of the main cable body and out of the gun-side
+  HV input.
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Resolve connector geometry, stress-control transition, and service boundary; see research/ebf3_bom_sources/organized/hv_tank_interface_hardware_plan.md
+  and research/ebf3_bom_sources/organized/ebf3_interface_architecture.md.
+- Replace first-pass nominal import mass with sourced lower/upper mass bounds if this item dominates
+  imported mass.
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_tank_side_bushing_cable_socket_interface
+  source_recipe_path: kb/recipes/recipe_ebf3_tank_side_bushing_cable_socket_interface.yaml
+  source_queue_type: leaf_decomposition_review_kb_recipe
+  route_decision: import_as_leaf
+  simulation_import_mass_policy: import_nominal
+  mass_nominal_kg: 0.2
+  availability_class: keep_ebf3_leaf
+  primary_process_id: import_receiving_basic_v0
+  executable_process_id: import_receiving_basic_v0
+  reasoning_brief: Connector/terminal item is low-mass, mixed-material, and rating-sensitive; direct
+    import avoids invented contact/body/dielectric manufacturing
+  recommended_edit: Count as Earth import for first run; split only for a later connector-specific
+    study
+route_decision: import_as_leaf
+simulation_import_mass_policy: import_nominal
+is_import: true

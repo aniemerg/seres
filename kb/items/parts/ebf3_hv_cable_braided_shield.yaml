@@ -4,8 +4,46 @@ name: EBF3 HV cable braided shield
 mass: 0.18
 unit: unit
 unit_kind: discrete
-material_class: conductive_metal
-notes: >
-  Level-3 child of HV-9. Cable shield braid around the HV cable insulation
-  system. Adopted from HV cable source evidence for braided shielding. Shield
-  material, coverage, grounding, and termination policy remain deferred.
+material: aluminum
+notes: Level-3 child of HV-9. Cable shield braid around the HV cable insulation system. Adopted from
+  HV cable source evidence for braided shielding.
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Resolve deferred Shield material, coverage, grounding, and termination policy.
+- Replace validation-scaled generic stock inputs with explicit EBF material lower/upper bounds and
+  material-specific recipe inputs.
+- 'Encode or verify performance requirements outside prose notes: shield coverage; termination resistance;
+  bend fatigue; HV cable grounding.'
+- 'Review route sensitivity flags before treating the route as nominally closed: HV_cable;shield_termination;material_fix:no_stainless_without_trace_alloy_closure.'
+- 'Keep out of CNC: braided/flexible shield needs explicit wire drawing/braiding or shield fabrication
+  route.'
+- Add shield braid/foil wrapping process and route recipes through wire drawing plus braiding and
+  termination QA.
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_hv_cable_braided_shield
+  source_recipe_path: kb/recipes/recipe_ebf3_hv_cable_braided_shield.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: route_gap
+  simulation_import_mass_policy: import_until_gap_resolved
+  mass_nominal_kg: 0.18
+  availability_class: local_derived
+  primary_process_id: wire_forming_process_v0
+  executable_process_id: import_receiving_basic_v0
+  secondary_process_ids:
+  - steel_mesh_sheet_production_v0
+  - spool_winding_basic_v0
+  ready_machine_ids:
+  - labor_bot_general_v0
+  - winding_drums
+  confidence: medium
+  reasoning_brief: Existing KB has wire drawing/spool processes, but a braided/flexible shield needs
+    explicit braid coverage, tensioning, termination continuity, flex, and vacuum cleanliness; not
+    a labor-only operation.
+  blocked_machine_or_process_reason: Existing KB has wire drawing/spool processes, but a braided/flexible
+    shield needs explicit braid coverage, tensioning, termination continuity, flex, and vacuum cleanliness;
+    not a labor-only operation.
+route_decision: route_gap
+simulation_import_mass_policy: import_until_gap_resolved
+is_import: true

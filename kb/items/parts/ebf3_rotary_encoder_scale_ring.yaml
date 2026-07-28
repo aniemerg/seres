@@ -4,6 +4,36 @@ name: EBF3 rotary encoder scale ring
 mass: 0.18
 unit: unit
 unit_kind: discrete
-material_class: glass
-notes: Child of ebf3_rotary_encoder. Encoder scale ring for EBF3 rotary encoder. Exact
-  specification and local manufacturing route remain unresolved.
+material: glass
+notes: Child of ebf3_rotary_encoder. Encoder scale ring for EBF3 rotary encoder.
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Replace coarse item specification with explicit material, geometry/interface requirements, and lower/upper
+  mass bounds.
+- Replace first-pass nominal import mass with sourced lower/upper mass bounds if this item dominates
+  imported mass.
+- 'Resolve local-route blocker before claiming local manufacturing closure: Precision encoder scale
+  patterning, pitch accuracy, optical contrast, concentricity, and metrology are not closed locally.'
+- 'Encode or verify performance requirements outside prose notes: scale pitch accuracy; optical contrast;
+  concentricity; thermal stability; contamination control.'
+- 'Review route sensitivity flags before treating the route as nominally closed: precision_encoder;metrology_gap;semantic_audit:precision_encoder_import.'
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_rotary_encoder_scale_ring
+  source_recipe_path: kb/recipes/recipe_ebf3_rotary_encoder_scale_ring.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: earth_import
+  simulation_import_mass_policy: import_nominal
+  mass_nominal_kg: 0.18
+  availability_class: local_derived
+  primary_process_id: import_receiving_basic_v0
+  executable_process_id: import_receiving_basic_v0
+  ready_machine_ids:
+  - labor_bot_general_v0
+  confidence: low
+  reasoning_brief: Rotary encoder scale ring should be direct import for first simulation despite
+    glass material plausibility
+route_decision: earth_import
+simulation_import_mass_policy: import_nominal
+is_import: true

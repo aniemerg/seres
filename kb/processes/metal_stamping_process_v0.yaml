@@ -15,6 +15,9 @@ resource_requirements:
 - machine_id: labor_bot_general_v0
   qty: 1
   unit: count
+- machine_id: stamping_press_basic
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 0.04
@@ -22,5 +25,14 @@ energy_model:
 time_model:
   type: batch
   hr_per_batch: 0.25
-notes: Simple stamping operation converting steel sheet 1mm into breaker housing with minor loss.
+notes: Template stamping/punching operation for sheet-metal parts; concrete recipes override inputs and
+  outputs. Part-specific die tooling is required but not modeled as a machine resource in the current
+  schema.
 process_type: batch
+future_improvements:
+- Add a schema-supported non-consumed tooling requirement for punch_die_set or part-specific dies; do
+  not hide die needs inside labor.
+- Replace generic punch_die_set with part-specific die/tooling when stamped EBF parts dominate local manufacturing
+  conclusions.
+- Audit stamping_press_basic capabilities before treating stamped routes as clean local manufacturing.
+is_template: true

@@ -4,10 +4,54 @@ name: EBF3 gun cathode ceramic standoff set
 mass: 0.05
 unit: unit
 unit_kind: discrete
-material_class: ceramic
-notes: >
-  Level-3 child of FG-15. Ceramic standoff/support set for electrically isolating
-  and mechanically supporting the cartridge hot-contact region. Adopted from
-  electron-gun package sources that support ceramic standoffs and high-vacuum
-  support constraints. Exact alumina grade, metallization, and geometry remain
-  deferred.
+material: ceramic
+notes: Level-3 child of FG-15. Ceramic standoff/support set for electrically isolating and mechanically
+  supporting the cartridge hot-contact region. Adopted from electron-gun package sources that support
+  ceramic standoffs and high-vacuum support constraints.
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Resolve deferred Exact alumina grade, metallization, and geometry.
+- Replace first-pass nominal import mass with sourced lower/upper mass bounds if this item dominates
+  imported mass.
+- 'Resolve local-route blocker before claiming local manufacturing closure: Cathode-adjacent ceramic
+  standoffs need dielectric, thermal shock, alignment, and vacuum cleanliness qualification beyond
+  generic ceramic routes.'
+- 'Encode or verify performance requirements outside prose notes: dielectric standoff strength; thermal
+  shock; cathode alignment; vacuum cleanliness.'
+- 'Review route sensitivity flags before treating the route as nominally closed: HV_insulation;electron_gun_precision;semantic_audit:cathode_ceramic_gap.'
+- Define ceramic forming/sintering, metallization or glass/ceramic sealing, cleaning, dielectric test,
+  and leak/outgassing acceptance before claiming local closure.
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_gun_cathode_ceramic_standoff_set
+  source_recipe_path: kb/recipes/recipe_ebf3_gun_cathode_ceramic_standoff_set.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: route_gap
+  simulation_import_mass_policy: import_until_gap_resolved
+  mass_nominal_kg: 0.05
+  availability_class: local_derived
+  primary_process_id: ceramic_forming_basic_v0
+  executable_process_id: import_receiving_basic_v0
+  secondary_process_ids:
+  - alumina_extraction_from_highlands_v0
+  - ceramic_base_fabrication_ v0
+  - surface_finishing_am_parts_v0
+  - ceramic_sintering_process_v0
+  ready_machine_ids:
+  - labor_bot_general_v0
+  - chemical_reactor_basic
+  - multi_axis_cnc_machining_center
+  - pressing_mold_set
+  - hydraulic_press
+  - kiln_ceramic
+  confidence: medium
+  reasoning_brief: Material route is lunar-plausible, but this part is an HV/electron-gun/feedthrough
+    dielectric boundary requiring creepage, leakage, partial-discharge or hermetic QA; labor-bot capability
+    is irrelevant.
+  blocked_machine_or_process_reason: Material route is lunar-plausible, but this part is an HV/electron-gun/feedthrough
+    dielectric boundary requiring creepage, leakage, partial-discharge or hermetic QA; labor-bot capability
+    is irrelevant.
+route_decision: route_gap
+simulation_import_mass_policy: import_until_gap_resolved
+is_import: true

@@ -4,12 +4,10 @@ name: EBF3 thermal imaging monitoring system
 mass: 1.0
 unit: unit
 unit_kind: discrete
-material_class: composite
-notes: >
-  CTL-9. Thermal imaging monitoring system for melt-pool temperature or thermal
-  field monitoring. Controls owns the camera/electronics/data interface; the
-  manufacture cabin owns passive viewports, mounts, or chamber penetrations if
-  modeled separately. See
-  research/ebf3_bom_sources/organized/controls_level_2_audit.md. No local
-  recipe is attached yet.
-  This assembly is split by `bom_ebf3_thermal_imaging_monitoring_system`. Child items are package-level placeholders for decomposition fidelity only; no local recipe is attached yet.
+material: composite
+notes: |
+  CTL-9. Thermal imaging monitoring system for melt-pool temperature or thermal field monitoring. Controls owns the camera/electronics/data interface; the manufacture cabin owns passive viewports, mounts, or chamber penetrations if modeled separately. See research/ebf3_bom_sources/organized/controls_level_2_audit.md. No local recipe is attached yet. This assembly is split by `bom_ebf3_thermal_imaging_monitoring_system`. Child items are package-level placeholders for decomposition fidelity only; assembly recipe now only joins visible child items; child material and manufacturing readiness remain unresolved.
+bom: bom_ebf3_thermal_imaging_monitoring_system
+recipe: recipe_ebf3_thermal_imaging_monitoring_system_assembly_v0
+trust_tags:
+- trusted_ebf3_unreplaced

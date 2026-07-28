@@ -4,7 +4,35 @@ name: EBF3 gun cathode radiation shield spacer set
 mass: 0.02
 unit: unit
 unit_kind: discrete
-material_class: refractory_metal
-notes: Child of ebf3_gun_cathode_radiation_shield. Shield spacer set for EBF3 gun
-  cathode radiation shield. Exact specification and local manufacturing route remain
-  unresolved.
+material: refractory_metal
+notes: Child of ebf3_gun_cathode_radiation_shield. Shield spacer set for EBF3 gun cathode radiation
+  shield.
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Replace coarse item specification with explicit material, geometry/interface requirements, and lower/upper
+  mass bounds.
+- Replace first-pass nominal import mass with sourced lower/upper mass bounds if this item dominates
+  imported mass.
+- 'Resolve local-route blocker before claiming local manufacturing closure: No Ready local refractory
+  spacer route closes trace feedstock plus cathode thermal environment.'
+- 'Encode or verify performance requirements outside prose notes: high temperature stability; low
+  vapor pressure; cathode spacing tolerance.'
+- 'Review route sensitivity flags before treating the route as nominally closed: refractory_trace;electron_gun_thermal.'
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_gun_cathode_radiation_shield_spacer_set
+  source_recipe_path: kb/recipes/recipe_ebf3_gun_cathode_radiation_shield_spacer_set.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: earth_import
+  simulation_import_mass_policy: import_nominal
+  mass_nominal_kg: 0.02
+  availability_class: scarce_trace
+  primary_process_id: none
+  executable_process_id: import_receiving_basic_v0
+  confidence: low
+  reasoning_brief: Small radiation-shield spacers are performance-critical refractory parts and should
+    be imported in first simulation
+route_decision: earth_import
+simulation_import_mass_policy: import_nominal
+is_import: true

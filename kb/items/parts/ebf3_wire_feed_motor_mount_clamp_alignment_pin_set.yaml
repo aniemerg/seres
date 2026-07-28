@@ -4,7 +4,40 @@ name: EBF3 wire feed motor mount clamp alignment pin set
 mass: 0.04
 unit: unit
 unit_kind: discrete
-material_class: metal
-notes: Child of ebf3_wire_feed_motor_mount_clamp. Alignment pin set for EBF3 wire
-  feed motor mount clamp. Exact specification and local manufacturing route remain
-  unresolved.
+material: steel
+notes: Child of ebf3_wire_feed_motor_mount_clamp. Alignment pin set for EBF3 wire feed motor mount
+  clamp.
+recipe: recipe_ebf3_wire_feed_motor_mount_clamp_alignment_pin_set
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Replace coarse item specification with explicit material, geometry/interface requirements, and lower/upper
+  mass bounds.
+- Replace validation-scaled generic stock inputs with explicit EBF material lower/upper bounds and
+  material-specific recipe inputs.
+- 'Encode or verify performance requirements outside prose notes: pin diameter tolerance; motor alignment
+  repeatability; wear.'
+- 'Review route sensitivity flags before treating the route as nominally closed: motion_precision.'
+- Do not block on the old audit label; add finish/inspection detail only if this leaf dominates simulation
+  sensitivity.
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_wire_feed_motor_mount_clamp_alignment_pin_set
+  source_recipe_path: kb/recipes/recipe_ebf3_wire_feed_motor_mount_clamp_alignment_pin_set.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: lunar_candidate_flagged
+  simulation_import_mass_policy: sensitivity_flag
+  mass_nominal_kg: 0.04
+  availability_class: local_derived
+  primary_process_id: steel_shaft_machining_v0
+  executable_process_id: steel_shaft_machining_v0
+  secondary_process_ids: []
+  ready_machine_ids:
+  - labor_bot_general_v0
+  - multi_axis_cnc_machining_center
+  confidence: medium
+  reasoning_brief: Steel machining route already has a concrete CNC/lathe-style machine; labor_bot
+    is handling only. Keep performance flags for alignment, seal, preload, wear, fatigue, or cleanliness
+    as applicable.
+route_decision: lunar_candidate_flagged
+simulation_import_mass_policy: sensitivity_flag

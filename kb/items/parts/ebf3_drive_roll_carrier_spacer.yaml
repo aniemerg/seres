@@ -4,10 +4,39 @@ name: EBF3 drive roll carrier spacer
 mass: 0.1
 unit: unit
 unit_kind: discrete
-material_class: metal
-notes: >
-  WF-11. Spacer maintaining drive-roll carrier spacing and alignment.
-  Intentional Level-2 single-part spacer leaf; thickness tolerance and material
-  choice remain material/process details. See
-  research/ebf3_bom_sources/organized/wire_feeder_level_2_audit.md. No local
-  recipe is attached yet.
+material: steel
+notes: 'WF-11. Spacer maintaining drive-roll carrier spacing and alignment. Intentional Level-2 single-part
+  spacer leaf; thickness tolerance and material choice remain material/process details. See research/ebf3_bom_sources/organized/wire_feeder_level_2_audit.md.
+  First-pass manufacturing/import route is recorded in the linked EBF3 route-review recipe.
+
+  '
+recipe: recipe_ebf3_drive_roll_carrier_spacer
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Replace validation-scaled generic stock inputs with explicit EBF material lower/upper bounds and
+  material-specific recipe inputs.
+- 'Encode or verify performance requirements outside prose notes: spacer thickness tolerance; carrier
+  alignment.'
+- 'Review route sensitivity flags before treating the route as nominally closed: candidate_fit:none.'
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_drive_roll_carrier_spacer
+  source_recipe_path: kb/recipes/recipe_ebf3_drive_roll_carrier_spacer.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: lunar_candidate
+  simulation_import_mass_policy: local_nominal
+  mass_nominal_kg: 0.1
+  availability_class: local_derived
+  primary_process_id: machining_basic_v0
+  executable_process_id: machining_basic_v0
+  secondary_process_ids:
+  - assembly_basic_v0
+  ready_machine_ids:
+  - multi_axis_cnc_machining_center
+  - labor_bot_general_v0
+  - assembly_tools_basic
+  confidence: high
+  reasoning_brief: Simple steel spacer is local nominal
+route_decision: lunar_candidate
+simulation_import_mass_policy: local_nominal

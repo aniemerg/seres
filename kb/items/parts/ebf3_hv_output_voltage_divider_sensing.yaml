@@ -4,14 +4,10 @@ name: EBF3 HV output voltage divider sensing hardware
 mass: 0.5
 unit: unit
 unit_kind: discrete
-material_class: electronic
-notes: >
-  HV-11. High-voltage output voltage divider or scaled voltage sensing hardware
-  candidate for HV tank/control feedback. Added during source-tag cleanup from
-  research/ebf3_bom_sources/organized/high_voltage_tank_level_2_audit.md.
-  Boundary reviewed in
-  research/ebf3_bom_sources/organized/hv_electrical_interface_review.md: the
-  HV-side divider hardware remains with the HV tank, while low-voltage ADC,
-  conditioning, logging, and decision logic belong to controls. No local recipe
-  is attached yet.
-  This assembly is split by `bom_ebf3_hv_output_voltage_divider_sensing`. Child items are structural placeholders for decomposition fidelity only; no local recipe is attached yet.
+material: electronic
+notes: |
+  HV-11. High-voltage output voltage divider or scaled voltage sensing hardware candidate for HV tank/control feedback. Added during source-tag cleanup from research/ebf3_bom_sources/organized/high_voltage_tank_level_2_audit.md. Boundary reviewed in research/ebf3_bom_sources/organized/hv_electrical_interface_review.md: the HV-side divider hardware remains with the HV tank, while low-voltage ADC, conditioning, logging, and decision logic belong to controls. No local recipe is attached yet. This assembly is split by `bom_ebf3_hv_output_voltage_divider_sensing`. Child items are structural placeholders for decomposition fidelity only; assembly recipe now only joins visible child items; child material and manufacturing readiness remain unresolved.
+bom: bom_ebf3_hv_output_voltage_divider_sensing
+recipe: recipe_ebf3_hv_output_voltage_divider_sensing_assembly_v0
+trust_tags:
+- trusted_ebf3_unreplaced

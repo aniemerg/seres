@@ -1,0 +1,27 @@
+id: recipe_ebf3_cabin_sacrificial_liner_assembly_v0
+kind: recipe
+variant_id: assembly_v0
+target_item_id: ebf3_cabin_sacrificial_liner
+inputs: &id001
+- item_id: ebf3_cabin_sacrificial_liner_panel_set
+  qty: 1.0
+  unit: unit
+- item_id: ebf3_cabin_sacrificial_liner_retainer_set
+  qty: 1.0
+  unit: unit
+outputs:
+- item_id: ebf3_cabin_sacrificial_liner
+  qty: 1.0
+  unit: unit
+steps:
+- process_id: assembly_basic_v0
+  inputs: *id001
+  outputs:
+  - item_id: ebf3_cabin_sacrificial_liner
+    qty: 1.0
+    unit: unit
+  notes: Assemble EBF3 cabin sacrificial liner from its source-aligned EBF3 child
+    items; child material and manufacturing readiness remain on the children.
+notes: BOM assembly recipe for EBF3 cabin sacrificial liner. This recipe only assembles
+  already-modeled EBF3 child items and does not claim local fabrication of unresolved
+  children.

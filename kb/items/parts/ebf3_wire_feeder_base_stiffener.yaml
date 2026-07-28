@@ -4,10 +4,41 @@ name: EBF3 wire feeder base stiffener
 mass: 0.4
 unit: unit
 unit_kind: discrete
-material_class: metal
-notes: >
-  WF-25. Stiffener plate or rib increasing wire-feeder base stiffness.
-  Intentional Level-2 single-part leaf; weld/fastener integration stays with the
-  feeder base package until layout is selected. See
-  research/ebf3_bom_sources/organized/wire_feeder_level_2_audit.md. No local
-  recipe is attached yet.
+material: steel
+notes: 'WF-25. Stiffener plate or rib increasing wire-feeder base stiffness. Intentional Level-2 single-part
+  leaf; weld/fastener integration stays with the feeder base package until layout is selected. See
+  research/ebf3_bom_sources/organized/wire_feeder_level_2_audit.md. First-pass manufacturing/import
+  route is recorded in the linked EBF3 route-review recipe.
+
+  '
+recipe: recipe_ebf3_wire_feeder_base_stiffener
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Replace validation-scaled generic stock inputs with explicit EBF material lower/upper bounds and
+  material-specific recipe inputs.
+- 'Encode or verify performance requirements outside prose notes: Base stiffener must provide stiffness,
+  mounting fit, and low-distortion support for the wire feeder.'
+- 'Review route sensitivity flags before treating the route as nominally closed: structural.'
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_wire_feeder_base_stiffener
+  source_recipe_path: kb/recipes/recipe_ebf3_wire_feeder_base_stiffener.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: lunar_candidate
+  simulation_import_mass_policy: local_nominal
+  mass_nominal_kg: 0.4
+  availability_class: local_derived
+  primary_process_id: sheet_metal_cutting_v0
+  executable_process_id: sheet_metal_cutting_v0
+  secondary_process_ids:
+  - machining_basic_v0
+  - inspection_basic_v0
+  ready_machine_ids:
+  - labor_bot_general_v0
+  - assembly_tools_basic
+  confidence: medium
+  reasoning_brief: Simple feeder-base stiffener is better represented as cut sheet/plate hardware
+    than generic frame fabrication.
+route_decision: lunar_candidate
+simulation_import_mass_policy: local_nominal

@@ -4,6 +4,45 @@ name: EBF3 gun trajectory corrector insulator set
 mass: 0.08
 unit: unit
 unit_kind: discrete
-material_class: insulator
-notes: Child of ebf3_gun_trajectory_corrector. Insulator set for EBF3 gun trajectory
-  corrector. Exact specification and local manufacturing route remain unresolved.
+material: alumina_ceramic
+notes: Child of ebf3_gun_trajectory_corrector. Insulator set for EBF3 gun trajectory corrector.
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Replace coarse item specification with explicit material, geometry/interface requirements, and lower/upper
+  mass bounds.
+- Replace first-pass nominal import mass with sourced lower/upper mass bounds if this item dominates
+  imported mass.
+- 'Resolve local-route blocker before claiming local manufacturing closure: Shaped HV ceramic insulator
+  needs forming/sintering plus dielectric/tracking qualification beyond alumina feedstock.'
+- 'Encode or verify performance requirements outside prose notes: dielectric withstand; tracking resistance;
+  thermal shock; electrode spacing stability.'
+- 'Review route sensitivity flags before treating the route as nominally closed: performance_flag:HV;performance_flag:electron_beam;candidate_fit:none;semantic_audit:
+  trajectory_corrector_insulator_gap.'
+- Define ceramic forming/sintering, metallization or glass/ceramic sealing, cleaning, dielectric test,
+  and leak/outgassing acceptance before claiming local closure.
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_gun_trajectory_corrector_insulator_set
+  source_recipe_path: kb/recipes/recipe_ebf3_gun_trajectory_corrector_insulator_set.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: route_gap
+  simulation_import_mass_policy: import_until_gap_resolved
+  mass_nominal_kg: 0.08
+  availability_class: local_derived
+  primary_process_id: ceramic_forming_basic_v0
+  executable_process_id: import_receiving_basic_v0
+  secondary_process_ids:
+  - ceramic_sintering_high_temp_v0
+  ready_machine_ids:
+  - labor_bot_general_v0
+  confidence: medium
+  reasoning_brief: Material route is lunar-plausible, but this part is an HV/electron-gun/feedthrough
+    dielectric boundary requiring creepage, leakage, partial-discharge or hermetic QA; labor-bot capability
+    is irrelevant.
+  blocked_machine_or_process_reason: Material route is lunar-plausible, but this part is an HV/electron-gun/feedthrough
+    dielectric boundary requiring creepage, leakage, partial-discharge or hermetic QA; labor-bot capability
+    is irrelevant.
+route_decision: route_gap
+simulation_import_mass_policy: import_until_gap_resolved
+is_import: true

@@ -4,7 +4,36 @@ name: EBF3 HV tank bonding anchor
 mass: 0.08
 unit: unit
 unit_kind: discrete
-material_class: metal
-notes: >
-  Child of HV-15. Local anchor or stud for tank bonding/shield connection.
-  Interlock switch and return-current topology remain unresolved.
+material: aluminum
+notes: Child of HV-15. Local anchor or stud for tank bonding/shield connection.
+recipe: recipe_ebf3_hv_tank_bonding_anchor
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Resolve interlock switch and return-current topology.
+- Replace validation-scaled generic stock inputs with explicit EBF material lower/upper bounds and
+  material-specific recipe inputs.
+- 'Encode or verify performance requirements outside prose notes: Bonding anchor must meet low impedance
+  ground path, mechanical pullout strength, corrosion/vacuum compatibility, and stable contact pressure.'
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_hv_tank_bonding_anchor
+  source_recipe_path: kb/recipes/recipe_ebf3_hv_tank_bonding_anchor.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: lunar_candidate
+  simulation_import_mass_policy: local_nominal
+  mass_nominal_kg: 0.08
+  availability_class: local_derived
+  primary_process_id: machining_basic_v0
+  executable_process_id: machining_basic_v0
+  secondary_process_ids:
+  - fastener_kit_small_fabrication_v0
+  - inspection_basic_v0
+  ready_machine_ids:
+  - multi_axis_cnc_machining_center
+  - labor_bot_general_v0
+  - assembly_tools_basic
+  confidence: medium
+  reasoning_brief: Grounding anchor geometry is simple local machining and fastening.
+route_decision: lunar_candidate
+simulation_import_mass_policy: local_nominal

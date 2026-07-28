@@ -4,11 +4,38 @@ name: EBF3 wire feed idler arm
 mass: 0.4
 unit: unit
 unit_kind: discrete
-material_class: metal
-notes: >
-  Level-3 child of WF-13. Arm body or idler arm portion of the wire-feed
-  pressure-arm assembly. Reintroduced below the source-table aligned pressure
-  arm, not as a top-level wire-feeder row. Pivot geometry, stiffness, and vacuum
-  wear details remain deferred. See
-  research/ebf3_bom_sources/organized/wire_feeder_level_2_audit.md. No local
-  recipe is attached yet.
+material: steel
+notes: Level-3 child of WF-13. Arm body or idler arm portion of the wire-feed pressure-arm assembly.
+  Reintroduced below the source-table aligned pressure arm, not as a top-level wire-feeder row. See
+  research/ebf3_bom_sources/organized/wire_feeder_level_2_audit.md. First-pass manufacturing/import
+  route is recorded in the linked EBF3 route-review recipe.
+recipe: recipe_ebf3_wire_feed_idler_arm
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Resolve deferred Pivot geometry, stiffness, and vacuum wear details.
+- Replace validation-scaled generic stock inputs with explicit EBF material lower/upper bounds and
+  material-specific recipe inputs.
+- 'Encode or verify performance requirements outside prose notes: Pivot fit; stiffness; drive-roll
+  pressure stability; wear debris control.'
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_wire_feed_idler_arm
+  source_recipe_path: kb/recipes/recipe_ebf3_wire_feed_idler_arm.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: lunar_candidate
+  simulation_import_mass_policy: local_nominal
+  mass_nominal_kg: 0.4
+  availability_class: local_derived
+  primary_process_id: machining_basic_v0
+  executable_process_id: machining_basic_v0
+  secondary_process_ids:
+  - assembly_basic_v0
+  ready_machine_ids:
+  - labor_bot_general_v0
+  - multi_axis_cnc_machining_center
+  - assembly_tools_basic
+  confidence: medium
+  reasoning_brief: Idler arm geometry pivot holes and stiffness are CNC-local steel work.
+route_decision: lunar_candidate
+simulation_import_mass_policy: local_nominal

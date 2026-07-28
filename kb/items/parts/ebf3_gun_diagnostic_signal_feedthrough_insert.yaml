@@ -4,14 +4,33 @@ name: EBF3 gun diagnostic signal feedthrough insert
 mass: 0.18
 unit: unit
 unit_kind: discrete
-material_class: composite
-notes: >
-  Level-3 child of FG-19. Gun-diagnostic signal feedthrough insert/interface
-  marker for carrying pickup and gun-side sensor signals across the vacuum
-  boundary. The cabin owns the passive chamber port or shared plate; controls
-  own external acquisition and processing. Pinout, coax-versus-multipin choice,
-  voltage/current rating, ceramic-to-metal construction, and sealing geometry
-  remain unresolved; see
-  research/ebf3_bom_sources/organized/beam_diagnostics_decomposition_plan.md,
-  research/ebf3_bom_sources/organized/electrical_signal_boundary_review.md, and
-  research/ebf3_bom_sources/organized/ebf3_interface_architecture.md.
+material: composite
+notes: Level-3 child of FG-19. Gun-diagnostic signal feedthrough insert/interface marker for carrying
+  pickup and gun-side sensor signals across the vacuum boundary. The cabin owns the passive chamber
+  port or shared plate; controls own external acquisition and processing.
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Resolve pinout, coax-versus-multipin choice, voltage/current rating, ceramic-to-metal construction,
+  and sealing geometry; see research/ebf3_bom_sources/organized/beam_diagnostics_decomposition_plan.md,
+  research/ebf3_bom_sources/organized/electrical_signal_boundary_review.md, and research/ebf3_bom_sources/organized/ebf3_interface_architecture.md.
+- Replace first-pass nominal import mass with sourced lower/upper mass bounds if this item dominates
+  imported mass.
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_gun_diagnostic_signal_feedthrough_insert
+  source_recipe_path: kb/recipes/recipe_ebf3_gun_diagnostic_signal_feedthrough_insert.yaml
+  source_queue_type: leaf_decomposition_review_kb_recipe
+  route_decision: import_as_leaf
+  simulation_import_mass_policy: import_nominal
+  mass_nominal_kg: 0.18
+  availability_class: expand_but_flag
+  primary_process_id: import_receiving_basic_v0
+  executable_process_id: import_receiving_basic_v0
+  reasoning_brief: Complex electronic/optical/electron-gun item with low-confidence local capability;
+    splitting now would be a large research task for limited first-sim value
+  recommended_edit: Count as Earth import in first simulation; split only if this import mass dominates
+    the result
+route_decision: import_as_leaf
+simulation_import_mass_policy: import_nominal
+is_import: true

@@ -4,9 +4,39 @@ name: EBF3 gun column gun-side mating flange
 mass: 0.55
 unit: unit
 unit_kind: discrete
-material_class: vacuum_structural_metal
-notes: >
-  Level-3 child of FG-17. Gun-side flange or mating datum for the fixed gun
-  package at the chamber boundary. The chamber-side port/flange remains
-  ebf3_cabin_gun_mounting_port. Vacuum gasket, bolt pattern, and service-kit
-  ownership remain deferred until interface geometry is selected.
+material: steel
+notes: Level-3 child of FG-17. Gun-side flange or mating datum for the fixed gun package at the chamber
+  boundary. The chamber-side port/flange remains ebf3_cabin_gun_mounting_port.
+recipe: recipe_ebf3_gun_column_gun_side_mating_flange
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Vacuum gasket, bolt pattern, and service-kit ownership remain deferred until interface geometry
+  is selected.
+- Replace validation-scaled generic stock inputs with explicit EBF material lower/upper bounds and
+  material-specific recipe inputs.
+- 'Encode or verify performance requirements outside prose notes: electron gun coaxiality; vacuum
+  seal face; HV clearance; thermal distortion.'
+- 'Review route sensitivity flags before treating the route as nominally closed: performance_flag:electron_beam;performance_flag:vacuum;candidate_fit:none.'
+- Close seal-face coaxiality cleanliness and HV-clearance acceptance.
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_gun_column_gun_side_mating_flange
+  source_recipe_path: kb/recipes/recipe_ebf3_gun_column_gun_side_mating_flange.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: lunar_candidate_flagged
+  simulation_import_mass_policy: sensitivity_flag
+  mass_nominal_kg: 0.55
+  availability_class: local_derived
+  primary_process_id: machining_basic_v0
+  executable_process_id: machining_basic_v0
+  secondary_process_ids:
+  - component_to_seal_from_raw_material_v0
+  ready_machine_ids:
+  - multi_axis_cnc_machining_center
+  - labor_bot_general_v0
+  confidence: medium
+  reasoning_brief: Local CNC covers the flange geometry but this is an electron-gun vacuum and HV
+    alignment interface.
+route_decision: lunar_candidate_flagged
+simulation_import_mass_policy: sensitivity_flag

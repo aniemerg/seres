@@ -1,6 +1,7 @@
 id: frame_fabrication_from_raw_metal_v0
-name: Frame fabrication from raw metal block
+name: Frame fabrication from raw metal block (template)
 kind: process
+is_template: true
 inputs:
 - item_id: raw_metal_block
   qty: 200.0
@@ -13,16 +14,27 @@ resource_requirements:
 - machine_id: labor_bot_general_v0
   qty: 1
   unit: count
+- machine_id: multi_axis_cnc_machining_center
+  qty: 1
+  unit: count
+- machine_id: assembly_tools_basic
+  qty: 1
+  unit: count
 energy_model:
   type: per_unit
   value: 0.8
   unit: kWh/kg
   scaling_basis: raw_metal_block
-  notes: Fabrication energy per kg of metal
+  notes: Rough cutting, drilling/milling, fitting, and handling energy per kg of metal stock.
 time_model:
   type: linear_rate
   rate: 100.0
   rate_unit: kg/hr
   scaling_basis: raw_metal_block
-notes: Simplified fabrication of formation rack frame from raw metal stock.
+notes: Template for simple structural frame or stiffener fabrication from raw metal stock. Recipe
+  overrides define the actual target part; labor bot alone is not sufficient, so CNC milling and
+  basic assembly tools are required for first-pass cutting, drilling, fitting, and fixturing.
+future_improvements:
+- Split large or precision-sensitive frame routes into explicit cutting, drilling/milling, joining,
+  inspection, and stress-relief steps when they dominate EBF3 local manufacturing energy or schedule.
 process_type: continuous

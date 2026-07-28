@@ -1,54 +1,47 @@
 ---
 id: material_classes
-title: Material Classes and the ISRU Material Flow
+title: Materials and Substitution
 type: article
 ---
 
-SERES models materials at a level of abstraction that reflects the real goal: understanding whether in-situ resources can substitute for imported ones. This page explains how the material class system works and what it means for interpreting recipe chains in the simulation.
+SERES models materials at a level of abstraction that reflects the real goal: understanding whether in-situ resources can substitute for imported ones. The current direction separates actual item material from substitution rules.
 
 ## The Problem: Specificity vs. Flexibility
 
 A naive model would define every material precisely: `regolith_lunar_mare`, `iron_ore_ilmenite`, `pig_iron_95pct`, and so on, with recipes that exactly specify which material feeds which process. This breaks constantly — a smelter that was designed to accept `iron_ore` cannot accept `iron_ore_ilmenite` even if they are functionally identical for this purpose.
 
-The material class system addresses this by letting items declare a generic *class* they belong to. Recipes can then specify either an exact item or a class, allowing any item of that class to satisfy the requirement.
+The old material class system addressed this by letting items declare a generic *class* they belong to. That mixed two questions: what an item is made from, and what can substitute for it. The KB is migrating toward `material` for the actual material, with substitution handled by explicit material groups.
 
-## How Material Classes Work
+## How Materials Work
 
-Each item in the KB can carry a `material_class` field:
+Parts should carry a `material` field:
 
 ```yaml
-id: regolith_lunar_mare
-kind: material
-material_class: regolith
-
-id: raw_ore_or_regolith
-kind: material
-material_class: regolith
+id: mounting_bracket_steel_v0
+kind: part
+material: steel
 ```
 
-A process that requires `raw_ore_or_regolith` would — when class substitution is enabled — also accept `regolith_lunar_mare`, because both share `material_class: regolith`.
+Material items may still carry legacy classification fields during migration,
+but part material should answer what the part is actually made from.
 
-### Common Material Classes in the KB
+### Legacy Broad Values
 
-- **`regolith`** — Various lunar and planetary surface materials (mare, highland, carbonaceous, silicate)
-- **`metal`** — Steel, aluminum, copper, iron, and alloys
-- **`raw_metal_block`** — Generic metal stock; enables iron → steel substitution for structural purposes
-- **`ceramic`** — Alumina, zirconia, silicate ceramics
-- **`polymer`** — Silicones, plastics, elastomers
-- **`glass`** — Various glass compositions
-- **`composite`** — Fiber-reinforced materials
+Values such as `metal`, `electronic`, and `composite` are still present in the
+KB after migration. Treat them as audit flags, not high-confidence material
+specifications.
 
 ## Current Status: Substitution Is Disabled
 
-Material class substitution is **currently disabled** in the simulation engine. This means:
+Automatic material substitution is **currently disabled** in the simulation engine. This means:
 
 - Recipe inputs must match the exact `item_id` specified — no automatic class-based substitution occurs
-- Even if two items share the same `material_class`, one will not automatically satisfy a recipe that calls for the other
-- The `material_class` field is present in the KB for future use and for manual equivalence checking, but does not affect simulation runs today
+- Even if two items share a legacy `material_class`, one will not automatically satisfy a recipe that calls for the other
+- Future substitution should use explicit material groups with allowed contexts
 
 **Why disabled?** During active KB development, automatic substitution can hide dependency problems. Requiring exact matches makes broken chains immediately visible, which is more valuable at this stage than smooth material flow.
 
-When substitution is eventually enabled, the system will first try an exact item match, then fall back to class-level matching.
+When substitution is eventually enabled, the system should first try an exact item match, then consult reviewed material groups.
 
 ## The ISRU Material Flow
 

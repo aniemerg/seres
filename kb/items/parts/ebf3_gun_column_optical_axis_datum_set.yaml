@@ -4,9 +4,46 @@ name: EBF3 gun column optical-axis datum set
 mass: 0.25
 unit: unit
 unit_kind: discrete
-material_class: precision_metal
-notes: >
-  Level-3 child of FG-17. Alignment datum features used to keep cathode,
-  electrodes, lenses, and diagnostics on the fixed gun optical axis. Adopted to
-  preserve alignment fidelity, but exact datum geometry, tolerances, and
-  inspection process remain deferred.
+material: precision_steel
+notes: Level-3 child of FG-17. Alignment datum features used to keep cathode, electrodes, lenses,
+  and diagnostics on the fixed gun optical axis.
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Resolve deferred Adopted to preserve alignment fidelity, but exact datum geometry, tolerances, and
+  inspection process.
+- Replace first-pass nominal import mass with sourced lower/upper mass bounds if this item dominates
+  imported mass.
+- 'Resolve local-route blocker before claiming local manufacturing closure: Electron-gun optical-axis
+  datum needs metrology, thermal drift, surface, and beam-axis acceptance beyond steel machining/alignment
+  tools.'
+- 'Encode or verify performance requirements outside prose notes: optical-axis alignment; datum stability;
+  surface finish; thermal drift.'
+- 'Review route sensitivity flags before treating the route as nominally closed: electron_gun_precision;metrology;semantic_audit:beam_axis_metrology_gap.'
+- Define datum finishing, metrology tooling, and beam-axis acceptance procedure.
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_gun_column_optical_axis_datum_set
+  source_recipe_path: kb/recipes/recipe_ebf3_gun_column_optical_axis_datum_set.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: route_gap
+  simulation_import_mass_policy: import_until_gap_resolved
+  mass_nominal_kg: 0.25
+  availability_class: local_derived
+  primary_process_id: steel_shaft_machining_v0
+  executable_process_id: import_receiving_basic_v0
+  secondary_process_ids:
+  - machining_basic_v0
+  - surface_finishing_am_parts_v0
+  ready_machine_ids:
+  - labor_bot_general_v0
+  - multi_axis_cnc_machining_center
+  - alignment_tools
+  confidence: medium
+  reasoning_brief: CNC steel machining alone does not close a beam-axis datum; metrology, stability,
+    alignment transfer, and acceptance route are missing.
+  blocked_machine_or_process_reason: CNC steel machining alone does not close a beam-axis datum; metrology,
+    stability, alignment transfer, and acceptance route are missing.
+route_decision: route_gap
+simulation_import_mass_policy: import_until_gap_resolved
+is_import: true

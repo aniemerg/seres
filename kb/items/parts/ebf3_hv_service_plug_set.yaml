@@ -4,7 +4,29 @@ name: EBF3 HV tank service plug set
 mass: 0.08
 unit: unit
 unit_kind: discrete
-material_class: composite
-notes: >
-  Child of HV-13. Plugs or caps for oil service openings. Material, thread, and
-  seal strategy remain unresolved.
+material: composite
+notes: Child of HV-13. Plugs or caps for oil service openings.
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Resolve material, thread, and seal strategy.
+- Replace first-pass nominal import mass with sourced lower/upper mass bounds if this item dominates
+  imported mass.
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_hv_service_plug_set
+  source_recipe_path: kb/recipes/recipe_ebf3_hv_service_plug_set.yaml
+  source_queue_type: leaf_decomposition_review_kb_recipe
+  route_decision: defer_split_import_fallback
+  simulation_import_mass_policy: import_until_gap_resolved
+  mass_nominal_kg: 0.08
+  availability_class: keep_ebf3_leaf
+  primary_process_id: import_receiving_basic_v0
+  executable_process_id: import_receiving_basic_v0
+  reasoning_brief: Composite/mixed-material leaf is small; splitting may be unnecessary for first
+    sim unless it controls a critical capability
+  recommended_edit: Use import fallback now; split only if sensitivity/high-risk subsystem requires
+    it
+route_decision: defer_split_import_fallback
+simulation_import_mass_policy: import_until_gap_resolved
+is_import: true

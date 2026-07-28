@@ -1,0 +1,33 @@
+id: recipe_ebf3_main_disconnect_switch_assembly_v0
+kind: recipe
+variant_id: assembly_v0
+target_item_id: ebf3_main_disconnect_switch
+inputs: &id001
+- item_id: ebf3_disconnect_switch_contact_set
+  qty: 1.0
+  unit: unit
+- item_id: ebf3_disconnect_switch_actuator
+  qty: 1.0
+  unit: unit
+- item_id: ebf3_disconnect_switch_housing
+  qty: 1.0
+  unit: unit
+- item_id: ebf3_disconnect_switch_terminal_set
+  qty: 1.0
+  unit: unit
+outputs:
+- item_id: ebf3_main_disconnect_switch
+  qty: 1.0
+  unit: unit
+steps:
+- process_id: assembly_basic_v0
+  inputs: *id001
+  outputs:
+  - item_id: ebf3_main_disconnect_switch
+    qty: 1.0
+    unit: unit
+  notes: Assemble EBF3 main disconnect switch from its reviewed EBF3 child items;
+    child material and manufacturing readiness remain on the children.
+notes: BOM assembly recipe for EBF3 main disconnect switch. This recipe only assembles
+  already-modeled EBF3 child items and does not claim local fabrication of unresolved
+  children.

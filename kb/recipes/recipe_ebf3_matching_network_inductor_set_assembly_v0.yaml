@@ -1,0 +1,36 @@
+id: recipe_ebf3_matching_network_inductor_set_assembly_v0
+kind: recipe
+variant_id: assembly_v0
+target_item_id: ebf3_matching_network_inductor_set
+inputs: &id001
+- item_id: ebf3_matching_network_inductor_core_set
+  qty: 1.0
+  unit: unit
+- item_id: ebf3_matching_network_inductor_winding_set
+  qty: 1.0
+  unit: unit
+- item_id: ebf3_matching_network_inductor_bobbin_or_insulation_set
+  qty: 1.0
+  unit: unit
+- item_id: ebf3_matching_network_inductor_terminal_set
+  qty: 1.0
+  unit: unit
+- item_id: ebf3_matching_network_inductor_mounting_base_set
+  qty: 1.0
+  unit: unit
+outputs:
+- item_id: ebf3_matching_network_inductor_set
+  qty: 1.0
+  unit: unit
+steps:
+- process_id: assembly_basic_v0
+  inputs: *id001
+  outputs:
+  - item_id: ebf3_matching_network_inductor_set
+    qty: 1.0
+    unit: unit
+  notes: Assemble `ebf3_matching_network_inductor_set` from source-first child items; child material and
+    manufacturing readiness remain unresolved.
+notes: >
+  BOM assembly recipe for `ebf3_matching_network_inductor_set`. This recipe only joins already-modeled
+  child items and does not claim local fabrication of unresolved children.

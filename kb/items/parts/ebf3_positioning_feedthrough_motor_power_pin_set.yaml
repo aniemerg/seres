@@ -4,12 +4,49 @@ name: EBF3 positioning feedthrough motor power pin set
 mass: 0.18
 unit: unit
 unit_kind: discrete
-material_class: conductive_metal
-notes: >
-  Child of ebf3_positioning_electrical_feedthrough. Motor-power pin set for
-  passing positioning-axis driver current through the vacuum boundary. Power
-  driver electronics remain in power supplies, and chamber passive ports remain
-  in the cabin. Pin count, current rating, conductor material, insulation
-  spacing, and local manufacturing route remain unresolved; see
-  research/ebf3_bom_sources/organized/four_axis_positioning_level_2_audit.md
-  and research/ebf3_bom_sources/organized/ebf3_interface_architecture.md.
+material: kovar_or_copper_alloy
+notes: 'Child of ebf3_positioning_electrical_feedthrough. Motor-power pin set for passing positioning-axis
+  driver current through the vacuum boundary. Power driver electronics remain in power supplies, and
+  chamber passive ports remain in the cabin. Pin count, current rating, conductor material, insulation
+  spacing, and first-pass manufacturing/import route is recorded in the linked EBF3 route-review recipe;
+  see research/ebf3_bom_sources/organized/four_axis_positioning_level_2_audit.md and research/ebf3_bom_sources/organized/ebf3_interface_architecture.md.
+
+  '
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Replace first-pass nominal import mass with sourced lower/upper mass bounds if this item dominates
+  imported mass.
+- 'Resolve local-route blocker before claiming local manufacturing closure: Power pin set needs conductive
+  pins plus hermetic ceramic/glass seal; current material/process does not close feedthrough technology.'
+- 'Encode or verify performance requirements outside prose notes: Current rating; hermetic seal; dielectric
+  spacing; vacuum leak rate; thermal cycling.'
+- 'Review route sensitivity flags before treating the route as nominally closed: HV;vacuum_feedthrough;motion_power;semantic_audit:hermetic_power_feedthrough_gap.'
+- Define ceramic forming/sintering, metallization or glass/ceramic sealing, cleaning, dielectric test,
+  and leak/outgassing acceptance before claiming local closure.
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_positioning_feedthrough_motor_power_pin_set
+  source_recipe_path: kb/recipes/recipe_ebf3_positioning_feedthrough_motor_power_pin_set.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: route_gap
+  simulation_import_mass_policy: import_until_gap_resolved
+  mass_nominal_kg: 0.18
+  availability_class: local_derived
+  primary_process_id: electrical_feedthrough_vacuum_fabrication_v0
+  executable_process_id: import_receiving_basic_v0
+  secondary_process_ids:
+  - electrical_assembly_basic_v0
+  ready_machine_ids:
+  - labor_bot_general_v0
+  - assembly_tools_basic
+  confidence: low
+  reasoning_brief: Material route is lunar-plausible, but this part is an HV/electron-gun/feedthrough
+    dielectric boundary requiring creepage, leakage, partial-discharge or hermetic QA; labor-bot capability
+    is irrelevant.
+  blocked_machine_or_process_reason: Material route is lunar-plausible, but this part is an HV/electron-gun/feedthrough
+    dielectric boundary requiring creepage, leakage, partial-discharge or hermetic QA; labor-bot capability
+    is irrelevant.
+route_decision: route_gap
+simulation_import_mass_policy: import_until_gap_resolved
+is_import: true

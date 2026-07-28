@@ -143,77 +143,56 @@ If reusing a part with different specifications than originally defined:
 
 ---
 
-## Material Class System
+## Material Field and Substitution
 
 ### Purpose
 
-The `material_class` field enables **generic substitution** in processes and recipes, dramatically reducing part proliferation.
-
-**Problem Solved**: Without material classes, every specific material type (e.g., `regolith_lunar_mare`) must exactly match process inputs (e.g., `raw_ore_or_regolith`), creating fragile dependencies.
-
-**Solution**: Items with the same `material_class` can substitute for each other in processes, enabling flexible material flows.
-
-### How It Works
-
-Items define a `material_class` field:
+Parts should state what they are actually made from with `material`. This is a
+property of the item itself, not a substitution rule.
 
 ```yaml
-# kb/items/materials/regolith_lunar_mare.yaml
-id: regolith_lunar_mare
-kind: material
-material_class: regolith  # Generic class
-material_subclass: lunar_regolith  # Optional refinement
-composition:
-  FeO: 0.15
-  TiO2: 0.10
+id: mounting_bracket_steel_v0
+kind: part
+material: steel
 ```
+
+Do not use broad substitution buckets like `material_class: metal` as a proxy
+for the part's material. If the exact material is unknown, use the best explicit
+temporary value and document the uncertainty in `notes`.
+
+### Substitution Rules
+
+Substitution should be modeled separately from item identity. The preferred
+direction is:
+
+- item `material`: what the item is made from
+- material definitions: canonical names, aliases, composition, and properties
+- material groups: explicit lists of materials that may substitute for a
+  specific use context
+
+Example:
 
 ```yaml
-# kb/items/materials/raw_ore_or_regolith.yaml
-id: raw_ore_or_regolith
-kind: material
-material_class: regolith  # Same class
+id: structural_steel_group
+members:
+  - carbon_steel
+  - stainless_steel
+  - tool_steel
+allowed_for:
+  - frames
+  - brackets
+  - housings
+not_allowed_for:
+  - cathodes
+  - precision_electrodes
 ```
 
-The simulation engine can match materials in two steps (disabled by default; exact match only unless explicitly enabled in the engine):
+### Legacy Material Class
 
-1. **Exact match**: Try exact `item_id` in inventory
-2. **Class match**: If not found, search inventory for items with matching `material_class`
-
-### Common Material Classes
-
-Found in the KB (256+ materials already use this):
-
-- `regolith`: Various regolith types (mare, highland, carbonaceous, silicate)
-- `metal`: Steel, aluminum, copper, iron, etc.
-- `raw_metal_block`: Generic metal stock (enables iron → steel substitution)
-- `ceramic`: Alumina, zirconia, silicate ceramics
-- `polymer`: Silicone, plastics, elastomers
-- `glass`: Various glass compositions
-- `composite`: Fiber-reinforced materials
-
-### Why This Matters for Parts
-
-Material classes allow recipes to specify generic inputs:
-
-```yaml
-# Instead of:
-inputs:
-  - item_id: steel_304_sheet  # Too specific!
-
-# Use:
-inputs:
-  - item_id: metal_sheet_structural  # Has material_class: metal
-    # Now accepts steel, aluminum, iron - whatever's available
-```
-
-**Impact**: Recipes become more flexible, reducing the need for variant recipes and duplicate parts.
-
-### When to Use Material Classes vs Specific Materials
-
-- **Use specific material** when composition matters (e.g., electrical conductivity, chemical reactivity)
-- **Use material class** for structural, bulk, or functionally-equivalent applications
-- **Document assumptions** in `notes` if using generic class for specific application
+`material_class` is deprecated for current KB item files. New part items should
+use `material`; machines should express material makeup through BOM components;
+material items should use composition, state, density, and future material-group
+metadata.
 
 ---
 
@@ -361,8 +340,8 @@ The KB defines several labor bot types:
    grep -i "motor" out/reports/inventory.md
    grep -i "bearing" out/reports/inventory.md
 
-   # Search by material class (in YAML files)
-   grep -r "material_class: metal" kb/items/parts/
+   # Search by material (in YAML files)
+   grep -r "material: steel" kb/items/parts/
    ```
 
 3. **Evaluate equivalence**
@@ -383,7 +362,7 @@ The KB defines several labor bot types:
 5. **If creating new part**:
    - Choose clear, descriptive ID (lowercase, snake_case)
    - Include estimated mass (within 5× is fine)
-   - Add `material_class` for generic substitution
+   - Add `material` for what the part is actually made from
    - Add `notes` with provenance
    ```yaml
    id: motor_specialty_100kw
@@ -391,7 +370,7 @@ The KB defines several labor bot types:
    name: Specialty high-power motor
    mass: 450  # AI estimate, scaled from 5kW motor
    unit: kg
-   material_class: motor
+   material: steel
    notes: |
      Created for applications requiring >50kW where motor_general_5kw
      inadequate (>5× threshold). Estimate based on scaling laws.
@@ -487,7 +466,7 @@ Conservative Mode treats parts_and_labor_guidelines.md as the foundation and ext
 - **`docs/project_overview.md`** — Project philosophy and goals
 - **`docs/kb_schema_reference.md`** — Formal specification and data model
 - **`docs/knowledge_acquisition_protocol.md`** — Knowledge acquisition methodology
-- **`docs/material_class_system.md`** — Material class implementation details
+- **`docs/material_class_system.md`** — Legacy material class notes and migration direction
 - **`docs/README.md`** — Onboarding and workflow guide
 - **`docs/labor_bot_design_memo.md`** — Labor bot specifications
 

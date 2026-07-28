@@ -4,8 +4,41 @@ name: EBF3 cabin frame member set
 mass: 24.0
 unit: unit
 unit_kind: discrete
-material_class: metal
-notes: >
-  Child of MC-1. Structural rail/member set for the manufacture cabin frame.
-  Profile, alloy, joint geometry, and vacuum-compatible finish remain
-  unresolved.
+material: steel
+notes: Child of MC-1. Structural rail/member set for the manufacture cabin frame.
+recipe: recipe_ebf3_cabin_frame_member_set
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Resolve profile, alloy, joint geometry, and vacuum-compatible finish.
+- Replace validation-scaled generic stock inputs with explicit EBF material lower/upper bounds and
+  material-specific recipe inputs.
+- 'Encode or verify performance requirements outside prose notes: frame straightness; door/wall interface
+  stiffness; vacuum-compatible joints.'
+- 'Review route sensitivity flags before treating the route as nominally closed: structural_vacuum_interface.'
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_cabin_frame_member_set
+  source_recipe_path: kb/recipes/recipe_ebf3_cabin_frame_member_set.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: lunar_candidate_flagged
+  simulation_import_mass_policy: sensitivity_flag
+  mass_nominal_kg: 24.0
+  availability_class: local_derived
+  primary_process_id: steel_bar_stock_rolling_shop_v0
+  executable_process_id: steel_bar_stock_rolling_shop_v0
+  secondary_process_ids:
+  - steel_ingot_cast_v0
+  - machining_basic_v0
+  - assembly_basic_v0
+  ready_machine_ids:
+  - labor_bot_general_v0
+  - casting_furnace_v0
+  - rolling_mill_v0
+  - multi_axis_cnc_machining_center
+  - assembly_tools_basic
+  confidence: medium
+  reasoning_brief: Steel frame members are supported by Ready rolling and machining but cabin boundary
+    interfaces require flagged stiffness and joint assumptions
+route_decision: lunar_candidate_flagged
+simulation_import_mass_policy: sensitivity_flag

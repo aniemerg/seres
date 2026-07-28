@@ -27,12 +27,11 @@ time_model:
   rate: 0.1
   rate_unit: kg/hr
   scaling_basis: steel_sheet_1mm
-notes: Basic lamination of steel sheet into laminated iron core piece; placeholder
-  parameters for modeling.
-assumptions: 'Uses stamping press basic and labor to form a laminated iron core from
-  a small sheet.
-
+notes: Basic lamination of steel sheet into laminated iron core piece; placeholder parameters for modeling.
+assumptions: |
+  Uses stamping press basic and labor to form a laminated iron core from a small sheet.
   Mass is conserved (0.01 kg steel_sheet_1mm -> 0.01 kg iron_core_laminated).
-
-  '
 process_type: continuous
+future_improvements:
+- Add lamination-specific die/tooling resource requirements and review throughput; current placeholder
+  parameters do not prove lamination manufacturing closure.

@@ -1,0 +1,30 @@
+id: recipe_ebf3_z_axis_counterbalance_force_element_assembly_v0
+kind: recipe
+variant_id: assembly_v0
+target_item_id: ebf3_z_axis_counterbalance_force_element
+inputs: &id001
+- item_id: ebf3_z_axis_counterbalance_metal_spring_element
+  qty: 1.0
+  unit: unit
+- item_id: ebf3_z_axis_counterbalance_spring_end_seat_set
+  qty: 1.0
+  unit: unit
+- item_id: ebf3_z_axis_counterbalance_preload_adjustment_interface
+  qty: 1.0
+  unit: unit
+outputs:
+- item_id: ebf3_z_axis_counterbalance_force_element
+  qty: 1.0
+  unit: unit
+steps:
+- process_id: assembly_basic_v0
+  inputs: *id001
+  outputs:
+  - item_id: ebf3_z_axis_counterbalance_force_element
+    qty: 1.0
+    unit: unit
+  notes: Assemble `ebf3_z_axis_counterbalance_force_element` from source-first child items; child material and
+    manufacturing readiness remain unresolved.
+notes: >
+  BOM assembly recipe for `ebf3_z_axis_counterbalance_force_element`. This recipe only joins already-modeled
+  child items and does not claim local fabrication of unresolved children.

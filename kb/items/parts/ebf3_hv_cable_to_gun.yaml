@@ -4,18 +4,10 @@ name: EBF3 HV cable to fixed electron beam gun
 mass: 1.0
 unit: unit
 unit_kind: discrete
-material_class: composite
-notes: >
-  HV-9. High-voltage cable carrying accelerating voltage from tank to fixed
-  electron beam gun. Boundary note: this item is owned by the high-voltage tank
-  subsystem as the main inter-subsystem HV transmission element; the gun owns the
-  receiving HV input/feedthrough hardware separately. Minimal cable-layer BOM:
-  bom_ebf3_hv_cable_to_gun. Tank-side and gun-side terminations remain deferred;
-  see
-  research/ebf3_bom_sources/organized/feedthrough_interface_review.md,
-  research/ebf3_bom_sources/organized/hv_tank_interface_review.md and
-  research/ebf3_bom_sources/organized/hv_tank_interface_hardware_plan.md.
-  Current interface architecture is summarized in
-  research/ebf3_bom_sources/organized/ebf3_interface_architecture.md.
-  Material ratings, dimensions, shielding/grounding, and termination details
-  remain unresolved. No local recipe is attached yet.
+material: composite
+notes: |
+  HV-9. High-voltage cable carrying accelerating voltage from tank to fixed electron beam gun. Boundary note: this item is owned by the high-voltage tank subsystem as the main inter-subsystem HV transmission element; the gun owns the receiving HV input/feedthrough hardware separately. Minimal cable-layer BOM: bom_ebf3_hv_cable_to_gun. Tank-side and gun-side terminations remain deferred; see research/ebf3_bom_sources/organized/feedthrough_interface_review.md, research/ebf3_bom_sources/organized/hv_tank_interface_review.md and research/ebf3_bom_sources/organized/hv_tank_interface_hardware_plan.md. Current interface architecture is summarized in research/ebf3_bom_sources/organized/ebf3_interface_architecture.md. Material ratings, dimensions, shielding/grounding, and termination details remain unresolved. Assembly recipe now only joins visible child items; child material and manufacturing readiness remain unresolved.
+bom: bom_ebf3_hv_cable_to_gun
+recipe: recipe_ebf3_hv_cable_to_gun_assembly_v0
+trust_tags:
+- trusted_ebf3_unreplaced

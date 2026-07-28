@@ -4,6 +4,38 @@ name: EBF3 ripple inductor insulation set
 mass: 0.12
 unit: unit
 unit_kind: discrete
-material_class: insulator
-notes: Child of ebf3_ripple_damping_inductor. Insulation set for EBF3 ripple damping
-  inductor. Exact specification and local manufacturing route remain unresolved.
+material: polymer_dielectric
+notes: Child of ebf3_ripple_damping_inductor. Insulation set for EBF3 ripple damping inductor.
+trust_tags:
+- trusted_ebf3_unreplaced
+future_improvements:
+- Replace coarse item specification with explicit material, geometry/interface requirements, and lower/upper
+  mass bounds.
+- Replace first-pass nominal import mass with sourced lower/upper mass bounds if this item dominates
+  imported mass.
+- 'Resolve local-route blocker before claiming local manufacturing closure: Coil insulation depends
+  on silicone or other scarce volatile chemistry and coil winding machine is not Ready.'
+- 'Encode or verify performance requirements outside prose notes: dielectric class; thermal rise;
+  vibration endurance; outgassing; winding abrasion resistance.'
+- 'Review route sensitivity flags before treating the route as nominally closed: performance_flag:coil;performance_flag:electronics;candidate_fit:accuracy_risk.'
+ebf3_route_review:
+  variant_id: ebf3_route_review_v0
+  source_recipe_id: recipe_ebf3_ripple_inductor_insulation_set
+  source_recipe_path: kb/recipes/recipe_ebf3_ripple_inductor_insulation_set.yaml
+  source_queue_type: process_route_review_kb_recipe
+  route_decision: earth_import
+  simulation_import_mass_policy: import_nominal
+  mass_nominal_kg: 0.12
+  availability_class: import_or_recycle
+  primary_process_id: coil_insulation_production_v0
+  executable_process_id: import_receiving_basic_v0
+  secondary_process_ids:
+  - coil_winding_basic_v0
+  ready_machine_ids:
+  - chemical_reactor_basic
+  - labor_bot_general_v0
+  confidence: high
+  reasoning_brief: Small mass but insulation quality gates inductor reliability; count as Earth import
+route_decision: earth_import
+simulation_import_mass_policy: import_nominal
+is_import: true

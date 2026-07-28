@@ -4,17 +4,10 @@ name: EBF3 HV output or return current monitor
 mass: 0.4
 unit: unit
 unit_kind: discrete
-material_class: electronic
-notes: >
-  HV-12. High-voltage output or return current monitor candidate for protection,
-  beam-current monitoring, and fault detection. Added during source-tag cleanup
-  from research/ebf3_bom_sources/organized/high_voltage_tank_level_2_audit.md.
-  Boundary reviewed in
-  research/ebf3_bom_sources/organized/hv_electrical_interface_review.md and
-  research/ebf3_bom_sources/organized/hv_grounding_return_review.md. The HV-side
-  primary sensor stays with the HV tank, low-voltage acquisition belongs to
-  controls, and shunt/CT/Hall/return-leg topology remains unresolved. No local
-  recipe is attached yet.
-  Current interface architecture is summarized in
-  research/ebf3_bom_sources/organized/ebf3_interface_architecture.md.
-  This assembly is split by `bom_ebf3_hv_output_return_current_monitor`. Child items are structural placeholders for decomposition fidelity only; no local recipe is attached yet.
+material: electronic
+notes: |
+  HV-12. High-voltage output or return current monitor candidate for protection, beam-current monitoring, and fault detection. Added during source-tag cleanup from research/ebf3_bom_sources/organized/high_voltage_tank_level_2_audit.md. Boundary reviewed in research/ebf3_bom_sources/organized/hv_electrical_interface_review.md and research/ebf3_bom_sources/organized/hv_grounding_return_review.md. The HV-side primary sensor stays with the HV tank, low-voltage acquisition belongs to controls, and shunt/CT/Hall/return-leg topology remains unresolved. No local recipe is attached yet. Current interface architecture is summarized in research/ebf3_bom_sources/organized/ebf3_interface_architecture.md. This assembly is split by `bom_ebf3_hv_output_return_current_monitor`. Child items are structural placeholders for decomposition fidelity only; assembly recipe now only joins visible child items; child material and manufacturing readiness remain unresolved.
+bom: bom_ebf3_hv_output_return_current_monitor
+recipe: recipe_ebf3_hv_output_return_current_monitor_assembly_v0
+trust_tags:
+- trusted_ebf3_unreplaced
