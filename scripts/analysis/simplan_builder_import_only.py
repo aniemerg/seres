@@ -43,7 +43,7 @@ def main() -> int:
     parser = argparse.ArgumentParser(description="Build import-only plan for a machine.")
     parser.add_argument("--machine-id", required=True, help="Target machine item id")
     parser.add_argument("--sim-id", required=True, help="Simulation id to use")
-    parser.add_argument("--kb-root", default=str(REPO_ROOT / "kb"), help="KB root")
+    parser.add_argument("--kb-root", default=str(REPO_ROOT / "content" / "kb"), help="KB root")
     parser.add_argument("--out", help="Output plan JSON path")
     parser.add_argument(
         "--allow-bom",

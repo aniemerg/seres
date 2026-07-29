@@ -24,8 +24,8 @@ from typing import List, Optional
 
 from src.kb_core.auto_fixer import AutoFixer, batch_fix_issues
 from src.kb_core.validators import ValidationIssue, ValidationLevel
+from src.paths import KB_ROOT
 
-KB_ROOT = Path("kb")
 OUT_DIR = Path("out")
 VALIDATION_ISSUES_FILE = OUT_DIR / "validation_issues.jsonl"
 

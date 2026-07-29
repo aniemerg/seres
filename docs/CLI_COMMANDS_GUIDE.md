@@ -292,8 +292,8 @@ python -m src.cli sim init --sim-id <name>
 ```bash
 python -m src.cli sim init --sim-id lunar_base_001
 # ✓ Created simulation 'lunar_base_001'
-#   Location: simulations/lunar_base_001
-#   Log file: simulations/lunar_base_001/simulation.jsonl
+#   Location: content/simulations/lunar_base_001
+#   Log file: content/simulations/lunar_base_001/simulation.jsonl
 ```
 
 ---
@@ -542,8 +542,8 @@ python -m src.cli sim status --sim-id lunar_base_001
 # Recipes: 0 active, 0 completed
 # Events queued: 0
 # Next event time: none
-# Snapshot: /path/to/simulations/lunar_base_001/snapshot.json
-# Events: /path/to/simulations/lunar_base_001/events.jsonl
+# Snapshot: /path/to/content/simulations/lunar_base_001/snapshot.json
+# Events: /path/to/content/simulations/lunar_base_001/events.jsonl
 ```
 
 ---
@@ -663,11 +663,11 @@ python -m src.cli sim list
 #
 #   lunar_base_001
 #     Created: 2025-12-30T10:00:00.000000Z
-#     Path: /path/to/simulations/lunar_base_001
+#     Path: /path/to/content/simulations/lunar_base_001
 #
 #   test_production
 #     Created: 2025-12-30T11:30:00.000000Z
-#     Path: /path/to/simulations/test_production
+#     Path: /path/to/content/simulations/test_production
 ```
 
 ---

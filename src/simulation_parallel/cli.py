@@ -8,12 +8,13 @@ import sys
 from pathlib import Path
 
 from src.kb_core.kb_loader import KBLoader
+from src.paths import KB_ROOT
 from src.simulation_parallel.runner import ConcurrentDESRunner
 from src.simulation_parallel.session import load_session, SIM2_DIR
 
 
 def _load_kb() -> KBLoader:
-    kb = KBLoader(Path("kb"), use_validated_models=False)
+    kb = KBLoader(KB_ROOT, use_validated_models=False)
     kb.load_all()
     return kb
 

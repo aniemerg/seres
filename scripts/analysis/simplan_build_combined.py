@@ -209,8 +209,8 @@ def main() -> int:
         help="Plaintext file with one machine id per line",
     )
     parser.add_argument("--sim-id", required=True, help="Simulation id for combined plan")
-    parser.add_argument("--kb-root", default=str(REPO_ROOT / "kb"), help="KB root")
-    parser.add_argument("--sim-root", default=str(REPO_ROOT / "simulations"), help="Sim root")
+    parser.add_argument("--kb-root", default=str(REPO_ROOT / "content" / "kb"), help="KB root")
+    parser.add_argument("--sim-root", default=str(REPO_ROOT / "content" / "simulations"), help="Sim root")
     parser.add_argument("--iterations", type=int, default=3, help="Greedy iterations per machine")
     parser.add_argument("--max-depth", type=int, default=6, help="Max recursion depth")
     parser.add_argument("--out", help="Output combined plan path")

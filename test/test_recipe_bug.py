@@ -4,8 +4,8 @@ Test to reproduce the multi-step recipe bug.
 This test creates a simple 2-step recipe and verifies that both steps execute.
 """
 import pytest
-from pathlib import Path
 from src.kb_core.kb_loader import KBLoader
+from src.paths import KB_ROOT
 from src.simulation.engine import SimulationEngine
 
 
@@ -17,7 +17,7 @@ def test_two_step_recipe_completes():
     of a multi-step recipe never executes.
     """
     # Load KB
-    kb = KBLoader(Path('kb'))
+    kb = KBLoader(KB_ROOT)
     kb.load_all()
 
     # Create simulation

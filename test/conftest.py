@@ -4,11 +4,13 @@ Pytest configuration and shared fixtures.
 import pytest
 from pathlib import Path
 
+from src.paths import KB_ROOT
+
 
 @pytest.fixture
 def kb_root():
     """Return path to KB root directory."""
-    return Path(__file__).parent.parent / "kb"
+    return KB_ROOT
 
 
 @pytest.fixture

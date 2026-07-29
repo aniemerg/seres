@@ -18,6 +18,8 @@ import argparse
 import builtins
 from pathlib import Path
 
+from src.paths import KB_ROOT
+
 
 def main():
     """Main CLI entry point."""
@@ -58,8 +60,8 @@ def main():
     index_parser.add_argument(
         '--kb-root',
         type=Path,
-        default=Path('kb'),
-        help='KB root directory (default: kb)'
+        default=KB_ROOT,
+        help=f'KB root directory (default: {KB_ROOT})'
     )
     index_parser.add_argument(
         '--out-dir',
@@ -78,8 +80,8 @@ def main():
     autofix_parser.add_argument(
         '--kb-root',
         type=Path,
-        default=Path('kb'),
-        help='KB root directory (default: kb)'
+        default=KB_ROOT,
+        help=f'KB root directory (default: {KB_ROOT})'
     )
     autofix_parser.add_argument(
         '--dry-run',
@@ -127,8 +129,8 @@ def main():
     validate_parser.add_argument(
         '--kb-root',
         type=Path,
-        default=Path('kb'),
-        help='KB root directory (default: kb)'
+        default=KB_ROOT,
+        help=f'KB root directory (default: {KB_ROOT})'
     )
     validate_parser.add_argument(
         '--verbose',
@@ -161,8 +163,8 @@ def main():
     closure_parser.add_argument(
         '--kb-root',
         type=Path,
-        default=Path('kb'),
-        help='KB root directory (default: kb)'
+        default=KB_ROOT,
+        help=f'KB root directory (default: {KB_ROOT})'
     )
 
     # =========================================================================
@@ -266,7 +268,7 @@ def main():
             from src.simulation.cli import run_sim_command
             from src.kb_core.kb_loader import KBLoader
             print("Loading KB...", flush=True)
-            kb_loader = KBLoader(Path('kb'), use_validated_models=False)
+            kb_loader = KBLoader(KB_ROOT, use_validated_models=False)
             print("KB loader ready.", flush=True)
             return run_sim_command(args, kb_loader)
 

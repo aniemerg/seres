@@ -20,8 +20,8 @@ from src.simulation.engine import SimulationEngine
 
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
-KB_ROOT = REPO_ROOT / "kb"
-SIM_ROOT = REPO_ROOT / "simulations"
+KB_ROOT = REPO_ROOT / "content" / "kb"
+SIM_ROOT = REPO_ROOT / "content" / "simulations"
 
 
 def _model_to_dict(obj: Any) -> Dict[str, Any]:

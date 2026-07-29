@@ -10,6 +10,8 @@ import yaml
 
 from src.simviewer.articles import discover_article_files, merge_backlinks, parse_articles
 from src.simviewer.config import SimviewerConfig
+from src.paths import KB_ROOT, REPO_ROOT
+from src.simulation.provenance import verify_provenance
 from src.simviewer.models import (
     ExportWarnings,
     InventoryCheckpoint,
@@ -480,7 +482,7 @@ def _collect_kb_entities(repo_root: Path) -> tuple[Dict[str, dict], List[str]]:
     entities: Dict[str, dict] = {}
     missing_categories: List[str] = []
 
-    kb_root = repo_root / "kb"
+    kb_root = repo_root / KB_ROOT.relative_to(REPO_ROOT)
     for section in ("items", "recipes", "processes"):
         root = kb_root / section
         if not root.exists():
@@ -756,6 +758,7 @@ def _build_simquery(
 def export_simviewer(repo_root: Path, config: SimviewerConfig, out_dir: Path) -> dict:
     """Export static data artifacts for the simviewer frontend."""
     sim_dir = repo_root / config.simulation_root / config.sim_id
+    kb_root = repo_root / KB_ROOT.relative_to(REPO_ROOT)
     event_log_path = sim_dir / "events.jsonl"
     snapshot_path = sim_dir / "snapshot.json"
 
@@ -764,6 +767,7 @@ def export_simviewer(repo_root: Path, config: SimviewerConfig, out_dir: Path) ->
     if not event_log_path.exists():
         raise FileNotFoundError(f"Simulation event log not found: {event_log_path}")
 
+    verify_provenance(sim_dir, kb_root)
     snapshot = _read_json(snapshot_path)
     events = list(_iter_event_lines(event_log_path))
 

@@ -38,8 +38,8 @@ from src.kb_core.validators import (
 )
 from src.kb_core.unit_converter import UnitConverter
 from src.simulation.adr020_validators import validate_process_adr020, validate_recipe_adr020
+from src.paths import KB_ROOT
 
-KB_ROOT = Path("kb")
 OUT_DIR = Path("out")
 WORK_QUEUE = OUT_DIR / "work_queue.jsonl"
 WORK_QUEUE_LOCK = OUT_DIR / "work_queue.lock"

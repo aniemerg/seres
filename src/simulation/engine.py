@@ -58,6 +58,7 @@ from src.simulation.persistence import (
     restore_scheduler,
     SimulationSnapshot,
 )
+from src.simulation.provenance import ensure_provenance, verify_provenance
 from src.simulation.adr020_validators import validate_process_adr020, validate_recipe_adr020
 from src.kb_core.kb_loader import KBLoader
 from src.kb_core.unit_converter import UnitConverter, COUNT_UNITS
@@ -65,6 +66,7 @@ from src.kb_core.calculations import calculate_duration, calculate_energy, is_ma
 from src.kb_core.schema import Quantity, RawProcess, RawEnergyModel
 from src.kb_core.override_resolver import resolve_recipe_step_with_kb
 from src.kb_core.validators import validate_process, ValidationLevel
+from src.paths import SIMULATIONS_ROOT
 
 
 class SimulationEngine:
@@ -96,12 +98,13 @@ class SimulationEngine:
 
         # Simulation directory
         if sim_dir is None:
-            sim_dir = Path("simulations") / sim_id
+            sim_dir = SIMULATIONS_ROOT / sim_id
         self.sim_dir = sim_dir
         self.sim_dir.mkdir(parents=True, exist_ok=True)
 
         self.snapshot_file = self.sim_dir / "snapshot.json"
         self.event_log_file = self.sim_dir / "events.jsonl"
+        self.provenance_file = self.sim_dir / "provenance.json"
 
         # Only log sim start for NEW simulations
         # (load() will skip this if loading existing)
@@ -2504,6 +2507,8 @@ class SimulationEngine:
 
     def save(self) -> None:
         """Persist snapshot and flush event buffer to sidecar log."""
+        ensure_provenance(self.sim_dir, self.kb.kb_root)
+
         if self.event_buffer:
             with self.event_log_file.open("a", encoding="utf-8") as f:
                 for event in self.event_buffer:
@@ -2529,6 +2534,7 @@ class SimulationEngine:
             self.save()
             return False
 
+        verify_provenance(self.sim_dir, self.kb.kb_root)
         snapshot = SimulationSnapshot.model_validate_json(
             self.snapshot_file.read_text(encoding="utf-8")
         )
