@@ -57,8 +57,8 @@ def _write_list(path: Path, items: List[str]) -> None:
 def main() -> int:
     parser = argparse.ArgumentParser(description="Report machine sets for a simulation.")
     parser.add_argument("--sim-id", required=True, help="Simulation id")
-    parser.add_argument("--sim-root", default=str(REPO_ROOT / "simulations"), help="Sim root")
-    parser.add_argument("--kb-root", default=str(REPO_ROOT / "kb"), help="KB root")
+    parser.add_argument("--sim-root", default=str(REPO_ROOT / "content" / "simulations"), help="Sim root")
+    parser.add_argument("--kb-root", default=str(REPO_ROOT / "content" / "kb"), help="KB root")
     parser.add_argument("--out-dir", default=str(REPO_ROOT / "out"), help="Output directory")
     args = parser.parse_args()
 

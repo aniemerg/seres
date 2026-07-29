@@ -687,8 +687,8 @@ def execute_plan(
 def main() -> int:
     parser = argparse.ArgumentParser(description="Execute a SimPlan.")
     parser.add_argument("--plan", required=True, help="Path to plan JSON")
-    parser.add_argument("--kb-root", default=str(REPO_ROOT / "kb"), help="KB root")
-    parser.add_argument("--sim-root", default=str(REPO_ROOT / "simulations"), help="Sim root")
+    parser.add_argument("--kb-root", default=str(REPO_ROOT / "content" / "kb"), help="KB root")
+    parser.add_argument("--sim-root", default=str(REPO_ROOT / "content" / "simulations"), help="Sim root")
     parser.add_argument("--reset", action="store_true", help="Delete existing sim directory first")
     parser.add_argument("--dry-run", action="store_true", help="Print actions without executing")
     parser.add_argument("--trace", action="store_true", help="Print step-by-step execution trace")

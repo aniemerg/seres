@@ -18,11 +18,9 @@ from pathlib import Path
 from typing import Any, Dict, List
 
 from agents import function_tool
+from src.paths import KB_ROOT, REPO_ROOT
 
 
-# Repo root
-REPO_ROOT = Path(__file__).parent.parent
-KB_ROOT = REPO_ROOT / "kb"
 VENV_PYTHON = REPO_ROOT / ".venv" / "bin" / "python"
 
 # Limits to prevent context overflow

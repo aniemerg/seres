@@ -386,7 +386,9 @@ def main():
 
     # Load KB
     print("Loading knowledge base...", file=sys.stderr)
-    kb_root = Path("kb")
+    from src.paths import KB_ROOT
+
+    kb_root = KB_ROOT
     kb_loader = KBLoader(kb_root)
     kb_loader.load_all()
     print(f"Loaded {len(kb_loader.items)} items, {len(kb_loader.recipes)} recipes",

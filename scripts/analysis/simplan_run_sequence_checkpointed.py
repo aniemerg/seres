@@ -158,8 +158,8 @@ def main() -> int:
     )
     parser.add_argument("--plans-dir", default=str(REPO_ROOT / "out" / "simplans"))
     parser.add_argument("--sim-id", required=True, help="Simulation id for sequential run")
-    parser.add_argument("--kb-root", default=str(REPO_ROOT / "kb"), help="KB root")
-    parser.add_argument("--sim-root", default=str(REPO_ROOT / "simulations"), help="Sim root")
+    parser.add_argument("--kb-root", default=str(REPO_ROOT / "content" / "kb"), help="KB root")
+    parser.add_argument("--sim-root", default=str(REPO_ROOT / "content" / "simulations"), help="Sim root")
     parser.add_argument("--reset", action="store_true", help="Reset sim before first plan")
     parser.add_argument("--dry-run", action="store_true", help="Print actions without executing")
     parser.add_argument(

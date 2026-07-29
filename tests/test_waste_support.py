@@ -1,12 +1,11 @@
-from pathlib import Path
-
 from src.kb_core.kb_loader import KBLoader
+from src.paths import KB_ROOT
 from src.kb_core.unit_converter import UnitConverter
 from src.kb_core.validators import validate_recipe
 
 
 def _make_converter() -> UnitConverter:
-    kb = KBLoader(Path("kb"))
+    kb = KBLoader(KB_ROOT)
     return UnitConverter(kb)
 
 

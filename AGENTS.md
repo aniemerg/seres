@@ -2,6 +2,20 @@
 
 Minimal setup to run the KB indexer and iterate on YAML data.
 
+## Content submodule
+
+The knowledge base and simulation runs live in the `content/` submodule. After
+cloning or switching branches, run:
+
+```bash
+git submodule update --init --recursive
+```
+
+Commit KB or intentionally published simulation changes inside `content/`
+first, push that commit, and then commit the updated submodule pointer in SERES.
+New simulation output is ignored in the content repository unless deliberately
+force-added for publication.
+
 ## ⚠️ REQUIRED READING BEFORE WORKING ON QUEUE
 
 **Before working on the work queue, you MUST read these documents:**
@@ -41,7 +55,7 @@ Quick examples:
   - Run indexer: `python -m src.cli index`
     - Outputs: `out/index.json`, `out/validation_report.md`, `out/work_queue.jsonl`, etc.
   - Validate specific item: `python -m src.cli validate --id process:regolith_mining_highlands_v0`
-    - (Find process IDs: `ls kb/processes/` or `grep "^id:" kb/processes/*.yaml`)
+    - (Find process IDs: `ls content/kb/processes/` or `grep "^id:" content/kb/processes/*.yaml`)
   - Auto-fix validation issues: `python -m src.cli auto-fix --dry-run`
   - Analyze material closure: `python -m src.cli closure --machine <machine_id>` or `--all`
 - Queue helpers (src CLI):
@@ -131,9 +145,10 @@ The old `base_builder` CLI has been removed. Use `python -m src.cli sim` instead
 
 ## Repo layout (current)
 - `design/` — memos, notes, reference papers.
-- `kb/` — YAML knowledge base (processes, items, resources, recipes, BOMs, scenarios).
+- `content/` — pinned `seres-content` submodule.
+- `content/kb/` — YAML knowledge base (processes, items, resources, recipes, BOMs, scenarios).
 - `queue_agents/` — Autonomous queue agents for processing KB gaps.
-- `simulations/` — Simulation runs and event logs.
+- `content/simulations/` — Simulation runs and event logs.
 - `docs/` — Documentation, ADRs, research questions, session accomplishments.
 - `out/` — generated index, reports, work queue.
 

@@ -32,10 +32,10 @@ from src.kb_core.unit_converter import UnitConverter
 from src.kb_core.schema import Quantity
 from src.kb_core.override_resolver import resolve_recipe_step_with_kb
 from src.simulation.engine import SimulationEngine
+from src.simulation.provenance import record_runbook
+from src.paths import KB_ROOT, REPO_ROOT, SIMULATIONS_ROOT
 
-REPO_ROOT = Path(__file__).parent.parent.parent
-KB_ROOT = REPO_ROOT / "kb"
-SIMULATIONS_DIR = REPO_ROOT / "simulations"
+SIMULATIONS_DIR = SIMULATIONS_ROOT
 
 
 # ============================================================================
@@ -719,12 +719,15 @@ def _run_runbook(
     dry_run: bool,
     continue_on_error: bool,
     story_mode: bool,
+    root_runbook_path: Optional[Path] = None,
 ) -> int:
     if not runbook_path.exists():
         _emit(f"Error: runbook file not found: {runbook_path}", _COLOR_ERROR, is_error=True)
         return 1
 
     resolved_path = runbook_path.resolve()
+    if root_runbook_path is None:
+        root_runbook_path = resolved_path
     if resolved_path in stack:
         _emit(f"Error: runbook cycle detected at {runbook_path}", _COLOR_ERROR, is_error=True)
         return 1
@@ -818,6 +821,7 @@ def _run_runbook(
                     dry_run=dry_run,
                     continue_on_error=child_continue_on_error,
                     story_mode=story_mode,
+                    root_runbook_path=root_runbook_path,
                 )
                 if result != 0 and not continue_on_error:
                     return result
@@ -939,6 +943,12 @@ def _run_runbook(
             result = handler(argparse.Namespace(**normalized_args), kb_loader)
             if result != 0 and not continue_on_error:
                 return result
+            sim_id = normalized_args.get("sim_id")
+            if sim_id:
+                record_runbook(
+                    SIMULATIONS_DIR / str(sim_id),
+                    root_runbook_path,
+                )
 
             if story_mode and cmd_name == "sim.advance-time":
                 if _LAST_ADVANCE_RESULT and _LAST_ADVANCE_RESULT.get("completed"):

@@ -14,7 +14,7 @@ from typing import Dict, Iterable, List, Optional, Set, Tuple
 import yaml
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
-KB_DIR = REPO_ROOT / "kb"
+KB_DIR = REPO_ROOT / "content" / "kb"
 
 
 @dataclass(frozen=True)

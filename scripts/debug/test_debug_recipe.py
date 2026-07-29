@@ -3,7 +3,6 @@ Debug script to trace multi-step recipe execution with full logging.
 """
 import logging
 import sys
-from pathlib import Path
 
 # Set up logging BEFORE importing engine
 logging.basicConfig(
@@ -13,6 +12,7 @@ logging.basicConfig(
 )
 
 from src.kb_core.kb_loader import KBLoader
+from src.paths import KB_ROOT
 from src.simulation.engine import SimulationEngine
 
 def test_recipe_with_debug():
@@ -22,7 +22,7 @@ def test_recipe_with_debug():
 
     # Load KB
     print("\nLoading KB...")
-    kb = KBLoader(Path('kb'))
+    kb = KBLoader(KB_ROOT)
     kb.load_all()
 
     # Create simulation

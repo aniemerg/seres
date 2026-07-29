@@ -18,6 +18,18 @@ If you are an AI agent or working the queue, see `AGENTS.md`.
 
 Prerequisites: Python 3.10+ and `uv` (see https://docs.astral.sh/uv/ for install).
 
+Clone SERES with its pinned content repository:
+
+```bash
+git clone --recurse-submodules git@github.com:aniemerg/seres.git
+```
+
+For an existing checkout, initialize or update the pinned content with:
+
+```bash
+git submodule update --init --recursive
+```
+
 Install dependencies:
 ```bash
 uv sync
@@ -81,12 +93,17 @@ Run a minimal simulation using CLI commands:
 
 ## How the project is organized
 
-- `kb/`: YAML knowledge base (items, processes, recipes, BOMs).
+- `content/`: pinned `seres-content` submodule.
+- `content/kb/`: YAML knowledge base (items, processes, recipes, BOMs).
+- `content/simulations/`: published and local simulation runs.
 - `src/`: indexer, simulator, and CLI (`python -m src.cli`).
 - `docs/`: design docs, ADRs, simulation guides, and runbooks.
-- `simulations/`: simulation runs and event logs.
 - `out/`: generated reports (validation, queue, index, etc.).
 - `design/`: research notes and background memos.
+
+The schema and engine live in this repository. Knowledge and published
+simulation data live together in `seres-content`; the submodule pointer pins an
+exact content commit without a separately maintained version number.
 
 ## Where to start (human-friendly)
 

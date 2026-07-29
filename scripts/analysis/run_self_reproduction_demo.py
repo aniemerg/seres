@@ -102,8 +102,8 @@ def main() -> int:
         default="sequential",
         help="Execution mode: per-machine sequential plans or one combined merged plan",
     )
-    parser.add_argument("--kb-root", default=str(REPO_ROOT / "kb"), help="KB root")
-    parser.add_argument("--sim-root", default=str(REPO_ROOT / "simulations"), help="Sim root")
+    parser.add_argument("--kb-root", default=str(REPO_ROOT / "content" / "kb"), help="KB root")
+    parser.add_argument("--sim-root", default=str(REPO_ROOT / "content" / "simulations"), help="Sim root")
     parser.add_argument("--plans-dir", default=str(REPO_ROOT / "out" / "simplans"))
     parser.add_argument("--reset", action="store_true", help="Reset sim before first plan")
     parser.add_argument("--trace", action="store_true", help="Print step-by-step execution trace")

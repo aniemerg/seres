@@ -36,9 +36,15 @@ python -m src.cli sim init --sim-id my_simulation
 ```
 
 This creates:
-- `simulations/my_simulation/` directory
+- `content/simulations/my_simulation/` directory
 - `events.jsonl` event log
 - `snapshot.json` state snapshot
+- `provenance.json` with exact SERES/content commits and the KB tree hash
+
+When a simulation is resumed or exported to SimViewer, SERES checks this
+provenance and fails if the engine commit or KB content no longer matches.
+Legacy simulations without provenance remain readable and receive provenance
+the next time they are saved.
 
 ### 2. Import Bootstrap Items
 
@@ -367,8 +373,8 @@ Processes: 1 active, 4 completed
 Recipes: 0 active, 1 completed
 Events queued: 2
 Next event time: 48.00 hours
-Snapshot: /path/to/simulations/lunar_base_001/snapshot.json
-Events: /path/to/simulations/lunar_base_001/events.jsonl
+Snapshot: /path/to/content/simulations/lunar_base_001/snapshot.json
+Events: /path/to/content/simulations/lunar_base_001/events.jsonl
 ```
 
 ### list
@@ -431,11 +437,11 @@ Found 3 simulation(s):
 
   lunar_base_001
     Created: 2025-12-30T10:00:00.000000Z
-    Path: /path/to/simulations/lunar_base_001
+    Path: /path/to/content/simulations/lunar_base_001
 
   test_production
     Created: 2025-12-30T11:30:00.000000Z
-    Path: /path/to/simulations/test_production
+    Path: /path/to/content/simulations/test_production
 
   ...
 ```
@@ -628,7 +634,7 @@ python -m src.cli sim import --sim-id test --item X --quantity 10 --unit kg
 
 ```bash
 python -m src.cli validate --id process:process_id
-# Fix issues in kb/processes/process_id.yaml
+# Fix issues in content/kb/processes/process_id.yaml
 python -m src.cli index  # Rebuild index
 ```
 

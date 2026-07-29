@@ -53,7 +53,7 @@ def main() -> int:
         default=str(REPO_ROOT / "runbooks" / "machine_runbook_queue_sequential.md"),
         help="Runbook markdown file with machine list",
     )
-    parser.add_argument("--kb-root", default=str(REPO_ROOT / "kb"), help="KB root")
+    parser.add_argument("--kb-root", default=str(REPO_ROOT / "content" / "kb"), help="KB root")
     parser.add_argument(
         "--all-imports",
         action="store_true",
@@ -66,7 +66,7 @@ def main() -> int:
     kb = KBLoader(kb_root, use_validated_models=False)
     kb.load_all()
 
-    sim_dir = REPO_ROOT / "simulations" / args.sim_id
+    sim_dir = REPO_ROOT / "content" / "simulations" / args.sim_id
     engine = SimulationEngine(args.sim_id, kb, sim_dir)
     if not engine.load():
         print(f"Failed to load simulation: {sim_dir}", file=sys.stderr)

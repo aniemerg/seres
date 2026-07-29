@@ -220,8 +220,8 @@ def main() -> int:
     parser = argparse.ArgumentParser(description="Generate runbook Markdown from a SimPlan.")
     parser.add_argument("--plan", required=True, help="Path to SimPlan JSON")
     parser.add_argument("--out", help="Output runbook path")
-    parser.add_argument("--kb-root", default=str(REPO_ROOT / "kb"), help="KB root")
-    parser.add_argument("--sim-root", default=str(REPO_ROOT / "simulations"), help="Sim root")
+    parser.add_argument("--kb-root", default=str(REPO_ROOT / "content" / "kb"), help="KB root")
+    parser.add_argument("--sim-root", default=str(REPO_ROOT / "content" / "simulations"), help="Sim root")
     parser.add_argument(
         "--no-advance",
         action="store_true",

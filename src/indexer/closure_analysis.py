@@ -12,6 +12,7 @@ from pathlib import Path
 from typing import Dict, Set, List, Tuple, Optional, Any
 
 from src.kb_core.kb_loader import KBLoader
+from src.paths import KB_ROOT
 
 
 class ClosureAnalyzer:
@@ -606,7 +607,12 @@ def main():
     parser.add_argument('--machine', type=str, help='Analyze a specific machine')
     parser.add_argument('--all', action='store_true', help='Analyze all machines')
     parser.add_argument('--output', type=str, help='Output file (default: stdout)')
-    parser.add_argument('--kb-root', type=Path, default=Path('kb'), help='KB root directory (default: kb)')
+    parser.add_argument(
+        '--kb-root',
+        type=Path,
+        default=KB_ROOT,
+        help=f'KB root directory (default: {KB_ROOT})',
+    )
 
     args = parser.parse_args()
 

@@ -34,7 +34,7 @@ def main() -> int:
     parser.add_argument("--machines", nargs="*", help="Machine ids to process (default: all machines)")
     parser.add_argument("--limit", type=int, help="Max machines to process")
     parser.add_argument("--iterations", type=int, default=1, help="Greedy iterations per machine")
-    parser.add_argument("--kb-root", default=str(REPO_ROOT / "kb"), help="KB root")
+    parser.add_argument("--kb-root", default=str(REPO_ROOT / "content" / "kb"), help="KB root")
     parser.add_argument("--out-dir", default=str(REPO_ROOT / "out" / "simplans"), help="Output directory")
     args = parser.parse_args()
 

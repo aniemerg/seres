@@ -16,9 +16,8 @@ import yaml
 from pathlib import Path
 from typing import List, Dict, Any
 
+from src.paths import KB_ROOT, REPO_ROOT
 
-REPO_ROOT = Path(__file__).parent.parent
-KB_ROOT = REPO_ROOT / "kb"
 DESIGN_ROOT = REPO_ROOT / "design"
 OUT_DIR = REPO_ROOT / "out"
 OUTPUT_FILE = REPO_ROOT / "queue_agents" / "cached_context.md"
