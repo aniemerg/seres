@@ -352,7 +352,7 @@ class CircularDependencyAnalyzer:
                 continue
 
             # Find recipe file
-            recipe_files = list(Path('kb/recipes').glob(f'{recipe_id}.yaml'))
+            recipe_files = list((self.kb.kb_root / "recipes").glob(f"{recipe_id}.yaml"))
             if not recipe_files:
                 continue
 

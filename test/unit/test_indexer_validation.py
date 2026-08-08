@@ -5,7 +5,12 @@ Tests that the indexer correctly validates items for missing mass fields.
 """
 import pytest
 
-from src.indexer.indexer import _collect_nulls
+from src.indexer.indexer import (
+    ITEM_KINDS,
+    RECIPE_TARGET_KINDS,
+    _collect_missing_fields,
+    _collect_nulls,
+)
 
 
 class TestMassValidation:
@@ -127,3 +132,53 @@ class TestMassValidation:
         nulls = _collect_nulls("machine", data)
 
         assert len(nulls) == 0, "Machine with mass should not be flagged"
+
+    def test_collect_nulls_resource_without_mass(self):
+        data = {
+            "id": "solar_irradiance",
+            "kind": "resource",
+            "unit": "kW",
+        }
+
+        assert _collect_nulls("resource", data) == []
+
+
+class TestPartMaterialCompatibility:
+    def test_legacy_material_class_satisfies_transition_check(self):
+        data = {
+            "id": "legacy_bracket",
+            "kind": "part",
+            "material_class": "steel",
+        }
+
+        assert _collect_missing_fields("part", data) == []
+
+    def test_explicit_material_satisfies_transition_check(self):
+        data = {
+            "id": "new_bracket",
+            "kind": "monolithic_part",
+            "material": "stainless_steel",
+        }
+
+        assert _collect_missing_fields("monolithic_part", data) == []
+
+    def test_part_without_either_material_field_is_reported(self):
+        missing = _collect_missing_fields(
+            "monolithic_part",
+            {"id": "unknown_bracket", "kind": "monolithic_part"},
+        )
+
+        assert missing == [
+            {"field": "material_or_material_class", "severity": "soft"}
+        ]
+
+    def test_assembly_does_not_require_one_material(self):
+        assert _collect_missing_fields(
+            "assembly_part",
+            {"id": "bearing_set", "kind": "assembly_part"},
+        ) == []
+
+
+def test_resource_is_indexed_but_not_required_to_have_a_recipe():
+    assert "resource" in ITEM_KINDS
+    assert "resource" not in RECIPE_TARGET_KINDS

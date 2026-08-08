@@ -22,6 +22,7 @@ from .unit_converter import (
 )
 from .override_resolver import resolve_recipe_step_with_kb
 from .calculations import calculate_mass_balance, CalculationError
+from .performance_vocabulary import performance_requirement_errors
 
 
 class ValidationLevel(Enum):
@@ -158,6 +159,91 @@ def validate_item(item: Any) -> List[ValidationIssue]:
     unit = item_dict.get("unit")
     mass = item_dict.get("mass")
     mass_kg = item_dict.get("mass_kg")
+    mass_low_kg = item_dict.get("mass_low_kg")
+    mass_high_kg = item_dict.get("mass_high_kg")
+
+    for field_path, message in performance_requirement_errors(
+        item_dict.get("performance_requirements")
+    ):
+        issues.append(ValidationIssue(
+            level=ValidationLevel.ERROR,
+            category="item",
+            rule="performance_requirement_vocabulary",
+            entity_type="item",
+            entity_id=item_id,
+            message=message,
+            field_path=field_path,
+            fix_hint="Use term IDs from config/performance_requirement_vocabulary.yaml",
+        ))
+
+    numeric_bounds = all(
+        value is None or (isinstance(value, (int, float)) and not isinstance(value, bool))
+        for value in (mass_low_kg, mass_high_kg)
+    )
+    if not numeric_bounds:
+        issues.append(ValidationIssue(
+            level=ValidationLevel.ERROR,
+            category="item",
+            rule="mass_range_invalid_type",
+            entity_type="item",
+            entity_id=item_id,
+            message="Mass range bounds must be numeric",
+            field_path="mass_low_kg/mass_high_kg",
+            fix_hint="Use non-negative numeric values or omit unknown bounds",
+        ))
+    else:
+        if mass_low_kg is not None and mass_low_kg < 0:
+            issues.append(ValidationIssue(
+                level=ValidationLevel.ERROR,
+                category="item",
+                rule="mass_range_negative",
+                entity_type="item",
+                entity_id=item_id,
+                message="mass_low_kg must not be negative",
+                field_path="mass_low_kg",
+                fix_hint="Use a non-negative lower mass bound",
+            ))
+        if mass_high_kg is not None and mass_high_kg < 0:
+            issues.append(ValidationIssue(
+                level=ValidationLevel.ERROR,
+                category="item",
+                rule="mass_range_negative",
+                entity_type="item",
+                entity_id=item_id,
+                message="mass_high_kg must not be negative",
+                field_path="mass_high_kg",
+                fix_hint="Use a non-negative upper mass bound",
+            ))
+        if (
+            mass_low_kg is not None
+            and mass_high_kg is not None
+            and mass_low_kg > mass_high_kg
+        ):
+            issues.append(ValidationIssue(
+                level=ValidationLevel.ERROR,
+                category="item",
+                rule="mass_range_inverted",
+                entity_type="item",
+                entity_id=item_id,
+                message="mass_low_kg exceeds mass_high_kg",
+                field_path="mass_low_kg/mass_high_kg",
+                fix_hint="Set mass_low_kg less than or equal to mass_high_kg",
+            ))
+        nominal_mass = mass_kg if mass_kg is not None else mass
+        if isinstance(nominal_mass, (int, float)) and not isinstance(nominal_mass, bool):
+            outside_low = mass_low_kg is not None and nominal_mass < mass_low_kg
+            outside_high = mass_high_kg is not None and nominal_mass > mass_high_kg
+            if outside_low or outside_high:
+                issues.append(ValidationIssue(
+                    level=ValidationLevel.WARNING,
+                    category="item",
+                    rule="nominal_mass_outside_range",
+                    entity_type="item",
+                    entity_id=item_id,
+                    message="Nominal mass is outside the declared mass range",
+                    field_path="mass_kg",
+                    fix_hint="Review the nominal value or the low/high engineering bounds",
+                ))
 
     if not unit_kind:
         issues.append(ValidationIssue(

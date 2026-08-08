@@ -26,6 +26,18 @@ require manual investigation/update of references.
 - `docs/self_reproducing_set.txt` — Canonical target machine list for the demo
 - `docs/minimal_self_reproducing_set.md` — Current minimal self‑reproducing machine set (reference)
 
+## Item And Material Modeling
+
+- `docs/ADRs/027-item-performance-and-mass-ranges.md` - Optional mass bounds and controlled performance requirements
+- `docs/ADRs/028-material-raw-material-resource-classification.md` - Source material, process-ready material, and non-material resource kinds
+- `docs/lunar_material.md` - Conservative lunar-material design screening guide
+- `docs/material_model_migration_notes.md` - Migration from ambiguous `material_class` usage to explicit part materials
+
+Run `python scripts/audit_machines.py` to generate a conservative machine-use
+audit under `out/machine_audit/`. It does not edit content unless `--apply` is
+specified. Repeat `--exclude-pattern REGEX` for project-specific machines that
+must remain outside automatic tagging.
+
 ### Conservative Mode: The Default Approach
 
 **All queue work should follow Conservative Mode** - treating queue items as potential symptoms rather than direct fix requests.
@@ -80,7 +92,7 @@ notes: |
 
 **📖 FULL DOCUMENTATION**: See **`docs/parts_and_labor_guidelines.md`** for comprehensive guidelines on:
 - Part reuse policy and equivalence criteria
-- Material class system (enables generic substitution)
+- Part material and substitution-boundary guidance
 - BOM best practices
 - Labor modeling approach
 - Workflow for creating parts/BOMs
@@ -91,7 +103,9 @@ notes: |
    - Regenerate if stale: `.venv/bin/python -m kbtool report inventory`
    - Search for the component type: `grep -i "motor\|bearing\|wire" out/reports/inventory.md`
 
-2. **Prefer existing parts** — Reuse an existing part if it is "reasonably equivalent" (within ~5× magnitude, same material compatibility)
+2. **Prefer existing parts** — Reuse an existing part if it is reasonably
+   equivalent in function, scale, material requirements, and critical
+   performance requirements
 
 3. **Only create new parts** if no reasonably equivalent part exists
 
@@ -100,7 +114,8 @@ notes: |
 Parts within **~5× magnitude** (mass, size, capability) are considered equivalent:
 - 5 kW motor ≈ 10 kW motor → **reuse same part**
 - 2 kg component ≈ 8 kg component → **reuse same part**
-- **EXCEPTION**: Materials incompatible (steel ≠ plastic) or process requirements conflict → create new part
+- **EXCEPTION**: Incompatible materials or critical performance/process
+  requirements require a separate part or an explicit unresolved boundary
 
 See **`docs/parts_and_labor_guidelines.md`** for detailed criteria and examples.
 

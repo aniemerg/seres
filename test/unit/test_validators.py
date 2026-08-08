@@ -333,6 +333,75 @@ class TestItemValidation:
         issues = validate_item(item)
         assert issues == []
 
+    def test_item_accepts_valid_mass_range_and_performance_terms(self):
+        item = {
+            "id": "precision_ring",
+            "kind": "monolithic_part",
+            "unit_kind": "discrete",
+            "unit": "unit",
+            "mass_kg": 2.0,
+            "mass_low_kg": 1.5,
+            "mass_high_kg": 2.5,
+            "performance_requirements": {
+                "geometrical_tolerances": {
+                    "form": ["circularity"],
+                },
+            },
+        }
+
+        assert validate_item(item) == []
+
+    def test_item_rejects_inverted_mass_range(self):
+        item = {
+            "id": "precision_ring",
+            "kind": "monolithic_part",
+            "unit_kind": "discrete",
+            "unit": "unit",
+            "mass_kg": 2.0,
+            "mass_low_kg": 3.0,
+            "mass_high_kg": 1.0,
+        }
+
+        issues = validate_item(item)
+
+        issue = next(i for i in issues if i.rule == "mass_range_inverted")
+        assert issue.level == ValidationLevel.ERROR
+
+    def test_item_warns_when_nominal_mass_is_outside_range(self):
+        item = {
+            "id": "precision_ring",
+            "kind": "monolithic_part",
+            "unit_kind": "discrete",
+            "unit": "unit",
+            "mass_kg": 4.0,
+            "mass_low_kg": 1.0,
+            "mass_high_kg": 3.0,
+        }
+
+        issues = validate_item(item)
+
+        issue = next(i for i in issues if i.rule == "nominal_mass_outside_range")
+        assert issue.level == ValidationLevel.WARNING
+
+    def test_item_rejects_unknown_performance_term(self):
+        item = {
+            "id": "precision_ring",
+            "kind": "monolithic_part",
+            "unit_kind": "discrete",
+            "unit": "unit",
+            "mass_kg": 2.0,
+            "performance_requirements": {
+                "geometrical_tolerances": {
+                    "form": ["impossible_roundness"],
+                },
+            },
+        }
+
+        issues = validate_item(item)
+
+        issue = next(i for i in issues if i.rule == "performance_requirement_vocabulary")
+        assert issue.level == ValidationLevel.ERROR
+
     def test_deprecated_field_rate_kg_per_hr(self):
         """ERROR: deprecated field rate_kg_per_hr."""
         process_dict = {

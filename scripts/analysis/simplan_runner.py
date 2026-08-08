@@ -121,7 +121,13 @@ def _order_recipes(plan: SimPlan, kb: KBLoader) -> List[str]:
         if not recipe:
             continue
         recipe_defs[rid] = recipe
-        outputs_by_recipe[rid] = _get_recipe_outputs(recipe)
+        target_item_id = recipe.get("target_item_id")
+        # A SimPlan selects one recipe for each demanded target. Coproducts may be
+        # reported separately, but they must not create producer edges that can
+        # reverse the selected target dependency order.
+        outputs_by_recipe[rid] = (
+            {str(target_item_id)} if target_item_id else _get_recipe_outputs(recipe)
+        )
         inputs = set()
         for entry in _get_recipe_inputs(recipe):
             item_id = entry.get("item_id")
@@ -405,7 +411,7 @@ def execute_plan(
 
         result = sim2_runner.run_to_completion_with_progress(
             max_no_progress=max_no_progress,
-            progress_callback=_progress,
+            progress_callback=_progress if trace else None,
             progress_every_steps=progress_every_steps,
         )
         if result.get("status") == "completed":

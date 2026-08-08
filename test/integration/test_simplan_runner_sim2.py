@@ -4,7 +4,8 @@ import json
 import yaml
 
 from scripts.analysis.simplan import SimPlan
-from scripts.analysis.simplan_runner import execute_plan
+from scripts.analysis.simplan_runner import _order_recipes, execute_plan
+from src.kb_core.kb_loader import KBLoader
 
 
 def _build_kb(tmp_path: Path) -> Path:
@@ -155,6 +156,51 @@ def test_execute_plan_sim2_sequential(tmp_path: Path):
     assert result["success"]
     assert (sim_root / "plan_sim2" / "snapshot.json").exists()
     assert (sim_root / "plan_sim2" / "deferred_intents.json").exists()
+
+
+def test_recipe_order_ignores_coproduct_producer_edges(tmp_path: Path):
+    kb_root = _build_kb(tmp_path)
+    with open(kb_root / "recipes" / "recipe_ingot_cycle_v0.yaml", "w") as f:
+        yaml.dump(
+            {
+                "id": "recipe_ingot_cycle_v0",
+                "target_item_id": "ingot",
+                "variant_id": "v0",
+                "inputs": [{"item_id": "ore", "qty": 1.0, "unit": "kg"}],
+                "outputs": [
+                    {"item_id": "ingot", "qty": 1.0, "unit": "kg"},
+                    {"item_id": "part", "qty": 0.1, "unit": "kg"},
+                ],
+                "steps": [{"process_id": "smelt_v0"}],
+            },
+            f,
+        )
+    with open(kb_root / "recipes" / "recipe_part_cycle_v0.yaml", "w") as f:
+        yaml.dump(
+            {
+                "id": "recipe_part_cycle_v0",
+                "target_item_id": "part",
+                "variant_id": "v0",
+                "inputs": [{"item_id": "ingot", "qty": 1.0, "unit": "kg"}],
+                "outputs": [
+                    {"item_id": "part", "qty": 1.0, "unit": "kg"},
+                    {"item_id": "ore", "qty": 0.1, "unit": "kg"},
+                ],
+                "steps": [{"process_id": "forge_v0"}],
+            },
+            f,
+        )
+
+    kb = KBLoader(kb_root, use_validated_models=False)
+    kb.load_all()
+    plan = SimPlan(sim_id="coproduct_order", target_machine_id="part", build_machine=False)
+    plan.add_recipe("recipe_part_cycle_v0", 1)
+    plan.add_recipe("recipe_ingot_cycle_v0", 1)
+
+    assert _order_recipes(plan, kb) == [
+        "recipe_ingot_cycle_v0",
+        "recipe_part_cycle_v0",
+    ]
 
 
 def test_execute_plan_sim2_propagates_plan_metadata_tags(tmp_path: Path):
