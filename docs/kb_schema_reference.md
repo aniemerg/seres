@@ -1,7 +1,7 @@
 # KB Schema Reference (Current)
 
 This document is the authoritative, up-to-date summary of the KB schema and
-modeling rules. It consolidates 012/013/014/016/017 for daily use.
+modeling rules. It consolidates 012/013/014/016/017/027 for daily use.
 
 ## Items
 
@@ -16,21 +16,149 @@ intended to fail fast at runtime so users/agents manually update references.
 Required:
 - `id`, `name`, `kind: material`, `unit`, `unit_kind: bulk`, `notes`
 Recommended:
-- `material_class`, `density`, `state`, `composition`, `source_tags`
+- `density`, `state`, `composition`, `source_tags`
 Optional:
 - `is_scrap: true` to mark byproduct/offal materials that should not require recipes or closure expansion
+Notes:
+- Use `kind: material` for process-ready engineering materials, feedstocks,
+  stock forms, powders, wires, ingots, slurries, intermediates, byproducts, and
+  scrap.
+- Do not use `kind: material` for natural/source-side lunar resources that still
+  need beneficiation or extraction before becoming process materials. Use
+  `kind: raw_material` instead.
 
-### Parts
+### Raw Materials
 Required:
-- `id`, `name`, `kind: part`, `unit`, `unit_kind: discrete`, `mass_kg` (mass per unit), `material_class`, `notes`
+- `id`, `name`, `kind: raw_material`, `unit`, `unit_kind: bulk`, `notes`
 Recommended:
-- `dimensions`, `source_tags`
+- `composition`, `source_tags`, site/provenance notes
+Notes:
+- Use `kind: raw_material` for natural, mined, collected, or otherwise primary
+  source materials such as lunar regolith, ores, feldspar source minerals,
+  meteorite source material, or volatile-bearing regolith.
+- Raw materials belong under `content/kb/items/raw_materials/`.
+- A material produced by a recipe from raw material, such as `regolith_powder`,
+  `ilmenite_concentrate`, `alumina_powder`, `ceramic_powder`, or stock metal,
+  is a `material`, not a `raw_material`.
+- Imported ore/source placeholders may still be `raw_material` if the item is
+  semantically an ore/source rather than an engineering material. Mark the supply
+  boundary with `is_import: true`.
+
+### Resources
+Required:
+- `id`, `name`, `kind: resource`, `unit`, `unit_kind: bulk`, `notes`
+Notes:
+- Use `kind: resource` for non-material process inputs/outputs such as energy,
+  heat, solar radiation/irradiance, data-like resources, or environmental fluxes.
+- Resources belong under `content/kb/items/resources/`.
+
+### Monolithic Parts
+Required:
+- `id`, `name`, `kind: monolithic_part`, `unit`, `unit_kind: discrete`,
+  `mass_kg` (mass per unit), `notes`
+Recommended:
+- `material`, `dimensions`, `source_tags`
+Compatibility:
+- Existing `kind: part` entries remain valid. New content should use
+  `monolithic_part` for a single-piece item or `assembly_part` for an item with
+  child components.
+- `material` names what a part is made from. Existing `material_class` remains
+  readable during migration, but should not be treated as proof that two
+  materials are interchangeable.
+
+### Assembly Parts
+Required:
+- `id`, `name`, `kind: assembly_part`, `unit`, `unit_kind: discrete`, `mass_kg`
+  (mass per unit), `notes`
+Recommended:
+- `bom`, `source_tags`, `performance_requirements`
+Notes:
+- `assembly_part` means the item is semantically made from multiple child
+  pieces, not that the KB has already decomposed it. It may appear as a leaf in
+  a recursive BOM tree when its child BOM has not been modeled yet.
+- Do not put a single `material` or `material_class` on assemblies. An
+  assembly's material makeup is represented by its BOM components.
+- A BOM component is a relationship role, not an item kind. Machines,
+  assemblies, monolithic parts, and materials can all appear as BOM components.
 
 ### Machines
 Required:
 - `id`, `name`, `kind: machine`, `unit`, `unit_kind: discrete`, `mass_kg` (mass per unit), `notes`
 Recommended:
 - `bom`, `capabilities`, `power_draw_kW`, `source_tags`
+Notes:
+- Do not put `material` or `material_class` on machines. A machine's material
+  makeup is represented by its BOM components.
+
+### Shared Optional Item Fields
+
+For monolithic parts, assemblies, and machines, `mass_kg` remains the nominal
+mass used for count <-> mass conversion. When mass is uncertain or
+scale-dependent, add:
+
+```yaml
+mass_low_kg: 0.5
+mass_high_kg: 2.0
+```
+
+The range is an uncertainty bracket for review, substitution, and difficulty
+estimation. It is not a replacement for `mass_kg`, and should be omitted when no
+useful bound is known.
+
+Use `performance_requirements` for critical characteristics that affect
+substitution, manufacturing route selection, or simulation fidelity. Values
+must be controlled term IDs from
+`config/performance_requirement_vocabulary.yaml`; do not put requirement
+sentences, alternatives, target values, or `review_required` placeholders in
+this field. Include only categories that are relevant to the part:
+
+```yaml
+performance_requirements:
+  geometrical_tolerances:
+    form:
+    - circularity
+    runout:
+    - circular_runout
+  surface_integrity:
+    surface_texture:
+    - surface_roughness
+  material_properties:
+    mechanical:
+    - hardness
+    - fatigue_strength
+```
+
+This block identifies which characteristics are critical; it does not state a
+numeric acceptance target or prove that a process can achieve it. Quantitative
+targets require a separate, source-backed representation. Leave unrelated
+categories absent instead of adding nulls or generic quality statements. See
+ADR-027 for the rationale.
+
+Use `trust_tags` when an item needs explicit trust/audit status:
+
+```yaml
+trust_tags:
+- untrusted_global_kb
+```
+
+Trust tags are project-policy annotations. They do not by themselves prove or
+invalidate manufacturability.
+
+Use `future_improvements` for known modeling gaps that should not be mixed into
+general notes. Keep `notes` for current assumptions/rationale; put backlog items
+such as missing part-specific tooling, unresolved mass bounds, missing material
+selection, route blockers, or required future decomposition here:
+
+```yaml
+future_improvements:
+- Add part-specific punch/die tooling before treating stamping as locally closed.
+- Replace coarse item specification with explicit material, geometry/interface
+  requirements, and lower/upper mass bounds.
+```
+
+This field is advisory metadata. It does not change simulation routing or prove
+manufacturing closure unless the referenced BOMs, recipes, processes, and
+resource requirements are also updated.
 
 ## Processes
 

@@ -10,7 +10,7 @@ and ADR-013 (Recipe Overrides).
 """
 from __future__ import annotations
 
-from typing import List, Optional, Literal
+from typing import Any, List, Optional, Literal
 from pydantic import BaseModel, Field, ConfigDict
 
 
@@ -200,23 +200,30 @@ class RawItem(BaseModel):
     model_config = ConfigDict(extra="allow")
 
     id: str
-    kind: str  # "material", "part", "machine"
+    # Item kinds include legacy `part` plus explicit material and part roles.
+    kind: str
     name: Optional[str] = None
 
     unit_kind: Optional[str] = None  # "discrete" or "bulk"
     mass: Optional[float] = None  # Item mass (for count → mass conversion)
     mass_kg: Optional[float] = None  # Explicit mass_kg field
+    mass_low_kg: Optional[float] = None
+    mass_high_kg: Optional[float] = None
     unit: Optional[str] = None
 
     bom: Optional[str] = None
     recipe: Optional[str] = None
 
+    material: Optional[str] = None
     material_class: Optional[str] = None
     density: Optional[float] = None  # kg/m³ (for mass ↔ volume conversion)
+    performance_requirements: Optional[dict[str, Any]] = None
 
     alternatives: List[str] = Field(default_factory=list)
     dedupe_candidate: Optional[bool] = None
     preferred_variant: Optional[str] = None
+    trust_tags: List[str] = Field(default_factory=list)
+    future_improvements: List[str] = Field(default_factory=list)
 
     # Machine-specific fields
     capabilities: List[str] = Field(default_factory=list)
@@ -431,23 +438,38 @@ class Item(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
     id: str
-    kind: Literal["material", "part", "machine"]
+    kind: Literal[
+        "material",
+        "raw_material",
+        "resource",
+        "monolithic_part",
+        "assembly_part",
+        "assembly",
+        "part",
+        "machine",
+    ]
     name: Optional[str] = None
 
     unit_kind: Optional[Literal["discrete", "bulk"]] = None
     mass: Optional[float] = None
     mass_kg: Optional[float] = None
+    mass_low_kg: Optional[float] = None
+    mass_high_kg: Optional[float] = None
     unit: Optional[str] = None
 
     bom: Optional[str] = None
     recipe: Optional[str] = None
 
+    material: Optional[str] = None
     material_class: Optional[str] = None
     density: Optional[float] = None
+    performance_requirements: Optional[dict[str, Any]] = None
 
     alternatives: List[str] = Field(default_factory=list)
     dedupe_candidate: Optional[bool] = None
     preferred_variant: Optional[str] = None
+    trust_tags: List[str] = Field(default_factory=list)
+    future_improvements: List[str] = Field(default_factory=list)
 
     capabilities: List[str] = Field(default_factory=list)
     processes_supported: List[str] = Field(default_factory=list)
@@ -467,6 +489,11 @@ RAW_MODEL_MAP = {
     "process": RawProcess,
     "recipe": RawRecipe,
     "material": RawItem,
+    "raw_material": RawItem,
+    "resource": RawItem,
+    "monolithic_part": RawItem,
+    "assembly_part": RawItem,
+    "assembly": RawItem,
     "part": RawItem,
     "machine": RawItem,
 }
@@ -476,6 +503,11 @@ VALIDATED_MODEL_MAP = {
     "process": Process,
     "recipe": Recipe,
     "material": Item,
+    "raw_material": Item,
+    "resource": Item,
+    "monolithic_part": Item,
+    "assembly_part": Item,
+    "assembly": Item,
     "part": Item,
     "machine": Item,
 }

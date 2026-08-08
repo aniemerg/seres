@@ -140,6 +140,24 @@ class TestEagerLoading:
         assert loader.materials["material_properties"]["steel"]["density_kg_per_m3"] == 7850
 
 
+@pytest.mark.parametrize(
+    "kind",
+    ["raw_material", "resource", "monolithic_part", "assembly_part", "assembly"],
+)
+def test_item_schema_accepts_extended_kinds(kind):
+    item = Item(
+        id=f"test_{kind}",
+        kind=kind,
+        unit="unit",
+        unit_kind="discrete",
+        mass_kg=1.0,
+        future_improvements=["Add a source-backed acceptance target."],
+    )
+
+    assert item.kind == kind
+    assert item.future_improvements == ["Add a source-backed acceptance target."]
+
+
 # =============================================================================
 # Lazy Loading Tests (get_*)
 # =============================================================================

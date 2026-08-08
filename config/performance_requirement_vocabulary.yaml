@@ -1,0 +1,72 @@
+id: performance_requirement_vocabulary_v0
+kind: schema_vocabulary
+version: 0.1
+description: Controlled characteristic IDs for item-level performance requirements.
+categories:
+  geometrical_tolerances:
+    form:
+      straightness: Deviation of a line element from a straight line.
+      flatness: Deviation of a surface from a plane.
+      circularity: Deviation of a circular element from a circle.
+      cylindricity: Deviation of a cylindrical surface from a cylinder.
+      line_profile: Deviation of a line element from its nominal profile.
+      surface_profile: Deviation of a surface from its nominal profile.
+    orientation:
+      parallelism: Orientation relative to a parallel datum.
+      perpendicularity: Orientation relative to a perpendicular datum.
+      angularity: Orientation relative to a specified angle.
+    location:
+      position: Location relative to nominal position and applicable datums.
+      coaxiality: Alignment of derived axes to a common datum axis.
+      symmetry: Alignment of derived median features to a datum plane or axis.
+    runout:
+      circular_runout: Variation of a circular element during rotation about a datum axis.
+      total_runout: Combined surface variation during rotation about a datum axis.
+  surface_integrity:
+    surface_texture:
+      surface_roughness: Fine-scale surface texture.
+      waviness: Widely spaced surface texture variation.
+      lay: Predominant surface-pattern direction.
+    surface_defects:
+      surface_crack: Crack open to the surface.
+      scratch: Narrow surface damage produced by contact or abrasion.
+      pit: Localized surface cavity.
+      burr: Unintended raised edge or material projection.
+      surface_contamination: Foreign material or residue on a functional surface.
+    surface_layer_properties:
+      surface_hardness: Hardness of the functional surface layer.
+      residual_stress: Residual stress state of the surface layer.
+      heat_affected_layer: Thermally altered surface or near-surface layer.
+  material_properties:
+    mechanical:
+      elastic_modulus: Elastic stiffness of the material.
+      yield_strength: Stress at the onset of permanent deformation.
+      tensile_strength: Maximum tensile stress sustained by the material.
+      fracture_toughness: Resistance to crack propagation.
+      fatigue_strength: Resistance to cyclic-load failure.
+      hardness: Resistance to localized deformation.
+      wear_resistance: Resistance to material loss from contact motion.
+    physical:
+      thermal_conductivity: Ability to conduct heat.
+      thermal_expansion_coefficient: Dimensional response to temperature change.
+      electrical_conductivity: Ability to conduct electric current.
+      electrical_resistivity: Resistance to electric-current flow.
+      dielectric_strength: Electric-field strength sustained without breakdown.
+      magnetic_permeability: Magnetic response to an applied field.
+      coercivity: Resistance to demagnetization.
+    chemical:
+      corrosion_resistance: Resistance to chemical or electrochemical degradation.
+      chemical_compatibility: Stability in contact with specified process or service media.
+      vacuum_outgassing: Release of gas from a material under vacuum.
+  internal_integrity:
+    discontinuities:
+      internal_crack: Crack not necessarily open to the surface.
+      porosity: Distributed internal pores.
+      void: Localized internal cavity.
+      inclusion: Entrapped foreign material.
+      delamination: Separation between bonded layers.
+      subsurface_discontinuity: Subsurface defect relevant to contact fatigue or fracture.
+    joining_defects:
+      lack_of_fusion: Incomplete fusion across a joined interface.
+      lack_of_penetration: Incomplete penetration through a joined section.
+      through_leak_path: Continuous defect path through a pressure or vacuum boundary.

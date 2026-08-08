@@ -362,7 +362,7 @@ class KBLoader:
 
         # Lazy load from file (try multiple locations)
         # Try kb/items/<kind>/<item_id>.yaml
-        for kind in ["materials", "raw_materials", "parts", "machines"]:
+        for kind in ["materials", "raw_materials", "resources", "parts", "machines"]:
             item_file = self.kb_root / "items" / kind / f"{item_id}.yaml"
             if item_file.exists():
                 try:

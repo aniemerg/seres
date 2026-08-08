@@ -43,6 +43,17 @@ from src.paths import KB_ROOT
 OUT_DIR = Path("out")
 WORK_QUEUE = OUT_DIR / "work_queue.jsonl"
 WORK_QUEUE_LOCK = OUT_DIR / "work_queue.lock"
+ITEM_KINDS = {
+    "material",
+    "raw_material",
+    "resource",
+    "monolithic_part",
+    "assembly_part",
+    "assembly",
+    "part",
+    "machine",
+}
+RECIPE_TARGET_KINDS = ITEM_KINDS - {"resource"}
 
 
 def _infer_kind(path: Path, data: dict) -> Optional[str]:
@@ -60,7 +71,9 @@ def _infer_kind(path: Path, data: dict) -> Optional[str]:
     if "recipes" in parts:
         return "recipe"
     if "resources" in parts:
-        return "resource_type"
+        return "resource"
+    if "raw_materials" in parts:
+        return "raw_material"
     if "materials" in parts:
         return "material"
     if "machines" in parts:
@@ -139,7 +152,7 @@ def _collect_refs(kind: str, data: dict) -> Tuple[Set[str], List[dict], List[dic
                     refs.add(str(step))
                 except Exception:
                     pass
-    elif kind in ("material", "part", "machine"):
+    elif kind in ITEM_KINDS:
         bom = data.get("bom")
         if bom:
             refs.add(str(bom))
@@ -170,11 +183,14 @@ def _collect_nulls(kind: str, data: dict) -> List[dict]:
             if req.get("qty") is None:
                 rtype = req.get("resource_type") or req.get("resource") or "unknown"
                 nulls.append({"field": f"resource_requirements[{i}].qty", "resource": rtype})
-    elif kind in ("part", "machine", "material"):
+    elif kind in ITEM_KINDS:
+        if kind == "resource":
+            return nulls
         # Check if item should have mass (skip non-physical items)
         material_class = data.get("material_class", "")
+        material = data.get("material", material_class)
         # Skip software, abstract, and information items
-        if material_class not in ("software", "abstract", "information"):
+        if material not in ("software", "abstract", "information"):
             if data.get("mass") is None:
                 nulls.append({"field": "mass"})
     elif kind == "bom":
@@ -199,9 +215,13 @@ def _collect_missing_fields(kind: str, data: dict) -> List[dict]:
             missing.append({"field": "energy_model", "severity": "soft"})
         if not data.get("time_model"):
             missing.append({"field": "time_model", "severity": "soft"})
-    elif kind == "part":
-        if not data.get("material_class"):
-            missing.append({"field": "material_class", "severity": "soft"})
+    elif kind in ("monolithic_part", "part"):
+        if not data.get("material") and not data.get("material_class"):
+            missing.append({"field": "material_or_material_class", "severity": "soft"})
+    elif kind in ("assembly_part", "assembly"):
+        # An assembly_part may be an undecomposed leaf. A BOM is expected when
+        # decomposition exists, but lack of a BOM is not itself a schema gap.
+        pass
     elif kind == "machine":
         if is_deprecated:
             return missing
@@ -502,7 +522,7 @@ def build_index() -> Dict[str, dict]:
     # Skip items marked as imports or scrap (is_import/is_scrap: true)
     items_without_recipes: List[dict] = []
     for entry in entries.values():
-        if entry["kind"] in ("part", "material", "machine") and entry["id"] not in recipe_targets:
+        if entry["kind"] in RECIPE_TARGET_KINDS and entry["id"] not in recipe_targets:
             # Check if item is marked as import by reading the file
             is_import = False
             is_scrap = False
@@ -863,7 +883,7 @@ def _collect_validation_issues(entries: Dict[str, dict], kb_loader) -> List[dict
     # Validate all items
     item_ids = [
         eid for eid, entry in entries.items()
-        if entry.get('kind') in {"material", "part", "machine"}
+        if entry.get('kind') in ITEM_KINDS
     ]
     for item_id in item_ids:
         item_data = kb_loader.items.get(item_id)
@@ -1204,7 +1224,7 @@ def _update_work_queue(
             }
         )
 
-    # Missing required fields (energy_model, time_model, material_class, etc.)
+    # Missing required fields (energy_model, time_model, material, etc.)
     for mf in missing_fields:
         gap_items.append(
             {
